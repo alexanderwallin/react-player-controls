@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
+import autobind from 'autobind-decorator'
 
 const { bool, func, string } = PropTypes
 
@@ -18,7 +19,14 @@ class PlayButton extends Component {
     extraClasses: '',
   }
 
-  render() {
+  @autobind
+  handleClick () {
+    if (this.props.isEnabled) {
+      this.props.onClick()
+    }
+  }
+
+  render () {
     const { isEnabled, onClick, extraClasses } = this.props
 
     return (
@@ -28,7 +36,7 @@ class PlayButton extends Component {
           { isEnabled },
           extraClasses
         )}
-        onClick={onClick}
+        onClick={this.handleClick}
       >
         <svg className="PlayButton-icon" viewBox="0 0 100 100">
           <polygon className="PlayButton-icon-shape" points="24 92 24 7 100 49.4955227"></polygon>

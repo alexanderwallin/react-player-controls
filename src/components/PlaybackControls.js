@@ -16,15 +16,11 @@ class PlaybackControls extends Component {
     onPlaybackChange: func.isRequired,
     isPlayable: bool,
     isPlaying: bool,
-    // playButton: customComponentProp,
-    // pauseButton: customComponentProp,
   }
 
   static defaultProps = {
     isPlayable: false,
     isPlaying: false,
-    // playButton: PlayButton,
-    // pauseButton: PauseButton,
   }
 
   @autobind
