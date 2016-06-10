@@ -1,0 +1,8 @@
+{
+  "extends": "standard",
+  "parser": "babel-eslint",
+  "plugins": ["react", "import", "jsx-a11y"],
+  "rules": {
+    "comma-dangle": [2, "only-multiline"],
+  }
+}
