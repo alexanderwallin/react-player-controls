@@ -22,8 +22,10 @@
   },
   "homepage": "https://github.com/reactify/react-player-controls#readme",
   "devDependencies": {
+    "autobind-decorator": "^1.3.3",
     "babel-cli": "^6.9.0",
     "babel-eslint": "^6.0.4",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
