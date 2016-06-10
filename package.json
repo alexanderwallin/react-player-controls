@@ -43,5 +43,8 @@
   },
   "peerDependencies": {
     "react": "^15.0.0"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5"
   }
 }
