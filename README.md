@@ -38,7 +38,23 @@ Dump UI components for media players
   onSeek={seekTime => audioEl.currentTime = seekTime}
 />
 
-// TimeMarker composite component
+// <TimeMarker /> composite component
+
+<TimeMarker
+  totalTime={190}
+  currentTime={65}
+  markerSeparator=" / "
+/>
+// -> "1:05 of 3:10" (without wrapping <span /> elements)
+
+<TimeMarker
+  totalTime={190}
+  currentTime={65}
+  markerSeparator=" | "
+  firstMarkerType={TimeMarkerType.ELAPSED}
+  secondMarkerType={TimeMarkerType.LEFT_NEGATIVE}
+/>
+// -> "1:05 | -2:05" (without wrapping <span /> elements)
 ```
 
 ## Development
