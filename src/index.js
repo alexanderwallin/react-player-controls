@@ -6,7 +6,7 @@ import PrevButton from './components/PrevButton.js'
 
 import ProgressBar from './components/ProgressBar.js'
 import FormattedTime from './components/FormattedTime.js'
-import TimeMarker from './components/TimeMarker.js'
+import TimeMarker, { TimeMarkerType } from './components/TimeMarker.js'
 
 export {
   PlaybackControls,
@@ -18,4 +18,5 @@ export {
   ProgressBar,
   FormattedTime,
   TimeMarker,
+  TimeMarkerType,
 }
