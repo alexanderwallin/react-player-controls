@@ -3,6 +3,7 @@ import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
 import FormattedTime from './FormattedTime.js'
+import RangeControlOverlay from './RangeControlOverlay.js'
 
 const { number, bool, func } = PropTypes
 
@@ -38,15 +39,12 @@ class ProgressBar extends Component {
     this.progressBarEl = rootEl
   }
 
-  getSeekTimeFromMouseEvent (evt) {
-    // Calculate seek time
-    return 0
-  }
-
   @autobind
-  handleSeek (evt) {
-    if (this.props.canSeek) {
-      this.props.onSeek(this.getSeekTimeFromMouseEvent(evt))
+  handleSeek (relativeTime) {
+    const { canSeek, onSeek, totalTime } = this.props
+
+    if (canSeek) {
+      onSeek(relativeTime * totalTime)
     }
   }
 
@@ -58,7 +56,11 @@ class ProgressBar extends Component {
     return (
       <div className={classNames('ProgressBar', { canSeek })} ref={this.storeRef}>
         <div className="ProgressBar-elapsed" style={{ width: `${progressPercent}%` }} />
-        <div className="ProgressBar-seek" onClick={this.handleSeek} />
+        <RangeControlOverlay
+          extraClasses="ProgressBar-seek"
+          bounds={() => this.progressBarEl.getBoundingClientRect()}
+          onValue={this.handleSeek}
+        />
       </div>
     )
   }
