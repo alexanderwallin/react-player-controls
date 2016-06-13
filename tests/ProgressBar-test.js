@@ -21,8 +21,7 @@ describe('<ProgressBar />', () => {
     const callback = spy()
     const bar = mount(<ProgressBar onSeek={callback}/>)
 
-    bar.find('RangeControlOverlay').props().onValue()
-    expect(callback.called).to.equal(false)
+    expect(bar.find('RangeControlOverlay')).to.have.length(0)
 
     bar.setProps({ isSeekable: callback, isSeekable: true })
     bar.find('RangeControlOverlay').props().onValue()

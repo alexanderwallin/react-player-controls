@@ -79,12 +79,14 @@ class ProgressBar extends Component {
 
         <div className="ProgressBar-handle" style={{ left: styleLeft }} />
 
-        <RangeControlOverlay
-          extraClasses="ProgressBar-seek"
-          bounds={() => this.progressBarEl.getBoundingClientRect()}
-          onValue={this.handleSeek}
-          onIntent={this.handleIntent}
-        />
+        {isSeekable && (
+          <RangeControlOverlay
+            extraClasses="ProgressBar-seek"
+            bounds={() => this.progressBarEl.getBoundingClientRect()}
+            onValue={this.handleSeek}
+            onIntent={this.handleIntent}
+          />
+        )}
       </div>
     )
   }
