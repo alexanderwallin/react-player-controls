@@ -19,13 +19,13 @@ describe('<ProgressBar />', () => {
 
   it('triggers seek callback when seekable', () => {
     const callback = spy()
-    const bar = mount(<ProgressBar onSeek={callback} />)
+    const bar = mount(<ProgressBar onSeek={callback}/>)
 
-    bar.find('.ProgressBar-seek').simulate('click')
+    bar.find('RangeControlOverlay').props().onValue()
     expect(callback.called).to.equal(false)
 
     bar.setProps({ canSeek: callback, canSeek: true })
-    bar.find('.ProgressBar-seek').simulate('click')
+    bar.find('RangeControlOverlay').props().onValue()
     expect(callback.called).to.equal(true)
   })
 
@@ -44,17 +44,9 @@ describe('<ProgressBar />', () => {
     const callback = spy()
     const bar = mount(<ProgressBar totalTime={10} canSeek={true} onSeek={callback} />)
 
-    bar.find('.ProgressBar-seek').simulate('click')
+    bar.find('RangeControlOverlay').props().onValue(0.5)
     expect(callback.called).to.equal(true)
-    expect(callback.args[0][0]).to.be.within(0, 10)
-
-    // here: click seek bar at 20% in and expect the seek callback to pass 2
-    /*const clickEvt = {
-      clientX: 143,
-      clientY: 200,
-    }
-    bar.find('.ProgressBar-seek').simulate('click', clickEvt)
-    expect(callback.args[0]).to.equal([2])*/
+    expect(callback.args[0][0]).to.equal(5)
   })
 
 })
