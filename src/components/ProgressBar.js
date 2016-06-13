@@ -32,6 +32,10 @@ class ProgressBar extends Component {
     super(props)
 
     this.progressBarEl = null
+
+    this.state = {
+      currentIntent: 0,
+    }
   }
 
   @autobind
@@ -48,8 +52,19 @@ class ProgressBar extends Component {
     }
   }
 
+  @autobind
+  handleIntent (relativeTime) {
+    const intent = this.props.canSeek ? relativeTime : 0
+
+    this.setState({
+      ...this.state,
+      currentIntent: intent,
+    })
+  }
+
   render () {
     const { totalTime, currentTime, canSeek } = this.props
+    const { currentIntent } = this.state
 
     const progressPercent = Math.min(100, 100 * currentTime / totalTime)
     const styleLeft = `${progressPercent}%`
@@ -58,12 +73,15 @@ class ProgressBar extends Component {
       <div className={classNames('ProgressBar', { canSeek })} ref={this.storeRef}>
         <div className="ProgressBar-elapsed" style={{ width: styleLeft }} />
 
+        <div className="ProgressBar-intent" style={{ width: `${currentIntent * 100}%` }} />
+
         <div className="ProgressBar-handle" style={{ left: styleLeft }} />
 
         <RangeControlOverlay
           extraClasses="ProgressBar-seek"
           bounds={() => this.progressBarEl.getBoundingClientRect()}
           onValue={this.handleSeek}
+          onIntent={this.handleIntent}
         />
       </div>
     )

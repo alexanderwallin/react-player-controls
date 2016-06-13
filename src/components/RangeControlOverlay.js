@@ -19,10 +19,12 @@ class RangeControlOverlay extends Component {
       }),
     ]).isRequired,
     onValue: func.isRequired,
+    onIntent: func,
     extraClasses: string,
   }
 
   static defaultProps = {
+    onIntent: () => {},
     extraClasses: '',
   }
 
@@ -39,13 +41,8 @@ class RangeControlOverlay extends Component {
   }
 
   @autobind
-  handleClick (evt) {
-    evt.preventDefault()
-    this.triggerRangeChange(evt)
-  }
-
-  @autobind
   startDrag (evt) {
+    this.setState({ isDragging: true })
     window.addEventListener('mousemove', this.triggerRangeChange)
     window.addEventListener('mouseup', this.endDrag)
   }
@@ -54,6 +51,7 @@ class RangeControlOverlay extends Component {
   endDrag (evt) {
     this.triggerRangeChange(evt)
 
+    this.setState({ isDragging: false })
     window.removeEventListener('mousemove', this.triggerRangeChange)
     window.removeEventListener('mouseup', this.endDrag)
   }
@@ -62,6 +60,18 @@ class RangeControlOverlay extends Component {
   triggerRangeChange (mouseEvent) {
     const newValue = this.getHorizontalValue(mouseEvent.pageX)
     this.props.onValue(newValue)
+  }
+
+  @autobind
+  handleIntentMove (evt) {
+    if (!this.state.isDragging) {
+      this.triggerIntent(evt)
+    }
+  }
+
+  triggerIntent (mouseEvent) {
+    const value = this.getHorizontalValue(mouseEvent.pageX)
+    this.props.onIntent(value)
   }
 
   getHorizontalValue (mouseX) {
@@ -81,10 +91,14 @@ class RangeControlOverlay extends Component {
   }
 
   render () {
+    const { extraClasses } = this.props
+    const { isDragging } = this.state
+
     return (
       <div
-        className={classNames('RangeControlOverlay', this.props.extraClasses)}
+        className={classNames('RangeControlOverlay', extraClasses, { isDragging })}
         onMouseDown={this.startDrag}
+        onMouseMove={this.handleIntentMove}
       />
     )
   }
