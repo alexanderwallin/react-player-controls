@@ -1,0 +1,15 @@
+{
+  "traverse": false,
+  "lint": false,
+  "test": true,
+  "build": ["npm run build"],
+  "bump": {
+    "tag": true,
+    "commit": true,
+    "message": "Updates to version %s"
+  },
+  "release": {
+    "push": true,
+    "pushTags": true
+  }
+}
