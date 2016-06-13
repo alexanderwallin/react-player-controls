@@ -37,6 +37,8 @@ Dump UI components for media players
   canSeek={true}
   onSeek={seekTime => audioEl.currentTime = seekTime}
 />
+
+// TimeMarker composite component
 ```
 
 ## Development
