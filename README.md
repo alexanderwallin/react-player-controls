@@ -1,6 +1,6 @@
 # react-player-controls
 
-Dump UI components for media players
+Dumb but useful UI components for media players
 
 ## Components
 
