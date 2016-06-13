@@ -52,10 +52,14 @@ class ProgressBar extends Component {
     const { totalTime, currentTime, canSeek } = this.props
 
     const progressPercent = Math.min(100, 100 * currentTime / totalTime)
+    const styleLeft = `${progressPercent}%`
 
     return (
       <div className={classNames('ProgressBar', { canSeek })} ref={this.storeRef}>
-        <div className="ProgressBar-elapsed" style={{ width: `${progressPercent}%` }} />
+        <div className="ProgressBar-elapsed" style={{ width: styleLeft }} />
+
+        <div className="ProgressBar-handle" style={{ left: styleLeft }} />
+
         <RangeControlOverlay
           extraClasses="ProgressBar-seek"
           bounds={() => this.progressBarEl.getBoundingClientRect()}
