@@ -17,7 +17,7 @@ class ProgressBar extends Component {
   static propTypes = {
     totalTime: number,
     currentTime: number,
-    canSeek: bool,
+    isSeekable: bool,
     onSeek: func,
     extraClasses: string,
   }
@@ -25,7 +25,7 @@ class ProgressBar extends Component {
   static defaultProps = {
     totalTime: Infinity,
     currentTime: 0,
-    canSeek: false,
+    isSeekable: false,
     onSeek: () => {},
     extraClasses: '',
   }
@@ -47,16 +47,16 @@ class ProgressBar extends Component {
 
   @autobind
   handleSeek (relativeTime) {
-    const { canSeek, onSeek, totalTime } = this.props
+    const { isSeekable, onSeek, totalTime } = this.props
 
-    if (canSeek) {
+    if (isSeekable) {
       onSeek(relativeTime * totalTime)
     }
   }
 
   @autobind
   handleIntent (relativeTime) {
-    const intent = this.props.canSeek ? relativeTime : 0
+    const intent = this.props.isSeekable ? relativeTime : 0
 
     this.setState({
       ...this.state,
@@ -65,14 +65,14 @@ class ProgressBar extends Component {
   }
 
   render () {
-    const { totalTime, currentTime, canSeek, extraClasses } = this.props
+    const { totalTime, currentTime, isSeekable, extraClasses } = this.props
     const { currentIntent } = this.state
 
     const progressPercent = Math.min(100, 100 * currentTime / totalTime)
     const styleLeft = `${progressPercent}%`
 
     return (
-      <div className={classNames('ProgressBar', extraClasses, { canSeek })} ref={this.storeRef}>
+      <div className={classNames('ProgressBar', extraClasses, { isSeekable })} ref={this.storeRef}>
         <div className="ProgressBar-elapsed" style={{ width: styleLeft }} />
 
         <div className="ProgressBar-intent" style={{ width: `${currentIntent * 100}%` }} />

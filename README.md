@@ -34,7 +34,7 @@ Dumb but useful UI components for media players
 <ProgressBar
   totalTime={song.duration}
   currentTime={audioEl.currentTime}
-  canSeek={true}
+  isSeekable={true}
   onSeek={seekTime => audioEl.currentTime = seekTime}
 />
 

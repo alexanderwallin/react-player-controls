@@ -14,7 +14,7 @@ describe('<ProgressBar />', () => {
 
   it('should not be seekable by default', () => {
     const bar = mount(<ProgressBar />)
-    expect(bar.props().canSeek).to.equal(false)
+    expect(bar.props().isSeekable).to.equal(false)
   })
 
   it('triggers seek callback when seekable', () => {
@@ -24,7 +24,7 @@ describe('<ProgressBar />', () => {
     bar.find('RangeControlOverlay').props().onValue()
     expect(callback.called).to.equal(false)
 
-    bar.setProps({ canSeek: callback, canSeek: true })
+    bar.setProps({ isSeekable: callback, isSeekable: true })
     bar.find('RangeControlOverlay').props().onValue()
     expect(callback.called).to.equal(true)
   })
@@ -42,7 +42,7 @@ describe('<ProgressBar />', () => {
 
   it('passes a time from seek click', () => {
     const callback = spy()
-    const bar = mount(<ProgressBar totalTime={10} canSeek={true} onSeek={callback} />)
+    const bar = mount(<ProgressBar totalTime={10} isSeekable={true} onSeek={callback} />)
 
     bar.find('RangeControlOverlay').props().onValue(0.5)
     expect(callback.called).to.equal(true)
