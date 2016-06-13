@@ -23,6 +23,18 @@ Dump UI components for media players
 <NextButton onClick={nextHandler} isEnabled={currentSong < numSongs.length - 1} />
 ```
 
+#### Progress and time
+
+```jsx
+// Progress bar and seek control
+<ProgressBar
+  totalTime={song.duration}
+  currentTime={audioEl.currentTime}
+  canSeek={true}
+  onSeek={seekTime => audioEl.currentTime = seekTime}
+/>
+```
+
 ## Development
 
 Build:
