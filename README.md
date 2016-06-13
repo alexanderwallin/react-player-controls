@@ -26,6 +26,12 @@ Dump UI components for media players
 #### Progress and time
 
 ```jsx
+import { ProgressBar, FormattedTime } from 'react-player-controls'
+
+// Simple time formatter
+// Will render "3:24"
+<FormattedTime numSeconds={204} />
+
 // Progress bar and seek control
 <ProgressBar
   totalTime={song.duration}
