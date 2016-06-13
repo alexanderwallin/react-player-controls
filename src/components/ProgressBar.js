@@ -71,8 +71,16 @@ class ProgressBar extends Component {
     const progressPercent = Math.min(100, 100 * currentTime / totalTime)
     const styleLeft = `${progressPercent}%`
 
+    const isRewindIntent = currentIntent !== 0 && currentIntent < currentTime / totalTime
+
     return (
-      <div className={classNames('ProgressBar', extraClasses, { isSeekable })} ref={this.storeRef}>
+      <div
+        className={classNames('ProgressBar', extraClasses, {
+          isSeekable,
+          isRewindIntent,
+        })}
+        ref={this.storeRef}
+      >
         <div className="ProgressBar-elapsed" style={{ width: styleLeft }} />
 
         <div className="ProgressBar-intent" style={{ width: `${currentIntent * 100}%` }} />

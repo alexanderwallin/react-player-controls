@@ -28,6 +28,16 @@ describe('<ProgressBar />', () => {
     expect(callback.called).to.equal(true)
   })
 
+  it('provides a class for rewind intents', () => {
+    const bar = shallow(<ProgressBar isSeekable={true} totalTime={10} currentTime={5} />)
+
+    bar.setState({ currentIntent: 0.3 })
+    expect(bar.hasClass('ProgressBar')).to.equal(true)
+
+    bar.setState({ currentIntent: 0.8 })
+    expect(bar.hasClass('isRewindIntent')).to.equal(false)
+  })
+
   it('sets correct elapsed width', () => {
     const bar1 = mount(<ProgressBar />)
     expect(bar1.find('.ProgressBar-elapsed').props().style.width).to.equal('0%')
