@@ -28,6 +28,14 @@ describe('<FormattedTime />', () => {
     expect(time.text()).to.equal('1:22')
   })
 
+  it('renders negative time', () => {
+    const time1 = mount(<FormattedTime numSeconds={-82} />)
+    expect(time1.text()).to.equal('-1:22')
+
+    const time2 = mount(<FormattedTime numSeconds={-(3600 + 20*60 + 10)} />)
+    expect(time2.text()).to.equal('-1:20:10')
+  })
+
   it('renders hours when needed', () => {
     const time = mount(<FormattedTime numSeconds={3601} />)
     expect(time.text()).to.equal('1:00:01')

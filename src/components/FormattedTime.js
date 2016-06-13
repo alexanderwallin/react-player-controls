@@ -23,13 +23,16 @@ class FormattedTime extends Component {
   getFormattedTime () {
     const { numSeconds } = this.props
 
-    const hours = Math.floor(numSeconds / 3600)
-    const minutes = Math.floor((numSeconds % 3600) / 60)
-    const seconds = numSeconds % 60
+    const prefix = numSeconds < 0 ? '-' : ''
+    const absNumSeconds = Math.abs(numSeconds)
+
+    const hours = Math.floor(absNumSeconds / 3600)
+    const minutes = Math.floor((absNumSeconds % 3600) / 60)
+    const seconds = absNumSeconds % 60
 
     return hours > 0
-      ? `${hours}:${padZero(minutes)}:${padZero(seconds)}`
-      : `${minutes}:${padZero(seconds)}`
+      ? `${prefix}${hours}:${padZero(minutes)}:${padZero(seconds)}`
+      : `${prefix}${minutes}:${padZero(seconds)}`
   }
 
   render () {
