@@ -1,4 +1,5 @@
 # react-player-controls
+[![Build Status](https://travis-ci.org/reactify/react-player-controls.svg?branch=master)](https://travis-ci.org/reactify/react-player-controls)
 
 Dumb but useful UI components for media players
 
