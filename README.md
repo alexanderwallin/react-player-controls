@@ -11,16 +11,20 @@ Dumb but useful UI components for media players
 <PlayButton isEnabled={true} onClick={playHandler} />
 <PauseButton onClick={pauseHandler} />
 
-// Play and pause wrapped in a PlaybackControls component
+// Prev and next
+<PrevButton onClick={prevHandler} isEnabled={currentSong > 0} />
+<NextButton onClick={nextHandler} isEnabled={currentSong < numSongs.length - 1} />
+
+// Wrapper for play, pause, prev and next
 <PlaybackControls
   isPlayable={true}
   isPlaying={false}
   onPlaybackChange={setPlayback}
+  hasPrevious={currentSong > 0}
+  onPrevious={prevHandler}
+  hasNext={currentSong < numSongs.length - 1}
+  onNext={nextHandler}
 />
-
-// Prev and next
-<PrevButton onClick={prevHandler} isEnabled={currentSong > 0} />
-<NextButton onClick={nextHandler} isEnabled={currentSong < numSongs.length - 1} />
 ```
 
 #### Progress and time
