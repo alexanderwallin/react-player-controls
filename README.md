@@ -80,3 +80,9 @@ Run tests:
 ```sh
 npm run test
 ```
+
+Publishing and tagging a release:
+
+```sh
+paco release <major|minor|patch>
+```
