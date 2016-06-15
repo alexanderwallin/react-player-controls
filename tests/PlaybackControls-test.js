@@ -9,28 +9,30 @@ chai.use(chaiEnzyme())
 import PlaybackControls from '../src/components/PlaybackControls.js'
 import PlayButton from '../src/components/PlayButton.js'
 import PauseButton from '../src/components/PauseButton.js'
+import PrevButton from '../src/components/PrevButton.js'
+import NextButton from '../src/components/NextButton.js'
 
 const noop = () => {}
 
 describe('<PlaybackControls />', () => {
 
-  it('should not be playable by default', () => {
+  it('is not playable by default', () => {
     const ctrls = mount(<PlaybackControls onPlaybackChange={noop} />)
     expect(ctrls.props().isPlayable).to.equal(false)
   })
 
-  it('should not be playing by default', () => {
+  it('is not playing by default', () => {
     const ctrls = mount(<PlaybackControls onPlaybackChange={noop} />)
     expect(ctrls.props().isPlaying).to.equal(false)
   })
 
-  it('should render a play button if not playing', () => {
+  it('renders a play button if not playing', () => {
     const ctrls = shallow(<PlaybackControls onPlaybackChange={noop} />)
     expect(ctrls.find(PlayButton)).to.have.length(1)
     expect(ctrls.find(PauseButton)).to.have.length(0)
   })
 
-  it('should render a pause button only if playable and playing', () => {
+  it('renders a pause button only if playable and playing', () => {
     const ctrls = mount(<PlaybackControls onPlaybackChange={noop} />)
     expect(ctrls.find(PlayButton)).to.have.length(1)
     expect(ctrls.find(PauseButton)).to.have.length(0)
@@ -44,7 +46,7 @@ describe('<PlaybackControls />', () => {
     expect(ctrls.find(PauseButton)).to.have.length(1)
   })
 
-  it('should handle playback state callbacks', () => {
+  it('handles playback state callbacks', () => {
     const playCallback = spy()
     const pauseCallback = spy()
     const ctrls = mount(<PlaybackControls onPlaybackChange={playCallback} />)
@@ -63,5 +65,36 @@ describe('<PlaybackControls />', () => {
     ctrls.find(PauseButton).simulate('click')
     expect(pauseCallback.called).to.equal(true)
     expect(pauseCallback.calledWith(false)).to.equal(true)
+  })
+
+  it('renders prev and next buttons', () => {
+    const ctrls = shallow(<PlaybackControls onPlaybackChange={noop} />)
+    expect(ctrls.find(PrevButton)).to.have.length(1)
+    expect(ctrls.find(NextButton)).to.have.length(1)
+  })
+
+  it('sets up prev and next buttons with correct states and callbacks', () => {
+    const prevCallback = spy()
+    const nextCallback = spy()
+
+    const ctrls = shallow(
+      <PlaybackControls
+        onPlaybackChange={noop}
+        hasPrevious={false}
+        onPrevious={prevCallback}
+        hasNext={false}
+        onNext={nextCallback}
+      />
+    )
+
+    expect(ctrls.find(PrevButton).props().onClick).to.equal(prevCallback)
+    expect(ctrls.find(NextButton).props().onClick).to.equal(nextCallback)
+
+    expect(ctrls.find(PrevButton).props().isEnabled).to.equal(false)
+    expect(ctrls.find(NextButton).props().isEnabled).to.equal(false)
+
+    ctrls.setProps({ ...ctrls.props(), hasPrevious: true, hasNext: true })
+    expect(ctrls.find(PrevButton).props().isEnabled).to.equal(true)
+    expect(ctrls.find(NextButton).props().isEnabled).to.equal(true)
   })
 })
