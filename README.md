@@ -84,5 +84,5 @@ npm run test
 Publishing and tagging a release:
 
 ```sh
-paco release <major|minor|patch>
+npm run release -- <major|minor|patch>
 ```

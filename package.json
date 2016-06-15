@@ -12,7 +12,8 @@
     "dev": "npm run build -- --watch",
     "lint": "eslint src",
     "test": "mocha --compilers js:babel-core/register tests/helpers/browser.js tests/*.js",
-    "test:w": "npm test -- -w"
+    "test:w": "npm test -- -w",
+    "release": "paco release"
   },
   "repository": {
     "type": "git",
