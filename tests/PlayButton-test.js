@@ -27,9 +27,9 @@ describe('<PlayButton />', () => {
     expect(btn.props().className).to.contain(classes)
   })
 
-  it('should render an icon', () => {
-    const btn = shallow(<PlayButton onClick={noop} />)
-    expect(btn.find('.PlayButton-icon')).to.have.length(1)
+  it('renders an icon per default', () => {
+    const btn = mount(<PlayButton onClick={noop} />)
+    expect(btn.find('.Icon')).to.have.length(1)
   })
 
   it('should trigger an onClick callback when enabled', () => {

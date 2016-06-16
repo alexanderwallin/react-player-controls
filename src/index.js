@@ -1,3 +1,5 @@
+export * from './components/icons.js'
+
 import PlaybackControls from './components/PlaybackControls.js'
 import PlayButton from './components/PlayButton.js'
 import PauseButton from './components/PauseButton.js'

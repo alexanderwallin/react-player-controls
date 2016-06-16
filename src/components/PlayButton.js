@@ -2,7 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
 import autobind from 'autobind-decorator'
 
-const { bool, func, string } = PropTypes
+import { PlayIcon } from './icons.js'
+
+const { bool, func, string, node } = PropTypes
 
 /**
  * Play button
@@ -11,11 +13,13 @@ class PlayButton extends Component {
   static propTypes = {
     onClick: func.isRequired,
     isEnabled: bool,
+    children: node,
     extraClasses: string,
   }
 
   static defaultProps = {
     isEnabled: false,
+    children: <PlayIcon />,
     extraClasses: '',
   }
 
@@ -27,10 +31,10 @@ class PlayButton extends Component {
   }
 
   render () {
-    const { isEnabled, onClick, extraClasses } = this.props
+    const { isEnabled, onClick, extraClasses, children } = this.props
 
     return (
-      <div
+      <button
         className={classNames(
           'PlayButton',
           { isEnabled },
@@ -38,10 +42,8 @@ class PlayButton extends Component {
         )}
         onClick={this.handleClick}
       >
-        <svg className="PlayButton-icon" viewBox="0 0 100 100">
-          <polygon className="PlayButton-icon-shape" points="24 92 24 7 100 49.4955227"></polygon>
-        </svg>
-      </div>
+        {children}
+      </button>
     )
   }
 }

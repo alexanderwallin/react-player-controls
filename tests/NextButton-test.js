@@ -22,9 +22,9 @@ describe('<NextButton />', () => {
     expect(btn.props().className).to.contain(classes)
   })
 
-  it('should render an icon', () => {
-    const btn = shallow(<NextButton onClick={noop} />)
-    expect(btn.find('.NextButton-icon')).to.have.length(1)
+  it('renders an icon per default', () => {
+    const btn = mount(<NextButton onClick={noop} />)
+    expect(btn.find('.Icon')).to.have.length(1)
   })
 
   it('should trigger an onClick callback when clicked', () => {

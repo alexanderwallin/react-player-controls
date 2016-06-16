@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
 
-const { bool, func, string } = PropTypes
+import { PauseIcon } from './icons.js'
+
+const { bool, func, string, node } = PropTypes
 
 /**
  * Pause button
@@ -10,17 +12,19 @@ class PauseButton extends Component {
   static propTypes = {
     onClick: func.isRequired,
     extraClasses: string,
+    children: node,
   }
 
   static defaultProps = {
     extraClasses: '',
+    children: <PauseIcon />,
   }
 
   render() {
-    const { onClick, extraClasses } = this.props
+    const { onClick, extraClasses, children } = this.props
 
     return (
-      <div
+      <button
         className={classNames(
           'PauseButton',
           'isEnabled',
@@ -28,13 +32,8 @@ class PauseButton extends Component {
         )}
         onClick={onClick}
       >
-        <svg className="PauseButton-icon" viewBox="0 0 100 100">
-          <g className="PauseButton-group">
-            <rect className="PauseButton-shape" x="58" y="11" width="21" height="78"></rect>
-            <rect className="PauseButton-shape" x="22" y="11" width="21" height="78"></rect>
-          </g>
-        </svg>
-      </div>
+        {children}
+      </button>
     )
   }
 }

@@ -2,7 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
-const { func, bool, string } = PropTypes
+import { PreviousIcon } from './icons.js'
+
+const { func, bool, string, node } = PropTypes
 
 class PrevButton extends Component {
 
@@ -10,11 +12,13 @@ class PrevButton extends Component {
     onClick: func.isRequired,
     isEnabled: bool,
     extraClasses: string,
+    children: node,
   }
 
   static defaultProps = {
     isEnabled: false,
     extraClasses: '',
+    children: <PreviousIcon />,
   }
 
   @autobind
@@ -25,17 +29,15 @@ class PrevButton extends Component {
   }
 
   render () {
-    const { isEnabled, onClick, extraClasses } = this.props
+    const { isEnabled, onClick, extraClasses, children } = this.props
 
     return (
-      <div
+      <button
         className={classNames('PrevButton', extraClasses, { isEnabled })}
         onClick={this.handleClick}
       >
-        <svg className="PrevButton-icon" viewBox="0 0 100 100">
-          <polygon className="PrevButton-shape" points="85 12.6092632 27.3529412 44.5358947 27.3529412 11 15 11 15 89 27.3529412 89 27.3529412 54.368 85 86.3028421" />
-        </svg>
-      </div>
+        {children}
+      </button>
     )
   }
 }

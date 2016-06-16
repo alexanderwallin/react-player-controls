@@ -22,9 +22,9 @@ describe('<PauseButton />', () => {
     expect(btn.props().className).to.contain(classes)
   })
 
-  it('should render an icon', () => {
-    const btn = shallow(<PauseButton onClick={noop} />)
-    expect(btn.find('.PauseButton-icon')).to.have.length(1)
+  it('renders an icon per default', () => {
+    const btn = mount(<PauseButton onClick={noop} />)
+    expect(btn.find('.Icon')).to.have.length(1)
   })
 
   it('should trigger an onClick callback when clicked', () => {
