@@ -28,7 +28,7 @@ class FormattedTime extends Component {
 
     const hours = Math.floor(absNumSeconds / 3600)
     const minutes = Math.floor((absNumSeconds % 3600) / 60)
-    const seconds = absNumSeconds % 60
+    const seconds = Math.round(absNumSeconds) % 60
 
     return hours > 0
       ? `${prefix}${hours}:${padZero(minutes)}:${padZero(seconds)}`

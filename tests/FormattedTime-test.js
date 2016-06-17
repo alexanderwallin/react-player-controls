@@ -41,4 +41,12 @@ describe('<FormattedTime />', () => {
     expect(time.text()).to.equal('1:00:01')
   })
 
+  it('rounds rendered time to integers', () => {
+    const time1 = mount(<FormattedTime numSeconds={3601.12874773} />)
+    expect(time1.text()).to.equal('1:00:01')
+
+    const time2 = mount(<FormattedTime numSeconds={3601.88999898} />)
+    expect(time2.text()).to.equal('1:00:02')
+  })
+
 })
