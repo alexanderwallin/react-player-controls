@@ -2,7 +2,13 @@ import React, { Component, PropTypes } from 'react'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
-const { oneOfType, shape, func, string, number } = PropTypes
+const { oneOfType, shape, func, string, number, oneOf } = PropTypes
+
+// Range control directions
+export const ControlDirection = {
+  HORIZONTAL: 'HORIZONTAL',
+  VERTICAL: 'VERTICAL',
+}
 
 /**
  * An invisible overlay that acts as a range mouse control
@@ -17,14 +23,20 @@ class RangeControlOverlay extends Component {
         width: number.isRequired,
         left: number.isRequired,
       }),
+      shape({
+        height: number.isRequired,
+        top: number.isRequired,
+      }),
     ]).isRequired,
     onValue: func.isRequired,
     onIntent: func,
+    direction: oneOf([ControlDirection.HORIZONTAL, ControlDirection.VERTICAL]),
     extraClasses: string,
   }
 
   static defaultProps = {
     onIntent: () => {},
+    direction: ControlDirection.HORIZONTAL,
     extraClasses: '',
   }
 
@@ -58,8 +70,13 @@ class RangeControlOverlay extends Component {
 
   @autobind
   triggerRangeChange (mouseEvent) {
-    const newValue = this.getHorizontalValue(mouseEvent.pageX)
-    this.props.onValue(newValue)
+    const { direction, onValue } = this.props
+
+    const newValue = direction === ControlDirection.VERTICAL
+      ? this.getVerticalValue(mouseEvent.pageY)
+      : this.getHorizontalValue(mouseEvent.pageX)
+
+    onValue(newValue)
   }
 
   @autobind
@@ -74,20 +91,32 @@ class RangeControlOverlay extends Component {
     this.props.onIntent(value)
   }
 
-  getHorizontalValue (mouseX) {
-    const { bounds } = this.props
+  getRectFromBounds() {
+    const { bounds } = this.props
 
-    const rect = typeof bounds === 'function'
+    return typeof bounds === 'function'
       ? bounds()
       : bounds
+  }
 
+  getHorizontalValue (mouseX) {
+    const rect = this.getRectFromBounds()
 
     let dLeft = mouseX - (rect.left + window.scrollX)
     dLeft = Math.max(dLeft, 0)
     dLeft = Math.min(dLeft, rect.width)
 
-    const relValue = dLeft / rect.width
-    return relValue
+    return dLeft / rect.width
+  }
+
+  getVerticalValue (mouseY) {
+    const rect = this.getRectFromBounds()
+
+    let dTop = mouseY - (rect.top + window.scrollY)
+    dTop = Math.max(dTop, 0)
+    dTop = Math.min(dTop, rect.height)
+
+    return 1 - (dTop / rect.height)
   }
 
   render () {

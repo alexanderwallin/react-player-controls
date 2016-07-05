@@ -7,72 +7,96 @@ import TestUtils from 'react-addons-test-utils'
 
 chai.use(chaiEnzyme())
 
-import RangeControlOverlay from '../src/components/RangeControlOverlay.js'
+import RangeControlOverlay, { ControlDirection } from '../src/components/RangeControlOverlay.js'
+
+const noop = () => {}
 
 describe('<RangeControlOverlay />', () => {
-  let overlay = null
-  let onValue = null
 
-  beforeEach(() => {
-    onValue = spy()
-    overlay = mount(
-      <RangeControlOverlay
-        bounds={{ left: 100, width: 100 }}
-        onValue={onValue}
-      />
-    )
+  describe('horizontal controls', () => {
+    let overlay = null
+    let onValue = null
+    let instance = null
+
+    beforeEach(() => {
+      onValue = spy()
+      overlay = shallow(
+        <RangeControlOverlay
+          bounds={{ left: 100, width: 100 }}
+          onValue={onValue}
+          direction={ControlDirection.HORIZONTAL}
+        />
+      )
+      instance = overlay.instance()
+    })
+
+    it('calculates the correct value', () => {
+      instance.triggerRangeChange({ pageX: 150 })
+      expect(onValue.callCount).to.equal(1)
+      expect(onValue.args[0][0]).to.equal(0.5)
+    })
+
+    it('does not get affected by the mouse y position', () => {
+      instance.triggerRangeChange({ pageX: 175, pageY: 20 })
+      instance.triggerRangeChange({ pageX: 175, pageY: 189 })
+
+      expect(onValue.callCount).to.equal(2)
+      expect(onValue.args[0][0]).to.equal(onValue.args[1][0])
+    })
+
+    it('keeps within the range [0, 1]', () => {
+      instance.triggerRangeChange({ pageX: 50 })
+      expect(onValue.args[0][0]).to.equal(0)
+
+      instance.triggerRangeChange({ pageX: 150 })
+      expect(onValue.args[1][0]).to.equal(0.5)
+
+      instance.triggerRangeChange({ pageX: 250 })
+      expect(onValue.args[2][0]).to.equal(1)
+    })
   })
 
-  // TODO: Figure out how to trigger changes using mouse events
-  // dispatched on window
+  describe('vertical controls', () => {
+    let overlay = null
+    let onValue = null
+    let instance = null
 
-  /*
-  it('resolves object or function as bounds', () => {
-    const boundsObj = { left: 123, width: 123 }
-    const boundsFn = () => boundsObj
+    beforeEach(() => {
+      onValue = spy()
+      overlay = shallow(
+        <RangeControlOverlay
+          bounds={{ top: 100, height: 100 }}
+          onValue={onValue}
+          direction={ControlDirection.VERTICAL}
+        />
+      )
+      instance = overlay.instance()
+    })
 
-    overlay = mount(<RangeControlOverlay bounds={boundsObj} onValue={onValue} />)
-    overlay.simulate('click')
-    expect(onValue.callCount).to.equal(1)
+    it('calculates the correct value', () => {
+      instance.triggerRangeChange({ pageY: 150 })
+      expect(onValue.callCount).to.equal(1)
+      expect(onValue.args[0][0]).to.equal(0.5)
+    })
 
-    overlay = mount(<RangeControlOverlay bounds={boundsFn} onValue={onValue} />)
-    overlay.simulate('click')
-    expect(onValue.callCount).to.equal(2)
+    it('does not get affected by the mouse x position', () => {
+      instance.triggerRangeChange({ pageX: 30, pageY: 175 })
+      instance.triggerRangeChange({ pageX: 999, pageY: 175 })
+
+      expect(onValue.callCount).to.equal(2)
+      expect(onValue.args[0][0]).to.equal(onValue.args[1][0])
+    })
+
+    it('keeps within the range [0, 1]', () => {
+      instance.triggerRangeChange({ pageY: 50 })
+      expect(onValue.args[0][0]).to.equal(1)
+
+      instance.triggerRangeChange({ pageY: 150 })
+      expect(onValue.args[1][0]).to.equal(0.5)
+
+      instance.triggerRangeChange({ pageY: 250 })
+      expect(onValue.args[2][0]).to.equal(0)
+    })
   })
-  */
-
-  /*
-  it('triggers onValue callback on click', () => {
-    overlay.simulate('click', { pageX: 150 })
-    expect(onValue.called).to.equal(true)
-    expect(onValue.args[0][0]).to.equal(0.5)
-  })
-  */
-
-  /*
-  it('translates mousemove pos into value', () => {
-    console.log('\n\n - - - \n\n')
-    overlay.simulate('mouseDown', { pageX: 150 })
-
-    // window.dispatchEvent(new MouseEvent('mousemove', { clientX: 180 }))
-    // console.log(TestUtils.Simulate)
-    TestUtils.Simulate.mouseMove(window, { clientX: 180, screenX: 180, pageX: 180 })
-    // overlay.simulate('mouseMove', { clientX: 180, screenX: 180, pageX: 180 })
-    expect(onValue.called).to.equal(true)
-  })
-  */
-
-  /*
-  it('respects bounds', () => {
-    overlay.simulate('mouseDown', { pageX: 1000 })
-    overlay.simulate('mouseUp', { pageX: 1000 })
-    expect(onValue.callCount).to.equal(1)
-    expect(onValue.args[0][0]).to.equal(1)
-
-    overlay.simulate('mouseDown', { pageX: 99 })
-    overlay.simulate('mouseUp', { pageX: 99 })
-    expect(onValue.args[1][0]).to.equal(0)
-  })
-  */
 
 })
