@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>sound-off</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="sound-off" fill="#000000">
+            <path d="M28.0748663,36.3636364 L0,36.3636364 L0,65.9090909 L30.4812834,65.9090909 L54.5454545,88.6363636 L54.5454545,11.3636364 L28.0748663,36.3636364 Z" id="Combined-Shape-Copy-2"></path>
+            <polygon id="Line" points="69.513151 44.1232126 87.6949692 62.3050308 90.9090909 65.5191526 97.3373344 59.0909091 94.1232126 55.8767874 75.9413945 37.6949692 72.7272727 34.4808474 66.2990293 40.9090909"></polygon>
+            <polygon id="Line" points="75.9413945 62.3050308 94.1232126 44.1232126 97.3373344 40.9090909 90.9090909 34.4808474 87.6949692 37.6949692 69.513151 55.8767874 66.2990293 59.0909091 72.7272727 65.5191526"></polygon>
+        </g>
+    </g>
+</svg>
