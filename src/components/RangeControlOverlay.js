@@ -89,11 +89,13 @@ class RangeControlOverlay extends Component {
   }
 
   triggerIntent (mouseEvent) {
+    const { direction, onIntent } = this.props
+
     const value = direction === ControlDirection.VERTICAL
       ? this.getVerticalValue(mouseEvent.pageY)
       : this.getHorizontalValue(mouseEvent.pageX)
 
-    this.props.onIntent(value)
+    onIntent(value)
   }
 
   getRectFromBounds() {
