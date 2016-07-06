@@ -61,7 +61,9 @@ class RangeControlOverlay extends Component {
 
   @autobind
   endDrag (evt) {
-    this.triggerRangeChange(evt)
+    if (evt) {
+      this.triggerRangeChange(evt)
+    }
 
     this.setState({ isDragging: false })
     window.removeEventListener('mousemove', this.triggerRangeChange)
