@@ -64,6 +64,28 @@ Dumb but useful UI components for media players
 // -> "1:05 | -2:05" (without wrapping <span /> elements)
 ```
 
+### Volume controls
+
+```jsx
+// Buttons for sound on/off states
+<SoundOnButton onClick={mute} />
+<SoundOffButton onClick={unmute} />
+
+// A composite mute toggle wrapper
+<MuteToggleButton
+  isMuted={isMuted}
+  onMuteChange={handleMuteChange}
+  isEnabled={somePredicate}
+/>
+
+// Volume slider
+<VolumeSlider
+  volume={volumeBetweenZeroAndOne}
+  onVolumeChange={handleVolumeChange}
+  isEnabled={somePredicate}
+/>
+```
+
 ## Development
 
 Build:
