@@ -54,10 +54,12 @@ describe('<MuteToggleButton />', () => {
     btn.setProps({ ...btn.props(), isEnabled: true })
     btn.find(SoundOnButton).simulate('click')
     expect(callback.callCount).to.equal(1)
+    expect(callback.args[0][0]).to.equal(true)
 
     btn.setProps({ ...btn.props(), isMuted: true })
     btn.find(SoundOffButton).simulate('click')
     expect(callback.callCount).to.equal(2)
+    expect(callback.args[1][0]).to.equal(false)
 
     btn.setProps({ ...btn.props(), isEnabled: false })
     btn.find(SoundOffButton).simulate('click')
