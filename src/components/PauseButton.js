@@ -1,40 +1,17 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 
+import Button from './Button.js'
 import { PauseIcon } from './icons.js'
-
-const { bool, func, string, node } = PropTypes
 
 /**
  * Pause button
  */
-class PauseButton extends Component {
-  static propTypes = {
-    onClick: func.isRequired,
-    extraClasses: string,
-    children: node,
-  }
-
+class PauseButton extends Button {
   static defaultProps = {
-    extraClasses: '',
+    ...Button.defaultProps,
+    className: 'PauseButton',
     children: <PauseIcon />,
-  }
-
-  render() {
-    const { onClick, extraClasses, children } = this.props
-
-    return (
-      <button
-        className={classNames(
-          'PauseButton',
-          'isEnabled',
-          extraClasses
-        )}
-        onClick={onClick}
-      >
-        {children}
-      </button>
-    )
   }
 }
 
