@@ -1,5 +1,7 @@
 export * from './components/icons.js'
 
+import Button from './components/Button.js'
+
 import PlaybackControls from './components/PlaybackControls.js'
 import PlayButton from './components/PlayButton.js'
 import PauseButton from './components/PauseButton.js'
@@ -17,6 +19,8 @@ import MuteToggleButton from './components/MuteToggleButton.js'
 import VolumeSlider from './components/VolumeSlider.js'
 
 export {
+  Button,
+
   PlaybackControls,
   PlayButton,
   PauseButton,
