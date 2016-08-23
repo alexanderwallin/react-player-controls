@@ -1,0 +1,116 @@
+@import "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700";
+@import "grid";
+
+$black: #3D463F;
+$gray: #878C88;
+$blue: #0E52CE;
+
+body {
+  background-color: #fafafa;
+  color: $black;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+//
+// Layout
+//
+
+.site-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 80px;
+}
+
+.site-header {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.site-sidebar {
+  flex: 1;
+}
+
+.site-content {
+  flex: 2;
+}
+
+//
+// Typography
+//
+
+.site-title {
+  margin: 0;
+  font-size: 1.5em;
+
+  img {
+    vertical-align: middle;
+    margin: -3px 10px 0 0;
+  }
+}
+
+.site-subtitle {
+  display: none;
+  color: $gray;
+  font-size: 1em;
+}
+
+h5 {
+  // margin-bottom: 1em;
+  font-size: 0.75em;
+  font-weight: normal;
+  color: $gray;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+a {
+  color: $blue;
+
+  &:hover {
+    color: saturate(lighten($blue, 30%), 20%);
+  }
+}
+
+pre,
+code {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+//
+// Sidebar / navigation
+//
+
+.site-sidebar {
+
+}
+
+.site-nav {
+  line-height: 2;
+  font-size: 12px;
+
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  ul {
+    margin-bottom: 1em;
+  }
+
+  a {
+    display: inline-block;
+    text-decoration: none;
+  }
+}
+
+//
+// Page content
+//
+
+.component-content {
+  margin-bottom: 40px;
+}

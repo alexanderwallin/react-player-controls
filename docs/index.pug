@@ -1,0 +1,40 @@
+- var componentLinks = [['PlayButton', 'PauseButton', 'PrevButton', 'NextButton', 'PlaybackControls'], ['FormattedTime', 'TimeMarker', 'ProgressBar'], ['SoundOnButton', 'SoundOffButton', 'MuteToggleButton', 'VolumeSlider']]
+
+doctype html
+html(lang="en")
+  head
+    title react-player-controls
+    link(rel="stylesheet" href="build/styles.css")
+    link(rel="shortcut icon" href="img/favicon.png")
+
+  body
+    .site-container
+      header.site-header
+        h1.site-title
+          img(src="img/logo-icon.svg" width="48" height="48")
+          | react-player-controls
+        .site-subtitle Examples
+
+      aside.site-sidebar
+        h5 Components
+        nav.site-nav
+          each componentGroup in componentLinks
+            ul
+              each component in componentGroup
+                li
+                  a(href='#' + component)
+                    code
+                      | &lt;
+                      = component
+                      | &nbsp;/&gt;
+
+      main.site-content
+        each componentGroup in componentLinks
+          each component in componentGroup
+            .component-content
+              div(id=component)
+              h2= component
+              p= component
+              .component-demo(data-component=component)
+
+  script(src="build/scripts.js")
