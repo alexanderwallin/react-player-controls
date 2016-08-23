@@ -63,10 +63,18 @@ body {
   }
 }
 
-.site-subtitle {
-  display: none;
-  color: $gray;
-  font-size: 1em;
+.site-title-text {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1em;
+
+  small {
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    color: $gray;
+    line-height: 1.44;
+  }
 }
 
 .external-nav {
