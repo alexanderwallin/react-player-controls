@@ -23905,11 +23905,341 @@ demos.PlaybackControls = function (_React$Component5) {
   return PlaybackControls;
 }(_react2.default.Component);
 
+//
+// FormattedTime demo
+//
+demos.FormattedTime = function (_React$Component6) {
+  _inherits(FormattedTimeDemo, _React$Component6);
+
+  function FormattedTimeDemo(props) {
+    _classCallCheck(this, FormattedTimeDemo);
+
+    var _this10 = _possibleConstructorReturn(this, Object.getPrototypeOf(FormattedTimeDemo).call(this, props));
+
+    _this10.state = {
+      numSeconds: 100
+    };
+    return _this10;
+  }
+
+  _createClass(FormattedTimeDemo, [{
+    key: 'render',
+    value: function render() {
+      var _this11 = this;
+
+      var numSeconds = this.state.numSeconds;
+
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'ComponentDemo FormattedTimeDemo' },
+        _react2.default.createElement(
+          'pre',
+          { className: 'ComponentDemo-code' },
+          _react2.default.createElement('code', { className: 'language-jsx', dangerouslySetInnerHTML: {
+              __html: _prismjs2.default.highlight('<FormattedTime\n  numSeconds={this.state.numSeconds}\n/>', _prismjs2.default.languages.jsx)
+            } })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ComponentDemo-settings' },
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement(
+              'code',
+              null,
+              'numSeconds'
+            ),
+            _react2.default.createElement('input', { type: 'number', value: numSeconds, onChange: function onChange(evt) {
+                return _this11.setState({ numSeconds: evt.target.value });
+              } })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ComponentDemo-results' },
+          _react2.default.createElement(rpc.FormattedTime, { numSeconds: numSeconds })
+        )
+      );
+    }
+  }]);
+
+  return FormattedTimeDemo;
+}(_react2.default.Component);
+
+//
+// TimeMarker demo
+//
+demos.TimeMarker = function (_React$Component7) {
+  _inherits(TimeMarkerDemo, _React$Component7);
+
+  function TimeMarkerDemo(props) {
+    _classCallCheck(this, TimeMarkerDemo);
+
+    var _this12 = _possibleConstructorReturn(this, Object.getPrototypeOf(TimeMarkerDemo).call(this, props));
+
+    _this12.state = {
+      totalTime: 190,
+      currentTime: 65,
+      markerSeparator: ' / ',
+      firstMarkerType: rpc.TimeMarkerType.ELAPSED,
+      secondMarkerType: rpc.TimeMarkerType.DURATION
+    };
+    return _this12;
+  }
+
+  _createClass(TimeMarkerDemo, [{
+    key: 'render',
+    value: function render() {
+      var _this13 = this;
+
+      var _state2 = this.state;
+      var totalTime = _state2.totalTime;
+      var currentTime = _state2.currentTime;
+      var markerSeparator = _state2.markerSeparator;
+      var firstMarkerType = _state2.firstMarkerType;
+      var secondMarkerType = _state2.secondMarkerType;
+
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'ComponentDemo TimeMarkerDemo' },
+        _react2.default.createElement(
+          'pre',
+          { className: 'ComponentDemo-code' },
+          _react2.default.createElement('code', { className: 'language-jsx', dangerouslySetInnerHTML: {
+              __html: _prismjs2.default.highlight('<TimeMarker\n  totalTime={this.state.totalTime}\n  currentTime={this.state.currentTime}\n  markerSeparator={this.state.markerSeparator}\n  firstMarkerType={this.state.firstMarkerType}\n  secondMarkerType={this.state.secondMarkerType}\n/>', _prismjs2.default.languages.jsx)
+            } })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ComponentDemo-settings' },
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement(
+              'code',
+              null,
+              'totalTime'
+            ),
+            _react2.default.createElement('input', { type: 'number', value: totalTime, onChange: function onChange(evt) {
+                return _this13.setState(Object.assign({}, _this13.state, { totalTime: evt.target.value }));
+              } })
+          ),
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement(
+              'code',
+              null,
+              'currentTime'
+            ),
+            _react2.default.createElement('input', { type: 'number', value: currentTime, onChange: function onChange(evt) {
+                return _this13.setState(Object.assign({}, _this13.state, { currentTime: evt.target.value }));
+              } })
+          ),
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement(
+              'code',
+              null,
+              'markerSeparator'
+            ),
+            _react2.default.createElement('input', { type: 'text', value: markerSeparator, onChange: function onChange(evt) {
+                return _this13.setState(Object.assign({}, _this13.state, { markerSeparator: evt.target.value }));
+              } })
+          ),
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement(
+              'code',
+              null,
+              'firstMarkerType'
+            ),
+            _react2.default.createElement(
+              'select',
+              { value: firstMarkerType, onChange: function onChange(evt) {
+                  return _this13.setState(Object.assign({}, _this13.state, { firstMarkerType: evt.target.value }));
+                } },
+              Object.keys(rpc.TimeMarkerType).map(function (type) {
+                return _react2.default.createElement(
+                  'option',
+                  { key: type, value: rpc.TimeMarkerType[type] },
+                  'TimeMarkerType.',
+                  type
+                );
+              })
+            )
+          ),
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement(
+              'code',
+              null,
+              'secondMarkerType'
+            ),
+            _react2.default.createElement(
+              'select',
+              { value: secondMarkerType, onChange: function onChange(evt) {
+                  return _this13.setState(Object.assign({}, _this13.state, { secondMarkerType: evt.target.value }));
+                } },
+              Object.keys(rpc.TimeMarkerType).map(function (type) {
+                return _react2.default.createElement(
+                  'option',
+                  { key: type, value: rpc.TimeMarkerType[type] },
+                  'TimeMarkerType.',
+                  type
+                );
+              })
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ComponentDemo-results' },
+          _react2.default.createElement(rpc.TimeMarker, {
+            totalTime: totalTime,
+            currentTime: currentTime,
+            markerSeparator: markerSeparator,
+            firstMarkerType: firstMarkerType,
+            secondMarkerType: secondMarkerType
+          })
+        )
+      );
+    }
+  }]);
+
+  return TimeMarkerDemo;
+}(_react2.default.Component);
+
+//
+// ProgressBar demo
+//
+demos.ProgressBar = function (_React$Component8) {
+  _inherits(ProgressBarDemo, _React$Component8);
+
+  function ProgressBarDemo(props) {
+    _classCallCheck(this, ProgressBarDemo);
+
+    var _this14 = _possibleConstructorReturn(this, Object.getPrototypeOf(ProgressBarDemo).call(this, props));
+
+    _this14.timer = null;
+
+    _this14.state = {
+      totalTime: 190,
+      currentTime: 65,
+      isSeekable: true
+    };
+    return _this14;
+  }
+
+  _createClass(ProgressBarDemo, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this15 = this;
+
+      this.timer = window.setInterval(function () {
+        _this15.setState(Object.assign({}, _this15.state, { currentTime: (_this15.state.currentTime + 1) % _this15.state.totalTime }));
+      }, 1000);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      window.clearInterval(this.timer);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this16 = this;
+
+      var _state3 = this.state;
+      var totalTime = _state3.totalTime;
+      var currentTime = _state3.currentTime;
+      var isSeekable = _state3.isSeekable;
+
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'ComponentDemo ProgressBarDemo' },
+        _react2.default.createElement(
+          'pre',
+          { className: 'ComponentDemo-code' },
+          _react2.default.createElement('code', { className: 'language-jsx', dangerouslySetInnerHTML: {
+              __html: _prismjs2.default.highlight('<ProgressBar\n  totalTime={this.state.totalTime}\n  currentTime={this.state.currentTime}\n  isSeekable={this.state.isSeekable}\n  onSeek={time => this.setState({ ...this.state, currentTime: time })}\n/>', _prismjs2.default.languages.jsx)
+            } })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ComponentDemo-settings' },
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement(
+              'code',
+              null,
+              'totalTime'
+            ),
+            _react2.default.createElement('input', { type: 'number', value: totalTime, onChange: function onChange(evt) {
+                return _this16.setState(Object.assign({}, _this16.state, { totalTime: evt.target.value }));
+              } })
+          ),
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement(
+              'code',
+              null,
+              'currentTime'
+            ),
+            _react2.default.createElement('input', { type: 'number', value: currentTime, onChange: function onChange(evt) {
+                return _this16.setState(Object.assign({}, _this16.state, { currentTime: evt.target.value }));
+              } })
+          ),
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement('input', { type: 'checkbox', checked: isSeekable, onChange: function onChange(evt) {
+                return _this16.setState(Object.assign({}, _this16.state, { isSeekable: !isSeekable }));
+              } }),
+            _react2.default.createElement(
+              'code',
+              null,
+              'isSeekable'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ComponentDemo-results' },
+          _react2.default.createElement(rpc.ProgressBar, {
+            totalTime: totalTime,
+            currentTime: currentTime,
+            isSeekable: isSeekable,
+            onSeek: function onSeek(time) {
+              return _this16.setState(Object.assign({}, _this16.state, { currentTime: time }));
+            }
+          })
+        )
+      );
+    }
+  }]);
+
+  return ProgressBarDemo;
+}(_react2.default.Component);
+
 _reactDom2.default.render(_react2.default.createElement(demos.PlayButton, null), document.querySelector('.component-demo[data-component="PlayButton"]'));
 _reactDom2.default.render(_react2.default.createElement(demos.PauseButton, null), document.querySelector('.component-demo[data-component="PauseButton"]'));
 _reactDom2.default.render(_react2.default.createElement(demos.PrevButton, null), document.querySelector('.component-demo[data-component="PrevButton"]'));
 _reactDom2.default.render(_react2.default.createElement(demos.NextButton, null), document.querySelector('.component-demo[data-component="NextButton"]'));
 _reactDom2.default.render(_react2.default.createElement(demos.PlaybackControls, null), document.querySelector('.component-demo[data-component="PlaybackControls"]'));
+
+_reactDom2.default.render(_react2.default.createElement(demos.FormattedTime, null), document.querySelector('.component-demo[data-component="FormattedTime"]'));
+_reactDom2.default.render(_react2.default.createElement(demos.TimeMarker, null), document.querySelector('.component-demo[data-component="TimeMarker"]'));
+_reactDom2.default.render(_react2.default.createElement(demos.ProgressBar, null), document.querySelector('.component-demo[data-component="ProgressBar"]'));
 
 },{"../../../dist/index.js":16,"prismjs":46,"prismjs/components/prism-jsx.js":45,"react":191,"react-dom":48}],193:[function(require,module,exports){
 /**

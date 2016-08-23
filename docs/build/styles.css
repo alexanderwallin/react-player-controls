@@ -247,7 +247,11 @@ menu li {
     .ComponentDemo-settings::before {
       content: 'State Settings'; }
     .ComponentDemo-settings label {
-      display: block; }
+      display: block;
+      margin-bottom: 4px; }
+    .ComponentDemo-settings code + input,
+    .ComponentDemo-settings code + select {
+      margin-left: 10px; }
   .ComponentDemo-results {
     flex: 1; }
     .ComponentDemo-results::before {
@@ -309,5 +313,47 @@ menu li {
 
 .Icon-shape {
   fill: #72D687; }
+
+.ProgressBar {
+  position: relative;
+  height: 8px;
+  margin: 10px 0;
+  background: #eee;
+  border-radius: 4px; }
+  .ProgressBar-elapsed {
+    height: 100%;
+    background: #878C88;
+    border-radius: 4px; }
+  .ProgressBar-seek {
+    position: absolute;
+    top: -6px;
+    right: 0;
+    bottom: -6px;
+    left: 0;
+    cursor: pointer; }
+  .ProgressBar-handle {
+    position: absolute;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    margin: -4px 0 0 -8px;
+    background: #72D687;
+    border-radius: 100%;
+    transform: scale(0);
+    transition: transform 0.2s; }
+  .ProgressBar.isSeekable:hover .ProgressBar-handle {
+    transform: scale(1); }
+  .ProgressBar.isSeekable:hover .ProgressBar-intent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05); }
+  .ProgressBar.isSeekable .ProgressBar-elapsed {
+    background: #72D687; }
+  .ProgressBar.isLoading {
+    opacity: 0.5;
+    background: #ccc;
+    animation: barLoading 2s infinite; }
 
 /*# sourceMappingURL=styles.css.map */

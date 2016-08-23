@@ -235,8 +235,208 @@ demos.PlaybackControls = class PlaybackControls extends React.Component {
   }
 }
 
+
+
+//
+// FormattedTime demo
+//
+demos.FormattedTime = class FormattedTimeDemo extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      numSeconds: 100,
+    }
+  }
+
+  render() {
+    const { numSeconds } = this.state
+
+    return (
+      <div className="ComponentDemo FormattedTimeDemo">
+        <pre className="ComponentDemo-code">
+          <code className="language-jsx" dangerouslySetInnerHTML={{
+            __html: Prism.highlight(
+              `<FormattedTime\n  numSeconds={this.state.numSeconds}\n/>`,
+              Prism.languages.jsx
+            )
+          }} />
+        </pre>
+
+        <div className="ComponentDemo-settings">
+          <label>
+            <code>numSeconds</code>
+            <input type="number" value={numSeconds} onChange={evt => this.setState({ numSeconds: evt.target.value })} />
+          </label>
+        </div>
+
+        <div className="ComponentDemo-results">
+          <rpc.FormattedTime numSeconds={numSeconds} />
+        </div>
+      </div>
+    )
+  }
+}
+
+//
+// TimeMarker demo
+//
+demos.TimeMarker = class TimeMarkerDemo extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      totalTime: 190,
+      currentTime: 65,
+      markerSeparator: ' / ',
+      firstMarkerType: rpc.TimeMarkerType.ELAPSED,
+      secondMarkerType: rpc.TimeMarkerType.DURATION,
+    }
+  }
+
+  render() {
+    const { totalTime, currentTime, markerSeparator, firstMarkerType, secondMarkerType } = this.state
+
+    return (
+      <div className="ComponentDemo TimeMarkerDemo">
+        <pre className="ComponentDemo-code">
+          <code className="language-jsx" dangerouslySetInnerHTML={{
+            __html: Prism.highlight(
+              `<TimeMarker\n  totalTime={this.state.totalTime}\n  currentTime={this.state.currentTime}\n  markerSeparator={this.state.markerSeparator}\n  firstMarkerType={this.state.firstMarkerType}\n  secondMarkerType={this.state.secondMarkerType}\n/>`,
+              Prism.languages.jsx
+            )
+          }} />
+        </pre>
+
+        <div className="ComponentDemo-settings">
+          <label>
+            <code>totalTime</code>
+            <input type="number" value={totalTime} onChange={evt => this.setState(Object.assign({}, this.state, { totalTime: evt.target.value }))} />
+          </label>
+
+          <label>
+            <code>currentTime</code>
+            <input type="number" value={currentTime} onChange={evt => this.setState(Object.assign({}, this.state, { currentTime: evt.target.value }))} />
+          </label>
+
+          <label>
+            <code>markerSeparator</code>
+            <input type="text" value={markerSeparator} onChange={evt => this.setState(Object.assign({}, this.state, { markerSeparator: evt.target.value }))} />
+          </label>
+
+          <label>
+            <code>firstMarkerType</code>
+            <select value={firstMarkerType} onChange={evt => this.setState(Object.assign({}, this.state, { firstMarkerType: evt.target.value }))}>
+              {Object.keys(rpc.TimeMarkerType).map(type => (
+                <option key={type} value={rpc.TimeMarkerType[type]}>TimeMarkerType.{type}</option>
+              ))}
+            </select>
+          </label>
+
+          <label>
+            <code>secondMarkerType</code>
+            <select value={secondMarkerType} onChange={evt => this.setState(Object.assign({}, this.state, { secondMarkerType: evt.target.value }))}>
+              {Object.keys(rpc.TimeMarkerType).map(type => (
+                <option key={type} value={rpc.TimeMarkerType[type]}>TimeMarkerType.{type}</option>
+              ))}
+            </select>
+          </label>
+        </div>
+
+        <div className="ComponentDemo-results">
+          <rpc.TimeMarker
+            totalTime={totalTime}
+            currentTime={currentTime}
+            markerSeparator={markerSeparator}
+            firstMarkerType={firstMarkerType}
+            secondMarkerType={secondMarkerType}
+          />
+        </div>
+      </div>
+    )
+  }
+}
+
+//
+// ProgressBar demo
+//
+demos.ProgressBar = class ProgressBarDemo extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.timer = null
+
+    this.state = {
+      totalTime: 190,
+      currentTime: 65,
+      isSeekable: true,
+    }
+  }
+
+  componentDidMount() {
+    this.timer = window.setInterval(() => {
+      this.setState(Object.assign(
+        {},
+        this.state,
+        { currentTime: (this.state.currentTime + 1) % this.state.totalTime }
+      ))
+    }, 1000)
+  }
+
+  componentWillUnmount() {
+    window.clearInterval(this.timer)
+  }
+
+  render() {
+    const { totalTime, currentTime, isSeekable } = this.state
+
+    return (
+      <div className="ComponentDemo ProgressBarDemo">
+        <pre className="ComponentDemo-code">
+          <code className="language-jsx" dangerouslySetInnerHTML={{
+            __html: Prism.highlight(
+              `<ProgressBar\n  totalTime={this.state.totalTime}\n  currentTime={this.state.currentTime}\n  isSeekable={this.state.isSeekable}\n  onSeek={time => this.setState({ ...this.state, currentTime: time })}\n/>`,
+              Prism.languages.jsx
+            )
+          }} />
+        </pre>
+
+        <div className="ComponentDemo-settings">
+          <label>
+            <code>totalTime</code>
+            <input type="number" value={totalTime} onChange={evt => this.setState(Object.assign({}, this.state, { totalTime: evt.target.value }))} />
+          </label>
+
+          <label>
+            <code>currentTime</code>
+            <input type="number" value={currentTime} onChange={evt => this.setState(Object.assign({}, this.state, { currentTime: evt.target.value }))} />
+          </label>
+
+          <label>
+            <input type="checkbox" checked={isSeekable} onChange={(evt) => this.setState(Object.assign({}, this.state, { isSeekable: !isSeekable }))} />
+            <code>isSeekable</code>
+          </label>
+        </div>
+
+        <div className="ComponentDemo-results">
+          <rpc.ProgressBar
+            totalTime={totalTime}
+            currentTime={currentTime}
+            isSeekable={isSeekable}
+            onSeek={time => this.setState(Object.assign({}, this.state, { currentTime: time }))}
+          />
+        </div>
+      </div>
+    )
+  }
+}
+
 ReactDOM.render(<demos.PlayButton />, document.querySelector('.component-demo[data-component="PlayButton"]'))
 ReactDOM.render(<demos.PauseButton />, document.querySelector('.component-demo[data-component="PauseButton"]'))
 ReactDOM.render(<demos.PrevButton />, document.querySelector('.component-demo[data-component="PrevButton"]'))
 ReactDOM.render(<demos.NextButton />, document.querySelector('.component-demo[data-component="NextButton"]'))
 ReactDOM.render(<demos.PlaybackControls />, document.querySelector('.component-demo[data-component="PlaybackControls"]'))
+
+ReactDOM.render(<demos.FormattedTime />, document.querySelector('.component-demo[data-component="FormattedTime"]'))
+ReactDOM.render(<demos.TimeMarker />, document.querySelector('.component-demo[data-component="TimeMarker"]'))
+ReactDOM.render(<demos.ProgressBar />, document.querySelector('.component-demo[data-component="ProgressBar"]'))

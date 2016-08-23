@@ -205,6 +205,12 @@ menu {
 
     label {
       display: block;
+      margin-bottom: 4px;
+    }
+
+    code + input,
+    code + select {
+      margin-left: 10px;
     }
   }
 
