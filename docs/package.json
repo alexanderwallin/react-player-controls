@@ -8,7 +8,8 @@
     "js": "browserify src/js/demos.js -t babelify -o build/bundle.js",
     "js:watch": "watchify src/js/demos.js -t babelify -o build/bundle.js",
     "serve": "live-server --port=8293",
-    "start": "npm-run-all --parallel '*:watch' 'serve'"
+    "start": "npm-run-all --parallel '*:watch' 'serve'",
+    "build": "npm-run-all --parallel 'pug' 'sass' 'js'"
   },
   "private": true,
   "dependencies": {
