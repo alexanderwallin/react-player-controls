@@ -23836,7 +23836,7 @@ demos.PlaybackControls = function (_React$Component5) {
           'pre',
           { className: 'ComponentDemo-code' },
           _react2.default.createElement('code', { className: 'language-jsx', dangerouslySetInnerHTML: {
-              __html: _prismjs2.default.highlight('<PlaybackControls\n  isEnabled={this.state.isEnabled}\n  onClick={() => alert(\'Go to next\')} \n/>', _prismjs2.default.languages.jsx)
+              __html: _prismjs2.default.highlight('<PlaybackControls\n  isPlayable={this.state.isPlayable}\n  isPlaying={this.state.isPlaying}\n  hasPrevious={this.state.hasPrevious}\n  hasNext={this.state.hasNext}\n  onPlaybackChange={isPlaying => this.setState({ ...this.state, isPlaying })}\n  onPrevious={() => alert(\'Go to previous\')}\n  onNext={() => alert(\'Go to next\')}\n/>', _prismjs2.default.languages.jsx)
             } })
         ),
         _react2.default.createElement(

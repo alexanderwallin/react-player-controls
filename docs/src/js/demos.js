@@ -188,7 +188,15 @@ demos.PlaybackControls = class PlaybackControls extends React.Component {
         <pre className="ComponentDemo-code">
           <code className="language-jsx" dangerouslySetInnerHTML={{
             __html: Prism.highlight(
-              `<PlaybackControls\n  isEnabled={this.state.isEnabled}\n  onClick={() => alert('Go to next')} \n/>`,
+`<PlaybackControls
+  isPlayable={this.state.isPlayable}
+  isPlaying={this.state.isPlaying}
+  hasPrevious={this.state.hasPrevious}
+  hasNext={this.state.hasNext}
+  onPlaybackChange={isPlaying => this.setState({ ...this.state, isPlaying })}
+  onPrevious={() => alert('Go to previous')}
+  onNext={() => alert('Go to next')}
+/>`,
               Prism.languages.jsx
             )
           }} />
