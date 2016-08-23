@@ -14,7 +14,9 @@ $color-active: fade-out($color-hover, 0.5);
 .PlayButton,
 .PauseButton,
 .PrevButton,
-.NextButton {
+.NextButton,
+.SoundOnButton,
+.SoundOffButton {
   margin-right: 10px;
   padding: 8px;
   background: $white;
@@ -58,41 +60,76 @@ $color-active: fade-out($color-hover, 0.5);
 
 
 //
-// Progress bar
+// Sliders
 //
 
-.ProgressBar {
+.ProgressBar,
+.VolumeSlider {
   position: relative;
-  height: 8px;
-  margin: 10px 0;
   background: #eee;
   border-radius: 4px;
 
-  &-elapsed {
-    height: 100%;
+  &-elapsed,
+  &-value {
     background: $gray;
     border-radius: 4px;
   }
 
   &-seek {
     position: absolute;
-    top: -6px;
-    right: 0;
-    bottom: -6px;
-    left: 0;
     cursor: pointer;
   }
 
   &-handle {
     position: absolute;
-    top: 0;
     width: 16px;
     height: 16px;
-    margin: -4px 0 0 -8px;
     background: $green;
     border-radius: 100%;
     transform: scale(0);
     transition: transform 0.2s;
+  }
+
+  &.isSeekable,
+  &.isEnabled {
+    &:hover {
+      .ProgressBar-handle,
+      .VolumeSlider-handle {
+        transform: scale(1);
+      }
+
+      .ProgressBar-intent,
+      .VolumeSlider-intent {
+        position: absolute;
+        background: rgba(0,0,0,0.05);
+      }
+    }
+
+    .ProgressBar-elapsed,
+    .VolumeSlider-value {
+      background: $green;
+    }
+  }
+}
+
+.ProgressBar {
+  height: 8px;
+  margin: 10px 0;
+
+  &-elapsed {
+    height: 100%;
+  }
+
+  &-seek {
+    top: -6px;
+    right: 0;
+    bottom: -6px;
+    left: 0;
+  }
+
+  &-handle {
+    top: 0;
+    margin: -4px 0 0 -8px;
   }
 
   &.isSeekable {
@@ -102,16 +139,10 @@ $color-active: fade-out($color-hover, 0.5);
       }
 
       .ProgressBar-intent {
-        position: absolute;
         top: 0;
         left: 0;
         height: 100%;
-        background: rgba(0,0,0,0.05);
       }
-    }
-
-    .ProgressBar-elapsed {
-      background: $green;
     }
   }
 
@@ -119,5 +150,43 @@ $color-active: fade-out($color-hover, 0.5);
     opacity: 0.5;
     background: #ccc;
     animation: barLoading 2s infinite;
+  }
+}
+
+.VolumeSlider {
+  width: 8px;
+  height: 100px;
+  // margin: 10px 0;
+
+  &-value {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+
+  &-seek {
+    left: -6px;
+    top: 0;
+    right: -6px;
+    bottom: 0;
+  }
+
+  &-handle {
+    left: 0;
+    margin: 0 0 -8px -4px;
+  }
+
+  &.isEnabled {
+    &:hover {
+      .VolumeSlider-handle {
+        transform: scale(1);
+      }
+
+      .VolumeSlider-intent {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+    }
   }
 }

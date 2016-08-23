@@ -431,6 +431,196 @@ demos.ProgressBar = class ProgressBarDemo extends React.Component {
   }
 }
 
+//
+// SoundOnButton demo
+//
+demos.SoundOnButton = class SoundOnButtonDemo extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isEnabled: true,
+    }
+  }
+
+  render() {
+    const { isEnabled } = this.state
+
+    return (
+      <div className="ComponentDemo SoundOnButtonDemo">
+        <pre className="ComponentDemo-code">
+          <code className="language-jsx" dangerouslySetInnerHTML={{
+            __html: Prism.highlight(
+              `<SoundOnButton\n  isEnabled={this.state.isEnabled}\n  onClick={() => alert('Turn off sound')} \n/>`,
+              Prism.languages.jsx
+            )
+          }} />
+        </pre>
+
+        <div className="ComponentDemo-settings">
+          <label>
+            <input type="checkbox" checked={isEnabled} onChange={(evt) => this.setState({ isEnabled: !isEnabled })} />
+            <code>isEnabled</code>
+          </label>
+        </div>
+
+        <div className="ComponentDemo-results">
+          <rpc.SoundOnButton
+            onClick={() => alert('Turn off sound')}
+            isEnabled={isEnabled}
+          />
+        </div>
+      </div>
+    )
+  }
+}
+
+//
+// SoundOffButton demo
+//
+demos.SoundOffButton = class SoundOffButtonDemo extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isEnabled: true,
+    }
+  }
+
+  render() {
+    const { isEnabled } = this.state
+
+    return (
+      <div className="ComponentDemo SoundOnButffonDemo">
+        <pre className="ComponentDemo-code">
+          <code className="language-jsx" dangerouslySetInnerHTML={{
+            __html: Prism.highlight(
+              `<SoundOffButton\n  isEnabled={this.state.isEnabled}\n  onClick={() => alert('Turn on sound')} \n/>`,
+              Prism.languages.jsx
+            )
+          }} />
+        </pre>
+
+        <div className="ComponentDemo-settings">
+          <label>
+            <input type="checkbox" checked={isEnabled} onChange={(evt) => this.setState({ isEnabled: !isEnabled })} />
+            <code>isEnabled</code>
+          </label>
+        </div>
+
+        <div className="ComponentDemo-results">
+          <rpc.SoundOffButton
+            onClick={() => alert('Turn on sound')}
+            isEnabled={isEnabled}
+          />
+        </div>
+      </div>
+    )
+  }
+}
+
+//
+// MuteToggleButton demo
+//
+demos.MuteToggleButton = class MuteToggleButtonDemo extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isEnabled: true,
+      isMuted: false,
+    }
+  }
+
+  render() {
+    const { isEnabled, isMuted } = this.state
+
+    return (
+      <div className="ComponentDemo SoundOnButffonDemo">
+        <pre className="ComponentDemo-code">
+          <code className="language-jsx" dangerouslySetInnerHTML={{
+            __html: Prism.highlight(
+              `<MuteToggleButton\n  isEnabled={this.state.isEnabled}\n  isMuted={this.state.isMuted}\n  onMuteChange={isMuted => this.setState({ ...this.state, isMuted })}\n/>`,
+              Prism.languages.jsx
+            )
+          }} />
+        </pre>
+
+        <div className="ComponentDemo-settings">
+          <label>
+            <input type="checkbox" checked={isEnabled} onChange={(evt) => this.setState(Object.assign({}, this.state, { isEnabled: !isEnabled }))} />
+            <code>isEnabled</code>
+          </label>
+
+          <label>
+            <input type="checkbox" checked={isMuted} onChange={(evt) => this.setState(Object.assign({}, this.state, { isMuted: !isMuted }))} />
+            <code>isMuted</code>
+          </label>
+        </div>
+
+        <div className="ComponentDemo-results">
+          <rpc.MuteToggleButton
+            isEnabled={isEnabled}
+            isMuted={isMuted}
+            onMuteChange={isMuted => this.setState(Object.assign({}, this.state, { isMuted }))}
+          />
+        </div>
+      </div>
+    )
+  }
+}
+
+//
+// VolumeSlider demo
+//
+demos.VolumeSlider = class VolumeSliderDemo extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isEnabled: true,
+      volume: 0.5,
+    }
+  }
+
+  render() {
+    const { isEnabled, volume } = this.state
+
+    return (
+      <div className="ComponentDemo SoundOnButffonDemo">
+        <pre className="ComponentDemo-code">
+          <code className="language-jsx" dangerouslySetInnerHTML={{
+            __html: Prism.highlight(
+              `<VolumeSlider\n  isEnabled={this.state.isEnabled}\n  volume={this.state.volume}\n  onVolumeChange={volume => this.setState({ ...this.state, volume })} \n/>`,
+              Prism.languages.jsx
+            )
+          }} />
+        </pre>
+
+        <div className="ComponentDemo-settings">
+          <label>
+            <input type="checkbox" checked={isEnabled} onChange={(evt) => this.setState(Object.assign({}, this.state, { isEnabled: !isEnabled }))} />
+            <code>isEnabled</code>
+          </label>
+
+          <label>
+            <code>volume</code>
+            <input type="number" min="0" max="1" step="0.1" value={volume} onChange={evt => this.setState(Object.assign({}, this.state, { volume: evt.target.value }))} />
+          </label>
+        </div>
+
+        <div className="ComponentDemo-results">
+          <rpc.VolumeSlider
+            isEnabled={isEnabled}
+            volume={volume}
+            onVolumeChange={volume => this.setState(Object.assign({}, this.state, { volume }))}
+          />
+        </div>
+      </div>
+    )
+  }
+}
+
 ReactDOM.render(<demos.PlayButton />, document.querySelector('.component-demo[data-component="PlayButton"]'))
 ReactDOM.render(<demos.PauseButton />, document.querySelector('.component-demo[data-component="PauseButton"]'))
 ReactDOM.render(<demos.PrevButton />, document.querySelector('.component-demo[data-component="PrevButton"]'))
@@ -440,3 +630,8 @@ ReactDOM.render(<demos.PlaybackControls />, document.querySelector('.component-d
 ReactDOM.render(<demos.FormattedTime />, document.querySelector('.component-demo[data-component="FormattedTime"]'))
 ReactDOM.render(<demos.TimeMarker />, document.querySelector('.component-demo[data-component="TimeMarker"]'))
 ReactDOM.render(<demos.ProgressBar />, document.querySelector('.component-demo[data-component="ProgressBar"]'))
+
+ReactDOM.render(<demos.SoundOnButton />, document.querySelector('.component-demo[data-component="SoundOnButton"]'))
+ReactDOM.render(<demos.SoundOffButton />, document.querySelector('.component-demo[data-component="SoundOffButton"]'))
+ReactDOM.render(<demos.MuteToggleButton />, document.querySelector('.component-demo[data-component="MuteToggleButton"]'))
+ReactDOM.render(<demos.VolumeSlider />, document.querySelector('.component-demo[data-component="VolumeSlider"]'))
