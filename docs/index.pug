@@ -36,15 +36,16 @@ html(lang="en")
 
       main.site-content
         each componentGroup in componentLinks
-          each component in componentGroup
-            .component-content
-              div(id=component)
-              h2.component-title
-                code
-                  | &lt;
-                  = component
-                  | &nbsp;/&gt;
-              .component-demo(data-component=component)
+          .component-group
+            each component in componentGroup
+              .component-content
+                div(id=component)
+                h2.component-title
+                  code
+                    | &lt;
+                    = component
+                    | &nbsp;/&gt;
+                .component-demo(data-component=component)
 
       footer.site-footer
         p
