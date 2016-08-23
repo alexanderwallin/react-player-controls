@@ -18,10 +18,11 @@ body {
 .site-container {
   display: flex;
   flex-wrap: wrap;
-  padding-bottom: 80px;
+  padding-bottom: 40px;
 }
 
 .site-header {
+  display: flex;
   width: 100%;
   margin-bottom: 20px;
   padding: 20px 0;
@@ -41,6 +42,7 @@ body {
 //
 
 .site-title {
+  flex: 2;
   margin: 0;
   font-size: 1.5em;
 
@@ -56,6 +58,20 @@ body {
   font-size: 1em;
 }
 
+.external-nav {
+  flex: 1;
+  line-height: 48px;
+  text-align: right;
+
+  a {
+    color: $gray;
+
+    &:hover {
+      color: $black;
+    }
+  }
+}
+
 h5 {
   // margin-bottom: 1em;
   font-size: 0.75em;
@@ -67,6 +83,7 @@ h5 {
 
 a {
   color: $blue;
+  text-decoration: none;
 
   &:hover {
     color: saturate(lighten($blue, 30%), 20%);
@@ -82,6 +99,16 @@ code {
 // Sidebar / navigation
 //
 
+nav,
+menu {
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
 .site-sidebar {
 
 }
@@ -90,20 +117,12 @@ code {
   line-height: 2;
   font-size: 12px;
 
-  ul,
-  li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
   ul {
     margin-bottom: 1em;
   }
 
   a {
     display: inline-block;
-    text-decoration: none;
   }
 }
 
@@ -112,5 +131,20 @@ code {
 //
 
 .component-content {
-  margin-bottom: 40px;
+  // margin-bottom: 40px;
+}
+
+
+//
+// Footer
+//
+
+.site-footer {
+  width: 100%;
+  margin-top: 60px;
+  padding: 20px 0 0;
+  border-top: 1px solid #eee;
+  font-size: 12px;
+  text-align: center;
+  color: $gray;
 }

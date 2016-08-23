@@ -15,6 +15,11 @@ html(lang="en")
           | react-player-controls
         .site-subtitle Examples
 
+        nav.external-nav
+          ul
+            li
+              a(href="https://github.com/reactify/react-player-controls") Fork on GitHub
+
       aside.site-sidebar
         h5 Components
         nav.site-nav
@@ -36,5 +41,12 @@ html(lang="en")
               h2= component
               p= component
               .component-demo(data-component=component)
+
+      footer.site-footer
+        p
+          | Made by&nbsp;
+          a(href="https://github.com/reactify") @reactify
+          | &nbsp;&middot;&nbsp;
+          a(href="http://reactifymusic.com") reactifymusic.com
 
   script(src="build/bundle.js")
