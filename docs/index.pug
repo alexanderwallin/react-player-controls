@@ -12,9 +12,9 @@ html(lang="en")
       header.site-header
         h1.site-title
           img(src="img/logo-icon.svg" width="48" height="48")
-          | react-player-controls
-          //- img(class="badge" src="https://travis-ci.org/reactify/react-player-controls.svg?branch=master")
-        .site-subtitle Examples
+          span.site-title-text
+            | react-player-controls
+            small Demos
 
         nav.external-nav
           ul
@@ -36,16 +36,16 @@ html(lang="en")
 
       main.site-content
         each componentGroup in componentLinks
-          each component in componentGroup
-            .component-content
-              div(id=component)
-              h2.component-title
-                code
-                  | &lt;
-                  = component
-                  | &nbsp;/&gt;
-              p= component
-              .component-demo(data-component=component)
+          .component-group
+            each component in componentGroup
+              .component-content
+                div(id=component)
+                h2.component-title
+                  code
+                    | &lt;
+                    = component
+                    | &nbsp;/&gt;
+                .component-demo(data-component=component)
 
       footer.site-footer
         p

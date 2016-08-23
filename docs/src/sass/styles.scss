@@ -1,14 +1,20 @@
+@import "../../node_modules/prismjs/themes/prism";
+
 @import "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700";
 @import "grid";
 
 $black: #3D463F;
 $gray: #878C88;
+$white: #fefefe;
 $blue: #0E52CE;
+$green: #72D687;
+
+$font: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 body {
   background-color: #fafafa;
   color: $black;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: $font;
 }
 
 //
@@ -57,10 +63,18 @@ body {
   }
 }
 
-.site-subtitle {
-  display: none;
-  color: $gray;
-  font-size: 1em;
+.site-title-text {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1em;
+
+  small {
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    color: $gray;
+    line-height: 1.44;
+  }
 }
 
 .external-nav {
@@ -97,7 +111,7 @@ a {
 
 pre,
 code {
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-family: Monaco, Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
 }
 
 //
@@ -135,12 +149,86 @@ menu {
 // Page content
 //
 
+.component-group {
+  margin-bottom: 40px;
+  border-bottom: 1px solid #eee;
+}
+
 .component-content {
   margin-bottom: 40px;
 }
 
 .component-title {
   font-size: 1.25em;
+}
+
+.ComponentDemo {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background: $white;
+  border: 1px solid #eee;
+  border-radius: 2px;
+
+  &-code,
+  &-settings,
+  &-results {
+    position: relative;
+    padding: 40px 16px 24px;
+    font-size: 12px;
+
+    &::before {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      font-family: $font;
+      font-size: 10px;
+      color: $gray;
+      letter-spacing: 2px;
+      line-height: 14px;
+      text-transform: uppercase;
+    }
+  }
+
+  .ComponentDemo-code {
+    width: 100%;
+    margin: 0;
+    padding-top: 40px;
+    background: $white;
+    border-bottom: 1px solid #eee;
+    line-height: 1.6;
+
+    &::before {
+      content: 'JS';
+    }
+  }
+
+  &-settings {
+    flex: 1;
+    border-right: 1px solid #eee;
+
+    &::before {
+      content: 'State Settings';
+    }
+
+    label {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    code + input,
+    code + select {
+      margin-left: 10px;
+    }
+  }
+
+  &-results {
+    flex: 1;
+
+    &::before {
+      content: 'Results';
+    }
+  }
 }
 
 
@@ -157,3 +245,6 @@ menu {
   text-align: center;
   color: $gray;
 }
+
+
+@import "controls";
