@@ -1,0 +1,48 @@
+$icon-size: 30px;
+
+// $color-hover: saturate(lighten($green, 10%), 20%);
+// $color-active: desaturate(darken($green, 20%), 20%);
+
+$color-hover: desaturate(darken($green, 20%), 10%);
+$color-active: fade-out($color-hover, 0.5);
+
+.PlayButton {
+  padding: 8px;
+  background: $white;
+  border: 2px solid $green;
+  border-radius: 100%;
+  outline: none;
+
+  &[disabled] {
+    opacity: 0.5;
+  }
+
+  &.isEnabled {
+    cursor: pointer;
+
+    &:hover {
+      border-color: $color-hover;
+
+      .Icon-shape {
+        fill: $color-hover;
+      }
+    }
+
+    &:active {
+      border-color: $color-active;
+
+      .Icon-shape {
+        fill: $color-active;
+      }
+    }
+  }
+}
+
+.Icon {
+  width: $icon-size;
+  height: $icon-size;
+}
+
+.Icon-shape {
+  fill: $green;
+}
