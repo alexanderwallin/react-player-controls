@@ -22716,17 +22716,11 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _index = require('../../../dist/index.js');
 
+var rpc = _interopRequireWildcard(_index);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var DemoPlayButton = function DemoPlayButton() {
-  return _react2.default.createElement(
-    'div',
-    null,
-    'Demo play button'
-  );
-};
-
-_reactDom2.default.render(_react2.default.createElement(DemoPlayButton, null), document.querySelector('.component-demo'));
 
 },{"../../../dist/index.js":16,"react":189,"react-dom":46}],191:[function(require,module,exports){
 /**
