@@ -13,6 +13,7 @@ html(lang="en")
         h1.site-title
           img(src="img/logo-icon.svg" width="48" height="48")
           | react-player-controls
+          //- img(class="badge" src="https://travis-ci.org/reactify/react-player-controls.svg?branch=master")
         .site-subtitle Examples
 
         nav.external-nav
@@ -38,7 +39,11 @@ html(lang="en")
           each component in componentGroup
             .component-content
               div(id=component)
-              h2= component
+              h2.component-title
+                code
+                  | &lt;
+                  = component
+                  | &nbsp;/&gt;
               p= component
               .component-demo(data-component=component)
 

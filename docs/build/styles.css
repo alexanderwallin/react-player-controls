@@ -34,6 +34,9 @@ body {
   .site-title img {
     vertical-align: middle;
     margin: -3px 10px 0 0; }
+  .site-title .badge {
+    display: inline-block;
+    margin-left: 10px; }
 
 .site-subtitle {
   display: none;
@@ -81,6 +84,12 @@ menu li {
     margin-bottom: 1em; }
   .site-nav a {
     display: inline-block; }
+
+.component-content {
+  margin-bottom: 40px; }
+
+.component-title {
+  font-size: 1.25em; }
 
 .site-footer {
   width: 100%;
