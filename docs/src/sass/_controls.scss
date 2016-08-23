@@ -6,7 +6,11 @@ $icon-size: 30px;
 $color-hover: desaturate(darken($green, 20%), 10%);
 $color-active: fade-out($color-hover, 0.5);
 
-.PlayButton {
+.PlayButton,
+.PauseButton,
+.PrevButton,
+.NextButton {
+  margin-right: 10px;
   padding: 8px;
   background: $white;
   border: 2px solid $green;

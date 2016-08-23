@@ -242,6 +242,8 @@ menu li {
     border-right: 1px solid #eee; }
     .ComponentDemo-settings::before {
       content: 'State Settings'; }
+    .ComponentDemo-settings label {
+      display: block; }
   .ComponentDemo-results {
     flex: 1; }
     .ComponentDemo-results::before {
@@ -256,23 +258,45 @@ menu li {
   text-align: center;
   color: #878C88; }
 
-.PlayButton {
+.PlayButton,
+.PauseButton,
+.PrevButton,
+.NextButton {
+  margin-right: 10px;
   padding: 8px;
   background: #fefefe;
   border: 2px solid #72D687;
   border-radius: 100%;
   outline: none; }
-  .PlayButton[disabled] {
+  .PlayButton[disabled],
+  .PauseButton[disabled],
+  .PrevButton[disabled],
+  .NextButton[disabled] {
     opacity: 0.5; }
-  .PlayButton.isEnabled {
+  .PlayButton.isEnabled,
+  .PauseButton.isEnabled,
+  .PrevButton.isEnabled,
+  .NextButton.isEnabled {
     cursor: pointer; }
-    .PlayButton.isEnabled:hover {
+    .PlayButton.isEnabled:hover,
+    .PauseButton.isEnabled:hover,
+    .PrevButton.isEnabled:hover,
+    .NextButton.isEnabled:hover {
       border-color: #3ea454; }
-      .PlayButton.isEnabled:hover .Icon-shape {
+      .PlayButton.isEnabled:hover .Icon-shape,
+      .PauseButton.isEnabled:hover .Icon-shape,
+      .PrevButton.isEnabled:hover .Icon-shape,
+      .NextButton.isEnabled:hover .Icon-shape {
         fill: #3ea454; }
-    .PlayButton.isEnabled:active {
+    .PlayButton.isEnabled:active,
+    .PauseButton.isEnabled:active,
+    .PrevButton.isEnabled:active,
+    .NextButton.isEnabled:active {
       border-color: rgba(62, 164, 84, 0.5); }
-      .PlayButton.isEnabled:active .Icon-shape {
+      .PlayButton.isEnabled:active .Icon-shape,
+      .PauseButton.isEnabled:active .Icon-shape,
+      .PrevButton.isEnabled:active .Icon-shape,
+      .NextButton.isEnabled:active .Icon-shape {
         fill: rgba(62, 164, 84, 0.5); }
 
 .Icon {

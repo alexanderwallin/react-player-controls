@@ -23622,7 +23622,294 @@ demos.PlayButton = function (_React$Component) {
   return PlayButtonDemo;
 }(_react2.default.Component);
 
-_reactDom2.default.render(_react2.default.createElement(demos.PlayButton, null), document.querySelector('.component-demo'));
+//
+// PauseButton demo
+//
+demos.PauseButton = function (_React$Component2) {
+  _inherits(PauseButtonDemo, _React$Component2);
+
+  function PauseButtonDemo() {
+    _classCallCheck(this, PauseButtonDemo);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(PauseButtonDemo).apply(this, arguments));
+  }
+
+  _createClass(PauseButtonDemo, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'ComponentDemo PauseButtonDemo' },
+        _react2.default.createElement(
+          'pre',
+          { className: 'ComponentDemo-code' },
+          _react2.default.createElement('code', { className: 'language-jsx', dangerouslySetInnerHTML: {
+              __html: _prismjs2.default.highlight('<PauseButton\n  onClick={() => alert(\'Pause!\')} \n/>', _prismjs2.default.languages.jsx)
+            } })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ComponentDemo-results' },
+          _react2.default.createElement(rpc.PauseButton, { onClick: function onClick() {
+              return alert('Pause!');
+            } })
+        )
+      );
+    }
+  }]);
+
+  return PauseButtonDemo;
+}(_react2.default.Component);
+
+//
+// PrevButton demo
+//
+demos.PrevButton = function (_React$Component3) {
+  _inherits(PrevButtonDemo, _React$Component3);
+
+  function PrevButtonDemo(props) {
+    _classCallCheck(this, PrevButtonDemo);
+
+    var _this4 = _possibleConstructorReturn(this, Object.getPrototypeOf(PrevButtonDemo).call(this, props));
+
+    _this4.state = {
+      isEnabled: true
+    };
+    return _this4;
+  }
+
+  _createClass(PrevButtonDemo, [{
+    key: 'render',
+    value: function render() {
+      var _this5 = this;
+
+      var isEnabled = this.state.isEnabled;
+
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'ComponentDemo PrevButtonDemo' },
+        _react2.default.createElement(
+          'pre',
+          { className: 'ComponentDemo-code' },
+          _react2.default.createElement('code', { className: 'language-jsx', dangerouslySetInnerHTML: {
+              __html: _prismjs2.default.highlight('<PrevButton\n  isEnabled={this.state.isEnabled}\n  onClick={() => alert(\'Go to previous\')} \n/>', _prismjs2.default.languages.jsx)
+            } })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ComponentDemo-settings' },
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement('input', { type: 'checkbox', checked: isEnabled, onChange: function onChange(evt) {
+                return _this5.setState({ isEnabled: !isEnabled });
+              } }),
+            _react2.default.createElement(
+              'code',
+              null,
+              'isEnabled'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ComponentDemo-results' },
+          _react2.default.createElement(rpc.PrevButton, {
+            onClick: function onClick() {
+              return alert('Go to previous');
+            },
+            isEnabled: isEnabled
+          })
+        )
+      );
+    }
+  }]);
+
+  return PrevButtonDemo;
+}(_react2.default.Component);
+
+//
+// NextButton demo
+//
+demos.NextButton = function (_React$Component4) {
+  _inherits(NextButtonDemo, _React$Component4);
+
+  function NextButtonDemo(props) {
+    _classCallCheck(this, NextButtonDemo);
+
+    var _this6 = _possibleConstructorReturn(this, Object.getPrototypeOf(NextButtonDemo).call(this, props));
+
+    _this6.state = {
+      isEnabled: true
+    };
+    return _this6;
+  }
+
+  _createClass(NextButtonDemo, [{
+    key: 'render',
+    value: function render() {
+      var _this7 = this;
+
+      var isEnabled = this.state.isEnabled;
+
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'ComponentDemo NextButtonDemo' },
+        _react2.default.createElement(
+          'pre',
+          { className: 'ComponentDemo-code' },
+          _react2.default.createElement('code', { className: 'language-jsx', dangerouslySetInnerHTML: {
+              __html: _prismjs2.default.highlight('<NextButton\n  isEnabled={this.state.isEnabled}\n  onClick={() => alert(\'Go to next\')} \n/>', _prismjs2.default.languages.jsx)
+            } })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ComponentDemo-settings' },
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement('input', { type: 'checkbox', checked: isEnabled, onChange: function onChange(evt) {
+                return _this7.setState({ isEnabled: !isEnabled });
+              } }),
+            _react2.default.createElement(
+              'code',
+              null,
+              'isEnabled'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ComponentDemo-results' },
+          _react2.default.createElement(rpc.NextButton, {
+            onClick: function onClick() {
+              return alert('Go to next');
+            },
+            isEnabled: isEnabled
+          })
+        )
+      );
+    }
+  }]);
+
+  return NextButtonDemo;
+}(_react2.default.Component);
+
+//
+// PlaybackControls demo
+//
+demos.PlaybackControls = function (_React$Component5) {
+  _inherits(PlaybackControls, _React$Component5);
+
+  function PlaybackControls(props) {
+    _classCallCheck(this, PlaybackControls);
+
+    var _this8 = _possibleConstructorReturn(this, Object.getPrototypeOf(PlaybackControls).call(this, props));
+
+    _this8.state = {
+      isPlaying: false,
+      isPlayable: true,
+      hasPrevious: true,
+      hasNext: true
+    };
+    return _this8;
+  }
+
+  _createClass(PlaybackControls, [{
+    key: 'render',
+    value: function render() {
+      var _this9 = this;
+
+      var _state = this.state;
+      var isPlayable = _state.isPlayable;
+      var isPlaying = _state.isPlaying;
+      var hasPrevious = _state.hasPrevious;
+      var hasNext = _state.hasNext;
+
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'ComponentDemo PlaybackControls' },
+        _react2.default.createElement(
+          'pre',
+          { className: 'ComponentDemo-code' },
+          _react2.default.createElement('code', { className: 'language-jsx', dangerouslySetInnerHTML: {
+              __html: _prismjs2.default.highlight('<PlaybackControls\n  isEnabled={this.state.isEnabled}\n  onClick={() => alert(\'Go to next\')} \n/>', _prismjs2.default.languages.jsx)
+            } })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ComponentDemo-settings' },
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement('input', { type: 'checkbox', checked: isPlayable, onChange: function onChange(evt) {
+                return _this9.setState({ isPlayable: !isPlayable });
+              } }),
+            _react2.default.createElement(
+              'code',
+              null,
+              'isPlayable'
+            )
+          ),
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement('input', { type: 'checkbox', checked: hasPrevious, onChange: function onChange(evt) {
+                return _this9.setState({ hasPrevious: !hasPrevious });
+              } }),
+            _react2.default.createElement(
+              'code',
+              null,
+              'hasPrevious'
+            )
+          ),
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement('input', { type: 'checkbox', checked: hasNext, onChange: function onChange(evt) {
+                return _this9.setState({ hasNext: !hasNext });
+              } }),
+            _react2.default.createElement(
+              'code',
+              null,
+              'hasNext'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ComponentDemo-results' },
+          _react2.default.createElement(rpc.PlaybackControls, {
+            isPlayable: isPlayable,
+            isPlaying: isPlaying,
+            onPlaybackChange: function onPlaybackChange(isPlaying) {
+              return _this9.setState(Object.assign({}, _this9.state, { isPlaying: isPlaying }));
+            },
+            hasPrevious: hasPrevious,
+            onPrevious: function onPrevious() {
+              return alert('Go to previous');
+            },
+            hasNext: hasNext,
+            onNext: function onNext() {
+              return alert('Go to next');
+            }
+          })
+        )
+      );
+    }
+  }]);
+
+  return PlaybackControls;
+}(_react2.default.Component);
+
+_reactDom2.default.render(_react2.default.createElement(demos.PlayButton, null), document.querySelector('.component-demo[data-component="PlayButton"]'));
+_reactDom2.default.render(_react2.default.createElement(demos.PauseButton, null), document.querySelector('.component-demo[data-component="PauseButton"]'));
+_reactDom2.default.render(_react2.default.createElement(demos.PrevButton, null), document.querySelector('.component-demo[data-component="PrevButton"]'));
+_reactDom2.default.render(_react2.default.createElement(demos.NextButton, null), document.querySelector('.component-demo[data-component="NextButton"]'));
+_reactDom2.default.render(_react2.default.createElement(demos.PlaybackControls, null), document.querySelector('.component-demo[data-component="PlaybackControls"]'));
 
 },{"../../../dist/index.js":16,"prismjs":46,"prismjs/components/prism-jsx.js":45,"react":191,"react-dom":48}],193:[function(require,module,exports){
 /**

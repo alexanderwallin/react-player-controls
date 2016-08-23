@@ -197,6 +197,10 @@ menu {
     &::before {
       content: 'State Settings';
     }
+
+    label {
+      display: block;
+    }
   }
 
   &-results {
