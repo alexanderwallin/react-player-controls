@@ -5,6 +5,15 @@
 
 Dumb but useful UI components for media players
 
+## Installation
+`npm i react-player-controls` 
+
+## Usage
+```js
+// Import the components you need as ES2015 modules  
+import { PlayButton, PauseButton } from 'react-player-controls'` 
+```  
+
 ## Components
 
 #### Playback and song changes
