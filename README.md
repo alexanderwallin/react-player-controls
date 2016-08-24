@@ -73,7 +73,7 @@ import { PlayButton, PauseButton } from 'react-player-controls'`
 // -> "1:05 | -2:05" (without wrapping <span /> elements)
 ```
 
-### Volume controls
+#### Volume controls
 
 ```jsx
 // Buttons for sound on/off states
