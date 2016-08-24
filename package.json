@@ -19,7 +19,10 @@
     "type": "git",
     "url": "git+https://github.com/reactify/react-player-controls.git"
   },
-  "author": "Alexander Wallin <office@alexanderwallin.com> (http://alexanderwallin.com)",
+  "author": "Reactify <developer@reactifymusic.com> (http://reactifymusic.com)",
+  "contributors": [
+    "Alexander Wallin <office@alexanderwallin.com> (http://alexanderwallin.com)"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/reactify/react-player-controls/issues"
