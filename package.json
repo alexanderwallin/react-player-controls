@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/reactify/react-player-controls/issues"
   },
-  "homepage": "https://github.com/reactify/react-player-controls#readme",
+  "homepage": "http://reactify.github.io/react-player-controls/",
   "devDependencies": {
     "babel-cli": "^6.9.0",
     "babel-eslint": "^6.0.4",
