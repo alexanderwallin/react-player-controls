@@ -37,8 +37,8 @@ class MuteToggleButton extends Component {
     return (
       <div className={classNames(className, extraClasses, { isMuted, isEnabled })}>
         {isMuted
-          ? <SoundOffButton onClick={() => this.handleMuteChange(false)} />
-          : <SoundOnButton onClick={() => this.handleMuteChange(true)} />
+          ? <SoundOffButton isEnabled={isEnabled} onClick={() => this.handleMuteChange(false)} />
+          : <SoundOnButton isEnabled={isEnabled} onClick={() => this.handleMuteChange(true)} />
         }
       </div>
     )
