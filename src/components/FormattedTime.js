@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
-const { number } = PropTypes
+const { number, object } = PropTypes
 
 const padZero = digit =>
   `${digit < 10 ? '0' : ''}${digit}`
@@ -14,10 +14,12 @@ class FormattedTime extends Component {
 
   static propTypes = {
     numSeconds: number,
+    style: object,
   }
 
   static defaultProps = {
     numSeconds: 0,
+    style: {},
   }
 
   getFormattedTime () {
@@ -36,8 +38,10 @@ class FormattedTime extends Component {
   }
 
   render () {
+    const { style } = this.props
+
     return (
-      <span className="FormattedTime">
+      <span className="FormattedTime" style={style}>
         {this.getFormattedTime()}
       </span>
     )

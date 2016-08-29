@@ -32,6 +32,11 @@ describe('<MuteToggleButton />', () => {
     expect(btn.props().className).to.contain(classes)
   })
 
+  it('should accept custom styles', () => {
+    const btn = shallow(<MuteToggleButton style={{ fontSize: 100 }} />)
+    expect(btn.props().style).to.eql({ fontSize: 100 })
+  })
+
   it('renders <SoundOnButton /> when unmuted', () => {
     const btn = mount(<MuteToggleButton isMuted={false} />)
     expect(btn.find(SoundOnButton)).to.have.length(1)

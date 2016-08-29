@@ -97,4 +97,9 @@ describe('<PlaybackControls />', () => {
     expect(ctrls.find(PrevButton).props().isEnabled).to.equal(true)
     expect(ctrls.find(NextButton).props().isEnabled).to.equal(true)
   })
+
+  it('should accept custom styles', () => {
+    const controls = shallow(<PlaybackControls style={{ fontSize: 100 }} onPlaybackChange={noop} />)
+    expect(controls.props().style).to.eql({ fontSize: 100 })
+  })
 })

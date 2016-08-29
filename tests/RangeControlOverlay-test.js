@@ -99,4 +99,9 @@ describe('<RangeControlOverlay />', () => {
     })
   })
 
+  it('should accept custom styles', () => {
+    const overlay = shallow(<RangeControlOverlay style={{ fontSize: 100 }} bounds={noop} />)
+    expect(overlay.props().style).to.eql({ fontSize: 100 })
+  })
+
 })

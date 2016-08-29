@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 import RangeControlOverlay, { ControlDirection } from './RangeControlOverlay.js'
 
-const { number, bool, func, string } = PropTypes
+const { number, bool, func, string, object } = PropTypes
 
 /**
  * Volume slider component
@@ -16,6 +16,7 @@ class VolumeSlider extends Component {
     isEnabled: bool,
     onVolumeChange: func,
     extraClasses: string,
+    style: object,
   }
 
   static defaultProps = {
@@ -23,6 +24,7 @@ class VolumeSlider extends Component {
     isEnabled: false,
     onVolumeChange: () => {},
     extraClasses: '',
+    style: {},
   }
 
   constructor(props) {
@@ -64,7 +66,7 @@ class VolumeSlider extends Component {
   }
 
   render () {
-    const { volume, isEnabled, extraClasses } = this.props
+    const { volume, isEnabled, extraClasses, style } = this.props
     const { currentIntent } = this.state
 
     const volumePercentage = Math.min(100, Math.max(0, volume * 100))
@@ -79,6 +81,7 @@ class VolumeSlider extends Component {
           isEnabled,
           isDecreaseIntent,
         })}
+        style={style}
         ref={this.storeRef}
       >
         <div className="VolumeSlider-value" style={{ height: styleBottom }} />

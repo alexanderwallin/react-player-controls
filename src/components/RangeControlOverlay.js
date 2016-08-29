@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
-const { oneOfType, shape, func, string, number, oneOf } = PropTypes
+const { oneOfType, shape, func, string, number, oneOf, object } = PropTypes
 
 // Range control directions
 export const ControlDirection = {
@@ -32,12 +32,14 @@ class RangeControlOverlay extends Component {
     onIntent: func,
     direction: oneOf([ControlDirection.HORIZONTAL, ControlDirection.VERTICAL]),
     extraClasses: string,
+    style: object,
   }
 
   static defaultProps = {
     onIntent: () => {},
     direction: ControlDirection.HORIZONTAL,
     extraClasses: '',
+    style: {},
   }
 
   constructor (props) {
@@ -127,12 +129,13 @@ class RangeControlOverlay extends Component {
   }
 
   render () {
-    const { extraClasses } = this.props
+    const { extraClasses, style } = this.props
     const { isDragging } = this.state
 
     return (
       <div
         className={classNames('RangeControlOverlay', extraClasses, { isDragging })}
+        style={style}
         onMouseDown={this.startDrag}
         onMouseMove={this.handleIntentMove}
       />

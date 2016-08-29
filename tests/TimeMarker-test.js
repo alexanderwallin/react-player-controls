@@ -41,4 +41,9 @@ describe('<TimeMarker />', () => {
     expect(spiedOn.args[1][0]).to.equal(TimeMarkerType.LEFT_NEGATIVE)
   })
 
+  it('should accept custom styles', () => {
+    const marker = shallow(<TimeMarker style={{ fontSize: 100 }} />)
+    expect(marker.props().style).to.eql({ fontSize: 100 })
+  })
+
 })

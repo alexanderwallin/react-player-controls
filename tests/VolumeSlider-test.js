@@ -50,4 +50,9 @@ describe('<VolumeSlider />', () => {
     expect(bounds).to.have.all.keys(['bottom', 'height', 'left', 'right', 'top', 'width'])
   })
 
+  it('should accept custom styles', () => {
+    const slider = shallow(<VolumeSlider style={{ fontSize: 100 }} />)
+    expect(slider.props().style).to.eql({ fontSize: 100 })
+  })
+
 })

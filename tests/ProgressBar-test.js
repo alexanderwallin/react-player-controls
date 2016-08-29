@@ -58,4 +58,9 @@ describe('<ProgressBar />', () => {
     expect(callback.args[0][0]).to.equal(5)
   })
 
+  it('should accept custom styles', () => {
+    const bar = shallow(<ProgressBar style={{ fontSize: 100 }} />)
+    expect(bar.props().style).to.eql({ fontSize: 100 })
+  })
+
 })

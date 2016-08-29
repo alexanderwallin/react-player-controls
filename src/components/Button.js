@@ -11,6 +11,7 @@ class Button extends Component {
     isEnabled: PropTypes.bool,
     className: PropTypes.string,
     extraClasses: PropTypes.string,
+    style: PropTypes.object,
     children: PropTypes.node,
   }
 
@@ -18,6 +19,7 @@ class Button extends Component {
     className: 'Button',
     isEnabled: true,
     extraClasses: '',
+    style: {},
     children: null,
   }
 
@@ -29,7 +31,7 @@ class Button extends Component {
   }
 
   render() {
-    const { isEnabled, className, extraClasses, children } = this.props
+    const { isEnabled, className, extraClasses, style, children } = this.props
 
     return (
       <button
@@ -38,6 +40,7 @@ class Button extends Component {
           { isEnabled },
           extraClasses
         )}
+        style={style}
         disabled={!isEnabled}
         onClick={this.handleClick}
       >

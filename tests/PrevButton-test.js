@@ -22,6 +22,11 @@ describe('<PrevButton />', () => {
     expect(btn.props().className).to.contain(classes)
   })
 
+  it('should accept custom styles', () => {
+    const btn = shallow(<PrevButton style={{ fontSize: 100 }} onClick={noop} />)
+    expect(btn.props().style).to.eql({ fontSize: 100 })
+  })
+
   it('renders an icon per default', () => {
     const btn = mount(<PrevButton onClick={noop} />)
     expect(btn.find('.Icon')).to.have.length(1)

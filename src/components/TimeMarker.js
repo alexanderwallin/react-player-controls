@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { values } from '../utils/collections.js'
 import FormattedTime from './FormattedTime.js'
 
-const { number, oneOf, string } = PropTypes
+const { number, oneOf, string, object } = PropTypes
 
 /**
  * Time marker types
@@ -28,6 +28,7 @@ class TimeMarker extends Component {
     firstMarkerType: oneOf(values(TimeMarkerType)),
     secondMarkerType: oneOf(values(TimeMarkerType)),
     markerSeparator: string,
+    style: object,
   }
 
   static defaultProps = {
@@ -36,6 +37,7 @@ class TimeMarker extends Component {
     firstMarkerType: TimeMarkerType.ELAPSED,
     secondMarkerType: TimeMarkerType.DURATION,
     markerSeparator: null,
+    style: {},
   }
 
   getSecondsForTimeWithMarkerType (markerType) {
@@ -58,7 +60,11 @@ class TimeMarker extends Component {
   }
 
   render () {
-    const { totalTime, currentTime, firstMarkerType, secondMarkerType, markerSeparator } = this.props
+    const {
+      totalTime, currentTime,
+      firstMarkerType, secondMarkerType, markerSeparator,
+      style,
+    } = this.props
 
     const seconds1 = this.getSecondsForTimeWithMarkerType(firstMarkerType)
     const seconds2 = this.getSecondsForTimeWithMarkerType(secondMarkerType)
@@ -66,6 +72,7 @@ class TimeMarker extends Component {
     return (
       <div
         className={classNames('TimeMarker')}
+        style={style}
       >
         <div className="TimeMarker-timeMarker">
           <FormattedTime numSeconds={seconds1} />

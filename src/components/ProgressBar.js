@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import FormattedTime from './FormattedTime.js'
 import RangeControlOverlay from './RangeControlOverlay.js'
 
-const { number, bool, func, string } = PropTypes
+const { number, bool, func, string, object } = PropTypes
 
 /**
  * Seekable progress bar
@@ -20,6 +20,7 @@ class ProgressBar extends Component {
     isSeekable: bool,
     onSeek: func,
     extraClasses: string,
+    style: object,
   }
 
   static defaultProps = {
@@ -28,6 +29,7 @@ class ProgressBar extends Component {
     isSeekable: false,
     onSeek: () => {},
     extraClasses: '',
+    style: {},
   }
 
   constructor(props) {
@@ -65,7 +67,7 @@ class ProgressBar extends Component {
   }
 
   render () {
-    const { totalTime, currentTime, isSeekable, extraClasses } = this.props
+    const { totalTime, currentTime, isSeekable, extraClasses, style } = this.props
     const { currentIntent } = this.state
 
     const progressPercent = Math.min(100, 100 * currentTime / totalTime)
@@ -79,6 +81,7 @@ class ProgressBar extends Component {
           isSeekable,
           isRewindIntent,
         })}
+        style={style}
         ref={this.storeRef}
       >
         <div className="ProgressBar-elapsed" style={{ width: styleLeft }} />

@@ -49,4 +49,9 @@ describe('<FormattedTime />', () => {
     expect(time2.text()).to.equal('1:00:02')
   })
 
+  it('should accept custom styles', () => {
+    const time = shallow(<FormattedTime style={{ fontSize: 100 }} />)
+    expect(time.props().style).to.eql({ fontSize: 100 })
+  })
+
 })

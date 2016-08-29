@@ -8,7 +8,7 @@ import PauseButton from './PauseButton.js'
 import PrevButton from './PrevButton.js'
 import NextButton from './NextButton.js'
 
-const { bool, func } = PropTypes
+const { bool, func, object } = PropTypes
 
 const noop = () => {}
 
@@ -24,6 +24,7 @@ class PlaybackControls extends Component {
     onPrevious: func,
     hasNext: bool,
     onNext: func,
+    style: object,
   }
 
   static defaultProps = {
@@ -33,6 +34,7 @@ class PlaybackControls extends Component {
     onPrevious: noop,
     hasNext: false,
     onNext: noop,
+    style: {},
   }
 
   @autobind
@@ -48,10 +50,16 @@ class PlaybackControls extends Component {
   }
 
   render () {
-    const { isPlayable, isPlaying, hasPrevious, onPrevious, hasNext, onNext } = this.props
+    const {
+      isPlayable, isPlaying, hasPrevious, onPrevious, hasNext, onNext,
+      style,
+    } = this.props
 
     return (
-      <div className={classNames('PlaybackControls', { isPlayable, isPlaying })}>
+      <div
+        className={classNames('PlaybackControls', { isPlayable, isPlaying })}
+        style={style}
+      >
         <PrevButton isEnabled={hasPrevious} onClick={onPrevious} />
 
         { isPlaying && isPlayable
