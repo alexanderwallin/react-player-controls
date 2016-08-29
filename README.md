@@ -5,6 +5,17 @@
 
 Dumb but useful UI components for media players
 
+## Installation
+```sh
+npm i react-player-controls
+```
+
+## Usage
+```js
+// Import the components you need as ES2015 modules  
+import { PlayButton, PauseButton } from 'react-player-controls'` 
+```  
+
 ## Components
 
 #### Playback and song changes
@@ -64,7 +75,7 @@ Dumb but useful UI components for media players
 // -> "1:05 | -2:05" (without wrapping <span /> elements)
 ```
 
-### Volume controls
+#### Volume controls
 
 ```jsx
 // Buttons for sound on/off states
@@ -86,26 +97,20 @@ Dumb but useful UI components for media players
 />
 ```
 
-## Development
+## Contribute  
+Contributors are welcome! Please make sure that tests pass locally before opening a PR  
 
-Build:
-
+#### Dev  
 ```sh
-# One-time build
-npm run build
-
-# Continuous build
 npm run dev
 ```
 
-Run tests:
-
+#### Build  
 ```sh
-npm run test
+npm run build
 ```
 
-Publishing and tagging a release:
-
+#### Tests  
 ```sh
-npm run release -- <major|minor|patch>
+npm run test
 ```
