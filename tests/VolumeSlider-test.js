@@ -55,4 +55,20 @@ describe('<VolumeSlider />', () => {
     expect(slider.props().style).to.eql({ fontSize: 100 })
   })
 
+  it('should accept custom children styles', () => {
+    const style = { fontSize: 100 }
+    const childrenStyles = {
+      value: { ...style },
+      intent: { ...style },
+      handle: { ...style },
+      RangeControlOverlay: { ...style },
+    }
+
+    const slider = shallow(<VolumeSlider isEnabled={true} childrenStyles={childrenStyles} />)
+    expect(slider.find('.VolumeSlider-value').props().style).to.include(style)
+    expect(slider.find('.VolumeSlider-intent').props().style).to.include(style)
+    expect(slider.find('.VolumeSlider-handle').props().style).to.include(style)
+    expect(slider.find(RangeControlOverlay).props().style).to.include(style)
+  })
+
 })

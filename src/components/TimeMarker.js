@@ -3,6 +3,7 @@ import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
 import { values } from '../utils/collections.js'
+import { withChildrenStyles } from '../utils/composers.js'
 import FormattedTime from './FormattedTime.js'
 
 const { number, oneOf, string, object } = PropTypes
@@ -63,7 +64,7 @@ class TimeMarker extends Component {
     const {
       totalTime, currentTime,
       firstMarkerType, secondMarkerType, markerSeparator,
-      style,
+      style, childrenStyles,
     } = this.props
 
     const seconds1 = this.getSecondsForTimeWithMarkerType(firstMarkerType)
@@ -74,16 +75,14 @@ class TimeMarker extends Component {
         className={classNames('TimeMarker')}
         style={style}
       >
-        <div className="TimeMarker-timeMarker">
-          <FormattedTime numSeconds={seconds1} />
-          {markerSeparator && (
-            <span className="TimeMarker-separator">{markerSeparator}</span>
-          )}
-          <FormattedTime numSeconds={seconds2} />
-        </div>
+        <FormattedTime numSeconds={seconds1} extraClasses="TimeMarker-firstMarker" style={childrenStyles.firstMarker} />
+        {markerSeparator && (
+          <span className="TimeMarker-separator" style={childrenStyles.separator}>{markerSeparator}</span>
+        )}
+        <FormattedTime numSeconds={seconds2} extraClasses="TimeMarker-secondMarker" style={childrenStyles.secondMarker} />
       </div>
     )
   }
 }
 
-export default TimeMarker
+export default withChildrenStyles(TimeMarker)

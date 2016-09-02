@@ -37,6 +37,18 @@ describe('<MuteToggleButton />', () => {
     expect(btn.props().style).to.eql({ fontSize: 100 })
   })
 
+  it('should accept custom children styles', () => {
+    const styles = {
+      SoundOnButton: { fontSize: 100 },
+      SoundOffButton: { fontSize: 100 },
+    }
+
+    const btn = mount(<MuteToggleButton childrenStyles={styles} onMuteChange={() => {}} />)
+    expect(btn.find(SoundOnButton).props().style).to.eql({ fontSize: 100 })
+    btn.setProps({ ...btn.props(), isMuted: true })
+    expect(btn.find(SoundOffButton).props().style).to.eql({ fontSize: 100 })
+  })
+
   it('renders <SoundOnButton /> when unmuted', () => {
     const btn = mount(<MuteToggleButton isMuted={false} />)
     expect(btn.find(SoundOnButton)).to.have.length(1)

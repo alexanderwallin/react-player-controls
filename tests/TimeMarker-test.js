@@ -46,4 +46,18 @@ describe('<TimeMarker />', () => {
     expect(marker.props().style).to.eql({ fontSize: 100 })
   })
 
+  it('should accept custom children styles', () => {
+    const style = { fontSize: 100 }
+    const childrenStyles = {
+      firstMarker: { ...style },
+      secondMarker: { ...style },
+      separator: { ...style },
+    }
+
+    const marker = mount(<TimeMarker markerSeparator={' / '} childrenStyles={childrenStyles} />)
+    expect(marker.find('.TimeMarker-firstMarker').props().style).to.include(style)
+    expect(marker.find('.TimeMarker-secondMarker').props().style).to.include(style)
+    expect(marker.find('.TimeMarker-separator').props().style).to.include(style)
+  })
+
 })

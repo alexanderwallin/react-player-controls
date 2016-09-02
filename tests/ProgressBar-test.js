@@ -7,6 +7,7 @@ import { spy } from 'sinon'
 chai.use(chaiEnzyme())
 
 import ProgressBar from '../src/components/ProgressBar.js'
+import RangeControlOverlay from '../src/components/RangeControlOverlay.js'
 
 const noop = () => {}
 
@@ -61,6 +62,22 @@ describe('<ProgressBar />', () => {
   it('should accept custom styles', () => {
     const bar = shallow(<ProgressBar style={{ fontSize: 100 }} />)
     expect(bar.props().style).to.eql({ fontSize: 100 })
+  })
+
+  it('should accept custom styles', () => {
+    const style = { fontSize: 100 }
+    const childrenStyles = {
+      elapsed: { ...style },
+      intent: { ...style },
+      handle: { ...style },
+      RangeControlOverlay: { ...style },
+    }
+
+    const bar = shallow(<ProgressBar isSeekable={true} childrenStyles={childrenStyles} />)
+    expect(bar.find('.ProgressBar-elapsed').props().style).to.include(style)
+    expect(bar.find('.ProgressBar-intent').props().style).to.include(style)
+    expect(bar.find('.ProgressBar-handle').props().style).to.include(style)
+    expect(bar.find(RangeControlOverlay).props().style).to.include(style)
   })
 
 })

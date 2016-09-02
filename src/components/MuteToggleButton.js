@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
 import autobind from 'autobind-decorator'
 
+import { withChildrenStyles } from '../utils/composers.js'
 import SoundOnButton from './SoundOnButton.js'
 import SoundOffButton from './SoundOffButton.js'
 
@@ -15,6 +16,7 @@ class MuteToggleButton extends Component {
     isEnabled: PropTypes.bool,
     className: PropTypes.string,
     extraClasses: PropTypes.string,
+    style: PropTypes.object,
   }
 
   static defaultProps = {
@@ -22,6 +24,7 @@ class MuteToggleButton extends Component {
     isEnabled: true,
     className: 'MuteToggleButton',
     extraClasses: '',
+    style: {},
   }
 
   @autobind
@@ -32,7 +35,7 @@ class MuteToggleButton extends Component {
   }
 
   render () {
-    const { isMuted, isEnabled, className, extraClasses, style } = this.props
+    const { isMuted, isEnabled, className, extraClasses, style, childrenStyles } = this.props
 
     return (
       <div
@@ -40,12 +43,24 @@ class MuteToggleButton extends Component {
         style={style}
       >
         {isMuted
-          ? <SoundOffButton isEnabled={isEnabled} onClick={() => this.handleMuteChange(false)} />
-          : <SoundOnButton isEnabled={isEnabled} onClick={() => this.handleMuteChange(true)} />
+          ? (
+            <SoundOffButton
+              style={childrenStyles.SoundOffButton}
+              isEnabled={isEnabled}
+              onClick={() => this.handleMuteChange(false)}
+            />
+          )
+          : (
+            <SoundOnButton
+              style={childrenStyles.SoundOnButton}
+              isEnabled={isEnabled}
+              onClick={() => this.handleMuteChange(true)}
+            />
+          )
         }
       </div>
     )
   }
 }
 
-export default MuteToggleButton
+export default withChildrenStyles(MuteToggleButton)

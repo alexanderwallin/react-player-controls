@@ -102,4 +102,20 @@ describe('<PlaybackControls />', () => {
     const controls = shallow(<PlaybackControls style={{ fontSize: 100 }} onPlaybackChange={noop} />)
     expect(controls.props().style).to.eql({ fontSize: 100 })
   })
+
+  it('should accept custom children styles', () => {
+    const styles = {
+      PlayButton: { fontSize: 100 },
+      PauseButton: { fontSize: 100 },
+      PrevButton: { fontSize: 100 },
+      NextButton: { fontSize: 100 },
+    }
+
+    const controls = mount(<PlaybackControls childrenStyles={styles} isPlayable={true} onPlaybackChange={noop} />)
+    expect(controls.find(PrevButton).props().style).to.eql({ fontSize: 100 })
+    expect(controls.find(NextButton).props().style).to.eql({ fontSize: 100 })
+    expect(controls.find(PlayButton).props().style).to.eql({ fontSize: 100 })
+    controls.setProps({ ...controls.props(), isPlaying: true })
+    expect(controls.find(PauseButton).props().style).to.eql({ fontSize: 100 })
+  })
 })
