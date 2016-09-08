@@ -10,15 +10,13 @@ class Button extends Component {
     onClick: PropTypes.func.isRequired,
     isEnabled: PropTypes.bool,
     className: PropTypes.string,
-    extraClasses: PropTypes.string,
     style: PropTypes.object,
     children: PropTypes.node,
   }
 
   static defaultProps = {
-    className: 'Button',
     isEnabled: true,
-    extraClasses: '',
+    className: 'Button',
     style: {},
     children: null,
   }
