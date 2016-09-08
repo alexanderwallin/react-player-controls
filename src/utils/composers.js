@@ -1,10 +1,11 @@
 import { PropTypes } from 'react'
+import curry from 'lodash.curry'
 
 /**
  * Adds `childrenStyles` prop type and default prop to
  * a component
  */
-export const withChildrenStyles = Component => {
+export const withChildrenStyles = curry(Component => {
   Component.propTypes = {
     ...(Component.propTypes || {}),
     childrenStyles: PropTypes.object,
@@ -16,4 +17,4 @@ export const withChildrenStyles = Component => {
   }
 
   return Component
-}
+})
