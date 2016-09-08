@@ -50,6 +50,16 @@ describe('<VolumeSlider />', () => {
     expect(bounds).to.have.all.keys(['bottom', 'height', 'left', 'right', 'top', 'width'])
   })
 
+  it('accepts a custom className', () => {
+    const slider = shallow(<VolumeSlider className="MyClassName" />)
+    expect(slider.props().className).to.include('MyClassName')
+  })
+
+  it('should have a default className', () => {
+    const slider = shallow(<VolumeSlider />)
+    expect(slider.props().className).to.contain('VolumeSlider')
+  })
+
   it('should accept custom styles', () => {
     const slider = shallow(<VolumeSlider style={{ fontSize: 100 }} />)
     expect(slider.props().style).to.eql({ fontSize: 100 })

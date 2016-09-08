@@ -98,6 +98,16 @@ describe('<PlaybackControls />', () => {
     expect(ctrls.find(NextButton).props().isEnabled).to.equal(true)
   })
 
+  it('accepts a custom class name', () => {
+    const controls = shallow(<PlaybackControls className="MyClassName" />)
+    expect(controls.props().className).to.include('MyClassName')
+  })
+
+  it('accepts extra classes', () => {
+    const controls = shallow(<PlaybackControls extraClasses="ExtraClass" />)
+    expect(controls.props().className).to.include('ExtraClass')
+  })
+
   it('should accept custom styles', () => {
     const controls = shallow(<PlaybackControls style={{ fontSize: 100 }} onPlaybackChange={noop} />)
     expect(controls.props().style).to.eql({ fontSize: 100 })

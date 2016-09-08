@@ -59,6 +59,16 @@ describe('<ProgressBar />', () => {
     expect(callback.args[0][0]).to.equal(5)
   })
 
+  it('accepts a custom class name', () => {
+    const bar = shallow(<ProgressBar className="MyClassName" />)
+    expect(bar.props().className).to.include('MyClassName')
+  })
+
+  it('should have a default className', () => {
+    const bar = shallow(<ProgressBar />)
+    expect(bar.props().className).to.contain('ProgressBar')
+  })
+
   it('should accept custom styles', () => {
     const bar = shallow(<ProgressBar style={{ fontSize: 100 }} />)
     expect(bar.props().style).to.eql({ fontSize: 100 })

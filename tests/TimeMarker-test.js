@@ -41,6 +41,16 @@ describe('<TimeMarker />', () => {
     expect(spiedOn.args[1][0]).to.equal(TimeMarkerType.LEFT_NEGATIVE)
   })
 
+  it('accepts a custom className', () => {
+    const marker = shallow(<TimeMarker className="MyClassName" />)
+    expect(marker.props().className).to.include('MyClassName')
+  })
+
+  it('should have a default className', () => {
+    const marker = shallow(<TimeMarker />)
+    expect(marker.props().className).to.contain('TimeMarker')
+  })
+
   it('should accept custom styles', () => {
     const marker = shallow(<TimeMarker style={{ fontSize: 100 }} />)
     expect(marker.props().style).to.eql({ fontSize: 100 })

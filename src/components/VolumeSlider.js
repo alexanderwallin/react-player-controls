@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
-import { withChildrenStyles } from '../utils/composers.js'
+import { compose, withChildrenStyles, withCustomizableClasses } from '../utils/composers.js'
 import RangeControlOverlay, { ControlDirection } from './RangeControlOverlay.js'
 
 const { number, bool, func, string, object } = PropTypes
@@ -67,7 +67,10 @@ class VolumeSlider extends Component {
   }
 
   render () {
-    const { volume, isEnabled, extraClasses, style, childrenStyles } = this.props
+    const {
+      volume, isEnabled,
+      className, extraClasses, style, childrenStyles,
+    } = this.props
     const { currentIntent } = this.state
 
     const volumePercentage = Math.min(100, Math.max(0, volume * 100))
@@ -78,7 +81,7 @@ class VolumeSlider extends Component {
 
     return (
       <div
-        className={classNames('VolumeSlider', extraClasses, {
+        className={classNames(className, extraClasses, {
           isEnabled,
           isDecreaseIntent,
         })}
@@ -106,4 +109,7 @@ class VolumeSlider extends Component {
   }
 }
 
-export default withChildrenStyles(VolumeSlider)
+export default compose(
+  withChildrenStyles(),
+  withCustomizableClasses('VolumeSlider')
+)(VolumeSlider)

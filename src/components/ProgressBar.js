@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
-import { withChildrenStyles } from '../utils/composers.js'
+import { compose, withChildrenStyles, withCustomizableClasses } from '../utils/composers.js'
 import FormattedTime from './FormattedTime.js'
 import RangeControlOverlay from './RangeControlOverlay.js'
 
@@ -20,7 +20,6 @@ class ProgressBar extends Component {
     currentTime: number,
     isSeekable: bool,
     onSeek: func,
-    extraClasses: string,
     style: object,
   }
 
@@ -29,7 +28,6 @@ class ProgressBar extends Component {
     currentTime: 0,
     isSeekable: false,
     onSeek: () => {},
-    extraClasses: '',
     style: {},
   }
 
@@ -68,7 +66,10 @@ class ProgressBar extends Component {
   }
 
   render () {
-    const { totalTime, currentTime, isSeekable, extraClasses, style, childrenStyles } = this.props
+    const {
+      totalTime, currentTime, isSeekable,
+      className, extraClasses, style, childrenStyles,
+    } = this.props
     const { currentIntent } = this.state
 
     const progressPercent = Math.min(100, 100 * currentTime / totalTime)
@@ -78,7 +79,7 @@ class ProgressBar extends Component {
 
     return (
       <div
-        className={classNames('ProgressBar', extraClasses, {
+        className={classNames(className, extraClasses, {
           isSeekable,
           isRewindIntent,
         })}
@@ -105,4 +106,7 @@ class ProgressBar extends Component {
   }
 }
 
-export default withChildrenStyles(ProgressBar)
+export default compose(
+  withChildrenStyles(),
+  withCustomizableClasses('ProgressBar')
+)(ProgressBar)

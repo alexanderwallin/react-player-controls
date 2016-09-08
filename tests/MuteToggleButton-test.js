@@ -22,6 +22,16 @@ describe('<MuteToggleButton />', () => {
     expect(btn.props().isMuted).to.be.false
   })
 
+  it('accepts a custom class name', () => {
+    const btn = shallow(<MuteToggleButton className="MyClassName" />)
+    expect(btn.props().className).to.include('MyClassName')
+  })
+
+  it('should have a default className', () => {
+    const btn = shallow(<MuteToggleButton />)
+    expect(btn.props().className).to.contain('MuteToggleButton')
+  })
+
   it('accepts extra classes', () => {
     const classes = 'TestClass'
 
