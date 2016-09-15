@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
 import autobind from 'autobind-decorator'
 
-import { withChildrenStyles } from '../utils/composers.js'
+import { withChildrenStyles, withChildClasses } from '../utils/composers.js'
 import SoundOnButton from './SoundOnButton.js'
 import SoundOffButton from './SoundOffButton.js'
 
@@ -35,7 +35,11 @@ class MuteToggleButton extends Component {
   }
 
   render () {
-    const { isMuted, isEnabled, className, extraClasses, style, childrenStyles } = this.props
+    const {
+      isMuted, isEnabled,
+      className, extraClasses, childClasses,
+      style, childrenStyles,
+    } = this.props
 
     return (
       <div
@@ -45,6 +49,7 @@ class MuteToggleButton extends Component {
         {isMuted
           ? (
             <SoundOffButton
+              className={childClasses.SoundOffButton}
               style={childrenStyles.SoundOffButton}
               isEnabled={isEnabled}
               onClick={() => this.handleMuteChange(false)}
@@ -52,6 +57,7 @@ class MuteToggleButton extends Component {
           )
           : (
             <SoundOnButton
+              className={childClasses.SoundOnButton}
               style={childrenStyles.SoundOnButton}
               isEnabled={isEnabled}
               onClick={() => this.handleMuteChange(true)}
@@ -63,4 +69,4 @@ class MuteToggleButton extends Component {
   }
 }
 
-export default withChildrenStyles(MuteToggleButton)
+export default withChildClasses(withChildrenStyles(MuteToggleButton))

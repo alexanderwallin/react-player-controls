@@ -43,3 +43,21 @@ export const withCustomizableClasses = curry((defaultClassName, Component) => {
 
   return Component
 })
+
+/**
+ * Adds a `childClasses` prop type definition together with an empty
+ * defaults object to a provided component.
+ */
+export const withChildClasses = curry(Component => {
+  Component.propTypes = {
+    ...(Component.propTypes || {}),
+    childClasses: PropTypes.object,
+  }
+
+  Component.defaultProps = {
+    ...(Component.defaultProps || {}),
+    childClasses: {},
+  }
+
+  return Component
+})

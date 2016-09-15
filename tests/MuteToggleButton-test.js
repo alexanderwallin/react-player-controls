@@ -42,6 +42,18 @@ describe('<MuteToggleButton />', () => {
     expect(btn.props().className).to.contain(classes)
   })
 
+  it('accepts custom child component classes', () => {
+    const childClasses = {
+      SoundOnButton: 'MySoundOnButton',
+      SoundOffButton: 'MySoundOffButton',
+    }
+    const btn = shallow(<MuteToggleButton childClasses={childClasses} />)
+
+    expect(btn.find(SoundOnButton).props().className).to.contain('MySoundOnButton')
+    btn.setProps({ ...btn.props(), isMuted: true })
+    expect(btn.find(SoundOffButton).props().className).to.contain('MySoundOffButton')
+  })
+
   it('should accept custom styles', () => {
     const btn = shallow(<MuteToggleButton style={{ fontSize: 100 }} />)
     expect(btn.props().style).to.eql({ fontSize: 100 })

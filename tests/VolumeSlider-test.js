@@ -60,6 +60,21 @@ describe('<VolumeSlider />', () => {
     expect(slider.props().className).to.contain('VolumeSlider')
   })
 
+  it('accepts custom child component classes', () => {
+    const childClasses = {
+      value: 'MyValue',
+      intent: 'MyIntent',
+      handle: 'MyHandle',
+      seek: 'MySeek',
+    }
+
+    const slider = mount(<VolumeSlider childClasses={childClasses} isEnabled />)
+    expect(slider.find('.MyValue')).to.have.length(1)
+    expect(slider.find('.MyIntent')).to.have.length(1)
+    expect(slider.find('.MyHandle')).to.have.length(1)
+    expect(slider.find('.MySeek')).to.have.length(1)
+  })
+
   it('should accept custom styles', () => {
     const slider = shallow(<VolumeSlider style={{ fontSize: 100 }} />)
     expect(slider.props().style).to.eql({ fontSize: 100 })
