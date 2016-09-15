@@ -51,7 +51,12 @@ describe('<FormattedTime />', () => {
 
   it('should accept a className', () => {
     let time = shallow(<FormattedTime className="CustomClassName" />)
-    expect(time.props().className).to.equal('CustomClassName')
+    expect(time.props().className).to.contain('CustomClassName')
+  })
+
+  it('should have a default className', () => {
+    let time = shallow(<FormattedTime />)
+    expect(time.props().className).to.contain('FormattedTime')
   })
 
   it('should accept extra classes', () => {

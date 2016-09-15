@@ -7,6 +7,7 @@ import { spy } from 'sinon'
 chai.use(chaiEnzyme())
 
 import TimeMarker, { TimeMarkerType } from '../src/components/TimeMarker.js'
+import FormattedTime from '../src/components/FormattedTime.js'
 
 describe('<TimeMarker />', () => {
 
@@ -39,6 +40,29 @@ describe('<TimeMarker />', () => {
     expect(spiedOn.callCount).to.equal(2)
     expect(spiedOn.args[0][0]).to.equal(TimeMarkerType.DURATION)
     expect(spiedOn.args[1][0]).to.equal(TimeMarkerType.LEFT_NEGATIVE)
+  })
+
+  it('accepts a custom className', () => {
+    const marker = shallow(<TimeMarker className="MyClassName" />)
+    expect(marker.props().className).to.include('MyClassName')
+  })
+
+  it('should have a default className', () => {
+    const marker = shallow(<TimeMarker />)
+    expect(marker.props().className).to.contain('TimeMarker')
+  })
+
+  it('accepts custom child classes', () => {
+    const childClasses = {
+      firstMarker: 'MyFirstMarker',
+      secondMarker: 'MySecondMarker',
+      separator: 'MySeparator',
+    }
+
+    const marker = shallow(<TimeMarker childClasses={childClasses} markerSeparator=" / " />)
+    expect(marker.find(FormattedTime).at(0).prop('extraClasses')).to.contain('MyFirstMarker')
+    expect(marker.find(FormattedTime).at(1).prop('extraClasses')).to.contain('MySecondMarker')
+    expect(marker.find('.MySeparator')).to.have.length(1)
   })
 
   it('should accept custom styles', () => {

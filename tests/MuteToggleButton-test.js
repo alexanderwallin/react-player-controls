@@ -22,6 +22,16 @@ describe('<MuteToggleButton />', () => {
     expect(btn.props().isMuted).to.be.false
   })
 
+  it('accepts a custom class name', () => {
+    const btn = shallow(<MuteToggleButton className="MyClassName" />)
+    expect(btn.props().className).to.include('MyClassName')
+  })
+
+  it('should have a default className', () => {
+    const btn = shallow(<MuteToggleButton />)
+    expect(btn.props().className).to.contain('MuteToggleButton')
+  })
+
   it('accepts extra classes', () => {
     const classes = 'TestClass'
 
@@ -30,6 +40,18 @@ describe('<MuteToggleButton />', () => {
 
     btn = shallow(<MuteToggleButton extraClasses={classes} />)
     expect(btn.props().className).to.contain(classes)
+  })
+
+  it('accepts custom child component classes', () => {
+    const childClasses = {
+      SoundOnButton: 'MySoundOnButton',
+      SoundOffButton: 'MySoundOffButton',
+    }
+    const btn = shallow(<MuteToggleButton childClasses={childClasses} />)
+
+    expect(btn.find(SoundOnButton).props().className).to.contain('MySoundOnButton')
+    btn.setProps({ ...btn.props(), isMuted: true })
+    expect(btn.find(SoundOffButton).props().className).to.contain('MySoundOffButton')
   })
 
   it('should accept custom styles', () => {

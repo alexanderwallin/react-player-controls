@@ -3,7 +3,7 @@ import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
 import { values } from '../utils/collections.js'
-import { withChildrenStyles } from '../utils/composers.js'
+import { compose, withChildrenStyles, withCustomizableClasses, withChildClasses } from '../utils/composers.js'
 import FormattedTime from './FormattedTime.js'
 
 const { number, oneOf, string, object } = PropTypes
@@ -64,7 +64,7 @@ class TimeMarker extends Component {
     const {
       totalTime, currentTime,
       firstMarkerType, secondMarkerType, markerSeparator,
-      style, childrenStyles,
+      className, extraClasses, childClasses, style, childrenStyles,
     } = this.props
 
     const seconds1 = this.getSecondsForTimeWithMarkerType(firstMarkerType)
@@ -72,17 +72,36 @@ class TimeMarker extends Component {
 
     return (
       <div
-        className={classNames('TimeMarker')}
+        className={classNames(className, extraClasses)}
         style={style}
       >
-        <FormattedTime numSeconds={seconds1} extraClasses="TimeMarker-firstMarker" style={childrenStyles.firstMarker} />
+        <FormattedTime
+          numSeconds={seconds1}
+          extraClasses={classNames('TimeMarker-firstMarker', childClasses.firstMarker)}
+          style={childrenStyles.firstMarker}
+        />
+
         {markerSeparator && (
-          <span className="TimeMarker-separator" style={childrenStyles.separator}>{markerSeparator}</span>
+          <span
+            className={classNames('TimeMarker-separator', childClasses.separator)}
+            style={childrenStyles.separator}
+          >
+            {markerSeparator}
+          </span>
         )}
-        <FormattedTime numSeconds={seconds2} extraClasses="TimeMarker-secondMarker" style={childrenStyles.secondMarker} />
+
+        <FormattedTime
+          numSeconds={seconds2}
+          extraClasses={classNames('TimeMarker-secondMarker', childClasses.secondMarker)}
+          style={childrenStyles.secondMarker}
+        />
       </div>
     )
   }
 }
 
-export default withChildrenStyles(TimeMarker)
+export default compose(
+  withChildrenStyles(),
+  withCustomizableClasses('TimeMarker'),
+  withChildClasses()
+)(TimeMarker)

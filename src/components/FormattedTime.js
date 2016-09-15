@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
+import { withCustomizableClasses } from '../utils/composers.js'
+
 const { number, object, string } = PropTypes
 
 const padZero = digit =>
@@ -15,15 +17,11 @@ class FormattedTime extends Component {
   static propTypes = {
     numSeconds: number,
     style: object,
-    className: string,
-    extraClasses: string,
   }
 
   static defaultProps = {
     numSeconds: 0,
     style: {},
-    className: 'FormattedTime',
-    extraClasses: '',
   }
 
   getFormattedTime () {
@@ -52,4 +50,4 @@ class FormattedTime extends Component {
   }
 }
 
-export default FormattedTime
+export default withCustomizableClasses('FormattedTime', FormattedTime)

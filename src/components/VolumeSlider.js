@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
-import { withChildrenStyles } from '../utils/composers.js'
+import { compose, withChildrenStyles, withCustomizableClasses, withChildClasses } from '../utils/composers.js'
 import RangeControlOverlay, { ControlDirection } from './RangeControlOverlay.js'
 
 const { number, bool, func, string, object } = PropTypes
@@ -67,7 +67,10 @@ class VolumeSlider extends Component {
   }
 
   render () {
-    const { volume, isEnabled, extraClasses, style, childrenStyles } = this.props
+    const {
+      volume, isEnabled,
+      className, extraClasses, childClasses, style, childrenStyles,
+    } = this.props
     const { currentIntent } = this.state
 
     const volumePercentage = Math.min(100, Math.max(0, volume * 100))
@@ -78,22 +81,31 @@ class VolumeSlider extends Component {
 
     return (
       <div
-        className={classNames('VolumeSlider', extraClasses, {
+        className={classNames(className, extraClasses, {
           isEnabled,
           isDecreaseIntent,
         })}
         style={style}
         ref={this.storeRef}
       >
-        <div className="VolumeSlider-value" style={{ height: styleBottom, ...(childrenStyles.value || {}) }} />
+        <div
+          className={childClasses.value || 'VolumeSlider-value'}
+          style={{ height: styleBottom, ...(childrenStyles.value || {}) }}
+        />
 
-        <div className="VolumeSlider-intent" style={{ height: `${appliedIntent * 100}%`, ...(childrenStyles.intent || {}) }} />
+        <div
+          className={childClasses.intent || 'VolumeSlider-intent'}
+          style={{ height: `${appliedIntent * 100}%`, ...(childrenStyles.intent || {}) }}
+        />
 
-        <div className="VolumeSlider-handle" style={{ bottom: styleBottom, ...(childrenStyles.handle || {}) }} />
+        <div
+          className={childClasses.handle || 'VolumeSlider-handle'}
+          style={{ bottom: styleBottom, ...(childrenStyles.handle || {}) }}
+        />
 
         {isEnabled && (
           <RangeControlOverlay
-            extraClasses="VolumeSlider-seek"
+            extraClasses={childClasses.seek || 'VolumeSlider-seek'}
             style={childrenStyles.RangeControlOverlay}
             bounds={this.getBounds}
             direction={ControlDirection.VERTICAL}
@@ -106,4 +118,8 @@ class VolumeSlider extends Component {
   }
 }
 
-export default withChildrenStyles(VolumeSlider)
+export default compose(
+  withChildrenStyles(),
+  withCustomizableClasses('VolumeSlider'),
+  withChildClasses()
+)(VolumeSlider)

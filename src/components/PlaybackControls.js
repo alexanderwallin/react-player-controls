@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
-import { withChildrenStyles } from '../utils/composers.js'
+import { compose, withChildrenStyles, withCustomizableClasses, withChildClasses } from '../utils/composers.js'
 import { customComponentProp } from '../propTypes.js'
 import PlayButton from './PlayButton.js'
 import PauseButton from './PauseButton.js'
@@ -53,25 +53,48 @@ class PlaybackControls extends Component {
   render () {
     const {
       isPlayable, isPlaying, hasPrevious, onPrevious, hasNext, onNext,
-      style, childrenStyles,
+      className, extraClasses, childClasses, style, childrenStyles,
     } = this.props
 
     return (
       <div
-        className={classNames('PlaybackControls', { isPlayable, isPlaying })}
+        className={classNames(className, { isPlayable, isPlaying }, extraClasses)}
         style={style}
       >
-        <PrevButton isEnabled={hasPrevious} onClick={onPrevious} style={childrenStyles.PrevButton} />
+        <PrevButton
+          isEnabled={hasPrevious}
+          onClick={onPrevious}
+          className={childClasses.PrevButton}
+          style={childrenStyles.PrevButton}
+        />
 
         { isPlaying && isPlayable
-          ? <PauseButton onClick={this.handlePause} style={childrenStyles.PauseButton} />
-          : <PlayButton isEnabled={isPlayable} onClick={this.handlePlay} style={childrenStyles.PlayButton} />
+          ? <PauseButton
+              onClick={this.handlePause}
+              className={childClasses.PauseButton}
+              style={childrenStyles.PauseButton}
+            />
+          : <PlayButton
+              isEnabled={isPlayable}
+              onClick={this.handlePlay}
+              className={childClasses.PlayButton}
+              style={childrenStyles.PlayButton}
+            />
         }
 
-        <NextButton isEnabled={hasNext} onClick={onNext} style={childrenStyles.NextButton} />
+        <NextButton
+          isEnabled={hasNext}
+          onClick={onNext}
+          className={childClasses.NextButton}
+          style={childrenStyles.NextButton}
+        />
       </div>
     )
   }
 }
 
-export default withChildrenStyles(PlaybackControls)
+export default compose(
+  withChildrenStyles(),
+  withCustomizableClasses('PlaybackControls'),
+  withChildClasses()
+)(PlaybackControls)

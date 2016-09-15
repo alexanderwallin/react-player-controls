@@ -98,6 +98,44 @@ describe('<PlaybackControls />', () => {
     expect(ctrls.find(NextButton).props().isEnabled).to.equal(true)
   })
 
+  it('accepts a custom class name', () => {
+    const controls = shallow(<PlaybackControls className="MyClassName" />)
+    expect(controls.props().className).to.include('MyClassName')
+  })
+
+  it('accepts extra classes', () => {
+    const controls = shallow(<PlaybackControls extraClasses="ExtraClass" />)
+    expect(controls.props().className).to.include('ExtraClass')
+  })
+
+  it('has default child component classes', () => {
+    const controls = shallow(<PlaybackControls />)
+    expect(controls.find(PrevButton).props().className).to.not.be.empty
+    expect(controls.find(NextButton).props().className).to.not.be.empty
+    expect(controls.find(PlayButton).props().className).to.not.be.empty
+
+    controls.setProps({ ...controls.props(), isPlayable: true, isPlaying: true })
+    expect(controls.find(PauseButton).props().className).to.not.be.empty
+  })
+
+  it('accepts custom child component classes', () => {
+    const childClasses = {
+      PrevButton: 'MyPrevButton',
+      NextButton: 'MyNextButton',
+      PlayButton: 'MyPlayButton',
+      PauseButton: 'MyPauseButton',
+    }
+
+    const controls = shallow(<PlaybackControls childClasses={childClasses} />)
+
+    expect(controls.find(PrevButton).props().className).to.contain('MyPrevButton')
+    expect(controls.find(NextButton).props().className).to.contain('MyNextButton')
+    expect(controls.find(PlayButton).props().className).to.contain('MyPlayButton')
+
+    controls.setProps({ ...controls.props(), isPlayable: true, isPlaying: true })
+    expect(controls.find(PauseButton).props().className).to.contain('MyPauseButton')
+  })
+
   it('should accept custom styles', () => {
     const controls = shallow(<PlaybackControls style={{ fontSize: 100 }} onPlaybackChange={noop} />)
     expect(controls.props().style).to.eql({ fontSize: 100 })

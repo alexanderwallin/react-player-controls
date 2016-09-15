@@ -22,6 +22,16 @@ describe('<PauseButton />', () => {
     expect(btn.props().className).to.contain(classes)
   })
 
+  it('should have a default class name', () => {
+    const btn = shallow(<PauseButton onClick={noop} />)
+    expect(btn.props().className).to.include('PauseButton')
+  })
+
+  it('should accept a custom class name', () => {
+    const btn = shallow(<PauseButton className="MyClassName" onClick={noop} />)
+    expect(btn.props().className). to.include('MyClassName')
+  })
+
   it('should accept custom styles', () => {
     const btn = shallow(<PauseButton style={{ fontSize: 100 }} onClick={noop} />)
     expect(btn.props().style).to.eql({ fontSize: 100 })

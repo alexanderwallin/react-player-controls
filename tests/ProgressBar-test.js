@@ -59,6 +59,36 @@ describe('<ProgressBar />', () => {
     expect(callback.args[0][0]).to.equal(5)
   })
 
+  it('accepts a custom class name', () => {
+    const bar = shallow(<ProgressBar className="MyClassName" />)
+    expect(bar.props().className).to.include('MyClassName')
+  })
+
+  it('should have a default className', () => {
+    const bar = shallow(<ProgressBar />)
+    expect(bar.props().className).to.contain('ProgressBar')
+  })
+
+  it('accepts extra classes', () => {
+    const bar = shallow(<ProgressBar extraClasses="ExtraClass" />)
+    expect(bar.props().className).to.include('ExtraClass')
+  })
+
+  it('accepts custom child component classes', () => {
+    const childClasses = {
+      elapsed: 'MyElapsed',
+      intent: 'MyIntent',
+      handle: 'MyHandle',
+      seek: 'MySeek',
+    }
+
+    const bar = mount(<ProgressBar childClasses={childClasses} isSeekable />)
+    expect(bar.find('.MyElapsed')).to.have.length(1)
+    expect(bar.find('.MyIntent')).to.have.length(1)
+    expect(bar.find('.MyHandle')).to.have.length(1)
+    expect(bar.find('.MySeek')).to.have.length(1)
+  })
+
   it('should accept custom styles', () => {
     const bar = shallow(<ProgressBar style={{ fontSize: 100 }} />)
     expect(bar.props().style).to.eql({ fontSize: 100 })

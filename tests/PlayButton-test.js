@@ -27,6 +27,16 @@ describe('<PlayButton />', () => {
     expect(btn.props().className).to.contain(classes)
   })
 
+  it('should have a default class name', () => {
+    const btn = shallow(<PlayButton onClick={noop} />)
+    expect(btn.props().className).to.include('PlayButton')
+  })
+
+  it('should accept a custom class name', () => {
+    const btn = shallow(<PlayButton className="MyClassName" onClick={noop} />)
+    expect(btn.props().className). to.include('MyClassName')
+  })
+
   it('should accept custom styles', () => {
     const btn = shallow(<PlayButton style={{ fontSize: 100 }} onClick={noop} />)
     expect(btn.props().style).to.eql({ fontSize: 100 })

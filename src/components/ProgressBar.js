@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
-import { withChildrenStyles } from '../utils/composers.js'
+import { compose, withChildrenStyles, withCustomizableClasses, withChildClasses } from '../utils/composers.js'
 import FormattedTime from './FormattedTime.js'
 import RangeControlOverlay from './RangeControlOverlay.js'
 
@@ -20,7 +20,6 @@ class ProgressBar extends Component {
     currentTime: number,
     isSeekable: bool,
     onSeek: func,
-    extraClasses: string,
     style: object,
   }
 
@@ -29,7 +28,6 @@ class ProgressBar extends Component {
     currentTime: 0,
     isSeekable: false,
     onSeek: () => {},
-    extraClasses: '',
     style: {},
   }
 
@@ -68,7 +66,10 @@ class ProgressBar extends Component {
   }
 
   render () {
-    const { totalTime, currentTime, isSeekable, extraClasses, style, childrenStyles } = this.props
+    const {
+      totalTime, currentTime, isSeekable,
+      className, extraClasses, childClasses, style, childrenStyles,
+    } = this.props
     const { currentIntent } = this.state
 
     const progressPercent = Math.min(100, 100 * currentTime / totalTime)
@@ -78,22 +79,31 @@ class ProgressBar extends Component {
 
     return (
       <div
-        className={classNames('ProgressBar', extraClasses, {
+        className={classNames(className, extraClasses, {
           isSeekable,
           isRewindIntent,
         })}
         style={style}
         ref={this.storeRef}
       >
-        <div className="ProgressBar-elapsed" style={{ width: styleLeft, ...(childrenStyles.elapsed || {}) }} />
+        <div
+          className={childClasses.elapsed || 'ProgressBar-elapsed'}
+          style={{ width: styleLeft, ...(childrenStyles.elapsed || {}) }}
+        />
 
-        <div className="ProgressBar-intent" style={{ width: `${currentIntent * 100}%`, ...(childrenStyles.intent || {}) }} />
+        <div
+          className={childClasses.intent || 'ProgressBar-intent'}
+          style={{ width: `${currentIntent * 100}%`, ...(childrenStyles.intent || {}) }}
+        />
 
-        <div className="ProgressBar-handle" style={{ left: styleLeft, ...(childrenStyles.handle || {}) }} />
+        <div
+          className={childClasses.handle || 'ProgressBar-handle'}
+          style={{ left: styleLeft, ...(childrenStyles.handle || {}) }}
+        />
 
         {isSeekable && (
           <RangeControlOverlay
-            extraClasses="ProgressBar-seek"
+            className={childClasses.seek || 'ProgressBar-seek'}
             style={childrenStyles.RangeControlOverlay}
             bounds={() => this.progressBarEl.getBoundingClientRect()}
             onValue={this.handleSeek}
@@ -105,4 +115,8 @@ class ProgressBar extends Component {
   }
 }
 
-export default withChildrenStyles(ProgressBar)
+export default compose(
+  withChildrenStyles(),
+  withCustomizableClasses('ProgressBar'),
+  withChildClasses()
+)(ProgressBar)

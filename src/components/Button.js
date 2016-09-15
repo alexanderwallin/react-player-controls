@@ -16,8 +16,8 @@ class Button extends Component {
   }
 
   static defaultProps = {
-    className: 'Button',
     isEnabled: true,
+    className: 'Button',
     extraClasses: '',
     style: {},
     children: null,
