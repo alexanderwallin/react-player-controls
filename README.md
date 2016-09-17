@@ -12,14 +12,18 @@
 [![Dependencies](https://img.shields.io/david/reactify/react-player-controls.svg?style=flat-square)](https://david-dm.org/reactify/react-player-controls)
 [![Dev dependency status](https://david-dm.org/reactify/react-player-controls/dev-status.svg?style=flat-square)](https://david-dm.org/reactify/react-player-controls#info=devDependencies)
 
-Dumb but useful UI components for media players
+This is a set of modular, tested and hopefully useful React components for composing media players. This library does not deal with actual media in any way, only the UI.
+
+Check out the components in action on the [examples page](https://reactify.github.io/react-player-controls).
 
 ## Installation
+
 ```sh
 npm i react-player-controls
 ```
 
 ## Usage
+
 ```js
 // Import the components you need as ES2015 modules  
 import { PlayButton, PauseButton } from 'react-player-controls'` 
