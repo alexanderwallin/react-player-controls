@@ -1,7 +1,16 @@
-# react-player-controls
+<h1 align="center">
+  <img src="https://cdn.rawgit.com/reactify/react-player-controls/master/docs/img/logo-icon.svg" width="100" height="100" />
+  <br />
+  react-player-controls
+  <br />
+  &nbsp;
+</h1>
+
+[![npm version](https://badge.fury.io/js/react-player-controls.svg)](https://badge.fury.io/js/react-player-controls)
 [![Build Status](https://travis-ci.org/reactify/react-player-controls.svg?branch=master)](https://travis-ci.org/reactify/react-player-controls)
 ![unstable](https://img.shields.io/badge/status-unstable-yellow.svg)
-[![npm version](https://badge.fury.io/js/react-player-controls.svg)](https://badge.fury.io/js/react-player-controls)
+[![Dependencies](https://img.shields.io/david/reactify/react-player-controls.svg?style=flat-square)](https://david-dm.org/reactify/react-player-controls)
+[![Dev dependency status](https://david-dm.org/reactify/react-player-controls/dev-status.svg?style=flat-square)](https://david-dm.org/reactify/react-player-controls#info=devDependencies)
 
 Dumb but useful UI components for media players
 
