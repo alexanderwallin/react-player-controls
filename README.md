@@ -26,8 +26,8 @@ npm i react-player-controls
 
 ```js
 // Import the components you need as ES2015 modules  
-import { PlayButton, PauseButton } from 'react-player-controls'` 
-```  
+import { PlayButton, PauseButton } from 'react-player-controls'
+```
 
 ## Components
 
