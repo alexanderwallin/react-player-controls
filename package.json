@@ -4,7 +4,9 @@
   "description": "UI components for media players",
   "main": "dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "resources",
+    "src"
   ],
   "scripts": {
     "prebuild": "rimraf dist",
