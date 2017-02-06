@@ -3,7 +3,6 @@ import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
 import { compose, withChildrenStyles, withCustomizableClasses, withChildClasses } from '../utils/composers.js'
-import { customComponentProp } from '../propTypes.js'
 import PlayButton from './PlayButton.js'
 import PauseButton from './PauseButton.js'
 import PrevButton from './PrevButton.js'

@@ -30,7 +30,7 @@ class Button extends Component {
     }
   }
 
-  render() {
+  render () {
     const { isEnabled, className, extraClasses, style, children } = this.props
 
     return (

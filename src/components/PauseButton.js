@@ -1,5 +1,4 @@
 import React from 'react'
-import classNames from 'classnames'
 
 import Button from './Button.js'
 import { PauseIcon } from './icons.js'

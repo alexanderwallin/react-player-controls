@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 import { withCustomizableClasses } from '../utils/composers.js'
 
-const { oneOfType, shape, func, string, number, oneOf, object } = PropTypes
+const { oneOfType, shape, func, number, oneOf, object } = PropTypes
 
 // Range control directions
 export const ControlDirection = {
@@ -100,7 +100,7 @@ class RangeControlOverlay extends Component {
     onIntent(value)
   }
 
-  getRectFromBounds() {
+  getRectFromBounds () {
     const { bounds } = this.props
 
     return typeof bounds === 'function'

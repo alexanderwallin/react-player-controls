@@ -7,7 +7,7 @@ import { NextIcon } from './icons.js'
  * Next button
  */
 class NextButton extends Button {
-  static defaultProps = {
+  static defaultProps = {
     ...Button.defaultProps,
     className: 'NextButton',
     children: <NextIcon />,

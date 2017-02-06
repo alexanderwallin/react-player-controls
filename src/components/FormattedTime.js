@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
 import { withCustomizableClasses } from '../utils/composers.js'
 
-const { number, object, string } = PropTypes
+const { number, object } = PropTypes
 
 const padZero = digit =>
   `${digit < 10 ? '0' : ''}${digit}`

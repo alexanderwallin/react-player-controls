@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
 import { values } from '../utils/collections.js'
@@ -62,7 +61,6 @@ class TimeMarker extends Component {
 
   render () {
     const {
-      totalTime, currentTime,
       firstMarkerType, secondMarkerType, markerSeparator,
       className, extraClasses, childClasses, style, childrenStyles,
     } = this.props

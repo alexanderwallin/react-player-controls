@@ -1,7 +1,9 @@
+/* eslint-env mocha */
+
 import React from 'react'
-import { shallow, mount } from 'enzyme';
-import chai, { expect } from 'chai';
-import chaiEnzyme from 'chai-enzyme';
+import { shallow, mount } from 'enzyme'
+import chai, { expect } from 'chai'
+import chaiEnzyme from 'chai-enzyme'
 import { spy } from 'sinon'
 import TestUtils from 'react-addons-test-utils'
 

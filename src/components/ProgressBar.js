@@ -3,10 +3,9 @@ import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
 import { compose, withChildrenStyles, withCustomizableClasses, withChildClasses } from '../utils/composers.js'
-import FormattedTime from './FormattedTime.js'
 import RangeControlOverlay from './RangeControlOverlay.js'
 
-const { number, bool, func, string, object } = PropTypes
+const { number, bool, func, object } = PropTypes
 
 /**
  * Seekable progress bar
@@ -31,7 +30,7 @@ class ProgressBar extends Component {
     style: {},
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.progressBarEl = null
