@@ -31,12 +31,16 @@ class RangeControlOverlay extends Component {
       }),
     ]).isRequired,
     onValue: func.isRequired,
+    onChangeStart: func,
+    onChangeEnd: func,
     onIntent: func,
     direction: oneOf([ControlDirection.HORIZONTAL, ControlDirection.VERTICAL]),
     style: object,
   }
 
   static defaultProps = {
+    onChangeStart: () => {},
+    onChangeEnd: () => {},
     onIntent: () => {},
     direction: ControlDirection.HORIZONTAL,
     style: {},
@@ -59,6 +63,11 @@ class RangeControlOverlay extends Component {
     this.setState({ isDragging: true })
     window.addEventListener('mousemove', this.triggerRangeChange)
     window.addEventListener('mouseup', this.endDrag)
+
+    const startValue = evt
+      ? this.getValueFromMouseEvent(evt)
+      : null
+    this.props.onChangeStart(startValue)
   }
 
   @autobind
@@ -70,17 +79,22 @@ class RangeControlOverlay extends Component {
     this.setState({ isDragging: false })
     window.removeEventListener('mousemove', this.triggerRangeChange)
     window.removeEventListener('mouseup', this.endDrag)
+
+    const endValue = evt
+      ? this.getValueFromMouseEvent(evt)
+      : null
+    this.props.onChangeEnd(endValue)
+  }
+
+  getValueFromMouseEvent (mouseEvent) {
+    return this.props.direction === ControlDirection.VERTICAL
+      ? this.getVerticalValue(mouseEvent.pageY)
+      : this.getHorizontalValue(mouseEvent.pageX)
   }
 
   @autobind
   triggerRangeChange (mouseEvent) {
-    const { direction, onValue } = this.props
-
-    const newValue = direction === ControlDirection.VERTICAL
-      ? this.getVerticalValue(mouseEvent.pageY)
-      : this.getHorizontalValue(mouseEvent.pageX)
-
-    onValue(newValue)
+    this.props.onValue(this.getValueFromMouseEvent(mouseEvent))
   }
 
   @autobind

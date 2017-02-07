@@ -24,9 +24,26 @@ describe('<ProgressBar />', () => {
 
     expect(bar.find('RangeControlOverlay')).to.have.length(0)
 
-    bar.setProps({ isSeekable: callback, isSeekable: true })
+    bar.setProps({ isSeekable: true })
     bar.find('RangeControlOverlay').props().onValue()
     expect(callback.called).to.equal(true)
+  })
+
+  it('triggers onSeekStart when seekable', () => {
+    const onSeekStart = spy()
+    const bar = mount(<ProgressBar isSeekable onSeekStart={onSeekStart} />)
+
+    bar.find('RangeControlOverlay').props().onChangeStart()
+    expect(onSeekStart.called).to.equal(true)
+  })
+
+  it('triggers onSeekEnd when seekable', () => {
+    const onSeekStart = spy()
+    const onSeekEnd = spy()
+    const bar = mount(<ProgressBar isSeekable onSeekEnd={onSeekEnd} />)
+
+    bar.find('RangeControlOverlay').props().onChangeEnd()
+    expect(onSeekEnd.called).to.equal(true)
   })
 
   it('provides a class for rewind intents', () => {

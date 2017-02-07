@@ -100,6 +100,31 @@ describe('<RangeControlOverlay />', () => {
       expect(onValue.args[2][0]).to.equal(0)
     })
   })
+})
+
+describe('all controls', () => {
+  it('it invokes onChangeStart and onChangeEnd prop functions', () => {
+    const onChangeStart = spy()
+    const onChangeEnd = spy()
+    const overlay = shallow(
+      <RangeControlOverlay
+        bounds={{ left: 100, width: 100 }}
+        direction={ControlDirection.HORIZONTAL}
+        onValue={noop}
+        onChangeStart={onChangeStart}
+        onChangeEnd={onChangeEnd}
+      />
+    )
+    const instance = overlay.instance()
+
+    instance.startDrag({ pageX: 110 })
+    expect(onChangeStart.callCount).to.equal(1)
+    expect(onChangeStart.args[0][0]).to.equal(0.1)
+
+    instance.endDrag({ pageX: 120 })
+    expect(onChangeEnd.callCount).to.equal(1)
+    expect(onChangeEnd.args[0][0]).to.equal(0.2)
+  })
 
   it('accepts a custom className', () => {
     const overlay = shallow(<RangeControlOverlay className="MyClassName" />)

@@ -19,6 +19,8 @@ class ProgressBar extends Component {
     currentTime: number,
     isSeekable: bool,
     onSeek: func,
+    onSeekStart: func,
+    onSeekEnd: func,
     style: object,
   }
 
@@ -27,6 +29,8 @@ class ProgressBar extends Component {
     currentTime: 0,
     isSeekable: false,
     onSeek: () => {},
+    onSeekStart: () => {},
+    onSeekEnd: () => {},
     style: {},
   }
 
@@ -51,6 +55,24 @@ class ProgressBar extends Component {
 
     if (isSeekable) {
       onSeek(relativeTime * totalTime)
+    }
+  }
+
+  @autobind
+  handleSeekStart (relativeTime) {
+    const { isSeekable, onSeekStart, totalTime } = this.props
+
+    if (isSeekable) {
+      onSeekStart(relativeTime * totalTime)
+    }
+  }
+
+  @autobind
+  handleSeekEnd (relativeTime) {
+    const { isSeekable, onSeekEnd, totalTime } = this.props
+
+    if (isSeekable) {
+      onSeekEnd(relativeTime * totalTime)
     }
   }
 
@@ -106,6 +128,8 @@ class ProgressBar extends Component {
             style={childrenStyles.RangeControlOverlay}
             bounds={() => this.progressBarEl.getBoundingClientRect()}
             onValue={this.handleSeek}
+            onChangeStart={this.handleSeekStart}
+            onChangeEnd={this.handleSeekEnd}
             onIntent={this.handleIntent}
           />
         )}
