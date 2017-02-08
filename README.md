@@ -25,7 +25,7 @@ npm i react-player-controls
 ## Usage
 
 ```js
-// Import the components you need as ES2015 modules  
+// Import the components you need as ES2015 modules
 import { PlayButton, PauseButton } from 'react-player-controls'
 ```
 
@@ -66,7 +66,9 @@ import { PlayButton, PauseButton } from 'react-player-controls'
   totalTime={song.duration}
   currentTime={audioEl.currentTime}
   isSeekable={true}
-  onSeek={seekTime => audioEl.currentTime = seekTime}
+  onSeek={seekTime => { /* f.i. update the time marker */}}
+  onSeekStart={seekTime => { /* perhaps freeze a video frame? */ }}
+  onSeekEnd={seekTime => { /* perform seek: */ audioEl.currentTime = seekTime }}
 />
 
 // <TimeMarker /> composite component
@@ -110,20 +112,20 @@ import { PlayButton, PauseButton } from 'react-player-controls'
 />
 ```
 
-## Contribute  
-Contributors are welcome! Please make sure that tests pass locally before opening a PR  
+## Contribute
+Contributors are welcome! Please make sure that tests pass locally before opening a PR
 
-#### Dev  
+#### Dev
 ```sh
 npm run dev
 ```
 
-#### Build  
+#### Build
 ```sh
 npm run build
 ```
 
-#### Tests  
+#### Tests
 ```sh
 npm run test
 ```
