@@ -16,6 +16,8 @@ This is a set of modular, tested and hopefully useful React components for compo
 
 Check out the components in action on the [examples page](https://reactify.github.io/react-player-controls).
 
+**A note on styles:** This library does not yet ship with any component styles. However, this is [on the way](https://github.com/reactify/react-player-controls/milestone/1). Meanwhile, you can check out [the styles from the examples page](https://github.com/reactify/react-player-controls/blob/master/docs/src/sass/_controls.scss) to get a kick start or just some inspiration in styling your player.
+
 ## Installation
 
 ```sh
@@ -113,7 +115,7 @@ import { PlayButton, PauseButton } from 'react-player-controls'
 ```
 
 ## Contribute
-Contributors are welcome! Please make sure that tests pass locally before opening a PR
+Contributors are welcome! Please make sure that tests pass locally before opening a PR.
 
 #### Dev
 ```sh
