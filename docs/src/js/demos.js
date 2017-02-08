@@ -370,6 +370,8 @@ demos.ProgressBar = class ProgressBarDemo extends React.Component {
       totalTime: 190,
       currentTime: 65,
       isSeekable: true,
+      lastSeekStart: 0,
+      lastSeekEnd: 0,
     }
   }
 
@@ -388,14 +390,14 @@ demos.ProgressBar = class ProgressBarDemo extends React.Component {
   }
 
   render() {
-    const { totalTime, currentTime, isSeekable } = this.state
+    const { totalTime, currentTime, isSeekable, lastSeekStart, lastSeekEnd } = this.state
 
     return (
       <div className="ComponentDemo ProgressBarDemo">
         <pre className="ComponentDemo-code">
           <code className="language-jsx" dangerouslySetInnerHTML={{
             __html: Prism.highlight(
-              `<ProgressBar\n  totalTime={this.state.totalTime}\n  currentTime={this.state.currentTime}\n  isSeekable={this.state.isSeekable}\n  onSeek={time => this.setState({ ...this.state, currentTime: time })}\n/>`,
+              `<ProgressBar\n  totalTime={this.state.totalTime}\n  currentTime={this.state.currentTime}\n  isSeekable={this.state.isSeekable}\n  onSeek={time => this.setState(() => ({ currentTime: time }))}\n  onSeekStart={time => this.setState(() => ({ lastSeekStart: time }))}\n  onSeekEnd={time => this.setState(() => ({ lastSeekEnd: time }))}\n/>`,
               Prism.languages.jsx
             )
           }} />
@@ -416,6 +418,16 @@ demos.ProgressBar = class ProgressBarDemo extends React.Component {
             <input type="checkbox" checked={isSeekable} onChange={(evt) => this.setState(Object.assign({}, this.state, { isSeekable: !isSeekable }))} />
             <code>isSeekable</code>
           </label>
+
+          <label>
+            <code>lastSeekStart</code>
+            <input type="number" disabled value={lastSeekStart} />
+          </label>
+
+          <label>
+            <code>lastSeekEnd</code>
+            <input type="number" disabled value={lastSeekEnd} />
+          </label>
         </div>
 
         <div className="ComponentDemo-results">
@@ -423,7 +435,9 @@ demos.ProgressBar = class ProgressBarDemo extends React.Component {
             totalTime={totalTime}
             currentTime={currentTime}
             isSeekable={isSeekable}
-            onSeek={time => this.setState(Object.assign({}, this.state, { currentTime: time }))}
+            onSeek={time => this.setState(() => ({ currentTime: time }))}
+            onSeekStart={time => this.setState(() => ({ lastSeekStart: time }))}
+            onSeekEnd={time => this.setState(() => ({ lastSeekEnd: time }))}
           />
         </div>
       </div>
