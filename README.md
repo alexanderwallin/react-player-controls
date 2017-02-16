@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://cdn.rawgit.com/reactify/react-player-controls/master/docs/img/logo-icon.svg" width="100" height="100" />
+  <img src="https://cdn.rawgit.com/alexanderwallin/react-player-controls/master/docs/img/logo-icon.svg" width="100" height="100" />
   <br />
   react-player-controls
   <br />
@@ -7,16 +7,16 @@
 </h1>
 
 [![npm version](https://badge.fury.io/js/react-player-controls.svg)](https://badge.fury.io/js/react-player-controls)
-[![Build Status](https://travis-ci.org/reactify/react-player-controls.svg?branch=master)](https://travis-ci.org/reactify/react-player-controls)
+[![Build Status](https://travis-ci.org/alexanderwallin/react-player-controls.svg?branch=master)](https://travis-ci.org/alexanderwallin/react-player-controls)
 ![unstable](https://img.shields.io/badge/status-unstable-yellow.svg)
-[![Dependencies](https://img.shields.io/david/reactify/react-player-controls.svg?style=flat-square)](https://david-dm.org/reactify/react-player-controls)
-[![Dev dependency status](https://david-dm.org/reactify/react-player-controls/dev-status.svg?style=flat-square)](https://david-dm.org/reactify/react-player-controls#info=devDependencies)
+[![Dependencies](https://img.shields.io/david/alexanderwallin/react-player-controls.svg?style=flat-square)](https://david-dm.org/alexanderwallin/react-player-controls)
+[![Dev dependency status](https://david-dm.org/alexanderwallin/react-player-controls/dev-status.svg?style=flat-square)](https://david-dm.org/alexanderwallin/react-player-controls#info=devDependencies)
 
 This is a set of modular, tested and hopefully useful React components for composing media players. This library does not deal with actual media in any way, only the UI.
 
-Check out the components in action on the [examples page](https://reactify.github.io/react-player-controls).
+Check out the components in action on the [examples page](https://alexanderwallin.github.io/react-player-controls).
 
-**A note on styles:** This library does not yet ship with any component styles. However, this is [on the way](https://github.com/reactify/react-player-controls/milestone/1). Meanwhile, you can check out [the styles from the examples page](https://github.com/reactify/react-player-controls/blob/master/docs/src/sass/_controls.scss) to get a kick start or just some inspiration in styling your player.
+**A note on styles:** This library does not yet ship with any component styles. However, this is [on the way](https://github.com/alexanderwallin/react-player-controls/milestone/1). Meanwhile, you can check out [the styles from the examples page](https://github.com/alexanderwallin/react-player-controls/blob/master/docs/src/sass/_controls.scss) to get a kick start or just some inspiration in styling your player.
 
 ## Installation
 
