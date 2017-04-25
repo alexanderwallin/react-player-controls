@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/reactify/react-player-controls.git"
+    "url": "git+https://github.com/alexanderwallin/react-player-controls.git"
   },
   "author": "Reactify <developer@reactifymusic.com> (http://reactifymusic.com)",
   "contributors": [
@@ -27,7 +27,7 @@
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/reactify/react-player-controls/issues"
+    "url": "https://github.com/alexanderwallin/react-player-controls/issues"
   },
   "homepage": "http://reactify.github.io/react-player-controls/",
   "devDependencies": {
