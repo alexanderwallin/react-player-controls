@@ -1,5 +1,5 @@
 {
-  "extends": "standard",
+  "extends": ["standard", "plugin:react/recommended"],
   "parser": "babel-eslint",
   "plugins": ["react", "import", "jsx-a11y"],
   "rules": {
