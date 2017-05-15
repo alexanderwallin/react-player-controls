@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import PropTypes from 'prop-types'
 import curry from 'lodash.curry'
 import flowRight from 'lodash.flowright'
 
