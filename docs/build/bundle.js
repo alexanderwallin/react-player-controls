@@ -23,6 +23,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -95,9 +99,6 @@ var Button = (_class = function (_Component) {
   }
 
   _createClass(Button, [{
-    key: 'myCustomFunc',
-    value: function myCustomFunc() {}
-  }, {
     key: 'handleClick',
     value: function handleClick() {
       if (this.props.isEnabled) {
@@ -126,12 +127,12 @@ var Button = (_class = function (_Component) {
   return Button;
 }(_react.Component), _applyDecoratedDescriptor(_class.prototype, 'handleClick', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleClick'), _class.prototype), _class);
 Button.propTypes = {
-  onClick: _react.PropTypes.func.isRequired,
-  isEnabled: _react.PropTypes.bool,
-  className: _react.PropTypes.string,
-  extraClasses: _react.PropTypes.string,
-  style: _react.PropTypes.object,
-  children: _react.PropTypes.node
+  onClick: _propTypes2.default.func.isRequired,
+  isEnabled: _propTypes2.default.bool,
+  className: _propTypes2.default.string,
+  extraClasses: _propTypes2.default.string,
+  style: _propTypes2.default.object,
+  children: _propTypes2.default.node
 };
 Button.defaultProps = {
   isEnabled: true,
@@ -142,7 +143,7 @@ Button.defaultProps = {
 };
 exports.default = Button;
 
-},{"autobind-decorator":199,"classnames":200,"react":232}],2:[function(require,module,exports){
+},{"autobind-decorator":199,"classnames":200,"prop-types":211,"react":237}],2:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -164,6 +165,10 @@ var _createClass = function () {
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _classnames = require('classnames');
 
@@ -193,8 +198,8 @@ function _inherits(subClass, superClass) {
   }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
-var number = _react.PropTypes.number,
-    object = _react.PropTypes.object;
+var number = _propTypes2.default.number,
+    object = _propTypes2.default.object;
 
 var padZero = function padZero(digit) {
   return '' + (digit < 10 ? '0' : '') + digit;
@@ -252,7 +257,7 @@ FormattedTime.defaultProps = {
 };
 exports.default = (0, _composers.withCustomizableClasses)('FormattedTime', FormattedTime);
 
-},{"../utils/composers.js":18,"classnames":200,"react":232}],3:[function(require,module,exports){
+},{"../utils/composers.js":18,"classnames":200,"prop-types":211,"react":237}],3:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -276,6 +281,10 @@ var _desc, _value, _class;
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _classnames = require('classnames');
 
@@ -403,12 +412,12 @@ var MuteToggleButton = (_class = function (_Component) {
   return MuteToggleButton;
 }(_react.Component), _applyDecoratedDescriptor(_class.prototype, 'handleMuteChange', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleMuteChange'), _class.prototype), _class);
 MuteToggleButton.propTypes = {
-  onMuteChange: _react.PropTypes.func.isRequired,
-  isMuted: _react.PropTypes.bool,
-  isEnabled: _react.PropTypes.bool,
-  className: _react.PropTypes.string,
-  extraClasses: _react.PropTypes.string,
-  style: _react.PropTypes.object
+  onMuteChange: _propTypes2.default.func.isRequired,
+  isMuted: _propTypes2.default.bool,
+  isEnabled: _propTypes2.default.bool,
+  className: _propTypes2.default.string,
+  extraClasses: _propTypes2.default.string,
+  style: _propTypes2.default.object
 };
 MuteToggleButton.defaultProps = {
   isMuted: false,
@@ -419,7 +428,7 @@ MuteToggleButton.defaultProps = {
 };
 exports.default = (0, _composers.withChildClasses)((0, _composers.withChildrenStyles)(MuteToggleButton));
 
-},{"../utils/composers.js":18,"./SoundOffButton.js":11,"./SoundOnButton.js":12,"autobind-decorator":199,"classnames":200,"react":232}],4:[function(require,module,exports){
+},{"../utils/composers.js":18,"./SoundOffButton.js":11,"./SoundOnButton.js":12,"autobind-decorator":199,"classnames":200,"prop-types":211,"react":237}],4:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -492,7 +501,7 @@ NextButton.defaultProps = _extends({}, _Button3.default.defaultProps, {
 });
 exports.default = NextButton;
 
-},{"./Button.js":1,"./icons.js":15,"react":232}],5:[function(require,module,exports){
+},{"./Button.js":1,"./icons.js":15,"react":237}],5:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -564,7 +573,7 @@ PauseButton.defaultProps = _extends({}, _Button3.default.defaultProps, {
 });
 exports.default = PauseButton;
 
-},{"./Button.js":1,"./icons.js":15,"react":232}],6:[function(require,module,exports){
+},{"./Button.js":1,"./icons.js":15,"react":237}],6:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -637,7 +646,7 @@ PlayButton.defaultProps = _extends({}, _Button3.default.defaultProps, {
 });
 exports.default = PlayButton;
 
-},{"./Button.js":1,"./icons.js":15,"react":232}],7:[function(require,module,exports){
+},{"./Button.js":1,"./icons.js":15,"react":237}],7:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -661,6 +670,10 @@ var _desc, _value, _class;
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _autobindDecorator = require('autobind-decorator');
 
@@ -739,9 +752,9 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
   return desc;
 }
 
-var bool = _react.PropTypes.bool,
-    func = _react.PropTypes.func,
-    object = _react.PropTypes.object;
+var bool = _propTypes2.default.bool,
+    func = _propTypes2.default.func,
+    object = _propTypes2.default.object;
 
 var noop = function noop() {};
 
@@ -834,7 +847,7 @@ PlaybackControls.defaultProps = {
 };
 exports.default = (0, _composers.compose)((0, _composers.withChildrenStyles)(), (0, _composers.withCustomizableClasses)('PlaybackControls'), (0, _composers.withChildClasses)())(PlaybackControls);
 
-},{"../utils/composers.js":18,"./NextButton.js":4,"./PauseButton.js":5,"./PlayButton.js":6,"./PrevButton.js":8,"autobind-decorator":199,"classnames":200,"react":232}],8:[function(require,module,exports){
+},{"../utils/composers.js":18,"./NextButton.js":4,"./PauseButton.js":5,"./PlayButton.js":6,"./PrevButton.js":8,"autobind-decorator":199,"classnames":200,"prop-types":211,"react":237}],8:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -907,7 +920,7 @@ PrevButton.defaultProps = _extends({}, _Button3.default.defaultProps, {
 });
 exports.default = PrevButton;
 
-},{"./Button.js":1,"./icons.js":15,"react":232}],9:[function(require,module,exports){
+},{"./Button.js":1,"./icons.js":15,"react":237}],9:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -941,6 +954,10 @@ var _desc, _value, _class;
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _autobindDecorator = require('autobind-decorator');
 
@@ -1007,10 +1024,10 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
   return desc;
 }
 
-var number = _react.PropTypes.number,
-    bool = _react.PropTypes.bool,
-    func = _react.PropTypes.func,
-    object = _react.PropTypes.object;
+var number = _propTypes2.default.number,
+    bool = _propTypes2.default.bool,
+    func = _propTypes2.default.func,
+    object = _propTypes2.default.object;
 
 /**
  * Seekable progress bar
@@ -1157,7 +1174,7 @@ ProgressBar.defaultProps = {
 };
 exports.default = (0, _composers.compose)((0, _composers.withChildrenStyles)(), (0, _composers.withCustomizableClasses)('ProgressBar'), (0, _composers.withChildClasses)())(ProgressBar);
 
-},{"../utils/composers.js":18,"./RangeControlOverlay.js":10,"autobind-decorator":199,"classnames":200,"react":232}],10:[function(require,module,exports){
+},{"../utils/composers.js":18,"./RangeControlOverlay.js":10,"autobind-decorator":199,"classnames":200,"prop-types":211,"react":237}],10:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -1182,6 +1199,10 @@ var _desc, _value, _class;
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _autobindDecorator = require('autobind-decorator');
 
@@ -1244,12 +1265,12 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
   return desc;
 }
 
-var oneOfType = _react.PropTypes.oneOfType,
-    shape = _react.PropTypes.shape,
-    func = _react.PropTypes.func,
-    number = _react.PropTypes.number,
-    oneOf = _react.PropTypes.oneOf,
-    object = _react.PropTypes.object;
+var oneOfType = _propTypes2.default.oneOfType,
+    shape = _propTypes2.default.shape,
+    func = _propTypes2.default.func,
+    number = _propTypes2.default.number,
+    oneOf = _propTypes2.default.oneOf,
+    object = _propTypes2.default.object;
 
 // Range control directions
 
@@ -1288,6 +1309,8 @@ var RangeControlOverlay = (_class = function (_Component) {
       window.addEventListener('mousemove', this.triggerRangeChange);
       window.addEventListener('mouseup', this.endDrag);
 
+      this.toggleSelection('none');
+
       var startValue = evt ? this.getValueFromMouseEvent(evt) : null;
       this.props.onChangeStart(startValue);
     }
@@ -1302,8 +1325,19 @@ var RangeControlOverlay = (_class = function (_Component) {
       window.removeEventListener('mousemove', this.triggerRangeChange);
       window.removeEventListener('mouseup', this.endDrag);
 
+      this.toggleSelection('');
+
       var endValue = evt ? this.getValueFromMouseEvent(evt) : null;
       this.props.onChangeEnd(endValue);
+    }
+  }, {
+    key: 'toggleSelection',
+    value: function toggleSelection(value) {
+      var body = document.getElementsByTagName('body')[0];
+      body.style['user-select'] = value;
+      body.style['-webkit-user-select'] = value;
+      body.style['-moz-user-select'] = value;
+      body.style['-ms-user-select'] = value;
     }
   }, {
     key: 'getValueFromMouseEvent',
@@ -1406,7 +1440,7 @@ RangeControlOverlay.defaultProps = {
 };
 exports.default = (0, _composers.withCustomizableClasses)('RangeControlOverlay')(RangeControlOverlay);
 
-},{"../utils/composers.js":18,"autobind-decorator":199,"classnames":200,"react":232}],11:[function(require,module,exports){
+},{"../utils/composers.js":18,"autobind-decorator":199,"classnames":200,"prop-types":211,"react":237}],11:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -1478,7 +1512,7 @@ SoundOffButton.defaultProps = _extends({}, _Button3.default.defaultProps, {
 });
 exports.default = SoundOffButton;
 
-},{"./Button.js":1,"./icons.js":15,"react":232}],12:[function(require,module,exports){
+},{"./Button.js":1,"./icons.js":15,"react":237}],12:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -1550,7 +1584,7 @@ SoundOnButton.defaultProps = _extends({}, _Button3.default.defaultProps, {
 });
 exports.default = SoundOnButton;
 
-},{"./Button.js":1,"./icons.js":15,"react":232}],13:[function(require,module,exports){
+},{"./Button.js":1,"./icons.js":15,"react":237}],13:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -1573,6 +1607,10 @@ var _createClass = function () {
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _classnames = require('classnames');
 
@@ -1608,10 +1646,10 @@ function _inherits(subClass, superClass) {
   }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
-var number = _react.PropTypes.number,
-    oneOf = _react.PropTypes.oneOf,
-    string = _react.PropTypes.string,
-    object = _react.PropTypes.object;
+var number = _propTypes2.default.number,
+    oneOf = _propTypes2.default.oneOf,
+    string = _propTypes2.default.string,
+    object = _propTypes2.default.object;
 
 /**
  * Time marker types
@@ -1711,7 +1749,7 @@ TimeMarker.defaultProps = {
 };
 exports.default = (0, _composers.compose)((0, _composers.withChildrenStyles)(), (0, _composers.withCustomizableClasses)('TimeMarker'), (0, _composers.withChildClasses)())(TimeMarker);
 
-},{"../utils/collections.js":17,"../utils/composers.js":18,"./FormattedTime.js":2,"classnames":200,"react":232}],14:[function(require,module,exports){
+},{"../utils/collections.js":17,"../utils/composers.js":18,"./FormattedTime.js":2,"classnames":200,"prop-types":211,"react":237}],14:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -1745,6 +1783,10 @@ var _desc, _value, _class;
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _autobindDecorator = require('autobind-decorator');
 
@@ -1811,11 +1853,11 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
   return desc;
 }
 
-var number = _react.PropTypes.number;
-var bool = _react.PropTypes.bool;
-var func = _react.PropTypes.func;
-var string = _react.PropTypes.string;
-var object = _react.PropTypes.object;
+var number = _propTypes2.default.number,
+    bool = _propTypes2.default.bool,
+    func = _propTypes2.default.func,
+    string = _propTypes2.default.string,
+    object = _propTypes2.default.object;
 
 /**
  * Volume slider component
@@ -1850,9 +1892,9 @@ var VolumeSlider = (_class = function (_Component) {
   }, {
     key: 'handleVolumeChange',
     value: function handleVolumeChange(volume) {
-      var _props = this.props;
-      var isEnabled = _props.isEnabled;
-      var onVolumeChange = _props.onVolumeChange;
+      var _props = this.props,
+          isEnabled = _props.isEnabled,
+          onVolumeChange = _props.onVolumeChange;
 
       if (isEnabled) {
         onVolumeChange(volume);
@@ -1870,14 +1912,14 @@ var VolumeSlider = (_class = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _props2 = this.props;
-      var volume = _props2.volume;
-      var isEnabled = _props2.isEnabled;
-      var className = _props2.className;
-      var extraClasses = _props2.extraClasses;
-      var childClasses = _props2.childClasses;
-      var style = _props2.style;
-      var childrenStyles = _props2.childrenStyles;
+      var _props2 = this.props,
+          volume = _props2.volume,
+          isEnabled = _props2.isEnabled,
+          className = _props2.className,
+          extraClasses = _props2.extraClasses,
+          childClasses = _props2.childClasses,
+          style = _props2.style,
+          childrenStyles = _props2.childrenStyles;
       var currentIntent = this.state.currentIntent;
 
       var volumePercentage = Math.min(100, Math.max(0, volume * 100));
@@ -1931,7 +1973,7 @@ VolumeSlider.defaultProps = {
 };
 exports.default = (0, _composers.compose)((0, _composers.withChildrenStyles)(), (0, _composers.withCustomizableClasses)('VolumeSlider'), (0, _composers.withChildClasses)())(VolumeSlider);
 
-},{"../utils/composers.js":18,"./RangeControlOverlay.js":10,"autobind-decorator":199,"classnames":200,"react":232}],15:[function(require,module,exports){
+},{"../utils/composers.js":18,"./RangeControlOverlay.js":10,"autobind-decorator":199,"classnames":200,"prop-types":211,"react":237}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1986,7 +2028,7 @@ var SoundOffIcon = exports.SoundOffIcon = function SoundOffIcon() {
   return _react2.default.createElement("svg", { className: "Icon SoundOffIcon", viewBox: "0 0 100 100" }, _react2.default.createElement("g", { className: "Icon-shape" }, _react2.default.createElement("path", { d: "M28.0748663,36.3636364 L0,36.3636364 L0,65.9090909 L30.4812834,65.9090909 L54.5454545,88.6363636 L54.5454545,11.3636364 L28.0748663,36.3636364 Z" }), _react2.default.createElement("polygon", { points: "69.513151 44.1232126 87.6949692 62.3050308 90.9090909 65.5191526 97.3373344 59.0909091 94.1232126 55.8767874 75.9413945 37.6949692 72.7272727 34.4808474 66.2990293 40.9090909" }), _react2.default.createElement("polygon", { points: "75.9413945 62.3050308 94.1232126 44.1232126 97.3373344 40.9090909 90.9090909 34.4808474 87.6949692 37.6949692 69.513151 55.8767874 66.2990293 59.0909091 72.7272727 65.5191526" })));
 };
 
-},{"react":232}],16:[function(require,module,exports){
+},{"react":237}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2110,7 +2152,9 @@ var _extends = Object.assign || function (target) {
   }return target;
 };
 
-var _react = require('react');
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _lodash = require('lodash.curry');
 
@@ -2135,7 +2179,7 @@ var compose = exports.compose = _lodash4.default;
  */
 var withChildrenStyles = exports.withChildrenStyles = (0, _lodash2.default)(function (Component) {
   Component.propTypes = _extends({}, Component.propTypes || {}, {
-    childrenStyles: _react.PropTypes.object
+    childrenStyles: _propTypes2.default.object
   });
 
   Component.defaultProps = _extends({}, Component.defaultProps || {}, {
@@ -2150,8 +2194,8 @@ var withChildrenStyles = exports.withChildrenStyles = (0, _lodash2.default)(func
  */
 var withCustomizableClasses = exports.withCustomizableClasses = (0, _lodash2.default)(function (defaultClassName, Component) {
   Component.propTypes = _extends({}, Component.propTypes || {}, {
-    className: _react.PropTypes.string,
-    extraClasses: _react.PropTypes.string
+    className: _propTypes2.default.string,
+    extraClasses: _propTypes2.default.string
   });
 
   Component.defaultProps = _extends({}, Component.defaultProps || {}, {
@@ -2168,7 +2212,7 @@ var withCustomizableClasses = exports.withCustomizableClasses = (0, _lodash2.def
  */
 var withChildClasses = exports.withChildClasses = (0, _lodash2.default)(function (Component) {
   Component.propTypes = _extends({}, Component.propTypes || {}, {
-    childClasses: _react.PropTypes.object
+    childClasses: _propTypes2.default.object
   });
 
   Component.defaultProps = _extends({}, Component.defaultProps || {}, {
@@ -2178,7 +2222,7 @@ var withChildClasses = exports.withChildClasses = (0, _lodash2.default)(function
   return Component;
 });
 
-},{"lodash.curry":205,"lodash.flowright":206,"react":232}],19:[function(require,module,exports){
+},{"lodash.curry":205,"lodash.flowright":206,"prop-types":211}],19:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -26408,53 +26452,745 @@ module.exports = flowRight;
 },{}],207:[function(require,module,exports){
 arguments[4][42][0].apply(exports,arguments)
 },{"dup":42}],208:[function(require,module,exports){
+(function (process){
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+'use strict';
+
+if (process.env.NODE_ENV !== 'production') {
+  var invariant = require('fbjs/lib/invariant');
+  var warning = require('fbjs/lib/warning');
+  var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');
+  var loggedTypeFailures = {};
+}
+
+/**
+ * Assert that the values match with the type specs.
+ * Error messages are memorized and will only be shown once.
+ *
+ * @param {object} typeSpecs Map of name to a ReactPropType
+ * @param {object} values Runtime values that need to be type-checked
+ * @param {string} location e.g. "prop", "context", "child context"
+ * @param {string} componentName Name of the component for error messages.
+ * @param {?Function} getStack Returns the component stack.
+ * @private
+ */
+function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+  if (process.env.NODE_ENV !== 'production') {
+    for (var typeSpecName in typeSpecs) {
+      if (typeSpecs.hasOwnProperty(typeSpecName)) {
+        var error;
+        // Prop type validation may throw. In case they do, we don't want to
+        // fail the render phase where it didn't fail before. So we log it.
+        // After these have been cleaned up, we'll let them throw.
+        try {
+          // This is intentionally an invariant that gets caught. It's the same
+          // behavior as without this statement except with a better message.
+          invariant(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'React.PropTypes.', componentName || 'React class', location, typeSpecName);
+          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+        } catch (ex) {
+          error = ex;
+        }
+        warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
+        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+          // Only monitor this failure once because there tends to be a lot of the
+          // same error.
+          loggedTypeFailures[error.message] = true;
+
+          var stack = getStack ? getStack() : '';
+
+          warning(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
+        }
+      }
+    }
+  }
+}
+
+module.exports = checkPropTypes;
+
+}).call(this,require('_process'))
+},{"./lib/ReactPropTypesSecret":212,"_process":45,"fbjs/lib/invariant":203,"fbjs/lib/warning":204}],209:[function(require,module,exports){
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+'use strict';
+
+var emptyFunction = require('fbjs/lib/emptyFunction');
+var invariant = require('fbjs/lib/invariant');
+var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');
+
+module.exports = function() {
+  function shim(props, propName, componentName, location, propFullName, secret) {
+    if (secret === ReactPropTypesSecret) {
+      // It is still safe when called from React.
+      return;
+    }
+    invariant(
+      false,
+      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+      'Use PropTypes.checkPropTypes() to call them. ' +
+      'Read more at http://fb.me/use-check-prop-types'
+    );
+  };
+  shim.isRequired = shim;
+  function getShim() {
+    return shim;
+  };
+  // Important!
+  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+  var ReactPropTypes = {
+    array: shim,
+    bool: shim,
+    func: shim,
+    number: shim,
+    object: shim,
+    string: shim,
+    symbol: shim,
+
+    any: shim,
+    arrayOf: getShim,
+    element: shim,
+    instanceOf: getShim,
+    node: shim,
+    objectOf: getShim,
+    oneOf: getShim,
+    oneOfType: getShim,
+    shape: getShim
+  };
+
+  ReactPropTypes.checkPropTypes = emptyFunction;
+  ReactPropTypes.PropTypes = ReactPropTypes;
+
+  return ReactPropTypes;
+};
+
+},{"./lib/ReactPropTypesSecret":212,"fbjs/lib/emptyFunction":201,"fbjs/lib/invariant":203}],210:[function(require,module,exports){
+(function (process){
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+'use strict';
+
+var emptyFunction = require('fbjs/lib/emptyFunction');
+var invariant = require('fbjs/lib/invariant');
+var warning = require('fbjs/lib/warning');
+
+var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');
+var checkPropTypes = require('./checkPropTypes');
+
+module.exports = function(isValidElement, throwOnDirectAccess) {
+  /* global Symbol */
+  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
+  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
+
+  /**
+   * Returns the iterator method function contained on the iterable object.
+   *
+   * Be sure to invoke the function with the iterable as context:
+   *
+   *     var iteratorFn = getIteratorFn(myIterable);
+   *     if (iteratorFn) {
+   *       var iterator = iteratorFn.call(myIterable);
+   *       ...
+   *     }
+   *
+   * @param {?object} maybeIterable
+   * @return {?function}
+   */
+  function getIteratorFn(maybeIterable) {
+    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
+    if (typeof iteratorFn === 'function') {
+      return iteratorFn;
+    }
+  }
+
+  /**
+   * Collection of methods that allow declaration and validation of props that are
+   * supplied to React components. Example usage:
+   *
+   *   var Props = require('ReactPropTypes');
+   *   var MyArticle = React.createClass({
+   *     propTypes: {
+   *       // An optional string prop named "description".
+   *       description: Props.string,
+   *
+   *       // A required enum prop named "category".
+   *       category: Props.oneOf(['News','Photos']).isRequired,
+   *
+   *       // A prop named "dialog" that requires an instance of Dialog.
+   *       dialog: Props.instanceOf(Dialog).isRequired
+   *     },
+   *     render: function() { ... }
+   *   });
+   *
+   * A more formal specification of how these methods are used:
+   *
+   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
+   *   decl := ReactPropTypes.{type}(.isRequired)?
+   *
+   * Each and every declaration produces a function with the same signature. This
+   * allows the creation of custom validation functions. For example:
+   *
+   *  var MyLink = React.createClass({
+   *    propTypes: {
+   *      // An optional string or URI prop named "href".
+   *      href: function(props, propName, componentName) {
+   *        var propValue = props[propName];
+   *        if (propValue != null && typeof propValue !== 'string' &&
+   *            !(propValue instanceof URI)) {
+   *          return new Error(
+   *            'Expected a string or an URI for ' + propName + ' in ' +
+   *            componentName
+   *          );
+   *        }
+   *      }
+   *    },
+   *    render: function() {...}
+   *  });
+   *
+   * @internal
+   */
+
+  var ANONYMOUS = '<<anonymous>>';
+
+  // Important!
+  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
+  var ReactPropTypes = {
+    array: createPrimitiveTypeChecker('array'),
+    bool: createPrimitiveTypeChecker('boolean'),
+    func: createPrimitiveTypeChecker('function'),
+    number: createPrimitiveTypeChecker('number'),
+    object: createPrimitiveTypeChecker('object'),
+    string: createPrimitiveTypeChecker('string'),
+    symbol: createPrimitiveTypeChecker('symbol'),
+
+    any: createAnyTypeChecker(),
+    arrayOf: createArrayOfTypeChecker,
+    element: createElementTypeChecker(),
+    instanceOf: createInstanceTypeChecker,
+    node: createNodeChecker(),
+    objectOf: createObjectOfTypeChecker,
+    oneOf: createEnumTypeChecker,
+    oneOfType: createUnionTypeChecker,
+    shape: createShapeTypeChecker
+  };
+
+  /**
+   * inlined Object.is polyfill to avoid requiring consumers ship their own
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+   */
+  /*eslint-disable no-self-compare*/
+  function is(x, y) {
+    // SameValue algorithm
+    if (x === y) {
+      // Steps 1-5, 7-10
+      // Steps 6.b-6.e: +0 != -0
+      return x !== 0 || 1 / x === 1 / y;
+    } else {
+      // Step 6.a: NaN == NaN
+      return x !== x && y !== y;
+    }
+  }
+  /*eslint-enable no-self-compare*/
+
+  /**
+   * We use an Error-like object for backward compatibility as people may call
+   * PropTypes directly and inspect their output. However, we don't use real
+   * Errors anymore. We don't inspect their stack anyway, and creating them
+   * is prohibitively expensive if they are created too often, such as what
+   * happens in oneOfType() for any type before the one that matched.
+   */
+  function PropTypeError(message) {
+    this.message = message;
+    this.stack = '';
+  }
+  // Make `instanceof Error` still work for returned errors.
+  PropTypeError.prototype = Error.prototype;
+
+  function createChainableTypeChecker(validate) {
+    if (process.env.NODE_ENV !== 'production') {
+      var manualPropTypeCallCache = {};
+      var manualPropTypeWarningCount = 0;
+    }
+    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
+      componentName = componentName || ANONYMOUS;
+      propFullName = propFullName || propName;
+
+      if (secret !== ReactPropTypesSecret) {
+        if (throwOnDirectAccess) {
+          // New behavior only for users of `prop-types` package
+          invariant(
+            false,
+            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+            'Use `PropTypes.checkPropTypes()` to call them. ' +
+            'Read more at http://fb.me/use-check-prop-types'
+          );
+        } else if (process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
+          // Old behavior for people using React.PropTypes
+          var cacheKey = componentName + ':' + propName;
+          if (
+            !manualPropTypeCallCache[cacheKey] &&
+            // Avoid spamming the console because they are often not actionable except for lib authors
+            manualPropTypeWarningCount < 3
+          ) {
+            warning(
+              false,
+              'You are manually calling a React.PropTypes validation ' +
+              'function for the `%s` prop on `%s`. This is deprecated ' +
+              'and will throw in the standalone `prop-types` package. ' +
+              'You may be seeing this warning due to a third-party PropTypes ' +
+              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.',
+              propFullName,
+              componentName
+            );
+            manualPropTypeCallCache[cacheKey] = true;
+            manualPropTypeWarningCount++;
+          }
+        }
+      }
+      if (props[propName] == null) {
+        if (isRequired) {
+          if (props[propName] === null) {
+            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
+          }
+          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
+        }
+        return null;
+      } else {
+        return validate(props, propName, componentName, location, propFullName);
+      }
+    }
+
+    var chainedCheckType = checkType.bind(null, false);
+    chainedCheckType.isRequired = checkType.bind(null, true);
+
+    return chainedCheckType;
+  }
+
+  function createPrimitiveTypeChecker(expectedType) {
+    function validate(props, propName, componentName, location, propFullName, secret) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== expectedType) {
+        // `propValue` being instance of, say, date/regexp, pass the 'object'
+        // check, but we can offer a more precise error message here rather than
+        // 'of type `object`'.
+        var preciseType = getPreciseType(propValue);
+
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createAnyTypeChecker() {
+    return createChainableTypeChecker(emptyFunction.thatReturnsNull);
+  }
+
+  function createArrayOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (typeof typeChecker !== 'function') {
+        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
+      }
+      var propValue = props[propName];
+      if (!Array.isArray(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
+      }
+      for (var i = 0; i < propValue.length; i++) {
+        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
+        if (error instanceof Error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createElementTypeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      if (!isValidElement(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createInstanceTypeChecker(expectedClass) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!(props[propName] instanceof expectedClass)) {
+        var expectedClassName = expectedClass.name || ANONYMOUS;
+        var actualClassName = getClassName(props[propName]);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createEnumTypeChecker(expectedValues) {
+    if (!Array.isArray(expectedValues)) {
+      process.env.NODE_ENV !== 'production' ? warning(false, 'Invalid argument supplied to oneOf, expected an instance of array.') : void 0;
+      return emptyFunction.thatReturnsNull;
+    }
+
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      for (var i = 0; i < expectedValues.length; i++) {
+        if (is(propValue, expectedValues[i])) {
+          return null;
+        }
+      }
+
+      var valuesString = JSON.stringify(expectedValues);
+      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createObjectOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (typeof typeChecker !== 'function') {
+        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
+      }
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
+      }
+      for (var key in propValue) {
+        if (propValue.hasOwnProperty(key)) {
+          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+          if (error instanceof Error) {
+            return error;
+          }
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createUnionTypeChecker(arrayOfTypeCheckers) {
+    if (!Array.isArray(arrayOfTypeCheckers)) {
+      process.env.NODE_ENV !== 'production' ? warning(false, 'Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
+      return emptyFunction.thatReturnsNull;
+    }
+
+    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+      var checker = arrayOfTypeCheckers[i];
+      if (typeof checker !== 'function') {
+        warning(
+          false,
+          'Invalid argument supplid to oneOfType. Expected an array of check functions, but ' +
+          'received %s at index %s.',
+          getPostfixForTypeWarning(checker),
+          i
+        );
+        return emptyFunction.thatReturnsNull;
+      }
+    }
+
+    function validate(props, propName, componentName, location, propFullName) {
+      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+        var checker = arrayOfTypeCheckers[i];
+        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret) == null) {
+          return null;
+        }
+      }
+
+      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createNodeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!isNode(props[propName])) {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createShapeTypeChecker(shapeTypes) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+      }
+      for (var key in shapeTypes) {
+        var checker = shapeTypes[key];
+        if (!checker) {
+          continue;
+        }
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+        if (error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function isNode(propValue) {
+    switch (typeof propValue) {
+      case 'number':
+      case 'string':
+      case 'undefined':
+        return true;
+      case 'boolean':
+        return !propValue;
+      case 'object':
+        if (Array.isArray(propValue)) {
+          return propValue.every(isNode);
+        }
+        if (propValue === null || isValidElement(propValue)) {
+          return true;
+        }
+
+        var iteratorFn = getIteratorFn(propValue);
+        if (iteratorFn) {
+          var iterator = iteratorFn.call(propValue);
+          var step;
+          if (iteratorFn !== propValue.entries) {
+            while (!(step = iterator.next()).done) {
+              if (!isNode(step.value)) {
+                return false;
+              }
+            }
+          } else {
+            // Iterator will provide entry [k,v] tuples rather than values.
+            while (!(step = iterator.next()).done) {
+              var entry = step.value;
+              if (entry) {
+                if (!isNode(entry[1])) {
+                  return false;
+                }
+              }
+            }
+          }
+        } else {
+          return false;
+        }
+
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  function isSymbol(propType, propValue) {
+    // Native Symbol.
+    if (propType === 'symbol') {
+      return true;
+    }
+
+    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
+    if (propValue['@@toStringTag'] === 'Symbol') {
+      return true;
+    }
+
+    // Fallback for non-spec compliant Symbols which are polyfilled.
+    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
+      return true;
+    }
+
+    return false;
+  }
+
+  // Equivalent of `typeof` but with special handling for array and regexp.
+  function getPropType(propValue) {
+    var propType = typeof propValue;
+    if (Array.isArray(propValue)) {
+      return 'array';
+    }
+    if (propValue instanceof RegExp) {
+      // Old webkits (at least until Android 4.0) return 'function' rather than
+      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
+      // passes PropTypes.object.
+      return 'object';
+    }
+    if (isSymbol(propType, propValue)) {
+      return 'symbol';
+    }
+    return propType;
+  }
+
+  // This handles more types than `getPropType`. Only used for error messages.
+  // See `createPrimitiveTypeChecker`.
+  function getPreciseType(propValue) {
+    if (typeof propValue === 'undefined' || propValue === null) {
+      return '' + propValue;
+    }
+    var propType = getPropType(propValue);
+    if (propType === 'object') {
+      if (propValue instanceof Date) {
+        return 'date';
+      } else if (propValue instanceof RegExp) {
+        return 'regexp';
+      }
+    }
+    return propType;
+  }
+
+  // Returns a string that is postfixed to a warning about an invalid type.
+  // For example, "undefined" or "of type array"
+  function getPostfixForTypeWarning(value) {
+    var type = getPreciseType(value);
+    switch (type) {
+      case 'array':
+      case 'object':
+        return 'an ' + type;
+      case 'boolean':
+      case 'date':
+      case 'regexp':
+        return 'a ' + type;
+      default:
+        return type;
+    }
+  }
+
+  // Returns class name of the object, if any.
+  function getClassName(propValue) {
+    if (!propValue.constructor || !propValue.constructor.name) {
+      return ANONYMOUS;
+    }
+    return propValue.constructor.name;
+  }
+
+  ReactPropTypes.checkPropTypes = checkPropTypes;
+  ReactPropTypes.PropTypes = ReactPropTypes;
+
+  return ReactPropTypes;
+};
+
+}).call(this,require('_process'))
+},{"./checkPropTypes":208,"./lib/ReactPropTypesSecret":212,"_process":45,"fbjs/lib/emptyFunction":201,"fbjs/lib/invariant":203,"fbjs/lib/warning":204}],211:[function(require,module,exports){
+(function (process){
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+if (process.env.NODE_ENV !== 'production') {
+  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+    Symbol.for &&
+    Symbol.for('react.element')) ||
+    0xeac7;
+
+  var isValidElement = function(object) {
+    return typeof object === 'object' &&
+      object !== null &&
+      object.$$typeof === REACT_ELEMENT_TYPE;
+  };
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = require('./factoryWithTypeCheckers')(isValidElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = require('./factoryWithThrowingShims')();
+}
+
+}).call(this,require('_process'))
+},{"./factoryWithThrowingShims":209,"./factoryWithTypeCheckers":210,"_process":45}],212:[function(require,module,exports){
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+'use strict';
+
+var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+module.exports = ReactPropTypesSecret;
+
+},{}],213:[function(require,module,exports){
 arguments[4][68][0].apply(exports,arguments)
-},{"dup":68}],209:[function(require,module,exports){
+},{"dup":68}],214:[function(require,module,exports){
 arguments[4][70][0].apply(exports,arguments)
-},{"./reactProdInvariant":230,"_process":45,"dup":70,"fbjs/lib/invariant":203}],210:[function(require,module,exports){
+},{"./reactProdInvariant":235,"_process":45,"dup":70,"fbjs/lib/invariant":203}],215:[function(require,module,exports){
 arguments[4][175][0].apply(exports,arguments)
-},{"./ReactChildren":211,"./ReactClass":212,"./ReactComponent":213,"./ReactDOMFactories":216,"./ReactElement":217,"./ReactElementValidator":219,"./ReactPropTypes":222,"./ReactPureComponent":224,"./ReactVersion":225,"./onlyChild":229,"_process":45,"dup":175,"fbjs/lib/warning":204,"object-assign":207}],211:[function(require,module,exports){
+},{"./ReactChildren":216,"./ReactClass":217,"./ReactComponent":218,"./ReactDOMFactories":221,"./ReactElement":222,"./ReactElementValidator":224,"./ReactPropTypes":227,"./ReactPureComponent":229,"./ReactVersion":230,"./onlyChild":234,"_process":45,"dup":175,"fbjs/lib/warning":204,"object-assign":207}],216:[function(require,module,exports){
 arguments[4][176][0].apply(exports,arguments)
-},{"./PooledClass":209,"./ReactElement":217,"./traverseAllChildren":231,"dup":176,"fbjs/lib/emptyFunction":201}],212:[function(require,module,exports){
+},{"./PooledClass":214,"./ReactElement":222,"./traverseAllChildren":236,"dup":176,"fbjs/lib/emptyFunction":201}],217:[function(require,module,exports){
 arguments[4][177][0].apply(exports,arguments)
-},{"./ReactComponent":213,"./ReactElement":217,"./ReactNoopUpdateQueue":220,"./ReactPropTypeLocationNames":221,"./reactProdInvariant":230,"_process":45,"dup":177,"fbjs/lib/emptyObject":202,"fbjs/lib/invariant":203,"fbjs/lib/warning":204,"object-assign":207}],213:[function(require,module,exports){
+},{"./ReactComponent":218,"./ReactElement":222,"./ReactNoopUpdateQueue":225,"./ReactPropTypeLocationNames":226,"./reactProdInvariant":235,"_process":45,"dup":177,"fbjs/lib/emptyObject":202,"fbjs/lib/invariant":203,"fbjs/lib/warning":204,"object-assign":207}],218:[function(require,module,exports){
 arguments[4][178][0].apply(exports,arguments)
-},{"./ReactNoopUpdateQueue":220,"./canDefineProperty":226,"./reactProdInvariant":230,"_process":45,"dup":178,"fbjs/lib/emptyObject":202,"fbjs/lib/invariant":203,"fbjs/lib/warning":204}],214:[function(require,module,exports){
+},{"./ReactNoopUpdateQueue":225,"./canDefineProperty":231,"./reactProdInvariant":235,"_process":45,"dup":178,"fbjs/lib/emptyObject":202,"fbjs/lib/invariant":203,"fbjs/lib/warning":204}],219:[function(require,module,exports){
 arguments[4][179][0].apply(exports,arguments)
-},{"./ReactCurrentOwner":215,"./reactProdInvariant":230,"_process":45,"dup":179,"fbjs/lib/invariant":203,"fbjs/lib/warning":204}],215:[function(require,module,exports){
+},{"./ReactCurrentOwner":220,"./reactProdInvariant":235,"_process":45,"dup":179,"fbjs/lib/invariant":203,"fbjs/lib/warning":204}],220:[function(require,module,exports){
 arguments[4][180][0].apply(exports,arguments)
-},{"dup":180}],216:[function(require,module,exports){
+},{"dup":180}],221:[function(require,module,exports){
 arguments[4][181][0].apply(exports,arguments)
-},{"./ReactElement":217,"./ReactElementValidator":219,"_process":45,"dup":181}],217:[function(require,module,exports){
+},{"./ReactElement":222,"./ReactElementValidator":224,"_process":45,"dup":181}],222:[function(require,module,exports){
 arguments[4][182][0].apply(exports,arguments)
-},{"./ReactCurrentOwner":215,"./ReactElementSymbol":218,"./canDefineProperty":226,"_process":45,"dup":182,"fbjs/lib/warning":204,"object-assign":207}],218:[function(require,module,exports){
+},{"./ReactCurrentOwner":220,"./ReactElementSymbol":223,"./canDefineProperty":231,"_process":45,"dup":182,"fbjs/lib/warning":204,"object-assign":207}],223:[function(require,module,exports){
 arguments[4][97][0].apply(exports,arguments)
-},{"dup":97}],219:[function(require,module,exports){
+},{"dup":97}],224:[function(require,module,exports){
 arguments[4][184][0].apply(exports,arguments)
-},{"./ReactComponentTreeHook":214,"./ReactCurrentOwner":215,"./ReactElement":217,"./canDefineProperty":226,"./checkReactTypeSpec":227,"./getIteratorFn":228,"_process":45,"dup":184,"fbjs/lib/warning":204}],220:[function(require,module,exports){
+},{"./ReactComponentTreeHook":219,"./ReactCurrentOwner":220,"./ReactElement":222,"./canDefineProperty":231,"./checkReactTypeSpec":232,"./getIteratorFn":233,"_process":45,"dup":184,"fbjs/lib/warning":204}],225:[function(require,module,exports){
 arguments[4][185][0].apply(exports,arguments)
-},{"_process":45,"dup":185,"fbjs/lib/warning":204}],221:[function(require,module,exports){
+},{"_process":45,"dup":185,"fbjs/lib/warning":204}],226:[function(require,module,exports){
 arguments[4][115][0].apply(exports,arguments)
-},{"_process":45,"dup":115}],222:[function(require,module,exports){
+},{"_process":45,"dup":115}],227:[function(require,module,exports){
 arguments[4][187][0].apply(exports,arguments)
-},{"./ReactElement":217,"./ReactPropTypeLocationNames":221,"./ReactPropTypesSecret":223,"./getIteratorFn":228,"_process":45,"dup":187,"fbjs/lib/emptyFunction":201,"fbjs/lib/warning":204}],223:[function(require,module,exports){
+},{"./ReactElement":222,"./ReactPropTypeLocationNames":226,"./ReactPropTypesSecret":228,"./getIteratorFn":233,"_process":45,"dup":187,"fbjs/lib/emptyFunction":201,"fbjs/lib/warning":204}],228:[function(require,module,exports){
 arguments[4][116][0].apply(exports,arguments)
-},{"dup":116}],224:[function(require,module,exports){
+},{"dup":116}],229:[function(require,module,exports){
 arguments[4][189][0].apply(exports,arguments)
-},{"./ReactComponent":213,"./ReactNoopUpdateQueue":220,"dup":189,"fbjs/lib/emptyObject":202,"object-assign":207}],225:[function(require,module,exports){
+},{"./ReactComponent":218,"./ReactNoopUpdateQueue":225,"dup":189,"fbjs/lib/emptyObject":202,"object-assign":207}],230:[function(require,module,exports){
 arguments[4][124][0].apply(exports,arguments)
-},{"dup":124}],226:[function(require,module,exports){
+},{"dup":124}],231:[function(require,module,exports){
 arguments[4][191][0].apply(exports,arguments)
-},{"_process":45,"dup":191}],227:[function(require,module,exports){
+},{"_process":45,"dup":191}],232:[function(require,module,exports){
 arguments[4][192][0].apply(exports,arguments)
-},{"./ReactComponentTreeHook":214,"./ReactPropTypeLocationNames":221,"./ReactPropTypesSecret":223,"./reactProdInvariant":230,"_process":45,"dup":192,"fbjs/lib/invariant":203,"fbjs/lib/warning":204}],228:[function(require,module,exports){
+},{"./ReactComponentTreeHook":219,"./ReactPropTypeLocationNames":226,"./ReactPropTypesSecret":228,"./reactProdInvariant":235,"_process":45,"dup":192,"fbjs/lib/invariant":203,"fbjs/lib/warning":204}],233:[function(require,module,exports){
 arguments[4][157][0].apply(exports,arguments)
-},{"dup":157}],229:[function(require,module,exports){
+},{"dup":157}],234:[function(require,module,exports){
 arguments[4][194][0].apply(exports,arguments)
-},{"./ReactElement":217,"./reactProdInvariant":230,"_process":45,"dup":194,"fbjs/lib/invariant":203}],230:[function(require,module,exports){
+},{"./ReactElement":222,"./reactProdInvariant":235,"_process":45,"dup":194,"fbjs/lib/invariant":203}],235:[function(require,module,exports){
 arguments[4][166][0].apply(exports,arguments)
-},{"dup":166}],231:[function(require,module,exports){
+},{"dup":166}],236:[function(require,module,exports){
 arguments[4][196][0].apply(exports,arguments)
-},{"./KeyEscapeUtils":208,"./ReactCurrentOwner":215,"./ReactElementSymbol":218,"./getIteratorFn":228,"./reactProdInvariant":230,"_process":45,"dup":196,"fbjs/lib/invariant":203,"fbjs/lib/warning":204}],232:[function(require,module,exports){
+},{"./KeyEscapeUtils":213,"./ReactCurrentOwner":220,"./ReactElementSymbol":223,"./getIteratorFn":233,"./reactProdInvariant":235,"_process":45,"dup":196,"fbjs/lib/invariant":203,"fbjs/lib/warning":204}],237:[function(require,module,exports){
 arguments[4][197][0].apply(exports,arguments)
-},{"./lib/React":210,"dup":197}]},{},[198]);
+},{"./lib/React":215,"dup":197}]},{},[198]);
