@@ -65,6 +65,8 @@ class RangeControlOverlay extends Component {
     window.addEventListener('mousemove', this.triggerRangeChange)
     window.addEventListener('mouseup', this.endDrag)
 
+    this.toggleSelection('none')
+
     const startValue = evt
       ? this.getValueFromMouseEvent(evt)
       : null
@@ -81,10 +83,20 @@ class RangeControlOverlay extends Component {
     window.removeEventListener('mousemove', this.triggerRangeChange)
     window.removeEventListener('mouseup', this.endDrag)
 
+    this.toggleSelection('')
+
     const endValue = evt
       ? this.getValueFromMouseEvent(evt)
       : null
     this.props.onChangeEnd(endValue)
+  }
+
+  toggleSelection (value) {
+    let body = document.getElementsByTagName('body')[0]
+    body.style['user-select'] = value
+    body.style['-webkit-user-select'] = value
+    body.style['-moz-user-select'] = value
+    body.style['-ms-user-select'] = value
   }
 
   getValueFromMouseEvent (mouseEvent) {
