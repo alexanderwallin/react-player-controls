@@ -29,7 +29,7 @@ class VolumeSlider extends Component {
     style: {},
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.sliderEl = null
