@@ -1,7 +1,8 @@
+/* eslint-env mocha */
 import React from 'react'
-import { shallow, mount } from 'enzyme';
-import chai, { expect } from 'chai';
-import chaiEnzyme from 'chai-enzyme';
+import { shallow, mount } from 'enzyme'
+import chai, { expect } from 'chai'
+import chaiEnzyme from 'chai-enzyme'
 import { spy } from 'sinon'
 
 chai.use(chaiEnzyme())
@@ -11,7 +12,6 @@ import PlayButton from '../src/components/PlayButton.js'
 const noop = () => {}
 
 describe('<PlayButton />', () => {
-
   it('should be disabled by default', () => {
     const btn = mount(<PlayButton onClick={noop} />)
     expect(btn.props().isEnabled).to.equal(false)
@@ -34,7 +34,7 @@ describe('<PlayButton />', () => {
 
   it('should accept a custom class name', () => {
     const btn = shallow(<PlayButton className="MyClassName" onClick={noop} />)
-    expect(btn.props().className). to.include('MyClassName')
+    expect(btn.props().className).to.include('MyClassName')
   })
 
   it('should accept custom styles', () => {
@@ -58,5 +58,4 @@ describe('<PlayButton />', () => {
     btn.simulate('click')
     expect(callback.called).to.equal(true)
   })
-
 })

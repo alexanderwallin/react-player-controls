@@ -1,7 +1,8 @@
+/* eslint-env mocha */
 import React from 'react'
-import { shallow, mount } from 'enzyme';
-import chai, { expect } from 'chai';
-import chaiEnzyme from 'chai-enzyme';
+import { shallow, mount } from 'enzyme'
+import chai, { expect } from 'chai'
+import chaiEnzyme from 'chai-enzyme'
 import { spy } from 'sinon'
 
 chai.use(chaiEnzyme())
@@ -11,7 +12,6 @@ import NextButton from '../src/components/NextButton.js'
 const noop = () => {}
 
 describe('<NextButton />', () => {
-
   it('should accept extra classes', () => {
     const classes = 'TestClass'
 
@@ -53,5 +53,4 @@ describe('<NextButton />', () => {
     btn.simulate('click')
     expect(callback.called).to.equal(true)
   })
-
 })

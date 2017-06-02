@@ -1,7 +1,8 @@
+/* eslint-env mocha */
 import React from 'react'
-import { shallow, mount } from 'enzyme';
-import chai, { expect } from 'chai';
-import chaiEnzyme from 'chai-enzyme';
+import { shallow, mount } from 'enzyme'
+import chai, { expect } from 'chai'
+import chaiEnzyme from 'chai-enzyme'
 import { spy } from 'sinon'
 
 chai.use(chaiEnzyme())
@@ -10,7 +11,6 @@ import TimeMarker, { TimeMarkerType } from '../src/components/TimeMarker.js'
 import FormattedTime from '../src/components/FormattedTime.js'
 
 describe('<TimeMarker />', () => {
-
   it('renders two <FormattedTime />', () => {
     const marker = shallow(<TimeMarker />)
     expect(marker.find('FormattedTime')).to.have.length(2)
@@ -29,7 +29,7 @@ describe('<TimeMarker />', () => {
   it('applies specified marker types', () => {
     spy(TimeMarker.prototype, 'getSecondsForTimeWithMarkerType')
 
-    const marker = mount(
+    mount(
       <TimeMarker
         firstMarkerType={TimeMarkerType.DURATION}
         secondMarkerType={TimeMarkerType.LEFT_NEGATIVE}
@@ -83,5 +83,4 @@ describe('<TimeMarker />', () => {
     expect(marker.find('.TimeMarker-secondMarker').props().style).to.include(style)
     expect(marker.find('.TimeMarker-separator').props().style).to.include(style)
   })
-
 })

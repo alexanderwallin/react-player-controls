@@ -1,7 +1,8 @@
+/* eslint-env mocha */
 import React from 'react'
-import { shallow, mount } from 'enzyme';
-import chai, { expect } from 'chai';
-import chaiEnzyme from 'chai-enzyme';
+import { shallow, mount } from 'enzyme'
+import chai, { expect } from 'chai'
+import chaiEnzyme from 'chai-enzyme'
 
 chai.use(chaiEnzyme())
 
@@ -10,7 +11,6 @@ import FormattedTime from '../src/components/FormattedTime.js'
 const noop = () => {}
 
 describe('<FormattedTime />', () => {
-
   it('defaults to 0:00', () => {
     const time = mount(<FormattedTime />)
 
@@ -32,7 +32,7 @@ describe('<FormattedTime />', () => {
     const time1 = mount(<FormattedTime numSeconds={-82} />)
     expect(time1.text()).to.equal('-1:22')
 
-    const time2 = mount(<FormattedTime numSeconds={-(3600 + 20*60 + 10)} />)
+    const time2 = mount(<FormattedTime numSeconds={-(3600 + 20 * 60 + 10)} />)
     expect(time2.text()).to.equal('-1:20:10')
   })
 
@@ -73,5 +73,4 @@ describe('<FormattedTime />', () => {
     const time = shallow(<FormattedTime style={{ fontSize: 100 }} />)
     expect(time.props().style).to.eql({ fontSize: 100 })
   })
-
 })

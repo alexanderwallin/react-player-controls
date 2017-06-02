@@ -1,7 +1,8 @@
+/* eslint-env mocha */
 import React from 'react'
-import { shallow, mount } from 'enzyme';
-import chai, { expect } from 'chai';
-import chaiEnzyme from 'chai-enzyme';
+import { shallow, mount } from 'enzyme'
+import chai, { expect } from 'chai'
+import chaiEnzyme from 'chai-enzyme'
 import { spy } from 'sinon'
 
 chai.use(chaiEnzyme())
@@ -15,7 +16,6 @@ import NextButton from '../src/components/NextButton.js'
 const noop = () => {}
 
 describe('<PlaybackControls />', () => {
-
   it('is not playable by default', () => {
     const ctrls = mount(<PlaybackControls onPlaybackChange={noop} />)
     expect(ctrls.props().isPlayable).to.equal(false)

@@ -1,7 +1,8 @@
+/* eslint-env mocha */
 import React from 'react'
-import { shallow, mount } from 'enzyme';
-import chai, { expect } from 'chai';
-import chaiEnzyme from 'chai-enzyme';
+import { shallow, mount } from 'enzyme'
+import chai, { expect } from 'chai'
+import chaiEnzyme from 'chai-enzyme'
 import { spy } from 'sinon'
 
 chai.use(chaiEnzyme())
@@ -11,7 +12,6 @@ import SoundOnButton from '../src/components/SoundOnButton.js'
 import SoundOffButton from '../src/components/SoundOffButton.js'
 
 describe('<MuteToggleButton />', () => {
-
   it('is enabled by default', () => {
     const btn = mount(<MuteToggleButton />)
     expect(btn.props().isEnabled).to.be.true
@@ -104,5 +104,4 @@ describe('<MuteToggleButton />', () => {
     btn.find(SoundOffButton).simulate('click')
     expect(callback.callCount).to.equal(2)
   })
-
 })

@@ -12,7 +12,7 @@
     "prebuild": "rimraf dist",
     "build": "babel --out-dir dist src",
     "dev": "npm run build -- --watch",
-    "lint": "eslint src",
+    "lint": "eslint src tests",
     "test": "mocha --compilers js:babel-core/register tests/helpers/browser.js tests/*.js",
     "test:w": "npm test -- -w",
     "release": "paco release"

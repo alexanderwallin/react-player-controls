@@ -1,16 +1,15 @@
+/* eslint-env mocha */
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 import chai, { expect } from 'chai'
 import chaiEnzyme from 'chai-enzyme'
-import { spy } from 'sinon'
 
 chai.use(chaiEnzyme())
 
-import VolumeSlider, { ControlDirection } from '../src/components/VolumeSlider.js'
+import VolumeSlider from '../src/components/VolumeSlider.js'
 import RangeControlOverlay from '../src/components/RangeControlOverlay.js'
 
 describe('<VolumeSlider />', () => {
-
   it('renders a value with correct height', () => {
     const slider = shallow(<VolumeSlider volume={0.6} />)
     const value = slider.find('.VolumeSlider-value')
@@ -95,5 +94,4 @@ describe('<VolumeSlider />', () => {
     expect(slider.find('.VolumeSlider-handle').props().style).to.include(style)
     expect(slider.find(RangeControlOverlay).props().style).to.include(style)
   })
-
 })

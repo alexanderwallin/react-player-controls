@@ -1,7 +1,8 @@
+/* eslint-env mocha */
 import React from 'react'
-import { shallow, mount } from 'enzyme';
-import chai, { expect } from 'chai';
-import chaiEnzyme from 'chai-enzyme';
+import { shallow, mount } from 'enzyme'
+import chai, { expect } from 'chai'
+import chaiEnzyme from 'chai-enzyme'
 import { spy } from 'sinon'
 
 chai.use(chaiEnzyme())
@@ -9,10 +10,7 @@ chai.use(chaiEnzyme())
 import ProgressBar from '../src/components/ProgressBar.js'
 import RangeControlOverlay from '../src/components/RangeControlOverlay.js'
 
-const noop = () => {}
-
 describe('<ProgressBar />', () => {
-
   it('should not be seekable by default', () => {
     const bar = mount(<ProgressBar />)
     expect(bar.props().isSeekable).to.equal(false)
@@ -38,7 +36,6 @@ describe('<ProgressBar />', () => {
   })
 
   it('triggers onSeekEnd when seekable', () => {
-    const onSeekStart = spy()
     const onSeekEnd = spy()
     const bar = mount(<ProgressBar isSeekable onSeekEnd={onSeekEnd} />)
 
@@ -126,5 +123,4 @@ describe('<ProgressBar />', () => {
     expect(bar.find('.ProgressBar-handle').props().style).to.include(style)
     expect(bar.find(RangeControlOverlay).props().style).to.include(style)
   })
-
 })

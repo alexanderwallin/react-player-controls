@@ -1,11 +1,9 @@
 /* eslint-env mocha */
-
 import React from 'react'
-import { shallow, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 import chai, { expect } from 'chai'
 import chaiEnzyme from 'chai-enzyme'
 import { spy } from 'sinon'
-import TestUtils from 'react-addons-test-utils'
 
 chai.use(chaiEnzyme())
 
@@ -14,7 +12,6 @@ import RangeControlOverlay, { ControlDirection } from '../src/components/RangeCo
 const noop = () => {}
 
 describe('<RangeControlOverlay />', () => {
-
   describe('horizontal controls', () => {
     let overlay = null
     let onValue = null
@@ -140,5 +137,4 @@ describe('all controls', () => {
     const overlay = shallow(<RangeControlOverlay style={{ fontSize: 100 }} bounds={noop} />)
     expect(overlay.props().style).to.eql({ fontSize: 100 })
   })
-
 })

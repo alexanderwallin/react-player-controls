@@ -1,7 +1,8 @@
+/* eslint-env mocha */
 import React from 'react'
-import { shallow, mount } from 'enzyme';
-import chai, { expect } from 'chai';
-import chaiEnzyme from 'chai-enzyme';
+import { shallow, mount } from 'enzyme'
+import chai, { expect } from 'chai'
+import chaiEnzyme from 'chai-enzyme'
 import { spy } from 'sinon'
 
 chai.use(chaiEnzyme())
@@ -11,7 +12,6 @@ import PrevButton from '../src/components/PrevButton.js'
 const noop = () => {}
 
 describe('<PrevButton />', () => {
-
   it('should accept extra classes', () => {
     const classes = 'TestClass'
 
@@ -29,7 +29,7 @@ describe('<PrevButton />', () => {
 
   it('should accept a custom class name', () => {
     const btn = shallow(<PrevButton className="MyClassName" onClick={noop} />)
-    expect(btn.props().className). to.include('MyClassName')
+    expect(btn.props().className).to.include('MyClassName')
   })
 
   it('should accept custom styles', () => {
@@ -53,5 +53,4 @@ describe('<PrevButton />', () => {
     btn.simulate('click')
     expect(callback.called).to.equal(true)
   })
-
 })
