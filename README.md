@@ -49,8 +49,10 @@ import { PlayButton, PauseButton } from 'react-player-controls'
   isPlayable={true}
   isPlaying={false}
   onPlaybackChange={setPlayback}
+  showPrevious={true}
   hasPrevious={currentSong > 0}
   onPrevious={prevHandler}
+  showNext={true}
   hasNext={currentSong < numSongs.length - 1}
   onNext={nextHandler}
 />

@@ -788,8 +788,10 @@ var PlaybackControls = (_class = function (_Component) {
       var _props = this.props,
           isPlayable = _props.isPlayable,
           isPlaying = _props.isPlaying,
+          showPrevious = _props.showPrevious,
           hasPrevious = _props.hasPrevious,
           onPrevious = _props.onPrevious,
+          showNext = _props.showNext,
           hasNext = _props.hasNext,
           onNext = _props.onNext,
           className = _props.className,
@@ -801,7 +803,7 @@ var PlaybackControls = (_class = function (_Component) {
       return _react2.default.createElement('div', {
         className: (0, _classnames2.default)(className, { isPlayable: isPlayable, isPlaying: isPlaying }, extraClasses),
         style: style
-      }, _react2.default.createElement(_PrevButton2.default, {
+      }, showPrevious && _react2.default.createElement(_PrevButton2.default, {
         isEnabled: hasPrevious,
         onClick: onPrevious,
         className: childClasses.PrevButton,
@@ -815,7 +817,7 @@ var PlaybackControls = (_class = function (_Component) {
         onClick: this.handlePlay,
         className: childClasses.PlayButton,
         style: childrenStyles.PlayButton
-      }), _react2.default.createElement(_NextButton2.default, {
+      }), showNext && _react2.default.createElement(_NextButton2.default, {
         isEnabled: hasNext,
         onClick: onNext,
         className: childClasses.NextButton,
@@ -830,8 +832,10 @@ PlaybackControls.propTypes = {
   onPlaybackChange: func.isRequired,
   isPlayable: bool,
   isPlaying: bool,
+  showPrevious: bool,
   hasPrevious: bool,
   onPrevious: func,
+  showNext: bool,
   hasNext: bool,
   onNext: func,
   style: object
@@ -839,8 +843,10 @@ PlaybackControls.propTypes = {
 PlaybackControls.defaultProps = {
   isPlayable: false,
   isPlaying: false,
+  showPrevious: true,
   hasPrevious: false,
   onPrevious: noop,
+  showNext: true,
   hasNext: false,
   onNext: noop,
   style: {}
@@ -23832,7 +23838,9 @@ demos.PlaybackControls = function (_React$Component5) {
     _this8.state = {
       isPlaying: false,
       isPlayable: true,
+      showPrevious: true,
       hasPrevious: true,
+      showNext: true,
       hasNext: true
     };
     return _this8;
@@ -23846,6 +23854,8 @@ demos.PlaybackControls = function (_React$Component5) {
       var _state = this.state,
           isPlayable = _state.isPlayable,
           isPlaying = _state.isPlaying,
+          showPrevious = _state.showPrevious,
+          showNext = _state.showNext,
           hasPrevious = _state.hasPrevious,
           hasNext = _state.hasNext;
 
@@ -23857,7 +23867,7 @@ demos.PlaybackControls = function (_React$Component5) {
           'pre',
           { className: 'ComponentDemo-code' },
           _react2.default.createElement('code', { className: 'language-jsx', dangerouslySetInnerHTML: {
-              __html: _prismjs2.default.highlight('<PlaybackControls\n  isPlayable={this.state.isPlayable}\n  isPlaying={this.state.isPlaying}\n  hasPrevious={this.state.hasPrevious}\n  hasNext={this.state.hasNext}\n  onPlaybackChange={isPlaying => this.setState({ ...this.state, isPlaying })}\n  onPrevious={() => alert(\'Go to previous\')}\n  onNext={() => alert(\'Go to next\')}\n/>', _prismjs2.default.languages.jsx)
+              __html: _prismjs2.default.highlight('<PlaybackControls\n  isPlayable={this.state.isPlayable}\n  isPlaying={this.state.isPlaying}\n  showPrevious={this.state.showPrevious}\n  hasPrevious={this.state.hasPrevious}\n  showNext={this.state.showNext}\n  hasNext={this.state.hasNext}\n  onPlaybackChange={isPlaying => this.setState({ ...this.state, isPlaying })}\n  onPrevious={() => alert(\'Go to previous\')}\n  onNext={() => alert(\'Go to next\')}\n/>', _prismjs2.default.languages.jsx)
             } })
         ),
         _react2.default.createElement(
@@ -23878,6 +23888,18 @@ demos.PlaybackControls = function (_React$Component5) {
           _react2.default.createElement(
             'label',
             null,
+            _react2.default.createElement('input', { type: 'checkbox', checked: showPrevious, onChange: function onChange(evt) {
+                return _this9.setState({ showPrevious: !showPrevious });
+              } }),
+            _react2.default.createElement(
+              'code',
+              null,
+              'showPrevious'
+            )
+          ),
+          _react2.default.createElement(
+            'label',
+            null,
             _react2.default.createElement('input', { type: 'checkbox', checked: hasPrevious, onChange: function onChange(evt) {
                 return _this9.setState({ hasPrevious: !hasPrevious });
               } }),
@@ -23885,6 +23907,18 @@ demos.PlaybackControls = function (_React$Component5) {
               'code',
               null,
               'hasPrevious'
+            )
+          ),
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement('input', { type: 'checkbox', checked: showNext, onChange: function onChange(evt) {
+                return _this9.setState({ showNext: !showNext });
+              } }),
+            _react2.default.createElement(
+              'code',
+              null,
+              'showNext'
             )
           ),
           _react2.default.createElement(
@@ -23909,10 +23943,12 @@ demos.PlaybackControls = function (_React$Component5) {
             onPlaybackChange: function onPlaybackChange(isPlaying) {
               return _this9.setState(Object.assign({}, _this9.state, { isPlaying: isPlaying }));
             },
+            showPrevious: showPrevious,
             hasPrevious: hasPrevious,
             onPrevious: function onPrevious() {
               return alert('Go to previous');
             },
+            showNext: showNext,
             hasNext: hasNext,
             onNext: function onNext() {
               return alert('Go to next');

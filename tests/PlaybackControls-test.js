@@ -67,10 +67,24 @@ describe('<PlaybackControls />', () => {
     expect(pauseCallback.calledWith(false)).to.equal(true)
   })
 
-  it('renders prev and next buttons', () => {
+  it('renders prev and next buttons by default', () => {
     const ctrls = shallow(<PlaybackControls onPlaybackChange={noop} />)
     expect(ctrls.find(PrevButton)).to.have.length(1)
     expect(ctrls.find(NextButton)).to.have.length(1)
+  })
+
+  it('respects showPrevious and showNext props', () => {
+    const ctrls1 = shallow(<PlaybackControls onPlaybackChange={noop} showPrevious={false} showNext={true} />)
+    expect(ctrls1.find(PrevButton)).to.have.length(0)
+    expect(ctrls1.find(NextButton)).to.have.length(1)
+
+    const ctrls2 = shallow(<PlaybackControls onPlaybackChange={noop} showPrevious={true} showNext={false} />)
+    expect(ctrls2.find(PrevButton)).to.have.length(1)
+    expect(ctrls2.find(NextButton)).to.have.length(0)
+
+    const ctrls3 = shallow(<PlaybackControls onPlaybackChange={noop} showPrevious={false} showNext={false} />)
+    expect(ctrls3.find(PrevButton)).to.have.length(0)
+    expect(ctrls3.find(NextButton)).to.have.length(0)
   })
 
   it('sets up prev and next buttons with correct states and callbacks', () => {

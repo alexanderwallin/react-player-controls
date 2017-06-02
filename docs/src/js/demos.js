@@ -175,13 +175,15 @@ demos.PlaybackControls = class PlaybackControls extends React.Component {
     this.state = {
       isPlaying: false,
       isPlayable: true,
+      showPrevious: true,
       hasPrevious: true,
+      showNext: true,
       hasNext: true,
     }
   }
 
   render() {
-    const { isPlayable, isPlaying, hasPrevious, hasNext } = this.state
+    const { isPlayable, isPlaying, showPrevious, showNext, hasPrevious, hasNext } = this.state
 
     return (
       <div className="ComponentDemo PlaybackControls">
@@ -191,7 +193,9 @@ demos.PlaybackControls = class PlaybackControls extends React.Component {
 `<PlaybackControls
   isPlayable={this.state.isPlayable}
   isPlaying={this.state.isPlaying}
+  showPrevious={this.state.showPrevious}
   hasPrevious={this.state.hasPrevious}
+  showNext={this.state.showNext}
   hasNext={this.state.hasNext}
   onPlaybackChange={isPlaying => this.setState({ ...this.state, isPlaying })}
   onPrevious={() => alert('Go to previous')}
@@ -209,8 +213,18 @@ demos.PlaybackControls = class PlaybackControls extends React.Component {
           </label>
 
           <label>
+            <input type="checkbox" checked={showPrevious} onChange={(evt) => this.setState({ showPrevious: !showPrevious })} />
+            <code>showPrevious</code>
+          </label>
+
+          <label>
             <input type="checkbox" checked={hasPrevious} onChange={(evt) => this.setState({ hasPrevious: !hasPrevious })} />
             <code>hasPrevious</code>
+          </label>
+
+          <label>
+            <input type="checkbox" checked={showNext} onChange={(evt) => this.setState({ showNext: !showNext })} />
+            <code>showNext</code>
           </label>
 
           <label>
@@ -224,8 +238,10 @@ demos.PlaybackControls = class PlaybackControls extends React.Component {
             isPlayable={isPlayable}
             isPlaying={isPlaying}
             onPlaybackChange={isPlaying => this.setState(Object.assign({}, this.state, { isPlaying: isPlaying }))}
+            showPrevious={showPrevious}
             hasPrevious={hasPrevious}
             onPrevious={() => alert('Go to previous')}
+            showNext={showNext}
             hasNext={hasNext}
             onNext={() => alert('Go to next')}
           />

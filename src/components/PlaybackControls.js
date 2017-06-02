@@ -21,8 +21,10 @@ class PlaybackControls extends Component {
     onPlaybackChange: func.isRequired,
     isPlayable: bool,
     isPlaying: bool,
+    showPrevious: bool,
     hasPrevious: bool,
     onPrevious: func,
+    showNext: bool,
     hasNext: bool,
     onNext: func,
     style: object,
@@ -31,8 +33,10 @@ class PlaybackControls extends Component {
   static defaultProps = {
     isPlayable: false,
     isPlaying: false,
+    showPrevious: true,
     hasPrevious: false,
     onPrevious: noop,
+    showNext: true,
     hasNext: false,
     onNext: noop,
     style: {},
@@ -52,7 +56,9 @@ class PlaybackControls extends Component {
 
   render () {
     const {
-      isPlayable, isPlaying, hasPrevious, onPrevious, hasNext, onNext,
+      isPlayable, isPlaying,
+      showPrevious, hasPrevious, onPrevious,
+      showNext, hasNext, onNext,
       className, extraClasses, childClasses, style, childrenStyles,
     } = this.props
 
@@ -61,12 +67,14 @@ class PlaybackControls extends Component {
         className={classNames(className, { isPlayable, isPlaying }, extraClasses)}
         style={style}
       >
-        <PrevButton
-          isEnabled={hasPrevious}
-          onClick={onPrevious}
-          className={childClasses.PrevButton}
-          style={childrenStyles.PrevButton}
-        />
+        { showPrevious && (
+          <PrevButton
+            isEnabled={hasPrevious}
+            onClick={onPrevious}
+            className={childClasses.PrevButton}
+            style={childrenStyles.PrevButton}
+          />
+        )}
 
         { isPlaying && isPlayable
           ? <PauseButton
@@ -82,12 +90,14 @@ class PlaybackControls extends Component {
             />
         }
 
-        <NextButton
-          isEnabled={hasNext}
-          onClick={onNext}
-          className={childClasses.NextButton}
-          style={childrenStyles.NextButton}
-        />
+        { showNext && (
+          <NextButton
+            isEnabled={hasNext}
+            onClick={onNext}
+            className={childClasses.NextButton}
+            style={childrenStyles.NextButton}
+          />
+        )}
       </div>
     )
   }
