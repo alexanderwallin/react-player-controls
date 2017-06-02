@@ -29,7 +29,7 @@
   "bugs": {
     "url": "https://github.com/alexanderwallin/react-player-controls/issues"
   },
-  "homepage": "http://reactify.github.io/react-player-controls/",
+  "homepage": "http://alexanderwallin.github.io/react-player-controls/",
   "devDependencies": {
     "babel-cli": "^6.14.0",
     "babel-eslint": "^6.1.2",
