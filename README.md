@@ -82,7 +82,7 @@ import { PlayButton, PauseButton } from 'react-player-controls'
   currentTime={65}
   markerSeparator=" / "
 />
-// -> "1:05 of 3:10" (without wrapping <span /> elements)
+// -> "1:05 / 3:10" (without wrapping <span /> elements)
 
 <TimeMarker
   totalTime={190}
