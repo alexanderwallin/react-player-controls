@@ -1,6 +1,6 @@
 {
   "traverse": false,
-  "lint": false,
+  "lint": true,
   "test": true,
   "build": ["npm run build"],
   "bump": {
