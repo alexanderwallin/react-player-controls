@@ -123,4 +123,15 @@ describe('<ProgressBar />', () => {
     expect(bar.find('.ProgressBar-handle').props().style).to.include(style)
     expect(bar.find(RangeControlOverlay).props().style).to.include(style)
   })
+
+  it('triggers intent callback when seekable', () => {
+    const callback = spy()
+    const bar = mount(<ProgressBar onIntent={callback}/>)
+
+    expect(bar.find('RangeControlOverlay')).to.have.length(0)
+
+    bar.setProps({ isSeekable: true })
+    bar.find('RangeControlOverlay').props().onIntent()
+    expect(callback.called).to.equal(true)
+  })
 })
