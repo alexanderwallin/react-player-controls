@@ -22,6 +22,7 @@ class ProgressBar extends Component {
     onSeek: func,
     onSeekStart: func,
     onSeekEnd: func,
+    onIntent: func,
     style: object,
   }
 
@@ -32,6 +33,7 @@ class ProgressBar extends Component {
     onSeek: () => {},
     onSeekStart: () => {},
     onSeekEnd: () => {},
+    onIntent: () => {},
     style: {},
   }
 
@@ -79,12 +81,17 @@ class ProgressBar extends Component {
 
   @autobind
   handleIntent (relativeTime) {
-    const intent = this.props.isSeekable ? relativeTime : 0
+    const { isSeekable, onIntent, totalTime } = this.props
+    const intent = isSeekable ? relativeTime : 0
 
     this.setState({
       ...this.state,
       currentIntent: intent,
     })
+
+    if (isSeekable) {
+      onIntent(relativeTime * totalTime)
+    }
   }
 
   render () {

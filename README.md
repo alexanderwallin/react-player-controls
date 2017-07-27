@@ -73,6 +73,7 @@ import { PlayButton, PauseButton } from 'react-player-controls'
   onSeek={seekTime => { /* f.i. update the time marker */}}
   onSeekStart={seekTime => { /* perhaps freeze a video frame? */ }}
   onSeekEnd={seekTime => { /* perform seek: */ audioEl.currentTime = seekTime }}
+  onIntent={seekTime => { /* f.i. update intended time marker */}}
 />
 
 // <TimeMarker /> composite component

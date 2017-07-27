@@ -406,14 +406,14 @@ demos.ProgressBar = class ProgressBarDemo extends React.Component {
   }
 
   render() {
-    const { totalTime, currentTime, isSeekable, lastSeekStart, lastSeekEnd } = this.state
+    const { totalTime, currentTime, isSeekable, lastSeekStart, lastSeekEnd, lastIntent } = this.state
 
     return (
       <div className="ComponentDemo ProgressBarDemo">
         <pre className="ComponentDemo-code">
           <code className="language-jsx" dangerouslySetInnerHTML={{
             __html: Prism.highlight(
-              `<ProgressBar\n  totalTime={this.state.totalTime}\n  currentTime={this.state.currentTime}\n  isSeekable={this.state.isSeekable}\n  onSeek={time => this.setState(() => ({ currentTime: time }))}\n  onSeekStart={time => this.setState(() => ({ lastSeekStart: time }))}\n  onSeekEnd={time => this.setState(() => ({ lastSeekEnd: time }))}\n/>`,
+              `<ProgressBar\n  totalTime={this.state.totalTime}\n  currentTime={this.state.currentTime}\n  isSeekable={this.state.isSeekable}\n  onSeek={time => this.setState(() => ({ currentTime: time }))}\n  onSeekStart={time => this.setState(() => ({ lastSeekStart: time }))}\n  onSeekEnd={time => this.setState(() => ({ lastSeekEnd: time }))}\n  onIntent={time => this.setState(() => ({ lastIntent: time }))}\n/>`,
               Prism.languages.jsx
             )
           }} />
@@ -444,6 +444,11 @@ demos.ProgressBar = class ProgressBarDemo extends React.Component {
             <code>lastSeekEnd</code>
             <input type="number" disabled value={lastSeekEnd} />
           </label>
+
+          <label>
+            <code>lastIntent</code>
+            <input type="number" disabled value={lastIntent} />
+          </label>
         </div>
 
         <div className="ComponentDemo-results">
@@ -454,6 +459,7 @@ demos.ProgressBar = class ProgressBarDemo extends React.Component {
             onSeek={time => this.setState(() => ({ currentTime: time }))}
             onSeekStart={time => this.setState(() => ({ lastSeekStart: time }))}
             onSeekEnd={time => this.setState(() => ({ lastSeekEnd: time }))}
+            onIntent={time => this.setState(() => ({ lastIntent: time }))}
           />
         </div>
       </div>
