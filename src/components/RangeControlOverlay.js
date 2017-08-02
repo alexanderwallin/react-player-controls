@@ -137,8 +137,10 @@ class RangeControlOverlay extends Component {
 
   getHorizontalValue (mouseX) {
     const rect = this.getRectFromBounds()
-
-    let dLeft = mouseX - (rect.left + window.scrollX)
+    const scrollX = (window.pageXOffset !== undefined)
+      ? window.pageXOffset
+      : (document.documentElement || document.body.parentNode || document.body).scrollLeft
+    let dLeft = mouseX - (rect.left + scrollX)
     dLeft = Math.max(dLeft, 0)
     dLeft = Math.min(dLeft, rect.width)
 
@@ -147,8 +149,10 @@ class RangeControlOverlay extends Component {
 
   getVerticalValue (mouseY) {
     const rect = this.getRectFromBounds()
-
-    let dTop = mouseY - (rect.top + window.scrollY)
+    const scrollY = (window.pageYOffset !== undefined)
+      ? window.pageYOffset
+      : (document.documentElement || document.body.parentNode || document.body).scrollTop
+    let dTop = mouseY - (rect.top + scrollY)
     dTop = Math.max(dTop, 0)
     dTop = Math.min(dTop, rect.height)
 
