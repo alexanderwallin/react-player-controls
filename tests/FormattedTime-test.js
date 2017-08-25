@@ -41,12 +41,15 @@ describe('<FormattedTime />', () => {
     expect(time.text()).to.equal('1:00:01')
   })
 
-  it('rounds rendered time to integers', () => {
+  it('rounds down rendered time to integers', () => {
     const time1 = mount(<FormattedTime numSeconds={3601.12874773} />)
     expect(time1.text()).to.equal('1:00:01')
 
-    const time2 = mount(<FormattedTime numSeconds={3601.88999898} />)
-    expect(time2.text()).to.equal('1:00:02')
+    const time2 = mount(<FormattedTime numSeconds={3659.88999898} />)
+    expect(time2.text()).to.equal('1:00:59')
+
+    const time3 = mount(<FormattedTime numSeconds={3601.88999898} />)
+    expect(time3.text()).to.equal('1:00:01')
   })
 
   it('should accept a className', () => {
