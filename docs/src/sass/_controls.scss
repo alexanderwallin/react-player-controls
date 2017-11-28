@@ -1,4 +1,5 @@
 $icon-size: 30px;
+$button-size: 50px;
 
 // $color-hover: saturate(lighten($green, 10%), 20%);
 // $color-active: desaturate(darken($green, 20%), 20%);
@@ -23,6 +24,8 @@ $color-active: fade-out($color-hover, 0.5);
   border: 2px solid $green;
   border-radius: 100%;
   outline: none;
+  width: $button-size;
+  height: $button-size;
 
   &[disabled] {
     opacity: 0.5;
