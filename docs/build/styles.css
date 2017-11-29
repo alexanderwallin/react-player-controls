@@ -328,6 +328,7 @@ menu li {
         fill: rgba(62, 164, 84, 0.5); }
 
 .Icon {
+  display: block;
   width: 30px;
   height: 30px; }
 

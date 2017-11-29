@@ -50,6 +50,7 @@ $color-active: fade-out($color-hover, 0.5);
 }
 
 .Icon {
+  display: block;
   width: $icon-size;
   height: $icon-size;
 }
