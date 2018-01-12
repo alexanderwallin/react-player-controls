@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import { compose, withChildrenStyles, withCustomizableClasses, withChildClasses } from '../utils/composers.js'
 import RangeControlOverlay, { ControlDirection } from './RangeControlOverlay.js'
 
-const { number, bool, func, string, object } = PropTypes
+const { number, bool, func, string, object, oneOf } = PropTypes
 
 /**
  * Volume slider component
@@ -17,6 +17,7 @@ class VolumeSlider extends Component {
     volume: number,
     isEnabled: bool,
     onVolumeChange: func,
+    direction: oneOf([ControlDirection.HORIZONTAL, ControlDirection.VERTICAL]),
     extraClasses: string,
     style: object,
   }
@@ -25,6 +26,7 @@ class VolumeSlider extends Component {
     volume: 0,
     isEnabled: false,
     onVolumeChange: () => {},
+    direction: ControlDirection.VERTICAL,
     extraClasses: '',
     style: {},
   }
@@ -69,20 +71,36 @@ class VolumeSlider extends Component {
 
   render () {
     const {
-      volume, isEnabled,
+      volume, isEnabled, direction,
       className, extraClasses, childClasses, style, childrenStyles,
     } = this.props
     const { currentIntent } = this.state
 
     const volumePercentage = Math.min(100, Math.max(0, volume * 100))
-    const styleBottom = `${volumePercentage}%`
+    const styleSize = `${volumePercentage}%`
 
     const appliedIntent = isEnabled && currentIntent !== 0 ? currentIntent : 0
     const isDecreaseIntent = appliedIntent && currentIntent < volume
 
+    const directionClass = direction === ControlDirection.VERTICAL
+      ? 'Direction-vertical'
+      : 'Direction-horizontal'
+
+    const valueSizeProperty = direction === ControlDirection.VERTICAL
+      ? 'height'
+      : 'width'
+
+    const intentSizeProperty = direction === ControlDirection.VERTICAL
+      ? 'height'
+      : 'width'
+
+    const handleSizeProperty = direction === ControlDirection.VERTICAL
+      ? 'bottom'
+      : 'left'
+
     return (
       <div
-        className={classNames(className, extraClasses, {
+        className={classNames(className, extraClasses, directionClass, {
           isEnabled,
           isDecreaseIntent,
         })}
@@ -91,17 +109,17 @@ class VolumeSlider extends Component {
       >
         <div
           className={childClasses.value || 'VolumeSlider-value'}
-          style={{ height: styleBottom, ...(childrenStyles.value || {}) }}
+          style={{ [valueSizeProperty]: styleSize, ...(childrenStyles.value || {}) }}
         />
 
         <div
           className={childClasses.intent || 'VolumeSlider-intent'}
-          style={{ height: `${appliedIntent * 100}%`, ...(childrenStyles.intent || {}) }}
+          style={{ [intentSizeProperty]: `${appliedIntent * 100}%`, ...(childrenStyles.intent || {}) }}
         />
 
         <div
           className={childClasses.handle || 'VolumeSlider-handle'}
-          style={{ bottom: styleBottom, ...(childrenStyles.handle || {}) }}
+          style={{ [handleSizeProperty]: styleSize, ...(childrenStyles.handle || {}) }}
         />
 
         {isEnabled && (
@@ -109,7 +127,7 @@ class VolumeSlider extends Component {
             extraClasses={childClasses.seek || 'VolumeSlider-seek'}
             style={childrenStyles.RangeControlOverlay}
             bounds={this.getBounds}
-            direction={ControlDirection.VERTICAL}
+            direction={direction}
             onValue={this.handleVolumeChange}
             onIntent={this.handleIntent}
           />

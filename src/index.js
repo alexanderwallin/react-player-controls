@@ -18,6 +18,8 @@ import MuteToggleButton from './components/MuteToggleButton.js'
 
 import VolumeSlider from './components/VolumeSlider.js'
 
+import { ControlDirection } from './components/RangeControlOverlay'
+
 export {
   Button,
 
@@ -37,4 +39,6 @@ export {
   MuteToggleButton,
 
   VolumeSlider,
+
+  ControlDirection,
 }

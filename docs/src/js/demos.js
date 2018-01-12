@@ -4,6 +4,7 @@ import Prism from 'prismjs'
 import 'prismjs/components/prism-jsx.js'
 
 import * as rpc from '../../../dist/index.js'
+import { ControlDirection } from "../../../src";
 
 console.log(Prism.languages)
 
@@ -614,26 +615,36 @@ demos.VolumeSlider = class VolumeSliderDemo extends React.Component {
     super(props)
 
     this.state = {
+      direction: ControlDirection.VERTICAL,
       isEnabled: true,
       volume: 0.5,
     }
   }
 
   render() {
-    const { isEnabled, volume } = this.state
+    const { direction, isEnabled, volume } = this.state
 
     return (
       <div className="ComponentDemo SoundOnButffonDemo">
         <pre className="ComponentDemo-code">
           <code className="language-jsx" dangerouslySetInnerHTML={{
             __html: Prism.highlight(
-              `<VolumeSlider\n  isEnabled={this.state.isEnabled}\n  volume={this.state.volume}\n  onVolumeChange={volume => this.setState({ ...this.state, volume })} \n/>`,
+              `<VolumeSlider\n  direction={this.state.direction}\n  isEnabled={this.state.isEnabled}\n  volume={this.state.volume}\n  onVolumeChange={volume => this.setState({ ...this.state, volume })} \n/>`,
               Prism.languages.jsx
             )
           }} />
         </pre>
 
         <div className="ComponentDemo-settings">
+          <label>
+            <code>direction</code>
+            <select value={direction} onChange={evt => this.setState(Object.assign({}, this.state, { direction: evt.target.value }))}>
+              {Object.keys(rpc.ControlDirection).map(direction => (
+                <option key={direction} value={rpc.ControlDirection[direction]}>ControlDirection.{direction}</option>
+              ))}
+            </select>
+          </label>
+
           <label>
             <input type="checkbox" checked={isEnabled} onChange={(evt) => this.setState(Object.assign({}, this.state, { isEnabled: !isEnabled }))} />
             <code>isEnabled</code>
@@ -647,6 +658,7 @@ demos.VolumeSlider = class VolumeSliderDemo extends React.Component {
 
         <div className="ComponentDemo-results">
           <rpc.VolumeSlider
+            direction={direction}
             isEnabled={isEnabled}
             volume={volume}
             onVolumeChange={volume => this.setState(Object.assign({}, this.state, { volume }))}

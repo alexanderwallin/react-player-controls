@@ -111,6 +111,7 @@ import { PlayButton, PauseButton } from 'react-player-controls'
 
 // Volume slider
 <VolumeSlider
+  direction={ControlDirection.VERTICAL}
   volume={volumeBetweenZeroAndOne}
   onVolumeChange={handleVolumeChange}
   isEnabled={somePredicate}
