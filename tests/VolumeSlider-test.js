@@ -77,6 +77,14 @@ describe('<VolumeSlider />', () => {
     expect(bounds).to.have.all.keys(['bottom', 'height', 'left', 'right', 'top', 'width'])
   })
 
+  it('provides <RangeControlOverlay /> with a valid direction', () => {
+    const horizontalSlider = shallow(<VolumeSlider isEnabled={true} direction={ControlDirection.HORIZONTAL} />)
+    const verticalSlider = shallow(<VolumeSlider isEnabled={true} direction={ControlDirection.VERTICAL} />)
+
+    expect(horizontalSlider.find(RangeControlOverlay).props().direction).to.eql(ControlDirection.HORIZONTAL)
+    expect(verticalSlider.find(RangeControlOverlay).props().direction).to.eql(ControlDirection.VERTICAL)
+  })
+
   it('accepts a custom className', () => {
     const slider = shallow(<VolumeSlider className="MyClassName" />)
     expect(slider.props().className).to.include('MyClassName')
