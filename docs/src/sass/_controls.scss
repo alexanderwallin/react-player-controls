@@ -161,31 +161,31 @@ $color-active: fade-out($color-hover, 0.5);
     position: absolute;
   }
 
-  &.Direction-horizontal {
+  &.isHorizontal {
     width: 100px;
     height: 8px;
   }
 
-  &.Direction-horizontal &-value {
+  &.isHorizontal &-value {
     height: 100%;
     left: 0;
   }
 
-  &.Direction-horizontal &-handle {
+  &.isHorizontal &-handle {
     margin: -4px 0 0 -8px;
   }
 
-  &.Direction-vertical {
+  &.isVertical {
     width: 8px;
     height: 100px;
   }
 
-  &.Direction-vertical &-value {
+  &.isVertical &-value {
     bottom: 0;
     width: 100%;
   }
 
-  &.Direction-vertical &-handle {
+  &.isVertical &-handle {
     left: 0;
     margin: 0 0 -8px -4px;
   }

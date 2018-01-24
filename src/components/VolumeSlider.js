@@ -83,8 +83,8 @@ class VolumeSlider extends Component {
     const isDecreaseIntent = appliedIntent && currentIntent < volume
 
     const directionClass = direction === ControlDirection.VERTICAL
-      ? 'Direction-vertical'
-      : 'Direction-horizontal'
+      ? 'isVertical'
+      : 'isHorizontal'
 
     const valueSizeProperty = direction === ControlDirection.VERTICAL
       ? 'height'
