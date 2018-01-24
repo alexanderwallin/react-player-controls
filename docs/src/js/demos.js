@@ -4,7 +4,6 @@ import Prism from 'prismjs'
 import 'prismjs/components/prism-jsx.js'
 
 import * as rpc from '../../../dist/index.js'
-import { ControlDirection } from "../../../src";
 
 console.log(Prism.languages)
 
@@ -615,7 +614,7 @@ demos.VolumeSlider = class VolumeSliderDemo extends React.Component {
     super(props)
 
     this.state = {
-      direction: ControlDirection.VERTICAL,
+      direction: rpc.ControlDirection.VERTICAL,
       isEnabled: true,
       volume: 0.5,
     }
