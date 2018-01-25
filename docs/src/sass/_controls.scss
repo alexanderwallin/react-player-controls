@@ -155,14 +155,39 @@ $color-active: fade-out($color-hover, 0.5);
 }
 
 .VolumeSlider {
-  width: 8px;
-  height: 100px;
   // margin: 10px 0;
 
   &-value {
     position: absolute;
+  }
+
+  &.isHorizontal {
+    width: 100px;
+    height: 8px;
+  }
+
+  &.isHorizontal &-value {
+    height: 100%;
+    left: 0;
+  }
+
+  &.isHorizontal &-handle {
+    margin: -4px 0 0 -8px;
+  }
+
+  &.isVertical {
+    width: 8px;
+    height: 100px;
+  }
+
+  &.isVertical &-value {
     bottom: 0;
     width: 100%;
+  }
+
+  &.isVertical &-handle {
+    left: 0;
+    margin: 0 0 -8px -4px;
   }
 
   &-seek {
@@ -170,11 +195,6 @@ $color-active: fade-out($color-hover, 0.5);
     top: 0;
     right: -6px;
     bottom: 0;
-  }
-
-  &-handle {
-    left: 0;
-    margin: 0 0 -8px -4px;
   }
 
   &.isEnabled {

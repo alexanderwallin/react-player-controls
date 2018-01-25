@@ -7,7 +7,7 @@ import chaiEnzyme from 'chai-enzyme'
 chai.use(chaiEnzyme())
 
 import VolumeSlider from '../src/components/VolumeSlider.js'
-import RangeControlOverlay from '../src/components/RangeControlOverlay.js'
+import RangeControlOverlay, { ControlDirection } from '../src/components/RangeControlOverlay.js'
 
 describe('<VolumeSlider />', () => {
   it('renders a value with correct height', () => {
@@ -33,6 +33,34 @@ describe('<VolumeSlider />', () => {
     expect(slider.find('.VolumeSlider-intent').props().style.height).to.equal('91%')
   })
 
+  it('renders with correct sizing when vertical', () => {
+    const slider = shallow(<VolumeSlider direction={ControlDirection.VERTICAL} isEnabled={true} volume={0.6} />)
+
+    slider.setState({ currentIntent: 0.2 })
+
+    const value = slider.find('.VolumeSlider-value')
+    const intent = slider.find('.VolumeSlider-intent')
+    const handle = slider.find('.VolumeSlider-handle')
+
+    expect(value.props().style).to.eql({ height: '60%' })
+    expect(intent.props().style).to.eql({ height: '20%' })
+    expect(handle.props().style).to.eql({ bottom: '60%' })
+  })
+
+  it('renders with correct sizing when horizontal', () => {
+    const slider = shallow(<VolumeSlider direction={ControlDirection.HORIZONTAL} isEnabled={true} volume={0.6} />)
+
+    slider.setState({ currentIntent: 0.2 })
+
+    const value = slider.find('.VolumeSlider-value')
+    const intent = slider.find('.VolumeSlider-intent')
+    const handle = slider.find('.VolumeSlider-handle')
+
+    expect(value.props().style).to.eql({ width: '60%' })
+    expect(intent.props().style).to.eql({ width: '20%' })
+    expect(handle.props().style).to.eql({ left: '60%' })
+  })
+
   it('renders a <RangeControlOverlay /> only when enabled', () => {
     const slider = shallow(<VolumeSlider isEnabled={false} />)
     expect(slider.find(RangeControlOverlay).length).to.equal(0)
@@ -47,6 +75,14 @@ describe('<VolumeSlider />', () => {
 
     expect(bounds).to.be.ok
     expect(bounds).to.have.all.keys(['bottom', 'height', 'left', 'right', 'top', 'width'])
+  })
+
+  it('provides <RangeControlOverlay /> with a valid direction', () => {
+    const horizontalSlider = shallow(<VolumeSlider isEnabled={true} direction={ControlDirection.HORIZONTAL} />)
+    const verticalSlider = shallow(<VolumeSlider isEnabled={true} direction={ControlDirection.VERTICAL} />)
+
+    expect(horizontalSlider.find(RangeControlOverlay).props().direction).to.eql(ControlDirection.HORIZONTAL)
+    expect(verticalSlider.find(RangeControlOverlay).props().direction).to.eql(ControlDirection.VERTICAL)
   })
 
   it('accepts a custom className', () => {
