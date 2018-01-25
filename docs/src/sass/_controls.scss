@@ -164,6 +164,7 @@ $color-active: fade-out($color-hover, 0.5);
   &.isHorizontal {
     width: 100px;
     height: 8px;
+    transition: width 0.3s, height 0.05s;
   }
 
   &.isHorizontal &-value {
@@ -178,6 +179,7 @@ $color-active: fade-out($color-hover, 0.5);
   &.isVertical {
     width: 8px;
     height: 100px;
+    transition: width 0.05s, height 0.3s;
   }
 
   &.isVertical &-value {
