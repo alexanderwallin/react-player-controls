@@ -1,6 +1,6 @@
 {
   "name": "react-player-controls",
-  "version": "0.5.17",
+  "version": "0.5.18",
   "description": "UI components for media players",
   "main": "dist/index.js",
   "files": [
