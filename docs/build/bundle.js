@@ -228,7 +228,7 @@ var FormattedTime = function (_Component) {
 
       var hours = Math.floor(absNumSeconds / 3600);
       var minutes = Math.floor(absNumSeconds % 3600 / 60);
-      var seconds = Math.round(absNumSeconds) % 60;
+      var seconds = Math.floor(absNumSeconds) % 60;
 
       return hours > 0 ? '' + prefix + hours + ':' + padZero(minutes) + ':' + padZero(seconds) : '' + prefix + minutes + ':' + padZero(seconds);
     }
@@ -1821,6 +1821,14 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
 }
 
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
+  } else {
+    obj[key] = value;
+  }return obj;
+}
+
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -1872,7 +1880,8 @@ var number = _propTypes2.default.number,
     bool = _propTypes2.default.bool,
     func = _propTypes2.default.func,
     string = _propTypes2.default.string,
-    object = _propTypes2.default.object;
+    object = _propTypes2.default.object,
+    oneOf = _propTypes2.default.oneOf;
 
 /**
  * Volume slider component
@@ -1930,6 +1939,7 @@ var VolumeSlider = (_class = function (_Component) {
       var _props2 = this.props,
           volume = _props2.volume,
           isEnabled = _props2.isEnabled,
+          direction = _props2.direction,
           className = _props2.className,
           extraClasses = _props2.extraClasses,
           childClasses = _props2.childClasses,
@@ -1938,13 +1948,21 @@ var VolumeSlider = (_class = function (_Component) {
       var currentIntent = this.state.currentIntent;
 
       var volumePercentage = Math.min(100, Math.max(0, volume * 100));
-      var styleBottom = volumePercentage + '%';
+      var styleSize = volumePercentage + '%';
 
       var appliedIntent = isEnabled && currentIntent !== 0 ? currentIntent : 0;
       var isDecreaseIntent = appliedIntent && currentIntent < volume;
 
+      var directionClass = direction === _RangeControlOverlay.ControlDirection.VERTICAL ? 'isVertical' : 'isHorizontal';
+
+      var valueSizeProperty = direction === _RangeControlOverlay.ControlDirection.VERTICAL ? 'height' : 'width';
+
+      var intentSizeProperty = direction === _RangeControlOverlay.ControlDirection.VERTICAL ? 'height' : 'width';
+
+      var handleSizeProperty = direction === _RangeControlOverlay.ControlDirection.VERTICAL ? 'bottom' : 'left';
+
       return _react2.default.createElement('div', {
-        className: (0, _classnames2.default)(className, extraClasses, {
+        className: (0, _classnames2.default)(className, extraClasses, directionClass, {
           isEnabled: isEnabled,
           isDecreaseIntent: isDecreaseIntent
         }),
@@ -1952,18 +1970,18 @@ var VolumeSlider = (_class = function (_Component) {
         ref: this.storeRef
       }, _react2.default.createElement('div', {
         className: childClasses.value || 'VolumeSlider-value',
-        style: _extends({ height: styleBottom }, childrenStyles.value || {})
+        style: _extends(_defineProperty({}, valueSizeProperty, styleSize), childrenStyles.value || {})
       }), _react2.default.createElement('div', {
         className: childClasses.intent || 'VolumeSlider-intent',
-        style: _extends({ height: appliedIntent * 100 + '%' }, childrenStyles.intent || {})
+        style: _extends(_defineProperty({}, intentSizeProperty, appliedIntent * 100 + '%'), childrenStyles.intent || {})
       }), _react2.default.createElement('div', {
         className: childClasses.handle || 'VolumeSlider-handle',
-        style: _extends({ bottom: styleBottom }, childrenStyles.handle || {})
+        style: _extends(_defineProperty({}, handleSizeProperty, styleSize), childrenStyles.handle || {})
       }), isEnabled && _react2.default.createElement(_RangeControlOverlay2.default, {
         extraClasses: childClasses.seek || 'VolumeSlider-seek',
         style: childrenStyles.RangeControlOverlay,
         bounds: this.getBounds,
-        direction: _RangeControlOverlay.ControlDirection.VERTICAL,
+        direction: direction,
         onValue: this.handleVolumeChange,
         onIntent: this.handleIntent
       }));
@@ -1976,6 +1994,7 @@ VolumeSlider.propTypes = {
   volume: number,
   isEnabled: bool,
   onVolumeChange: func,
+  direction: oneOf([_RangeControlOverlay.ControlDirection.HORIZONTAL, _RangeControlOverlay.ControlDirection.VERTICAL]),
   extraClasses: string,
   style: object
 };
@@ -1983,6 +2002,7 @@ VolumeSlider.defaultProps = {
   volume: 0,
   isEnabled: false,
   onVolumeChange: function onVolumeChange() {},
+  direction: _RangeControlOverlay.ControlDirection.VERTICAL,
   extraClasses: '',
   style: {}
 };
@@ -2049,7 +2069,7 @@ var SoundOffIcon = exports.SoundOffIcon = function SoundOffIcon() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.VolumeSlider = exports.MuteToggleButton = exports.SoundOffButton = exports.SoundOnButton = exports.TimeMarkerType = exports.TimeMarker = exports.FormattedTime = exports.ProgressBar = exports.PrevButton = exports.NextButton = exports.PauseButton = exports.PlayButton = exports.PlaybackControls = exports.Button = undefined;
+exports.ControlDirection = exports.VolumeSlider = exports.MuteToggleButton = exports.SoundOffButton = exports.SoundOnButton = exports.TimeMarkerType = exports.TimeMarker = exports.FormattedTime = exports.ProgressBar = exports.PrevButton = exports.NextButton = exports.PauseButton = exports.PlayButton = exports.PlaybackControls = exports.Button = undefined;
 
 var _icons = require('./components/icons.js');
 
@@ -2115,6 +2135,8 @@ var _VolumeSlider = require('./components/VolumeSlider.js');
 
 var _VolumeSlider2 = _interopRequireDefault(_VolumeSlider);
 
+var _RangeControlOverlay = require('./components/RangeControlOverlay');
+
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
 }
@@ -2133,8 +2155,9 @@ exports.SoundOnButton = _SoundOnButton2.default;
 exports.SoundOffButton = _SoundOffButton2.default;
 exports.MuteToggleButton = _MuteToggleButton2.default;
 exports.VolumeSlider = _VolumeSlider2.default;
+exports.ControlDirection = _RangeControlOverlay.ControlDirection;
 
-},{"./components/Button.js":1,"./components/FormattedTime.js":2,"./components/MuteToggleButton.js":3,"./components/NextButton.js":4,"./components/PauseButton.js":5,"./components/PlayButton.js":6,"./components/PlaybackControls.js":7,"./components/PrevButton.js":8,"./components/ProgressBar.js":9,"./components/SoundOffButton.js":11,"./components/SoundOnButton.js":12,"./components/TimeMarker.js":13,"./components/VolumeSlider.js":14,"./components/icons.js":15}],17:[function(require,module,exports){
+},{"./components/Button.js":1,"./components/FormattedTime.js":2,"./components/MuteToggleButton.js":3,"./components/NextButton.js":4,"./components/PauseButton.js":5,"./components/PlayButton.js":6,"./components/PlaybackControls.js":7,"./components/PrevButton.js":8,"./components/ProgressBar.js":9,"./components/RangeControlOverlay":10,"./components/SoundOffButton.js":11,"./components/SoundOnButton.js":12,"./components/TimeMarker.js":13,"./components/VolumeSlider.js":14,"./components/icons.js":15}],17:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24581,6 +24604,7 @@ demos.VolumeSlider = function (_React$Component12) {
     var _this23 = _possibleConstructorReturn(this, (VolumeSliderDemo.__proto__ || Object.getPrototypeOf(VolumeSliderDemo)).call(this, props));
 
     _this23.state = {
+      direction: rpc.ControlDirection.VERTICAL,
       isEnabled: true,
       volume: 0.5
     };
@@ -24593,6 +24617,7 @@ demos.VolumeSlider = function (_React$Component12) {
       var _this24 = this;
 
       var _state5 = this.state,
+          direction = _state5.direction,
           isEnabled = _state5.isEnabled,
           volume = _state5.volume;
 
@@ -24604,12 +24629,35 @@ demos.VolumeSlider = function (_React$Component12) {
           'pre',
           { className: 'ComponentDemo-code' },
           _react2.default.createElement('code', { className: 'language-jsx', dangerouslySetInnerHTML: {
-              __html: _prismjs2.default.highlight('<VolumeSlider\n  isEnabled={this.state.isEnabled}\n  volume={this.state.volume}\n  onVolumeChange={volume => this.setState({ ...this.state, volume })} \n/>', _prismjs2.default.languages.jsx)
+              __html: _prismjs2.default.highlight('<VolumeSlider\n  direction={this.state.direction}\n  isEnabled={this.state.isEnabled}\n  volume={this.state.volume}\n  onVolumeChange={volume => this.setState({ ...this.state, volume })} \n/>', _prismjs2.default.languages.jsx)
             } })
         ),
         _react2.default.createElement(
           'div',
           { className: 'ComponentDemo-settings' },
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement(
+              'code',
+              null,
+              'direction'
+            ),
+            _react2.default.createElement(
+              'select',
+              { value: direction, onChange: function onChange(evt) {
+                  return _this24.setState(Object.assign({}, _this24.state, { direction: evt.target.value }));
+                } },
+              Object.keys(rpc.ControlDirection).map(function (direction) {
+                return _react2.default.createElement(
+                  'option',
+                  { key: direction, value: rpc.ControlDirection[direction] },
+                  'ControlDirection.',
+                  direction
+                );
+              })
+            )
+          ),
           _react2.default.createElement(
             'label',
             null,
@@ -24639,6 +24687,7 @@ demos.VolumeSlider = function (_React$Component12) {
           'div',
           { className: 'ComponentDemo-results' },
           _react2.default.createElement(rpc.VolumeSlider, {
+            direction: direction,
             isEnabled: isEnabled,
             volume: volume,
             onVolumeChange: function onVolumeChange(volume) {

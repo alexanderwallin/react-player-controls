@@ -408,26 +408,46 @@ menu li {
     background: #ccc;
     animation: barLoading 2s infinite; }
 
-.VolumeSlider {
+.VolumeSlider-value {
+  position: absolute; }
+
+.VolumeSlider.isHorizontal {
+  width: 100px;
+  height: 8px;
+  transition: width 0.3s, height 0.05s; }
+
+.VolumeSlider.isHorizontal .VolumeSlider-value {
+  height: 100%;
+  left: 0; }
+
+.VolumeSlider.isHorizontal .VolumeSlider-handle {
+  margin: -4px 0 0 -8px; }
+
+.VolumeSlider.isVertical {
   width: 8px;
-  height: 100px; }
-  .VolumeSlider-value {
-    position: absolute;
-    bottom: 0;
-    width: 100%; }
-  .VolumeSlider-seek {
-    left: -6px;
-    top: 0;
-    right: -6px;
-    bottom: 0; }
-  .VolumeSlider-handle {
-    left: 0;
-    margin: 0 0 -8px -4px; }
-  .VolumeSlider.isEnabled:hover .VolumeSlider-handle {
-    transform: scale(1); }
-  .VolumeSlider.isEnabled:hover .VolumeSlider-intent {
-    bottom: 0;
-    left: 0;
-    width: 100%; }
+  height: 100px;
+  transition: width 0.05s, height 0.3s; }
+
+.VolumeSlider.isVertical .VolumeSlider-value {
+  bottom: 0;
+  width: 100%; }
+
+.VolumeSlider.isVertical .VolumeSlider-handle {
+  left: 0;
+  margin: 0 0 -8px -4px; }
+
+.VolumeSlider-seek {
+  left: -6px;
+  top: 0;
+  right: -6px;
+  bottom: 0; }
+
+.VolumeSlider.isEnabled:hover .VolumeSlider-handle {
+  transform: scale(1); }
+
+.VolumeSlider.isEnabled:hover .VolumeSlider-intent {
+  bottom: 0;
+  left: 0;
+  width: 100%; }
 
 /*# sourceMappingURL=styles.css.map */
