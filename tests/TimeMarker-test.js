@@ -32,14 +32,14 @@ describe('<TimeMarker />', () => {
     mount(
       <TimeMarker
         firstMarkerType={TimeMarkerType.DURATION}
-        secondMarkerType={TimeMarkerType.LEFT_NEGATIVE}
+        secondMarkerType={TimeMarkerType.REMAINING_NEGATIVE}
       />
     )
 
     const spiedOn = TimeMarker.prototype.getSecondsForTimeWithMarkerType
     expect(spiedOn.callCount).to.equal(2)
     expect(spiedOn.args[0][0]).to.equal(TimeMarkerType.DURATION)
-    expect(spiedOn.args[1][0]).to.equal(TimeMarkerType.LEFT_NEGATIVE)
+    expect(spiedOn.args[1][0]).to.equal(TimeMarkerType.REMAINING_NEGATIVE)
   })
 
   it('accepts a custom className', () => {

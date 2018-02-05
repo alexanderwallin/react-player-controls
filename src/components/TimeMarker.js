@@ -13,8 +13,8 @@ const { number, oneOf, string, object } = PropTypes
  */
 export const TimeMarkerType = {
   ELAPSED: 'ELAPSED',
-  LEFT: 'LEFT',
-  LEFT_NEGATIVE: 'LEFT_NEGATIVE',
+  REMAINING: 'REMAINING',
+  REMAINING_NEGATIVE: 'REMAINING_NEGATIVE',
   DURATION: 'DURATION',
 }
 
@@ -50,10 +50,10 @@ class TimeMarker extends Component {
     else if (markerType === TimeMarkerType.ELAPSED) {
       return currentTime
     }
-    else if (markerType === TimeMarkerType.LEFT) {
+    else if (markerType === TimeMarkerType.REMAINING) {
       return totalTime - currentTime
     }
-    else if (markerType === TimeMarkerType.LEFT_NEGATIVE) {
+    else if (markerType === TimeMarkerType.REMAINING_NEGATIVE) {
       return currentTime - totalTime
     }
 
