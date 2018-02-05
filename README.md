@@ -77,6 +77,13 @@ import { PlayButton, PauseButton } from 'react-player-controls'
 />
 
 // <TimeMarker /> composite component
+//
+// A time marker can be one of four types:
+//
+// - TimeMarkerType.ELAPSED
+// - TimeMarkerType.REMAINING
+// - TimeMarkerType.REMAINING_NEGATIVE
+// - TimeMarkerType.DURATION
 
 <TimeMarker
   totalTime={190}
@@ -90,7 +97,7 @@ import { PlayButton, PauseButton } from 'react-player-controls'
   currentTime={65}
   markerSeparator=" | "
   firstMarkerType={TimeMarkerType.ELAPSED}
-  secondMarkerType={TimeMarkerType.LEFT_NEGATIVE}
+  secondMarkerType={TimeMarkerType.REMANING_NEGATIVE}
 />
 // -> "1:05 | -2:05" (without wrapping <span /> elements)
 ```

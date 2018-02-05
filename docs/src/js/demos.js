@@ -5,8 +5,6 @@ import 'prismjs/components/prism-jsx.js'
 
 import * as rpc from '../../../dist/index.js'
 
-console.log(Prism.languages)
-
 const demos = {}
 
 //
