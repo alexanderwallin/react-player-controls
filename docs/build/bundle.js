@@ -1673,8 +1673,8 @@ var number = _propTypes2.default.number,
 
 var TimeMarkerType = exports.TimeMarkerType = {
   ELAPSED: 'ELAPSED',
-  LEFT: 'LEFT',
-  LEFT_NEGATIVE: 'LEFT_NEGATIVE',
+  REMAINING: 'REMAINING',
+  REMAINING_NEGATIVE: 'REMAINING_NEGATIVE',
   DURATION: 'DURATION'
 
   /**
@@ -1701,9 +1701,9 @@ var TimeMarker = function (_Component) {
         return totalTime;
       } else if (markerType === TimeMarkerType.ELAPSED) {
         return currentTime;
-      } else if (markerType === TimeMarkerType.LEFT) {
+      } else if (markerType === TimeMarkerType.REMAINING) {
         return totalTime - currentTime;
-      } else if (markerType === TimeMarkerType.LEFT_NEGATIVE) {
+      } else if (markerType === TimeMarkerType.REMAINING_NEGATIVE) {
         return currentTime - totalTime;
       }
 
@@ -23608,8 +23608,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-console.log(_prismjs2.default.languages);
 
 var demos = {};
 
