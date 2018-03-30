@@ -26,25 +26,6 @@ export const withChildrenStyles = curry(Component => {
 })
 
 /**
- *
- */
-export const withCustomizableClasses = curry((defaultClassName, Component) => {
-  Component.propTypes = {
-    ...(Component.propTypes || {}),
-    className: PropTypes.string,
-    extraClasses: PropTypes.string,
-  }
-
-  Component.defaultProps = {
-    ...(Component.defaultProps || {}),
-    className: defaultClassName,
-    extraClasses: '',
-  }
-
-  return Component
-})
-
-/**
  * Adds a `childClasses` prop type definition together with an empty
  * defaults object to a provided component.
  */

@@ -11,7 +11,6 @@ class Button extends Component {
     onClick: PropTypes.func.isRequired,
     isEnabled: PropTypes.bool,
     className: PropTypes.string,
-    extraClasses: PropTypes.string,
     style: PropTypes.object,
     children: PropTypes.node,
   }
@@ -19,7 +18,6 @@ class Button extends Component {
   static defaultProps = {
     isEnabled: true,
     className: 'Button',
-    extraClasses: '',
     style: {},
     children: null,
   }
@@ -32,14 +30,13 @@ class Button extends Component {
   }
 
   render () {
-    const { isEnabled, className, extraClasses, style, children } = this.props
+    const { isEnabled, className, style, children } = this.props
 
     return (
       <button
         className={classNames(
           className,
-          { isEnabled },
-          extraClasses
+          { isEnabled }
         )}
         style={style}
         disabled={!isEnabled}

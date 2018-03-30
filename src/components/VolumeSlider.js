@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
-import { compose, withChildrenStyles, withCustomizableClasses, withChildClasses } from '../utils/composers.js'
+import { compose, withChildrenStyles, withChildClasses } from '../utils/composers.js'
 import RangeControlOverlay, { ControlDirection } from './RangeControlOverlay.js'
 
 const { number, bool, func, string, object, oneOf } = PropTypes
@@ -18,7 +18,7 @@ class VolumeSlider extends Component {
     isEnabled: bool,
     onVolumeChange: func,
     direction: oneOf([ControlDirection.HORIZONTAL, ControlDirection.VERTICAL]),
-    extraClasses: string,
+    className: string,
     style: object,
   }
 
@@ -27,7 +27,7 @@ class VolumeSlider extends Component {
     isEnabled: false,
     onVolumeChange: () => {},
     direction: ControlDirection.VERTICAL,
-    extraClasses: '',
+    className: 'VolumeSlider',
     style: {},
   }
 
@@ -72,7 +72,7 @@ class VolumeSlider extends Component {
   render () {
     const {
       volume, isEnabled, direction,
-      className, extraClasses, childClasses, style, childrenStyles,
+      className, childClasses, style, childrenStyles,
     } = this.props
     const { currentIntent } = this.state
 
@@ -100,7 +100,7 @@ class VolumeSlider extends Component {
 
     return (
       <div
-        className={classNames(className, extraClasses, directionClass, {
+        className={classNames(className, directionClass, {
           isEnabled,
           isDecreaseIntent,
         })}
@@ -124,7 +124,7 @@ class VolumeSlider extends Component {
 
         {isEnabled && (
           <RangeControlOverlay
-            extraClasses={childClasses.seek || 'VolumeSlider-seek'}
+            className={childClasses.seek || 'VolumeSlider-seek'}
             style={childrenStyles.RangeControlOverlay}
             bounds={this.getBounds}
             direction={direction}
@@ -139,6 +139,5 @@ class VolumeSlider extends Component {
 
 export default compose(
   withChildrenStyles(),
-  withCustomizableClasses('VolumeSlider'),
   withChildClasses()
 )(VolumeSlider)

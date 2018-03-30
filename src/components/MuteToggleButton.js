@@ -16,7 +16,6 @@ class MuteToggleButton extends Component {
     isMuted: PropTypes.bool,
     isEnabled: PropTypes.bool,
     className: PropTypes.string,
-    extraClasses: PropTypes.string,
     style: PropTypes.object,
   }
 
@@ -24,7 +23,6 @@ class MuteToggleButton extends Component {
     isMuted: false,
     isEnabled: true,
     className: 'MuteToggleButton',
-    extraClasses: '',
     style: {},
   }
 
@@ -38,13 +36,13 @@ class MuteToggleButton extends Component {
   render () {
     const {
       isMuted, isEnabled,
-      className, extraClasses, childClasses,
+      className, childClasses,
       style, childrenStyles,
     } = this.props
 
     return (
       <div
-        className={classNames(className, extraClasses, { isMuted, isEnabled })}
+        className={classNames(className, { isMuted, isEnabled })}
         style={style}
       >
         {isMuted

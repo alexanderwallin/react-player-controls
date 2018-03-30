@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
-import { compose, withChildrenStyles, withCustomizableClasses, withChildClasses } from '../utils/composers.js'
+import { compose, withChildrenStyles, withChildClasses } from '../utils/composers.js'
 import * as Icon from './icons.js'
 
-const { bool, func, object } = PropTypes
+const { bool, func, object, string } = PropTypes
 
 const noop = () => {}
 
@@ -24,6 +24,7 @@ class PlaybackControls extends Component {
     showNext: bool,
     hasNext: bool,
     onNext: func,
+    className: string,
     style: object,
   }
 
@@ -36,6 +37,7 @@ class PlaybackControls extends Component {
     showNext: true,
     hasNext: false,
     onNext: noop,
+    className: 'PlaybackControls',
     style: {},
   }
 
@@ -56,12 +58,12 @@ class PlaybackControls extends Component {
       isPlayable, isPlaying,
       showPrevious, hasPrevious, onPrevious,
       showNext, hasNext, onNext,
-      className, extraClasses, childClasses, style, childrenStyles,
+      className, childClasses, style, childrenStyles,
     } = this.props
 
     return (
       <div
-        className={classNames(className, { isPlayable, isPlaying }, extraClasses)}
+        className={classNames(className, { isPlayable, isPlaying })}
         style={style}
       >
         { showPrevious && (
@@ -110,6 +112,5 @@ class PlaybackControls extends Component {
 
 export default compose(
   withChildrenStyles(),
-  withCustomizableClasses('PlaybackControls'),
   withChildClasses()
 )(PlaybackControls)

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import { values } from '../utils/collections.js'
-import { compose, withChildrenStyles, withCustomizableClasses, withChildClasses } from '../utils/composers.js'
+import { compose, withChildrenStyles, withChildClasses } from '../utils/composers.js'
 import FormattedTime from './FormattedTime.js'
 
 const { number, oneOf, string, object } = PropTypes
@@ -29,6 +29,7 @@ class TimeMarker extends Component {
     firstMarkerType: oneOf(values(TimeMarkerType)),
     secondMarkerType: oneOf(values(TimeMarkerType)),
     markerSeparator: string,
+    className: string,
     style: object,
   }
 
@@ -38,6 +39,7 @@ class TimeMarker extends Component {
     firstMarkerType: TimeMarkerType.ELAPSED,
     secondMarkerType: TimeMarkerType.DURATION,
     markerSeparator: null,
+    className: 'TimeMarker',
     style: {},
   }
 
@@ -63,7 +65,7 @@ class TimeMarker extends Component {
   render () {
     const {
       firstMarkerType, secondMarkerType, markerSeparator,
-      className, extraClasses, childClasses, style, childrenStyles,
+      className, childClasses, style, childrenStyles,
     } = this.props
 
     const seconds1 = this.getSecondsForTimeWithMarkerType(firstMarkerType)
@@ -71,12 +73,12 @@ class TimeMarker extends Component {
 
     return (
       <div
-        className={classNames(className, extraClasses)}
+        className={className}
         style={style}
       >
         <FormattedTime
           numSeconds={seconds1}
-          extraClasses={classNames('TimeMarker-firstMarker', childClasses.firstMarker)}
+          className={classNames('TimeMarker-firstMarker', childClasses.firstMarker)}
           style={childrenStyles.firstMarker}
         />
 
@@ -91,7 +93,7 @@ class TimeMarker extends Component {
 
         <FormattedTime
           numSeconds={seconds2}
-          extraClasses={classNames('TimeMarker-secondMarker', childClasses.secondMarker)}
+          className={classNames('TimeMarker-secondMarker', childClasses.secondMarker)}
           style={childrenStyles.secondMarker}
         />
       </div>
@@ -101,6 +103,5 @@ class TimeMarker extends Component {
 
 export default compose(
   withChildrenStyles(),
-  withCustomizableClasses('TimeMarker'),
   withChildClasses()
 )(TimeMarker)

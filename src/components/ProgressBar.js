@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
-import { compose, withChildrenStyles, withCustomizableClasses, withChildClasses } from '../utils/composers.js'
+import { compose, withChildrenStyles, withChildClasses } from '../utils/composers.js'
 import RangeControlOverlay from './RangeControlOverlay.js'
 
-const { number, bool, func, object } = PropTypes
+const { number, bool, func, object, string } = PropTypes
 
 /**
  * Seekable progress bar
@@ -23,6 +23,7 @@ class ProgressBar extends Component {
     onSeekStart: func,
     onSeekEnd: func,
     onIntent: func,
+    className: string,
     style: object,
   }
 
@@ -34,6 +35,7 @@ class ProgressBar extends Component {
     onSeekStart: () => {},
     onSeekEnd: () => {},
     onIntent: () => {},
+    className: 'ProgressBar',
     style: {},
   }
 
@@ -97,7 +99,7 @@ class ProgressBar extends Component {
   render () {
     const {
       totalTime, currentTime, isSeekable,
-      className, extraClasses, childClasses, style, childrenStyles,
+      className, childClasses, style, childrenStyles,
     } = this.props
     const { currentIntent } = this.state
 
@@ -108,7 +110,7 @@ class ProgressBar extends Component {
 
     return (
       <div
-        className={classNames(className, extraClasses, {
+        className={classNames(className, {
           isSeekable,
           isRewindIntent,
         })}
@@ -148,6 +150,5 @@ class ProgressBar extends Component {
 
 export default compose(
   withChildrenStyles(),
-  withCustomizableClasses('ProgressBar'),
   withChildClasses()
 )(ProgressBar)
