@@ -7,9 +7,9 @@ import { spy } from 'sinon'
 
 chai.use(chaiEnzyme())
 
+import Button from '../src/components/Button.js'
 import MuteToggleButton from '../src/components/MuteToggleButton.js'
-import SoundOnButton from '../src/components/SoundOnButton.js'
-import SoundOffButton from '../src/components/SoundOffButton.js'
+import { SoundOff, SoundOnIcon } from '../src/components/icons.js'
 
 describe('<MuteToggleButton />', () => {
   it('is enabled by default', () => {
@@ -49,9 +49,9 @@ describe('<MuteToggleButton />', () => {
     }
     const btn = shallow(<MuteToggleButton childClasses={childClasses} />)
 
-    expect(btn.find(SoundOnButton).props().className).to.contain('MySoundOnButton')
+    expect(btn.find(Button).props().className).to.contain('MySoundOnButton')
     btn.setProps({ ...btn.props(), isMuted: true })
-    expect(btn.find(SoundOffButton).props().className).to.contain('MySoundOffButton')
+    expect(btn.find(Button).props().className).to.contain('MySoundOffButton')
   })
 
   it('should accept custom styles', () => {
@@ -66,42 +66,45 @@ describe('<MuteToggleButton />', () => {
     }
 
     const btn = mount(<MuteToggleButton childrenStyles={styles} onMuteChange={() => {}} />)
-    expect(btn.find(SoundOnButton).props().style).to.eql({ fontSize: 100 })
+    expect(btn.find(Button).props().style).to.eql({ fontSize: 100 })
     btn.setProps({ ...btn.props(), isMuted: true })
-    expect(btn.find(SoundOffButton).props().style).to.eql({ fontSize: 100 })
+    expect(btn.find(Button).props().style).to.eql({ fontSize: 100 })
   })
 
-  it('renders <SoundOnButton /> when unmuted', () => {
+  it('renders a <Button />', () => {
     const btn = mount(<MuteToggleButton isMuted={false} />)
-    expect(btn.find(SoundOnButton)).to.have.length(1)
+    expect(btn.find(Button).length).to.equal(1)
   })
 
-  it('renders <SoundOffButton /> when muted', () => {
+  it('renders a <SoundOnIcon /> when unmuted', () => {
+    const btn = mount(<MuteToggleButton isMuted={false} />)
+    expect(btn.find(SoundOnIcon)).to.have.length(1)
+  })
+
+  it('renders a <SoundOffIcon /> when muted', () => {
     const btn = mount(<MuteToggleButton isMuted={true} />)
-    expect(btn.find(SoundOffButton)).to.have.length(1)
+    expect(btn.find(SoundOffIcon)).to.have.length(1)
   })
 
   it('triggers an onMuteChange() callback when enabled', () => {
     const callback = spy()
     const btn = mount(<MuteToggleButton isEnabled={false} isMuted={false} onMuteChange={callback} />)
 
-    // TODO: Sound*Button components should be mocked
-
-    btn.find(SoundOnButton).simulate('click')
+    btn.find(Button).simulate('click')
     expect(callback.callCount).to.equal(0)
 
     btn.setProps({ ...btn.props(), isEnabled: true })
-    btn.find(SoundOnButton).simulate('click')
+    btn.find(Button).simulate('click')
     expect(callback.callCount).to.equal(1)
     expect(callback.args[0][0]).to.equal(true)
 
     btn.setProps({ ...btn.props(), isMuted: true })
-    btn.find(SoundOffButton).simulate('click')
+    btn.find(Button).simulate('click')
     expect(callback.callCount).to.equal(2)
     expect(callback.args[1][0]).to.equal(false)
 
     btn.setProps({ ...btn.props(), isEnabled: false })
-    btn.find(SoundOffButton).simulate('click')
+    btn.find(Button).simulate('click')
     expect(callback.callCount).to.equal(2)
   })
 })

@@ -4,10 +4,7 @@ import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
 import { compose, withChildrenStyles, withCustomizableClasses, withChildClasses } from '../utils/composers.js'
-import PlayButton from './PlayButton.js'
-import PauseButton from './PauseButton.js'
-import PrevButton from './PrevButton.js'
-import NextButton from './NextButton.js'
+import * as Icon from './icons.js'
 
 const { bool, func, object } = PropTypes
 
@@ -68,35 +65,43 @@ class PlaybackControls extends Component {
         style={style}
       >
         { showPrevious && (
-          <PrevButton
+          <Button
             isEnabled={hasPrevious}
             onClick={onPrevious}
             className={childClasses.PrevButton}
             style={childrenStyles.PrevButton}
-          />
+          >
+            <Icon.PreviousIcon />
+          </Button>
         )}
 
         { isPlaying && isPlayable
-          ? <PauseButton
+          ? <Button
               onClick={this.handlePause}
               className={childClasses.PauseButton}
               style={childrenStyles.PauseButton}
-            />
-          : <PlayButton
+            >
+              <Icon.PauseIcon />
+            </Button>
+          : <Button
               isEnabled={isPlayable}
               onClick={this.handlePlay}
               className={childClasses.PlayButton}
               style={childrenStyles.PlayButton}
-            />
+            >
+              <Icon.PlayIcon />
+            </Button>
         }
 
         { showNext && (
-          <NextButton
+          <Button
             isEnabled={hasNext}
             onClick={onNext}
             className={childClasses.NextButton}
             style={childrenStyles.NextButton}
-          />
+          >
+            <Icon.NextIcon />
+          </Button>
         )}
       </div>
     )

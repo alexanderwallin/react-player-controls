@@ -4,8 +4,8 @@ import classNames from 'classnames'
 import autobind from 'autobind-decorator'
 
 import { withChildrenStyles, withChildClasses } from '../utils/composers.js'
-import SoundOnButton from './SoundOnButton.js'
-import SoundOffButton from './SoundOffButton.js'
+import Button from './Button.js'
+import { SoundOffIcon, SoundOnIcon } from './icons.js'
 
 /**
  * Mute toggle button
@@ -49,20 +49,24 @@ class MuteToggleButton extends Component {
       >
         {isMuted
           ? (
-            <SoundOffButton
+            <Button
               className={childClasses.SoundOffButton}
               style={childrenStyles.SoundOffButton}
               isEnabled={isEnabled}
               onClick={() => this.handleMuteChange(false)}
-            />
+            >
+              <SoundOnIcon />
+            </Button>
           )
           : (
-            <SoundOnButton
+            <Button
               className={childClasses.SoundOnButton}
               style={childrenStyles.SoundOnButton}
               isEnabled={isEnabled}
               onClick={() => this.handleMuteChange(true)}
-            />
+            >
+              <SoundOffIcon />
+            </Button>
           )
         }
       </div>
