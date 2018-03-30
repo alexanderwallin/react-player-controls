@@ -8,9 +8,6 @@ import ProgressBar from './components/ProgressBar.js'
 import FormattedTime from './components/FormattedTime.js'
 import TimeMarker, { TimeMarkerType } from './components/TimeMarker.js'
 
-import SoundOffButton from './components/SoundOffButton.js'
-import MuteToggleButton from './components/MuteToggleButton.js'
-
 import VolumeSlider from './components/VolumeSlider.js'
 
 import { ControlDirection } from './components/RangeControlOverlay'
@@ -30,10 +27,6 @@ export {
   FormattedTime,
   TimeMarker,
   TimeMarkerType,
-
-  SoundOnButton,
-  SoundOffButton,
-  MuteToggleButton,
 
   VolumeSlider,
 
