@@ -2,8 +2,6 @@ export * from './components/icons.js'
 
 import Button from './components/Button.js'
 
-import PlaybackControls from './components/PlaybackControls.js'
-
 import ProgressBar from './components/ProgressBar.js'
 import FormattedTime from './components/FormattedTime.js'
 import TimeMarker, { TimeMarkerType } from './components/TimeMarker.js'
@@ -16,12 +14,6 @@ import { PlayIcon, PauseIcon, PreviousIcon, NextIcon, SoundOnIcon, SoundOffIcon 
 
 export {
   Button,
-
-  PlaybackControls,
-  PlayButton,
-  PauseButton,
-  NextButton,
-  PrevButton,
 
   ProgressBar,
   FormattedTime,
