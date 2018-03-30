@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
-import { compose, withChildrenStyles, withChildClasses } from '../utils/composers.js'
 import RangeControlOverlay from './RangeControlOverlay.js'
 
 const { number, bool, func, object, string } = PropTypes
@@ -25,6 +24,8 @@ class ProgressBar extends Component {
     onIntent: func,
     className: string,
     style: object,
+    childClasses: object,
+    childrenStyles: object,
   }
 
   static defaultProps = {
@@ -37,6 +38,8 @@ class ProgressBar extends Component {
     onIntent: () => {},
     className: 'ProgressBar',
     style: {},
+    childClasses: {},
+    childrenStyles: {},
   }
 
   constructor (props) {
@@ -148,7 +151,4 @@ class ProgressBar extends Component {
   }
 }
 
-export default compose(
-  withChildrenStyles(),
-  withChildClasses()
-)(ProgressBar)
+export default ProgressBar

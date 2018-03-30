@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
-import { compose, withChildrenStyles, withChildClasses } from '../utils/composers.js'
 import * as Icon from './icons.js'
 
 const { bool, func, object, string } = PropTypes
@@ -26,6 +25,8 @@ class PlaybackControls extends Component {
     onNext: func,
     className: string,
     style: object,
+    childClasses: object,
+    childrenStyles: object,
   }
 
   static defaultProps = {
@@ -39,6 +40,8 @@ class PlaybackControls extends Component {
     onNext: noop,
     className: 'PlaybackControls',
     style: {},
+    childClasses: {},
+    childrenStyles: {},
   }
 
   @autobind
@@ -110,7 +113,4 @@ class PlaybackControls extends Component {
   }
 }
 
-export default compose(
-  withChildrenStyles(),
-  withChildClasses()
-)(PlaybackControls)
+export default PlaybackControls

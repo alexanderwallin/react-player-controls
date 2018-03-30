@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
-import { compose, withChildrenStyles, withChildClasses } from '../utils/composers.js'
 import RangeControlOverlay, { ControlDirection } from './RangeControlOverlay.js'
 
 const { number, bool, func, string, object, oneOf } = PropTypes
@@ -20,6 +19,8 @@ class VolumeSlider extends Component {
     direction: oneOf([ControlDirection.HORIZONTAL, ControlDirection.VERTICAL]),
     className: string,
     style: object,
+    childClasses: object,
+    childrenStyles: object,
   }
 
   static defaultProps = {
@@ -29,6 +30,8 @@ class VolumeSlider extends Component {
     direction: ControlDirection.VERTICAL,
     className: 'VolumeSlider',
     style: {},
+    childClasses: {},
+    childrenStyles: {},
   }
 
   constructor (props) {
@@ -137,7 +140,4 @@ class VolumeSlider extends Component {
   }
 }
 
-export default compose(
-  withChildrenStyles(),
-  withChildClasses()
-)(VolumeSlider)
+export default VolumeSlider

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import autobind from 'autobind-decorator'
 
-import { withChildrenStyles, withChildClasses } from '../utils/composers.js'
 import Button from './Button.js'
 import { SoundOffIcon, SoundOnIcon } from './icons.js'
 
@@ -17,6 +16,8 @@ class MuteToggleButton extends Component {
     isEnabled: PropTypes.bool,
     className: PropTypes.string,
     style: PropTypes.object,
+    childClasses: PropTypes.object,
+    childrenStyles: PropTypes.object,
   }
 
   static defaultProps = {
@@ -24,6 +25,8 @@ class MuteToggleButton extends Component {
     isEnabled: true,
     className: 'MuteToggleButton',
     style: {},
+    childClasses: {},
+    childrenStyles: {},
   }
 
   @autobind
@@ -72,4 +75,4 @@ class MuteToggleButton extends Component {
   }
 }
 
-export default withChildClasses(withChildrenStyles(MuteToggleButton))
+export default MuteToggleButton

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import { values } from '../utils/collections.js'
-import { compose, withChildrenStyles, withChildClasses } from '../utils/composers.js'
 import FormattedTime from './FormattedTime.js'
 
 const { number, oneOf, string, object } = PropTypes
@@ -31,6 +30,8 @@ class TimeMarker extends Component {
     markerSeparator: string,
     className: string,
     style: object,
+    childClasses: object,
+    childrenStyles: object,
   }
 
   static defaultProps = {
@@ -41,6 +42,8 @@ class TimeMarker extends Component {
     markerSeparator: null,
     className: 'TimeMarker',
     style: {},
+    childClasses: {},
+    childrenStyles: {},
   }
 
   getSecondsForTimeWithMarkerType (markerType) {
@@ -101,7 +104,4 @@ class TimeMarker extends Component {
   }
 }
 
-export default compose(
-  withChildrenStyles(),
-  withChildClasses()
-)(TimeMarker)
+export default TimeMarker
