@@ -60,8 +60,8 @@ describe('<TimeMarker />', () => {
     }
 
     const marker = shallow(<TimeMarker childClasses={childClasses} markerSeparator=" / " />)
-    expect(marker.find(FormattedTime).at(0).prop('extraClasses')).to.contain('MyFirstMarker')
-    expect(marker.find(FormattedTime).at(1).prop('extraClasses')).to.contain('MySecondMarker')
+    expect(marker.find(FormattedTime).at(0).props().className).to.contain('MyFirstMarker')
+    expect(marker.find(FormattedTime).at(1).props().className).to.contain('MySecondMarker')
     expect(marker.find('.MySeparator')).to.have.length(1)
   })
 

@@ -83,11 +83,6 @@ describe('<ProgressBar />', () => {
     expect(bar.props().className).to.contain('ProgressBar')
   })
 
-  it('accepts extra classes', () => {
-    const bar = shallow(<ProgressBar extraClasses="ExtraClass" />)
-    expect(bar.props().className).to.include('ExtraClass')
-  })
-
   it('accepts custom child component classes', () => {
     const childClasses = {
       elapsed: 'MyElapsed',
