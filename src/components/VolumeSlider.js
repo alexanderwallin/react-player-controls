@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
-import RangeControlOverlay, { ControlDirection } from './RangeControlOverlay.js'
+import { Direction } from '../constants.js'
+import { noop } from '../utils.js'
+import RangeControlOverlay from './RangeControlOverlay.js'
 
 const { number, bool, func, string, object, oneOf } = PropTypes
 
@@ -16,7 +18,7 @@ class VolumeSlider extends Component {
     volume: number,
     isEnabled: bool,
     onVolumeChange: func,
-    direction: oneOf([ControlDirection.HORIZONTAL, ControlDirection.VERTICAL]),
+    direction: oneOf([Direction.HORIZONTAL, Direction.VERTICAL]),
     className: string,
     style: object,
     childClasses: object,
@@ -26,8 +28,8 @@ class VolumeSlider extends Component {
   static defaultProps = {
     volume: 0,
     isEnabled: false,
-    onVolumeChange: () => {},
-    direction: ControlDirection.VERTICAL,
+    onVolumeChange: noop,
+    direction: Direction.VERTICAL,
     className: 'VolumeSlider',
     style: {},
     childClasses: {},
@@ -85,19 +87,19 @@ class VolumeSlider extends Component {
     const appliedIntent = isEnabled && currentIntent !== 0 ? currentIntent : 0
     const isDecreaseIntent = appliedIntent && currentIntent < volume
 
-    const directionClass = direction === ControlDirection.VERTICAL
+    const directionClass = direction === Direction.VERTICAL
       ? 'isVertical'
       : 'isHorizontal'
 
-    const valueSizeProperty = direction === ControlDirection.VERTICAL
+    const valueSizeProperty = direction === Direction.VERTICAL
       ? 'height'
       : 'width'
 
-    const intentSizeProperty = direction === ControlDirection.VERTICAL
+    const intentSizeProperty = direction === Direction.VERTICAL
       ? 'height'
       : 'width'
 
-    const handleSizeProperty = direction === ControlDirection.VERTICAL
+    const handleSizeProperty = direction === Direction.VERTICAL
       ? 'bottom'
       : 'left'
 

@@ -6,8 +6,9 @@ import chaiEnzyme from 'chai-enzyme'
 
 chai.use(chaiEnzyme())
 
+import { Direction } from '../src/constants.js'
 import VolumeSlider from '../src/components/VolumeSlider.js'
-import RangeControlOverlay, { ControlDirection } from '../src/components/RangeControlOverlay.js'
+import RangeControlOverlay from '../src/components/RangeControlOverlay.js'
 
 describe('<VolumeSlider />', () => {
   it('renders a value with correct height', () => {
@@ -34,7 +35,7 @@ describe('<VolumeSlider />', () => {
   })
 
   it('renders with correct sizing when vertical', () => {
-    const slider = shallow(<VolumeSlider direction={ControlDirection.VERTICAL} isEnabled={true} volume={0.6} />)
+    const slider = shallow(<VolumeSlider direction={Direction.VERTICAL} isEnabled={true} volume={0.6} />)
 
     slider.setState({ currentIntent: 0.2 })
 
@@ -48,7 +49,7 @@ describe('<VolumeSlider />', () => {
   })
 
   it('renders with correct sizing when horizontal', () => {
-    const slider = shallow(<VolumeSlider direction={ControlDirection.HORIZONTAL} isEnabled={true} volume={0.6} />)
+    const slider = shallow(<VolumeSlider direction={Direction.HORIZONTAL} isEnabled={true} volume={0.6} />)
 
     slider.setState({ currentIntent: 0.2 })
 
@@ -78,11 +79,11 @@ describe('<VolumeSlider />', () => {
   })
 
   it('provides <RangeControlOverlay /> with a valid direction', () => {
-    const horizontalSlider = shallow(<VolumeSlider isEnabled={true} direction={ControlDirection.HORIZONTAL} />)
-    const verticalSlider = shallow(<VolumeSlider isEnabled={true} direction={ControlDirection.VERTICAL} />)
+    const horizontalSlider = shallow(<VolumeSlider isEnabled={true} direction={Direction.HORIZONTAL} />)
+    const verticalSlider = shallow(<VolumeSlider isEnabled={true} direction={Direction.VERTICAL} />)
 
-    expect(horizontalSlider.find(RangeControlOverlay).props().direction).to.eql(ControlDirection.HORIZONTAL)
-    expect(verticalSlider.find(RangeControlOverlay).props().direction).to.eql(ControlDirection.VERTICAL)
+    expect(horizontalSlider.find(RangeControlOverlay).props().direction).to.eql(Direction.HORIZONTAL)
+    expect(verticalSlider.find(RangeControlOverlay).props().direction).to.eql(Direction.VERTICAL)
   })
 
   it('accepts a custom className', () => {

@@ -7,7 +7,8 @@ import { spy } from 'sinon'
 
 chai.use(chaiEnzyme())
 
-import RangeControlOverlay, { ControlDirection } from '../src/components/RangeControlOverlay.js'
+import { Direction } from '../src/constants.js'
+import RangeControlOverlay from '../src/components/RangeControlOverlay.js'
 
 const noop = () => {}
 
@@ -23,7 +24,7 @@ describe('<RangeControlOverlay />', () => {
         <RangeControlOverlay
           bounds={{ left: 100, width: 100 }}
           onValue={onValue}
-          direction={ControlDirection.HORIZONTAL}
+          direction={Direction.HORIZONTAL}
         />
       )
       instance = overlay.instance()
@@ -66,7 +67,7 @@ describe('<RangeControlOverlay />', () => {
         <RangeControlOverlay
           bounds={{ top: 100, height: 100 }}
           onValue={onValue}
-          direction={ControlDirection.VERTICAL}
+          direction={Direction.VERTICAL}
         />
       )
       instance = overlay.instance()
@@ -106,7 +107,7 @@ describe('all controls', () => {
     const overlay = shallow(
       <RangeControlOverlay
         bounds={{ left: 100, width: 100 }}
-        direction={ControlDirection.HORIZONTAL}
+        direction={Direction.HORIZONTAL}
         onValue={noop}
         onChangeStart={onChangeStart}
         onChangeEnd={onChangeEnd}

@@ -8,7 +8,7 @@ import TimeMarker, { TimeMarkerType } from './components/TimeMarker.js'
 
 import VolumeSlider from './components/VolumeSlider.js'
 
-import { ControlDirection } from './components/RangeControlOverlay'
+import { Direction } from './constants.js'
 
 import { PlayIcon, PauseIcon, PreviousIcon, NextIcon, SoundOnIcon, SoundOffIcon } from './components/icons.js'
 
@@ -22,7 +22,7 @@ export {
 
   VolumeSlider,
 
-  ControlDirection,
+  Direction,
 
   PlayIcon,
   PauseIcon,

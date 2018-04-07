@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import autobind from 'autobind-decorator'
 import classNames from 'classnames'
 
+import { noop } from '../utils.js'
 import RangeControlOverlay from './RangeControlOverlay.js'
 
 const { number, bool, func, object, string } = PropTypes
@@ -32,10 +33,10 @@ class ProgressBar extends Component {
     totalTime: Infinity,
     currentTime: 0,
     isSeekable: false,
-    onSeek: () => {},
-    onSeekStart: () => {},
-    onSeekEnd: () => {},
-    onIntent: () => {},
+    onSeek: noop,
+    onSeekStart: noop,
+    onSeekEnd: noop,
+    onIntent: noop,
     className: 'ProgressBar',
     style: {},
     childClasses: {},
