@@ -11,37 +11,50 @@ import VolumeSlider from '../src/components/VolumeSlider.js'
 import RangeControlOverlay from '../src/components/RangeControlOverlay.js'
 
 describe('<VolumeSlider />', () => {
+  const childClasses = {
+    intent: 'Intent',
+    value: 'Value',
+    handle: 'Handle',
+  }
+
   it('renders a value with correct height', () => {
-    const slider = shallow(<VolumeSlider volume={0.6} />)
-    const value = slider.find('.VolumeSlider-value')
+    const slider = shallow(<VolumeSlider volume={0.6} childClasses={childClasses} />)
+    const value = slider.find('.Value')
 
     expect(value.props().style).to.eql({ height: '60%' })
   })
 
   it('renders an intent with correct height', () => {
-    const slider = shallow(<VolumeSlider isEnabled={false} volume={0.45} />)
+    const slider = shallow(<VolumeSlider isEnabled={false} volume={0.45} childClasses={childClasses} />)
 
-    expect(slider.find('.VolumeSlider-intent').props().style.height).to.equal('0%')
+    expect(slider.find('.Intent').props().style.height).to.equal('0%')
 
     // Disabled, so should still be 0%
     slider.setState({ currentIntent: 0.2 })
-    expect(slider.find('.VolumeSlider-intent').props().style.height).to.equal('0%')
+    expect(slider.find('.Intent').props().style.height).to.equal('0%')
 
     slider.setProps({ ...slider.props(), isEnabled: true })
-    expect(slider.find('.VolumeSlider-intent').props().style.height).to.equal('20%')
+    expect(slider.find('.Intent').props().style.height).to.equal('20%')
 
     slider.setState({ currentIntent: 0.91 })
-    expect(slider.find('.VolumeSlider-intent').props().style.height).to.equal('91%')
+    expect(slider.find('.Intent').props().style.height).to.equal('91%')
   })
 
   it('renders with correct sizing when vertical', () => {
-    const slider = shallow(<VolumeSlider direction={Direction.VERTICAL} isEnabled={true} volume={0.6} />)
+    const slider = shallow(
+      <VolumeSlider
+        direction={Direction.VERTICAL}
+        isEnabled={true}
+        volume={0.6}
+        childClasses={childClasses}
+      />
+    )
 
     slider.setState({ currentIntent: 0.2 })
 
-    const value = slider.find('.VolumeSlider-value')
-    const intent = slider.find('.VolumeSlider-intent')
-    const handle = slider.find('.VolumeSlider-handle')
+    const value = slider.find('.Value')
+    const intent = slider.find('.Intent')
+    const handle = slider.find('.Handle')
 
     expect(value.props().style).to.eql({ height: '60%' })
     expect(intent.props().style).to.eql({ height: '20%' })
@@ -49,13 +62,20 @@ describe('<VolumeSlider />', () => {
   })
 
   it('renders with correct sizing when horizontal', () => {
-    const slider = shallow(<VolumeSlider direction={Direction.HORIZONTAL} isEnabled={true} volume={0.6} />)
+    const slider = shallow(
+      <VolumeSlider
+        direction={Direction.HORIZONTAL}
+        isEnabled={true}
+        volume={0.6}
+        childClasses={childClasses}
+      />
+    )
 
     slider.setState({ currentIntent: 0.2 })
 
-    const value = slider.find('.VolumeSlider-value')
-    const intent = slider.find('.VolumeSlider-intent')
-    const handle = slider.find('.VolumeSlider-handle')
+    const value = slider.find('.Value')
+    const intent = slider.find('.Intent')
+    const handle = slider.find('.Handle')
 
     expect(value.props().style).to.eql({ width: '60%' })
     expect(intent.props().style).to.eql({ width: '20%' })
@@ -88,12 +108,7 @@ describe('<VolumeSlider />', () => {
 
   it('accepts a custom className', () => {
     const slider = shallow(<VolumeSlider className="MyClassName" />)
-    expect(slider.props().className).to.include('MyClassName')
-  })
-
-  it('should have a default className', () => {
-    const slider = shallow(<VolumeSlider />)
-    expect(slider.props().className).to.contain('VolumeSlider')
+    expect(slider.props().className).to.equal('MyClassName')
   })
 
   it('accepts custom child component classes', () => {
@@ -125,10 +140,12 @@ describe('<VolumeSlider />', () => {
       RangeControlOverlay: { ...style },
     }
 
-    const slider = shallow(<VolumeSlider isEnabled={true} childrenStyles={childrenStyles} />)
-    expect(slider.find('.VolumeSlider-value').props().style).to.include(style)
-    expect(slider.find('.VolumeSlider-intent').props().style).to.include(style)
-    expect(slider.find('.VolumeSlider-handle').props().style).to.include(style)
+    const slider = shallow(
+      <VolumeSlider isEnabled={true} childClasses={childClasses} childrenStyles={childrenStyles} />
+    )
+    expect(slider.find('.Value').props().style).to.include(style)
+    expect(slider.find('.Intent').props().style).to.include(style)
+    expect(slider.find('.Handle').props().style).to.include(style)
     expect(slider.find(RangeControlOverlay).props().style).to.include(style)
   })
 })

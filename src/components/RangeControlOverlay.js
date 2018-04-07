@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import autobind from 'autobind-decorator'
-import classNames from 'classnames'
 
 import { Direction } from '../constants.js'
 import { noop } from '../utils.js'
@@ -40,7 +39,7 @@ class RangeControlOverlay extends Component {
     onChangeEnd: noop,
     onIntent: noop,
     direction: Direction.HORIZONTAL,
-    className: 'RangeControlOverlay',
+    className: null,
     style: {},
   }
 
@@ -158,11 +157,10 @@ class RangeControlOverlay extends Component {
 
   render () {
     const { className, style } = this.props
-    const { isDragging } = this.state
 
     return (
       <div
-        className={classNames(className, { isDragging })}
+        className={className}
         style={style}
         onMouseDown={this.startDrag}
         onMouseMove={this.handleIntentMove}

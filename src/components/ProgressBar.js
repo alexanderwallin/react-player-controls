@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import autobind from 'autobind-decorator'
-import classNames from 'classnames'
 
 import { noop } from '../utils.js'
 import RangeControlOverlay from './RangeControlOverlay.js'
@@ -37,7 +36,7 @@ class ProgressBar extends Component {
     onSeekStart: noop,
     onSeekEnd: noop,
     onIntent: noop,
-    className: 'ProgressBar',
+    className: null,
     style: {},
     childClasses: {},
     childrenStyles: {},
@@ -110,35 +109,30 @@ class ProgressBar extends Component {
     const progressPercent = Math.min(100, 100 * currentTime / totalTime)
     const styleLeft = `${progressPercent}%`
 
-    const isRewindIntent = currentIntent !== 0 && currentIntent < currentTime / totalTime
-
     return (
       <div
-        className={classNames(className, {
-          isSeekable,
-          isRewindIntent,
-        })}
+        className={className}
         style={style}
         ref={this.storeRef}
       >
         <div
-          className={childClasses.elapsed || 'ProgressBar-elapsed'}
+          className={childClasses.elapsed}
           style={{ width: styleLeft, ...(childrenStyles.elapsed || {}) }}
         />
 
         <div
-          className={childClasses.intent || 'ProgressBar-intent'}
+          className={childClasses.intent}
           style={{ width: `${currentIntent * 100}%`, ...(childrenStyles.intent || {}) }}
         />
 
         <div
-          className={childClasses.handle || 'ProgressBar-handle'}
+          className={childClasses.handle}
           style={{ left: styleLeft, ...(childrenStyles.handle || {}) }}
         />
 
         {isSeekable && (
           <RangeControlOverlay
-            className={childClasses.seek || 'ProgressBar-seek'}
+            className={childClasses.seek}
             style={childrenStyles.RangeControlOverlay}
             bounds={() => this.progressBarEl.getBoundingClientRect()}
             onChange={this.handleSeek}

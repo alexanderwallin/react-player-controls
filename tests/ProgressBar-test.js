@@ -43,25 +43,20 @@ describe('<ProgressBar />', () => {
     expect(onSeekEnd.called).to.equal(true)
   })
 
-  it('provides a class for rewind intents', () => {
-    const bar = shallow(<ProgressBar isSeekable={true} totalTime={10} currentTime={5} />)
-
-    bar.setState({ currentIntent: 0.3 })
-    expect(bar.hasClass('ProgressBar')).to.equal(true)
-
-    bar.setState({ currentIntent: 0.8 })
-    expect(bar.hasClass('isRewindIntent')).to.equal(false)
-  })
-
   it('sets correct elapsed width', () => {
-    const bar1 = mount(<ProgressBar />)
-    expect(bar1.find('.ProgressBar-elapsed').props().style.width).to.equal('0%')
+    const props = {
+      childClasses: {
+        elapsed: 'Elapsed',
+      },
+    }
+    const bar1 = mount(<ProgressBar {...props} />)
+    expect(bar1.find('.Elapsed').props().style.width).to.equal('0%')
 
-    const bar2 = mount(<ProgressBar totalTime={10} currentTime={1} />)
-    expect(bar2.find('.ProgressBar-elapsed').props().style.width).to.equal('10%')
+    const bar2 = mount(<ProgressBar {...props} totalTime={10} currentTime={1} />)
+    expect(bar2.find('.Elapsed').props().style.width).to.equal('10%')
 
-    const bar3 = mount(<ProgressBar totalTime={10} currentTime={20} />)
-    expect(bar3.find('.ProgressBar-elapsed').props().style.width).to.equal('100%')
+    const bar3 = mount(<ProgressBar {...props} totalTime={10} currentTime={20} />)
+    expect(bar3.find('.Elapsed').props().style.width).to.equal('100%')
   })
 
   it('passes a time from seek click', () => {
@@ -76,11 +71,6 @@ describe('<ProgressBar />', () => {
   it('accepts a custom class name', () => {
     const bar = shallow(<ProgressBar className="MyClassName" />)
     expect(bar.props().className).to.include('MyClassName')
-  })
-
-  it('should have a default className', () => {
-    const bar = shallow(<ProgressBar />)
-    expect(bar.props().className).to.contain('ProgressBar')
   })
 
   it('accepts custom child component classes', () => {
@@ -112,10 +102,20 @@ describe('<ProgressBar />', () => {
       RangeControlOverlay: { ...style },
     }
 
-    const bar = shallow(<ProgressBar isSeekable={true} childrenStyles={childrenStyles} />)
-    expect(bar.find('.ProgressBar-elapsed').props().style).to.include(style)
-    expect(bar.find('.ProgressBar-intent').props().style).to.include(style)
-    expect(bar.find('.ProgressBar-handle').props().style).to.include(style)
+    const bar = shallow(
+      <ProgressBar
+        isSeekable={true}
+        childClasses={{
+          elapsed: 'Elapsed',
+          intent: 'Intent',
+          handle: 'Handle',
+        }}
+        childrenStyles={childrenStyles}
+      />
+    )
+    expect(bar.find('.Elapsed').props().style).to.include(style)
+    expect(bar.find('.Intent').props().style).to.include(style)
+    expect(bar.find('.Handle').props().style).to.include(style)
     expect(bar.find(RangeControlOverlay).props().style).to.include(style)
   })
 

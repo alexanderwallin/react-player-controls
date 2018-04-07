@@ -19,7 +19,7 @@ class FormattedTime extends Component {
 
   static defaultProps = {
     numSeconds: 0,
-    className: 'FormattedTime',
+    className: null,
     style: {},
   }
 

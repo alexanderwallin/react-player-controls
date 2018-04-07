@@ -12,11 +12,6 @@ import Button from '../src/components/Button.js'
 const noop = () => {}
 
 describe('<Button />', () => {
-  it('has a default class name of Button', () => {
-    const btn = shallow(<Button onClick={noop} />)
-    expect(btn.props().className).to.include('Button')
-  })
-
   it('accepts a custom class name', () => {
     const btn = shallow(<Button className="MyClassName" onClick={noop} />)
     expect(btn.props().className).to.include('MyClassName')

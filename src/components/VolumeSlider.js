@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import autobind from 'autobind-decorator'
-import classNames from 'classnames'
 
 import { Direction } from '../constants.js'
 import { noop } from '../utils.js'
@@ -30,7 +29,7 @@ class VolumeSlider extends Component {
     isEnabled: false,
     onVolumeChange: noop,
     direction: Direction.VERTICAL,
-    className: 'VolumeSlider',
+    className: null,
     style: {},
     childClasses: {},
     childrenStyles: {},
@@ -85,11 +84,6 @@ class VolumeSlider extends Component {
     const styleSize = `${volumePercentage}%`
 
     const appliedIntent = isEnabled && currentIntent !== 0 ? currentIntent : 0
-    const isDecreaseIntent = appliedIntent && currentIntent < volume
-
-    const directionClass = direction === Direction.VERTICAL
-      ? 'isVertical'
-      : 'isHorizontal'
 
     const valueSizeProperty = direction === Direction.VERTICAL
       ? 'height'
@@ -105,31 +99,28 @@ class VolumeSlider extends Component {
 
     return (
       <div
-        className={classNames(className, directionClass, {
-          isEnabled,
-          isDecreaseIntent,
-        })}
+        className={className}
         style={style}
         ref={this.storeRef}
       >
         <div
-          className={childClasses.value || 'VolumeSlider-value'}
+          className={childClasses.value}
           style={{ [valueSizeProperty]: styleSize, ...(childrenStyles.value || {}) }}
         />
 
         <div
-          className={childClasses.intent || 'VolumeSlider-intent'}
+          className={childClasses.intent}
           style={{ [intentSizeProperty]: `${appliedIntent * 100}%`, ...(childrenStyles.intent || {}) }}
         />
 
         <div
-          className={childClasses.handle || 'VolumeSlider-handle'}
+          className={childClasses.handle}
           style={{ [handleSizeProperty]: styleSize, ...(childrenStyles.handle || {}) }}
         />
 
         {isEnabled && (
           <RangeControlOverlay
-            className={childClasses.seek || 'VolumeSlider-seek'}
+            className={childClasses.seek}
             style={childrenStyles.RangeControlOverlay}
             bounds={this.getBounds}
             direction={direction}

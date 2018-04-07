@@ -57,11 +57,6 @@ describe('<FormattedTime />', () => {
     expect(time.props().className).to.contain('CustomClassName')
   })
 
-  it('should have a default className', () => {
-    let time = shallow(<FormattedTime />)
-    expect(time.props().className).to.contain('FormattedTime')
-  })
-
   it('should accept custom styles', () => {
     const time = shallow(<FormattedTime style={{ fontSize: 100 }} />)
     expect(time.props().style).to.eql({ fontSize: 100 })

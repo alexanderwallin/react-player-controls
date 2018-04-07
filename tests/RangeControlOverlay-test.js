@@ -129,11 +129,6 @@ describe('all controls', () => {
     expect(overlay.props().className).to.include('MyClassName')
   })
 
-  it('should have a default className', () => {
-    const overlay = shallow(<RangeControlOverlay />)
-    expect(overlay.props().className).to.contain('RangeControlOverlay')
-  })
-
   it('should accept custom styles', () => {
     const overlay = shallow(<RangeControlOverlay style={{ fontSize: 100 }} bounds={noop} />)
     expect(overlay.props().style).to.eql({ fontSize: 100 })
