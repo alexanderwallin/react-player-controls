@@ -141,7 +141,7 @@ class ProgressBar extends Component {
             className={childClasses.seek || 'ProgressBar-seek'}
             style={childrenStyles.RangeControlOverlay}
             bounds={() => this.progressBarEl.getBoundingClientRect()}
-            onValue={this.handleSeek}
+            onChange={this.handleSeek}
             onChangeStart={this.handleSeekStart}
             onChangeEnd={this.handleSeekEnd}
             onIntent={this.handleIntent}

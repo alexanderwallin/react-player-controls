@@ -100,7 +100,7 @@ class Slider extends PureComponent {
           direction={direction}
           bounds={() => this.$el.getBoundingClientRect()}
           onIntent={this.handleIntent}
-          onValue={this.handleChange}
+          onChange={this.handleChange}
           onChangeStart={this.handleChangeStart}
           onChangeEnd={this.handleChangeEnd}
           style={{

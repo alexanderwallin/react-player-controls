@@ -133,7 +133,7 @@ class VolumeSlider extends Component {
             style={childrenStyles.RangeControlOverlay}
             bounds={this.getBounds}
             direction={direction}
-            onValue={this.handleVolumeChange}
+            onChange={this.handleVolumeChange}
             onIntent={this.handleIntent}
           />
         )}

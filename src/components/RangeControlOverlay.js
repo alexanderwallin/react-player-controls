@@ -26,7 +26,7 @@ class RangeControlOverlay extends Component {
         top: number.isRequired,
       }),
     ]).isRequired,
-    onValue: func.isRequired,
+    onChange: func.isRequired,
     onChangeStart: func,
     onChangeEnd: func,
     onIntent: func,
@@ -104,7 +104,7 @@ class RangeControlOverlay extends Component {
 
   @autobind
   triggerRangeChange (mouseEvent) {
-    this.props.onValue(this.getValueFromMouseEvent(mouseEvent))
+    this.props.onChange(this.getValueFromMouseEvent(mouseEvent))
   }
 
   @autobind

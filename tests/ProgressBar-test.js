@@ -23,7 +23,7 @@ describe('<ProgressBar />', () => {
     expect(bar.find('RangeControlOverlay')).to.have.length(0)
 
     bar.setProps({ isSeekable: true })
-    bar.find('RangeControlOverlay').props().onValue()
+    bar.find('RangeControlOverlay').props().onChange()
     expect(callback.called).to.equal(true)
   })
 
@@ -68,7 +68,7 @@ describe('<ProgressBar />', () => {
     const callback = spy()
     const bar = mount(<ProgressBar totalTime={10} isSeekable={true} onSeek={callback} />)
 
-    bar.find('RangeControlOverlay').props().onValue(0.5)
+    bar.find('RangeControlOverlay').props().onChange(0.5)
     expect(callback.called).to.equal(true)
     expect(callback.args[0][0]).to.equal(5)
   })
