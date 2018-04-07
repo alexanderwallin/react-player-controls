@@ -8,6 +8,7 @@ import {
   Button,
   Direction,
   FormattedTime,
+  PlayerIcon,
   Slider,
 } from '../../../dist/index.js'
 
@@ -96,6 +97,40 @@ class FormattedTimeDemo extends PureComponent {
 
         <div className="ComponentDemo-results">
           <FormattedTime numSeconds={numSeconds} />
+        </div>
+      </div>
+    )
+  }
+}
+
+//
+// PlayerIcon demo
+//
+class PlayerIconDemo extends PureComponent {
+  render () {
+    return (
+      <div className="ComponentDemo ButtonDemo">
+        <pre className="ComponentDemo-code">
+          <code className="language-jsx" dangerouslySetInnerHTML={{
+            __html: Prism.highlight(
+              `<PlayerIcon.Play width={32} height={32} style={{ marginRight: 32 }} />\n` +
+              `<PlayerIcon.Pause width={32} height={32} style={{ marginRight: 32 }} />\n` +
+              `<PlayerIcon.Previous width={32} height={32} style={{ marginRight: 32 }} />\n` +
+              `<PlayerIcon.Next width={32} height={32} style={{ marginRight: 32 }} />\n` +
+              `<PlayerIcon.SoundOn width={32} height={32} style={{ marginRight: 32 }} />\n` +
+              `<PlayerIcon.SoundOff width={32} height={32} style={{ marginRight: 32 }} />\n`,
+              Prism.languages.jsx
+            )
+          }} />
+        </pre>
+
+        <div className="ComponentDemo-results">
+          <PlayerIcon.Play width={32} height={32} style={{ marginRight: 32 }} />
+          <PlayerIcon.Pause width={32} height={32} style={{ marginRight: 32 }} />
+          <PlayerIcon.Previous width={32} height={32} style={{ marginRight: 32 }} />
+          <PlayerIcon.Next width={32} height={32} style={{ marginRight: 32 }} />
+          <PlayerIcon.SoundOn width={32} height={32} style={{ marginRight: 32 }} />
+          <PlayerIcon.SoundOff width={32} height={32} style={{ marginRight: 32 }} />
         </div>
       </div>
     )
@@ -251,4 +286,5 @@ class SliderDemo extends PureComponent {
 
 ReactDOM.render(<ButtonDemo />, document.querySelector('.component-demo[data-component="Button"]'))
 ReactDOM.render(<FormattedTimeDemo />, document.querySelector('.component-demo[data-component="FormattedTime"]'))
+ReactDOM.render(<PlayerIconDemo />, document.querySelector('.component-demo[data-component="PlayerIcon"]'))
 ReactDOM.render(<SliderDemo />, document.querySelector('.component-demo[data-component="Slider"]'))

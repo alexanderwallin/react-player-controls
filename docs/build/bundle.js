@@ -22354,6 +22354,50 @@ var FormattedTimeDemo = function (_PureComponent2) {
 }(_react.PureComponent);
 
 //
+// PlayerIcon demo
+//
+
+
+var PlayerIconDemo = function (_PureComponent3) {
+  _inherits(PlayerIconDemo, _PureComponent3);
+
+  function PlayerIconDemo() {
+    _classCallCheck(this, PlayerIconDemo);
+
+    return _possibleConstructorReturn(this, (PlayerIconDemo.__proto__ || Object.getPrototypeOf(PlayerIconDemo)).apply(this, arguments));
+  }
+
+  _createClass(PlayerIconDemo, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'ComponentDemo ButtonDemo' },
+        _react2.default.createElement(
+          'pre',
+          { className: 'ComponentDemo-code' },
+          _react2.default.createElement('code', { className: 'language-jsx', dangerouslySetInnerHTML: {
+              __html: _prismjs2.default.highlight('<PlayerIcon.Play width={32} height={32} style={{ marginRight: 32 }} />\n' + '<PlayerIcon.Pause width={32} height={32} style={{ marginRight: 32 }} />\n' + '<PlayerIcon.Previous width={32} height={32} style={{ marginRight: 32 }} />\n' + '<PlayerIcon.Next width={32} height={32} style={{ marginRight: 32 }} />\n' + '<PlayerIcon.SoundOn width={32} height={32} style={{ marginRight: 32 }} />\n' + '<PlayerIcon.SoundOff width={32} height={32} style={{ marginRight: 32 }} />\n', _prismjs2.default.languages.jsx)
+            } })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ComponentDemo-results' },
+          _react2.default.createElement(_index.PlayerIcon.Play, { width: 32, height: 32, style: { marginRight: 32 } }),
+          _react2.default.createElement(_index.PlayerIcon.Pause, { width: 32, height: 32, style: { marginRight: 32 } }),
+          _react2.default.createElement(_index.PlayerIcon.Previous, { width: 32, height: 32, style: { marginRight: 32 } }),
+          _react2.default.createElement(_index.PlayerIcon.Next, { width: 32, height: 32, style: { marginRight: 32 } }),
+          _react2.default.createElement(_index.PlayerIcon.SoundOn, { width: 32, height: 32, style: { marginRight: 32 } }),
+          _react2.default.createElement(_index.PlayerIcon.SoundOff, { width: 32, height: 32, style: { marginRight: 32 } })
+        )
+      );
+    }
+  }]);
+
+  return PlayerIconDemo;
+}(_react.PureComponent);
+
+//
 // Slider demo
 //
 
@@ -22411,15 +22455,15 @@ var SliderHandle = function SliderHandle(_ref2) {
   });
 };
 
-var SliderDemo = function (_PureComponent3) {
-  _inherits(SliderDemo, _PureComponent3);
+var SliderDemo = function (_PureComponent4) {
+  _inherits(SliderDemo, _PureComponent4);
 
   function SliderDemo(props) {
     _classCallCheck(this, SliderDemo);
 
-    var _this5 = _possibleConstructorReturn(this, (SliderDemo.__proto__ || Object.getPrototypeOf(SliderDemo)).call(this, props));
+    var _this6 = _possibleConstructorReturn(this, (SliderDemo.__proto__ || Object.getPrototypeOf(SliderDemo)).call(this, props));
 
-    _this5.state = {
+    _this6.state = {
       isEnabled: true,
       direction: _index.Direction.HORIZONTAL,
       value: 0,
@@ -22427,13 +22471,13 @@ var SliderDemo = function (_PureComponent3) {
       lastValueEnd: 0,
       lastIntent: 0
     };
-    return _this5;
+    return _this6;
   }
 
   _createClass(SliderDemo, [{
     key: 'render',
     value: function render() {
-      var _this6 = this;
+      var _this7 = this;
 
       var _state = this.state,
           isEnabled = _state.isEnabled,
@@ -22461,7 +22505,7 @@ var SliderDemo = function (_PureComponent3) {
             'label',
             null,
             _react2.default.createElement('input', { type: 'checkbox', checked: isEnabled, onChange: function onChange(evt) {
-                return _this6.setState({ isEnabled: !isEnabled });
+                return _this7.setState({ isEnabled: !isEnabled });
               } }),
             _react2.default.createElement(
               'code',
@@ -22480,7 +22524,7 @@ var SliderDemo = function (_PureComponent3) {
             _react2.default.createElement(
               'select',
               { value: direction, onChange: function onChange(evt) {
-                  return _this6.setState({ direction: evt.target.value });
+                  return _this7.setState({ direction: evt.target.value });
                 } },
               _react2.default.createElement(
                 'option',
@@ -22503,7 +22547,7 @@ var SliderDemo = function (_PureComponent3) {
               'value'
             ),
             _react2.default.createElement('input', { type: 'number', value: value, min: 0, max: 1, step: 0.01, onChange: function onChange(evt) {
-                return _this6.setState({ value: evt.target.value });
+                return _this7.setState({ value: evt.target.value });
               } })
           ),
           _react2.default.createElement(
@@ -22546,22 +22590,22 @@ var SliderDemo = function (_PureComponent3) {
               isEnabled: isEnabled,
               direction: direction,
               onChange: function onChange(newValue) {
-                return _this6.setState(function () {
+                return _this7.setState(function () {
                   return { value: newValue };
                 });
               },
               onChangeStart: function onChangeStart(startValue) {
-                return _this6.setState(function () {
+                return _this7.setState(function () {
                   return { lastValueStart: startValue };
                 });
               },
               onChangeEnd: function onChangeEnd(endValue) {
-                return _this6.setState(function () {
+                return _this7.setState(function () {
                   return { lastValueEnd: endValue };
                 });
               },
               onIntent: function onIntent(intent) {
-                return _this6.setState(function () {
+                return _this7.setState(function () {
                   return { lastIntent: intent };
                 });
               },
@@ -22588,6 +22632,7 @@ var SliderDemo = function (_PureComponent3) {
 
 _reactDom2.default.render(_react2.default.createElement(ButtonDemo, null), document.querySelector('.component-demo[data-component="Button"]'));
 _reactDom2.default.render(_react2.default.createElement(FormattedTimeDemo, null), document.querySelector('.component-demo[data-component="FormattedTime"]'));
+_reactDom2.default.render(_react2.default.createElement(PlayerIconDemo, null), document.querySelector('.component-demo[data-component="PlayerIcon"]'));
 _reactDom2.default.render(_react2.default.createElement(SliderDemo, null), document.querySelector('.component-demo[data-component="Slider"]'));
 
 },{"../../../dist/index.js":7,"prismjs":34,"prismjs/components/prism-jsx.js":33,"react":187,"react-dom":36}],189:[function(require,module,exports){
