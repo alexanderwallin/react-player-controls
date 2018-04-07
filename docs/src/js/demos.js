@@ -1,17 +1,25 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
+// import PropTypes from 'prop-types'
 import Prism from 'prismjs'
 import 'prismjs/components/prism-jsx.js'
 
-import * as rpc from '../../../dist/index.js'
+import {
+  Button,
+  Direction,
+  FormattedTime,
+  Slider,
+} from '../../../dist/index.js'
 
-const demos = {}
+const WHITE_SMOKE = '#eee'
+const GRAY = '#878c88'
+const GREEN = '#72d687'
 
 //
-// PlayButton demo
+// Button demo
 //
-demos.PlayButton = class PlayButtonDemo extends React.Component {
-  constructor(props) {
+class ButtonDemo extends PureComponent {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -19,15 +27,15 @@ demos.PlayButton = class PlayButtonDemo extends React.Component {
     }
   }
 
-  render() {
+  render () {
     const { isEnabled } = this.state
 
     return (
-      <div className="ComponentDemo PlayButtonDemo">
+      <div className="ComponentDemo ButtonDemo">
         <pre className="ComponentDemo-code">
           <code className="language-jsx" dangerouslySetInnerHTML={{
             __html: Prism.highlight(
-              `<PlayButton\n  isEnabled={this.state.isEnabled}\n  onClick={() => alert('Play!')} \n/>`,
+              `<Button\n  isEnabled={this.state.isEnabled}\n  onClick={() => alert('Clicked!')} \n>\n  This is a button\n</Button>`,
               Prism.languages.jsx
             )
           }} />
@@ -41,221 +49,23 @@ demos.PlayButton = class PlayButtonDemo extends React.Component {
         </div>
 
         <div className="ComponentDemo-results">
-          <rpc.PlayButton
-            onClick={() => alert('Play!')}
+          <Button
             isEnabled={isEnabled}
-          />
+            onClick={() => alert('Clicked!')}
+          >
+            This is a button
+          </Button>
         </div>
       </div>
     )
   }
 }
-
-//
-// PauseButton demo
-//
-demos.PauseButton = class PauseButtonDemo extends React.Component {
-  render() {
-    return (
-      <div className="ComponentDemo PauseButtonDemo">
-        <pre className="ComponentDemo-code">
-          <code className="language-jsx" dangerouslySetInnerHTML={{
-            __html: Prism.highlight(
-              `<PauseButton\n  onClick={() => alert('Pause!')} \n/>`,
-              Prism.languages.jsx
-            )
-          }} />
-        </pre>
-
-        <div className="ComponentDemo-results">
-          <rpc.PauseButton onClick={() => alert('Pause!')} />
-        </div>
-      </div>
-    )
-  }
-}
-
-//
-// PrevButton demo
-//
-demos.PrevButton = class PrevButtonDemo extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isEnabled: true,
-    }
-  }
-
-  render() {
-    const { isEnabled } = this.state
-
-    return (
-      <div className="ComponentDemo PrevButtonDemo">
-        <pre className="ComponentDemo-code">
-          <code className="language-jsx" dangerouslySetInnerHTML={{
-            __html: Prism.highlight(
-              `<PrevButton\n  isEnabled={this.state.isEnabled}\n  onClick={() => alert('Go to previous')} \n/>`,
-              Prism.languages.jsx
-            )
-          }} />
-        </pre>
-
-        <div className="ComponentDemo-settings">
-          <label>
-            <input type="checkbox" checked={isEnabled} onChange={(evt) => this.setState({ isEnabled: !isEnabled })} />
-            <code>isEnabled</code>
-          </label>
-        </div>
-
-        <div className="ComponentDemo-results">
-          <rpc.PrevButton
-            onClick={() => alert('Go to previous')}
-            isEnabled={isEnabled}
-          />
-        </div>
-      </div>
-    )
-  }
-}
-
-//
-// NextButton demo
-//
-demos.NextButton = class NextButtonDemo extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isEnabled: true,
-    }
-  }
-
-  render() {
-    const { isEnabled } = this.state
-
-    return (
-      <div className="ComponentDemo NextButtonDemo">
-        <pre className="ComponentDemo-code">
-          <code className="language-jsx" dangerouslySetInnerHTML={{
-            __html: Prism.highlight(
-              `<NextButton\n  isEnabled={this.state.isEnabled}\n  onClick={() => alert('Go to next')} \n/>`,
-              Prism.languages.jsx
-            )
-          }} />
-        </pre>
-
-        <div className="ComponentDemo-settings">
-          <label>
-            <input type="checkbox" checked={isEnabled} onChange={(evt) => this.setState({ isEnabled: !isEnabled })} />
-            <code>isEnabled</code>
-          </label>
-        </div>
-
-        <div className="ComponentDemo-results">
-          <rpc.NextButton
-            onClick={() => alert('Go to next')}
-            isEnabled={isEnabled}
-          />
-        </div>
-      </div>
-    )
-  }
-}
-
-//
-// PlaybackControls demo
-//
-demos.PlaybackControls = class PlaybackControls extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isPlaying: false,
-      isPlayable: true,
-      showPrevious: true,
-      hasPrevious: true,
-      showNext: true,
-      hasNext: true,
-    }
-  }
-
-  render() {
-    const { isPlayable, isPlaying, showPrevious, showNext, hasPrevious, hasNext } = this.state
-
-    return (
-      <div className="ComponentDemo PlaybackControls">
-        <pre className="ComponentDemo-code">
-          <code className="language-jsx" dangerouslySetInnerHTML={{
-            __html: Prism.highlight(
-`<PlaybackControls
-  isPlayable={this.state.isPlayable}
-  isPlaying={this.state.isPlaying}
-  showPrevious={this.state.showPrevious}
-  hasPrevious={this.state.hasPrevious}
-  showNext={this.state.showNext}
-  hasNext={this.state.hasNext}
-  onPlaybackChange={isPlaying => this.setState({ ...this.state, isPlaying })}
-  onPrevious={() => alert('Go to previous')}
-  onNext={() => alert('Go to next')}
-/>`,
-              Prism.languages.jsx
-            )
-          }} />
-        </pre>
-
-        <div className="ComponentDemo-settings">
-          <label>
-            <input type="checkbox" checked={isPlayable} onChange={(evt) => this.setState({ isPlayable: !isPlayable })} />
-            <code>isPlayable</code>
-          </label>
-
-          <label>
-            <input type="checkbox" checked={showPrevious} onChange={(evt) => this.setState({ showPrevious: !showPrevious })} />
-            <code>showPrevious</code>
-          </label>
-
-          <label>
-            <input type="checkbox" checked={hasPrevious} onChange={(evt) => this.setState({ hasPrevious: !hasPrevious })} />
-            <code>hasPrevious</code>
-          </label>
-
-          <label>
-            <input type="checkbox" checked={showNext} onChange={(evt) => this.setState({ showNext: !showNext })} />
-            <code>showNext</code>
-          </label>
-
-          <label>
-            <input type="checkbox" checked={hasNext} onChange={(evt) => this.setState({ hasNext: !hasNext })} />
-            <code>hasNext</code>
-          </label>
-        </div>
-
-        <div className="ComponentDemo-results">
-          <rpc.PlaybackControls
-            isPlayable={isPlayable}
-            isPlaying={isPlaying}
-            onPlaybackChange={isPlaying => this.setState(Object.assign({}, this.state, { isPlaying: isPlaying }))}
-            showPrevious={showPrevious}
-            hasPrevious={hasPrevious}
-            onPrevious={() => alert('Go to previous')}
-            showNext={showNext}
-            hasNext={hasNext}
-            onNext={() => alert('Go to next')}
-          />
-        </div>
-      </div>
-    )
-  }
-}
-
-
 
 //
 // FormattedTime demo
 //
-demos.FormattedTime = class FormattedTimeDemo extends React.Component {
-  constructor(props) {
+class FormattedTimeDemo extends PureComponent {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -263,7 +73,7 @@ demos.FormattedTime = class FormattedTimeDemo extends React.Component {
     }
   }
 
-  render() {
+  render () {
     const { numSeconds } = this.state
 
     return (
@@ -285,7 +95,7 @@ demos.FormattedTime = class FormattedTimeDemo extends React.Component {
         </div>
 
         <div className="ComponentDemo-results">
-          <rpc.FormattedTime numSeconds={numSeconds} />
+          <FormattedTime numSeconds={numSeconds} />
         </div>
       </div>
     )
@@ -293,30 +103,85 @@ demos.FormattedTime = class FormattedTimeDemo extends React.Component {
 }
 
 //
-// TimeMarker demo
+// Slider demo
 //
-demos.TimeMarker = class TimeMarkerDemo extends React.Component {
-  constructor(props) {
+const SliderBar = ({ direction, value, style }) => (
+  <div
+    style={Object.assign({}, {
+      position: 'absolute',
+      background: GRAY,
+      borderRadius: 4,
+    }, direction === Direction.HORIZONTAL ? {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      width: `${value * 100}%`,
+    } : {
+      right: 0,
+      bottom: 0,
+      left: 0,
+      height: `${value * 100}%`,
+    }, style)}
+  />
+)
+
+const SliderHandle = ({ direction, value, style }) => (
+  <div
+    style={Object.assign({}, {
+      position: 'absolute',
+      width: 16,
+      height: 16,
+      background: GREEN,
+      borderRadius: '100%',
+      transform: 'scale(1)',
+      transition: 'transform 0.2s',
+      '&:hover': {
+        transform: 'scale(1.3)',
+      }
+    }, direction === Direction.HORIZONTAL ? {
+      top: 0,
+      left: `${value * 100}%`,
+      marginTop: -4,
+      marginLeft: -8,
+    } : {
+      left: 0,
+      bottom: `${value * 100}%`,
+      marginBottom: -8,
+      marginLeft: -4,
+    }, style)}
+  />
+)
+
+class SliderDemo extends PureComponent {
+  constructor (props) {
     super(props)
 
     this.state = {
-      totalTime: 190,
-      currentTime: 65,
-      markerSeparator: ' / ',
-      firstMarkerType: rpc.TimeMarkerType.ELAPSED,
-      secondMarkerType: rpc.TimeMarkerType.DURATION,
+      isEnabled: true,
+      direction: Direction.HORIZONTAL,
+      value: 0,
+      lastValueStart: 0,
+      lastValueEnd: 0,
+      lastIntent: 0,
     }
   }
 
-  render() {
-    const { totalTime, currentTime, markerSeparator, firstMarkerType, secondMarkerType } = this.state
+  render () {
+    const { isEnabled, direction, value, lastValueStart, lastValueEnd, lastIntent } = this.state
 
     return (
-      <div className="ComponentDemo TimeMarkerDemo">
+      <div className="ComponentDemo SliderDemo">
         <pre className="ComponentDemo-code">
           <code className="language-jsx" dangerouslySetInnerHTML={{
             __html: Prism.highlight(
-              `<TimeMarker\n  totalTime={this.state.totalTime}\n  currentTime={this.state.currentTime}\n  markerSeparator={this.state.markerSeparator}\n  firstMarkerType={this.state.firstMarkerType}\n  secondMarkerType={this.state.secondMarkerType}\n/>`,
+              `const SliderBar = ({ direction, value, style }) => <div style={computedStylesHere} />` +
+              `\nconst SliderHandle = ({ direction, value, style }) => <div style={computedStylesHere} />` +
+              `\n` +
+              `\n<Slider\n  isEnabled={this.state.isEnabled}\n  direction={this.state.direction}\n  onChange={newValue => this.setState(() => ({ value: newValue }))}\n  onChangeStart={startValue => this.setState(() => ({ lastValueStart: startValue }))}\n  onChangeEnd={endValue => this.setState(() => ({ lastValueEnd: endValue }))}\n  onIntent={intent => this.setState(() => ({ lastIntent: intent }))}\n  style={sliderStylesHere}\n>` +
+              `\n  <SliderBar direction={direction} value={value} style={{ background: this.state.isEnabled ? '#72d687' : '#878c88' }} />` +
+              `\n  <SliderBar direction={direction} value={lastIntent} style={{ background: 'rgba(0, 0, 0, 0.05)' }} />` +
+              `\n  <SliderHandle direction={direction} value={value} style={{ background: this.state.isEnabled ? '#72d687' : '#878c88' }} />` +
+              `\n</Slider>`,
               Prism.languages.jsx
             )
           }} />
@@ -324,123 +189,31 @@ demos.TimeMarker = class TimeMarkerDemo extends React.Component {
 
         <div className="ComponentDemo-settings">
           <label>
-            <code>totalTime</code>
-            <input type="number" value={totalTime} onChange={evt => this.setState(Object.assign({}, this.state, { totalTime: evt.target.value }))} />
+            <input type="checkbox" checked={isEnabled} onChange={(evt) => this.setState({ isEnabled: !isEnabled })} />
+            <code>isEnabled</code>
           </label>
 
           <label>
-            <code>currentTime</code>
-            <input type="number" value={currentTime} onChange={evt => this.setState(Object.assign({}, this.state, { currentTime: evt.target.value }))} />
-          </label>
-
-          <label>
-            <code>markerSeparator</code>
-            <input type="text" value={markerSeparator} onChange={evt => this.setState(Object.assign({}, this.state, { markerSeparator: evt.target.value }))} />
-          </label>
-
-          <label>
-            <code>firstMarkerType</code>
-            <select value={firstMarkerType} onChange={evt => this.setState(Object.assign({}, this.state, { firstMarkerType: evt.target.value }))}>
-              {Object.keys(rpc.TimeMarkerType).map(type => (
-                <option key={type} value={rpc.TimeMarkerType[type]}>TimeMarkerType.{type}</option>
-              ))}
+            <code>direction</code>
+            <select value={direction} onChange={(evt) => this.setState({ direction: evt.target.value })}>
+              <option value={Direction.HORIZONTAL}>Direction.HORIZONTAL</option>
+              <option value={Direction.VERTICAL}>Direction.VERTICAL</option>
             </select>
           </label>
 
           <label>
-            <code>secondMarkerType</code>
-            <select value={secondMarkerType} onChange={evt => this.setState(Object.assign({}, this.state, { secondMarkerType: evt.target.value }))}>
-              {Object.keys(rpc.TimeMarkerType).map(type => (
-                <option key={type} value={rpc.TimeMarkerType[type]}>TimeMarkerType.{type}</option>
-              ))}
-            </select>
-          </label>
-        </div>
-
-        <div className="ComponentDemo-results">
-          <rpc.TimeMarker
-            totalTime={totalTime}
-            currentTime={currentTime}
-            markerSeparator={markerSeparator}
-            firstMarkerType={firstMarkerType}
-            secondMarkerType={secondMarkerType}
-          />
-        </div>
-      </div>
-    )
-  }
-}
-
-//
-// ProgressBar demo
-//
-demos.ProgressBar = class ProgressBarDemo extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.timer = null
-
-    this.state = {
-      totalTime: 190,
-      currentTime: 65,
-      isSeekable: true,
-      lastSeekStart: 0,
-      lastSeekEnd: 0,
-    }
-  }
-
-  componentDidMount() {
-    this.timer = window.setInterval(() => {
-      this.setState(Object.assign(
-        {},
-        this.state,
-        { currentTime: (this.state.currentTime + 1) % this.state.totalTime }
-      ))
-    }, 1000)
-  }
-
-  componentWillUnmount() {
-    window.clearInterval(this.timer)
-  }
-
-  render() {
-    const { totalTime, currentTime, isSeekable, lastSeekStart, lastSeekEnd, lastIntent } = this.state
-
-    return (
-      <div className="ComponentDemo ProgressBarDemo">
-        <pre className="ComponentDemo-code">
-          <code className="language-jsx" dangerouslySetInnerHTML={{
-            __html: Prism.highlight(
-              `<ProgressBar\n  totalTime={this.state.totalTime}\n  currentTime={this.state.currentTime}\n  isSeekable={this.state.isSeekable}\n  onSeek={time => this.setState(() => ({ currentTime: time }))}\n  onSeekStart={time => this.setState(() => ({ lastSeekStart: time }))}\n  onSeekEnd={time => this.setState(() => ({ lastSeekEnd: time }))}\n  onIntent={time => this.setState(() => ({ lastIntent: time }))}\n/>`,
-              Prism.languages.jsx
-            )
-          }} />
-        </pre>
-
-        <div className="ComponentDemo-settings">
-          <label>
-            <code>totalTime</code>
-            <input type="number" value={totalTime} onChange={evt => this.setState(Object.assign({}, this.state, { totalTime: evt.target.value }))} />
+            <code>value</code>
+            <input type="number" value={value} min={0} max={1} step={0.01} onChange={evt => this.setState({ value: evt.target.value })} />
           </label>
 
           <label>
-            <code>currentTime</code>
-            <input type="number" value={currentTime} onChange={evt => this.setState(Object.assign({}, this.state, { currentTime: evt.target.value }))} />
+            <code>lastValueStart</code>
+            <input type="number" disabled value={lastValueStart} />
           </label>
 
           <label>
-            <input type="checkbox" checked={isSeekable} onChange={(evt) => this.setState(Object.assign({}, this.state, { isSeekable: !isSeekable }))} />
-            <code>isSeekable</code>
-          </label>
-
-          <label>
-            <code>lastSeekStart</code>
-            <input type="number" disabled value={lastSeekStart} />
-          </label>
-
-          <label>
-            <code>lastSeekEnd</code>
-            <input type="number" disabled value={lastSeekEnd} />
+            <code>lastValueEnd</code>
+            <input type="number" disabled value={lastValueEnd} />
           </label>
 
           <label>
@@ -450,233 +223,32 @@ demos.ProgressBar = class ProgressBarDemo extends React.Component {
         </div>
 
         <div className="ComponentDemo-results">
-          <rpc.ProgressBar
-            totalTime={totalTime}
-            currentTime={currentTime}
-            isSeekable={isSeekable}
-            onSeek={time => this.setState(() => ({ currentTime: time }))}
-            onSeekStart={time => this.setState(() => ({ lastSeekStart: time }))}
-            onSeekEnd={time => this.setState(() => ({ lastSeekEnd: time }))}
-            onIntent={time => this.setState(() => ({ lastIntent: time }))}
-          />
-        </div>
-      </div>
-    )
-  }
-}
-
-//
-// SoundOnButton demo
-//
-demos.SoundOnButton = class SoundOnButtonDemo extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isEnabled: true,
-    }
-  }
-
-  render() {
-    const { isEnabled } = this.state
-
-    return (
-      <div className="ComponentDemo SoundOnButtonDemo">
-        <pre className="ComponentDemo-code">
-          <code className="language-jsx" dangerouslySetInnerHTML={{
-            __html: Prism.highlight(
-              `<SoundOnButton\n  isEnabled={this.state.isEnabled}\n  onClick={() => alert('Turn off sound')} \n/>`,
-              Prism.languages.jsx
-            )
-          }} />
-        </pre>
-
-        <div className="ComponentDemo-settings">
-          <label>
-            <input type="checkbox" checked={isEnabled} onChange={(evt) => this.setState({ isEnabled: !isEnabled })} />
-            <code>isEnabled</code>
-          </label>
-        </div>
-
-        <div className="ComponentDemo-results">
-          <rpc.SoundOnButton
-            onClick={() => alert('Turn off sound')}
+          <Slider
             isEnabled={isEnabled}
-          />
-        </div>
-      </div>
-    )
-  }
-}
-
-//
-// SoundOffButton demo
-//
-demos.SoundOffButton = class SoundOffButtonDemo extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isEnabled: true,
-    }
-  }
-
-  render() {
-    const { isEnabled } = this.state
-
-    return (
-      <div className="ComponentDemo SoundOnButffonDemo">
-        <pre className="ComponentDemo-code">
-          <code className="language-jsx" dangerouslySetInnerHTML={{
-            __html: Prism.highlight(
-              `<SoundOffButton\n  isEnabled={this.state.isEnabled}\n  onClick={() => alert('Turn on sound')} \n/>`,
-              Prism.languages.jsx
-            )
-          }} />
-        </pre>
-
-        <div className="ComponentDemo-settings">
-          <label>
-            <input type="checkbox" checked={isEnabled} onChange={(evt) => this.setState({ isEnabled: !isEnabled })} />
-            <code>isEnabled</code>
-          </label>
-        </div>
-
-        <div className="ComponentDemo-results">
-          <rpc.SoundOffButton
-            onClick={() => alert('Turn on sound')}
-            isEnabled={isEnabled}
-          />
-        </div>
-      </div>
-    )
-  }
-}
-
-//
-// MuteToggleButton demo
-//
-demos.MuteToggleButton = class MuteToggleButtonDemo extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isEnabled: true,
-      isMuted: false,
-    }
-  }
-
-  render() {
-    const { isEnabled, isMuted } = this.state
-
-    return (
-      <div className="ComponentDemo SoundOnButffonDemo">
-        <pre className="ComponentDemo-code">
-          <code className="language-jsx" dangerouslySetInnerHTML={{
-            __html: Prism.highlight(
-              `<MuteToggleButton\n  isEnabled={this.state.isEnabled}\n  isMuted={this.state.isMuted}\n  onMuteChange={isMuted => this.setState({ ...this.state, isMuted })}\n/>`,
-              Prism.languages.jsx
-            )
-          }} />
-        </pre>
-
-        <div className="ComponentDemo-settings">
-          <label>
-            <input type="checkbox" checked={isEnabled} onChange={(evt) => this.setState(Object.assign({}, this.state, { isEnabled: !isEnabled }))} />
-            <code>isEnabled</code>
-          </label>
-
-          <label>
-            <input type="checkbox" checked={isMuted} onChange={(evt) => this.setState(Object.assign({}, this.state, { isMuted: !isMuted }))} />
-            <code>isMuted</code>
-          </label>
-        </div>
-
-        <div className="ComponentDemo-results">
-          <rpc.MuteToggleButton
-            isEnabled={isEnabled}
-            isMuted={isMuted}
-            onMuteChange={isMuted => this.setState(Object.assign({}, this.state, { isMuted }))}
-          />
-        </div>
-      </div>
-    )
-  }
-}
-
-//
-// VolumeSlider demo
-//
-demos.VolumeSlider = class VolumeSliderDemo extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      direction: rpc.ControlDirection.VERTICAL,
-      isEnabled: true,
-      volume: 0.5,
-    }
-  }
-
-  render() {
-    const { direction, isEnabled, volume } = this.state
-
-    return (
-      <div className="ComponentDemo SoundOnButffonDemo">
-        <pre className="ComponentDemo-code">
-          <code className="language-jsx" dangerouslySetInnerHTML={{
-            __html: Prism.highlight(
-              `<VolumeSlider\n  direction={this.state.direction}\n  isEnabled={this.state.isEnabled}\n  volume={this.state.volume}\n  onVolumeChange={volume => this.setState({ ...this.state, volume })} \n/>`,
-              Prism.languages.jsx
-            )
-          }} />
-        </pre>
-
-        <div className="ComponentDemo-settings">
-          <label>
-            <code>direction</code>
-            <select value={direction} onChange={evt => this.setState(Object.assign({}, this.state, { direction: evt.target.value }))}>
-              {Object.keys(rpc.ControlDirection).map(direction => (
-                <option key={direction} value={rpc.ControlDirection[direction]}>ControlDirection.{direction}</option>
-              ))}
-            </select>
-          </label>
-
-          <label>
-            <input type="checkbox" checked={isEnabled} onChange={(evt) => this.setState(Object.assign({}, this.state, { isEnabled: !isEnabled }))} />
-            <code>isEnabled</code>
-          </label>
-
-          <label>
-            <code>volume</code>
-            <input type="number" min="0" max="1" step="0.1" value={volume} onChange={evt => this.setState(Object.assign({}, this.state, { volume: evt.target.value }))} />
-          </label>
-        </div>
-
-        <div className="ComponentDemo-results">
-          <rpc.VolumeSlider
             direction={direction}
-            isEnabled={isEnabled}
-            volume={volume}
-            onVolumeChange={volume => this.setState(Object.assign({}, this.state, { volume }))}
-          />
+            onChange={newValue => this.setState(() => ({ value: newValue }))}
+            onChangeStart={startValue => this.setState(() => ({ lastValueStart: startValue }))}
+            onChangeEnd={endValue => this.setState(() => ({ lastValueEnd: endValue }))}
+            onIntent={intent => this.setState(() => ({ lastIntent: intent }))}
+            style={{
+              width: direction === Direction.HORIZONTAL ? 200 : 8,
+              height: direction === Direction.HORIZONTAL ? 8 : 130,
+              borderRadius: 4,
+              background: WHITE_SMOKE,
+              transition: direction === Direction.HORIZONTAL ? 'width 0.1s' : 'height 0.1s',
+              cursor: isEnabled === true ? 'pointer' : 'default',
+            }}
+          >
+            <SliderBar direction={direction} value={value} style={{ background: isEnabled ? GREEN : GRAY }} />
+            <SliderBar direction={direction} value={lastIntent} style={{ background: 'rgba(0, 0, 0, 0.05)' }} />
+            <SliderHandle direction={direction} value={value} style={{ background: isEnabled ? GREEN : GRAY }} />
+          </Slider>
         </div>
       </div>
     )
   }
 }
 
-ReactDOM.render(<demos.PlayButton />, document.querySelector('.component-demo[data-component="PlayButton"]'))
-ReactDOM.render(<demos.PauseButton />, document.querySelector('.component-demo[data-component="PauseButton"]'))
-ReactDOM.render(<demos.PrevButton />, document.querySelector('.component-demo[data-component="PrevButton"]'))
-ReactDOM.render(<demos.NextButton />, document.querySelector('.component-demo[data-component="NextButton"]'))
-ReactDOM.render(<demos.PlaybackControls />, document.querySelector('.component-demo[data-component="PlaybackControls"]'))
-
-ReactDOM.render(<demos.FormattedTime />, document.querySelector('.component-demo[data-component="FormattedTime"]'))
-ReactDOM.render(<demos.TimeMarker />, document.querySelector('.component-demo[data-component="TimeMarker"]'))
-ReactDOM.render(<demos.ProgressBar />, document.querySelector('.component-demo[data-component="ProgressBar"]'))
-
-ReactDOM.render(<demos.SoundOnButton />, document.querySelector('.component-demo[data-component="SoundOnButton"]'))
-ReactDOM.render(<demos.SoundOffButton />, document.querySelector('.component-demo[data-component="SoundOffButton"]'))
-ReactDOM.render(<demos.MuteToggleButton />, document.querySelector('.component-demo[data-component="MuteToggleButton"]'))
-ReactDOM.render(<demos.VolumeSlider />, document.querySelector('.component-demo[data-component="VolumeSlider"]'))
+ReactDOM.render(<ButtonDemo />, document.querySelector('.component-demo[data-component="Button"]'))
+ReactDOM.render(<FormattedTimeDemo />, document.querySelector('.component-demo[data-component="FormattedTime"]'))
+ReactDOM.render(<SliderDemo />, document.querySelector('.component-demo[data-component="Slider"]'))
