@@ -213,9 +213,9 @@ class SliderDemo extends PureComponent {
               `\nconst SliderHandle = ({ direction, value, style }) => <div style={computedStylesHere} />` +
               `\n` +
               `\n<Slider\n  isEnabled={this.state.isEnabled}\n  direction={this.state.direction}\n  onChange={newValue => this.setState(() => ({ value: newValue }))}\n  onChangeStart={startValue => this.setState(() => ({ lastValueStart: startValue }))}\n  onChangeEnd={endValue => this.setState(() => ({ lastValueEnd: endValue }))}\n  onIntent={intent => this.setState(() => ({ lastIntent: intent }))}\n  style={sliderStylesHere}\n>` +
-              `\n  <SliderBar direction={direction} value={value} style={{ background: this.state.isEnabled ? '#72d687' : '#878c88' }} />` +
-              `\n  <SliderBar direction={direction} value={lastIntent} style={{ background: 'rgba(0, 0, 0, 0.05)' }} />` +
-              `\n  <SliderHandle direction={direction} value={value} style={{ background: this.state.isEnabled ? '#72d687' : '#878c88' }} />` +
+              `\n  <SliderBar\n    direction={this.state.direction}\n    value={this.state.value}\n    style={{ background: this.state.isEnabled ? '#72d687' : '#878c88' }}\n  />` +
+              `\n  <SliderBar\n    direction={this.state.direction}\n    value={this.state.lastIntent}\n    style={{ background: 'rgba(0, 0, 0, 0.05)' }}\n  />` +
+              `\n  <SliderHandle\n    direction={this.state.direction}\n    value={this.state.value}\n    style={{ background: this.state.isEnabled ? '#72d687' : '#878c88' }}\n  />` +
               `\n</Slider>`,
               Prism.languages.jsx
             )
