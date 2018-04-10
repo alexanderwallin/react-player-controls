@@ -24857,7 +24857,7 @@ demos.ProgressBar = function (_React$Component8) {
           'pre',
           { className: 'ComponentDemo-code' },
           _react2.default.createElement('code', { className: 'language-jsx', dangerouslySetInnerHTML: {
-              __html: _prismjs2.default.highlight('<ProgressBar\n  totalTime={this.state.totalTime}\n  currentTime={this.state.currentTime}\n  isSeekable={this.state.isSeekable}\n  onSeek={time => this.setState(() => ({ currentTime: time }))}\n  onSeekStart={time => this.setState(() => ({ lastSeekStart: time }))}\n  onSeekEnd={time => this.setState(() => ({ lastSeekEnd: time }))}\n  onIntent={time => this.setState(() => ({ lastIntent: time }))}\n/>', _prismjs2.default.languages.jsx)
+              __html: _prismjs2.default.highlight('<ProgressBar\n  totalTime={this.state.totalTime}\n  currentTime={this.state.currentTime}\n  bufferedTime={30}\n  isSeekable={this.state.isSeekable}\n  onSeek={time => this.setState(() => ({ currentTime: time }))}\n  onSeekStart={time => this.setState(() => ({ lastSeekStart: time }))}\n  onSeekEnd={time => this.setState(() => ({ lastSeekEnd: time }))}\n  onIntent={time => this.setState(() => ({ lastIntent: time }))}\n/>', _prismjs2.default.languages.jsx)
             } })
         ),
         _react2.default.createElement(

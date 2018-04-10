@@ -413,7 +413,7 @@ demos.ProgressBar = class ProgressBarDemo extends React.Component {
         <pre className="ComponentDemo-code">
           <code className="language-jsx" dangerouslySetInnerHTML={{
             __html: Prism.highlight(
-              `<ProgressBar\n  totalTime={this.state.totalTime}\n  currentTime={this.state.currentTime}\n  isSeekable={this.state.isSeekable}\n  onSeek={time => this.setState(() => ({ currentTime: time }))}\n  onSeekStart={time => this.setState(() => ({ lastSeekStart: time }))}\n  onSeekEnd={time => this.setState(() => ({ lastSeekEnd: time }))}\n  onIntent={time => this.setState(() => ({ lastIntent: time }))}\n/>`,
+              `<ProgressBar\n  totalTime={this.state.totalTime}\n  currentTime={this.state.currentTime}\n  bufferedTime={30}\n  isSeekable={this.state.isSeekable}\n  onSeek={time => this.setState(() => ({ currentTime: time }))}\n  onSeekStart={time => this.setState(() => ({ lastSeekStart: time }))}\n  onSeekEnd={time => this.setState(() => ({ lastSeekEnd: time }))}\n  onIntent={time => this.setState(() => ({ lastIntent: time }))}\n/>`,
               Prism.languages.jsx
             )
           }} />
