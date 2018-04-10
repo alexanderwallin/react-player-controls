@@ -73,9 +73,6 @@ describe('<ProgressBar />', () => {
 
     const bar3 = mount(<ProgressBar totalTime={10} bufferedTime={20} />)
     expect(bar3.find('.ProgressBar-buffered').props().style.width).to.equal('100%')
-
-    const bar4 = mount(<ProgressBar totalTime={10} currentTime={1} bufferedTime={2} />)
-    expect(bar4.find('.ProgressBar-buffered').props().style.width).to.equal('30%')
   })
 
   it('passes a time from seek click', () => {
