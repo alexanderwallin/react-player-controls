@@ -124,8 +124,7 @@ pre[class*="language-"] {
 body {
   background-color: #fafafa;
   color: #3D463F;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: lightgr; }
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 .site-container {
   display: flex;
