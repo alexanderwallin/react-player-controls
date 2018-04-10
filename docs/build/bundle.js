@@ -1147,7 +1147,7 @@ var ProgressBar = (_class = function (_Component) {
         ref: this.storeRef
       }, _react2.default.createElement('div', {
         className: childClasses.buffered || 'ProgressBar-buffered',
-        style: _extends({ width: Math.min(100, Math.max(progressPercent, 100 * (currentTime + bufferedTime) / totalTime)) + '%' }, childrenStyles.buffered || {})
+        style: _extends({ width: Math.min(100, 100 * bufferedTime / totalTime) + '%' }, childrenStyles.buffered || {})
       }), _react2.default.createElement('div', {
         className: childClasses.elapsed || 'ProgressBar-elapsed',
         style: _extends({ width: styleLeft }, childrenStyles.elapsed || {})
@@ -24813,7 +24813,7 @@ demos.ProgressBar = function (_React$Component8) {
     _this14.state = {
       totalTime: 190,
       currentTime: 65,
-      bufferedTime: 30,
+      bufferedTime: 75,
       isSeekable: true,
       lastSeekStart: 0,
       lastSeekEnd: 0

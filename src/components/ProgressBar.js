@@ -119,7 +119,7 @@ class ProgressBar extends Component {
       >
         <div
           className={childClasses.buffered || 'ProgressBar-buffered'}
-          style={{ width: `${Math.min(100, Math.max(progressPercent, 100 * (currentTime + bufferedTime) / totalTime))}%`, ...(childrenStyles.buffered || {}) }}
+          style={{ width: `${Math.min(100, 100 * bufferedTime / totalTime)}%`, ...(childrenStyles.buffered || {}) }}
         />
 
         <div

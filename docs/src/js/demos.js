@@ -383,7 +383,7 @@ demos.ProgressBar = class ProgressBarDemo extends React.Component {
     this.state = {
       totalTime: 190,
       currentTime: 65,
-      bufferedTime: 30,
+      bufferedTime: 75,
       isSeekable: true,
       lastSeekStart: 0,
       lastSeekEnd: 0,
