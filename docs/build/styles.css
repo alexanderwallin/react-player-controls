@@ -97,7 +97,8 @@ pre[class*="language-"] {
 .token.keyword {
   color: #07a; }
 
-.token.function {
+.token.function,
+.token.class-name {
   color: #DD4A68; }
 
 .token.regex,
@@ -123,7 +124,8 @@ pre[class*="language-"] {
 body {
   background-color: #fafafa;
   color: #3D463F;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: lightgr; }
 
 .site-container {
   display: flex;
@@ -374,7 +376,7 @@ menu li {
   .VolumeSlider.isEnabled:hover .ProgressBar-intent,
   .VolumeSlider.isEnabled:hover .VolumeSlider-intent {
     position: absolute;
-    background: rgba(0, 0, 0, 0.05); }
+    background: rgba(0, 0, 0, 0.1); }
   .ProgressBar.isSeekable .ProgressBar-elapsed,
   .ProgressBar.isSeekable .VolumeSlider-value, .ProgressBar.isEnabled .ProgressBar-elapsed,
   .ProgressBar.isEnabled .VolumeSlider-value,
@@ -388,7 +390,14 @@ menu li {
   height: 8px;
   margin: 10px 0; }
   .ProgressBar-elapsed {
-    height: 100%; }
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0; }
+  .ProgressBar-buffered {
+    height: 100%;
+    border-radius: 4px;
+    background: #d3d3d3; }
   .ProgressBar-seek {
     top: -6px;
     right: 0;

@@ -102,7 +102,7 @@ $color-active: fade-out($color-hover, 0.5);
       .ProgressBar-intent,
       .VolumeSlider-intent {
         position: absolute;
-        background: rgba(0,0,0,0.05);
+        background: rgba(0,0,0,0.1);
       }
     }
 
@@ -119,6 +119,15 @@ $color-active: fade-out($color-hover, 0.5);
 
   &-elapsed {
     height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &-buffered {
+    height: 100%;
+    border-radius: 4px;
+    background: $lightgray;
   }
 
   &-seek {

@@ -13,7 +13,7 @@ const demos = {}
 // PlayButton demo
 //
 demos.PlayButton = class PlayButtonDemo extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -21,7 +21,7 @@ demos.PlayButton = class PlayButtonDemo extends React.Component {
     }
   }
 
-  render() {
+  render () {
     const { isEnabled } = this.state
 
     return (
@@ -57,7 +57,7 @@ demos.PlayButton = class PlayButtonDemo extends React.Component {
 // PauseButton demo
 //
 demos.PauseButton = class PauseButtonDemo extends React.Component {
-  render() {
+  render () {
     return (
       <div className="ComponentDemo PauseButtonDemo">
         <pre className="ComponentDemo-code">
@@ -81,7 +81,7 @@ demos.PauseButton = class PauseButtonDemo extends React.Component {
 // PrevButton demo
 //
 demos.PrevButton = class PrevButtonDemo extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -89,7 +89,7 @@ demos.PrevButton = class PrevButtonDemo extends React.Component {
     }
   }
 
-  render() {
+  render () {
     const { isEnabled } = this.state
 
     return (
@@ -125,7 +125,7 @@ demos.PrevButton = class PrevButtonDemo extends React.Component {
 // NextButton demo
 //
 demos.NextButton = class NextButtonDemo extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -133,7 +133,7 @@ demos.NextButton = class NextButtonDemo extends React.Component {
     }
   }
 
-  render() {
+  render () {
     const { isEnabled } = this.state
 
     return (
@@ -169,7 +169,7 @@ demos.NextButton = class NextButtonDemo extends React.Component {
 // PlaybackControls demo
 //
 demos.PlaybackControls = class PlaybackControls extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -182,7 +182,7 @@ demos.PlaybackControls = class PlaybackControls extends React.Component {
     }
   }
 
-  render() {
+  render () {
     const { isPlayable, isPlaying, showPrevious, showNext, hasPrevious, hasNext } = this.state
 
     return (
@@ -251,13 +251,11 @@ demos.PlaybackControls = class PlaybackControls extends React.Component {
   }
 }
 
-
-
 //
 // FormattedTime demo
 //
 demos.FormattedTime = class FormattedTimeDemo extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -265,7 +263,7 @@ demos.FormattedTime = class FormattedTimeDemo extends React.Component {
     }
   }
 
-  render() {
+  render () {
     const { numSeconds } = this.state
 
     return (
@@ -298,7 +296,7 @@ demos.FormattedTime = class FormattedTimeDemo extends React.Component {
 // TimeMarker demo
 //
 demos.TimeMarker = class TimeMarkerDemo extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -310,7 +308,7 @@ demos.TimeMarker = class TimeMarkerDemo extends React.Component {
     }
   }
 
-  render() {
+  render () {
     const { totalTime, currentTime, markerSeparator, firstMarkerType, secondMarkerType } = this.state
 
     return (
@@ -377,7 +375,7 @@ demos.TimeMarker = class TimeMarkerDemo extends React.Component {
 // ProgressBar demo
 //
 demos.ProgressBar = class ProgressBarDemo extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.timer = null
@@ -385,28 +383,30 @@ demos.ProgressBar = class ProgressBarDemo extends React.Component {
     this.state = {
       totalTime: 190,
       currentTime: 65,
+      bufferedTime: 30,
       isSeekable: true,
       lastSeekStart: 0,
       lastSeekEnd: 0,
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.timer = window.setInterval(() => {
       this.setState(Object.assign(
         {},
         this.state,
-        { currentTime: (this.state.currentTime + 1) % this.state.totalTime }
+        {currentTime: (this.state.currentTime + 1) % this.state.totalTime},
+        {bufferedTime: (this.state.bufferedTime + 1) % this.state.totalTime}
       ))
     }, 1000)
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     window.clearInterval(this.timer)
   }
 
-  render() {
-    const { totalTime, currentTime, isSeekable, lastSeekStart, lastSeekEnd, lastIntent } = this.state
+  render () {
+    const { totalTime, currentTime, bufferedTime, isSeekable, lastSeekStart, lastSeekEnd, lastIntent } = this.state
 
     return (
       <div className="ComponentDemo ProgressBarDemo">
@@ -428,6 +428,11 @@ demos.ProgressBar = class ProgressBarDemo extends React.Component {
           <label>
             <code>currentTime</code>
             <input type="number" value={currentTime} onChange={evt => this.setState(Object.assign({}, this.state, { currentTime: evt.target.value }))} />
+          </label>
+
+          <label>
+            <code>bufferedTime</code>
+            <input type="number" value={bufferedTime} onChange={evt => this.setState(Object.assign({}, this.state, { bufferedTime: evt.target.value }))} />
           </label>
 
           <label>
@@ -455,6 +460,7 @@ demos.ProgressBar = class ProgressBarDemo extends React.Component {
           <rpc.ProgressBar
             totalTime={totalTime}
             currentTime={currentTime}
+            bufferedTime={bufferedTime}
             isSeekable={isSeekable}
             onSeek={time => this.setState(() => ({ currentTime: time }))}
             onSeekStart={time => this.setState(() => ({ lastSeekStart: time }))}
@@ -471,7 +477,7 @@ demos.ProgressBar = class ProgressBarDemo extends React.Component {
 // SoundOnButton demo
 //
 demos.SoundOnButton = class SoundOnButtonDemo extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -479,7 +485,7 @@ demos.SoundOnButton = class SoundOnButtonDemo extends React.Component {
     }
   }
 
-  render() {
+  render () {
     const { isEnabled } = this.state
 
     return (
@@ -515,7 +521,7 @@ demos.SoundOnButton = class SoundOnButtonDemo extends React.Component {
 // SoundOffButton demo
 //
 demos.SoundOffButton = class SoundOffButtonDemo extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -523,7 +529,7 @@ demos.SoundOffButton = class SoundOffButtonDemo extends React.Component {
     }
   }
 
-  render() {
+  render () {
     const { isEnabled } = this.state
 
     return (
@@ -559,7 +565,7 @@ demos.SoundOffButton = class SoundOffButtonDemo extends React.Component {
 // MuteToggleButton demo
 //
 demos.MuteToggleButton = class MuteToggleButtonDemo extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -568,7 +574,7 @@ demos.MuteToggleButton = class MuteToggleButtonDemo extends React.Component {
     }
   }
 
-  render() {
+  render () {
     const { isEnabled, isMuted } = this.state
 
     return (
@@ -610,7 +616,7 @@ demos.MuteToggleButton = class MuteToggleButtonDemo extends React.Component {
 // VolumeSlider demo
 //
 demos.VolumeSlider = class VolumeSliderDemo extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -620,7 +626,7 @@ demos.VolumeSlider = class VolumeSliderDemo extends React.Component {
     }
   }
 
-  render() {
+  render () {
     const { direction, isEnabled, volume } = this.state
 
     return (
