@@ -97,8 +97,7 @@ pre[class*="language-"] {
 .token.keyword {
   color: #07a; }
 
-.token.function,
-.token.class-name {
+.token.function {
   color: #DD4A68; }
 
 .token.regex,
