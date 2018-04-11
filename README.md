@@ -69,6 +69,7 @@ import { PlayButton, PauseButton } from 'react-player-controls'
 <ProgressBar
   totalTime={song.duration}
   currentTime={audioEl.currentTime}
+  bufferTime={bufferTimeCalculatedSomehow}
   isSeekable={true}
   onSeek={seekTime => { /* f.i. update the time marker */}}
   onSeekStart={seekTime => { /* perhaps freeze a video frame? */ }}
