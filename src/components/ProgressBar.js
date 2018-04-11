@@ -18,6 +18,7 @@ class ProgressBar extends Component {
   static propTypes = {
     totalTime: number,
     currentTime: number,
+    bufferedTime: number,
     isSeekable: bool,
     onSeek: func,
     onSeekStart: func,
@@ -29,6 +30,7 @@ class ProgressBar extends Component {
   static defaultProps = {
     totalTime: Infinity,
     currentTime: 0,
+    bufferedTime: 0,
     isSeekable: false,
     onSeek: () => {},
     onSeekStart: () => {},
@@ -96,7 +98,7 @@ class ProgressBar extends Component {
 
   render () {
     const {
-      totalTime, currentTime, isSeekable,
+      totalTime, currentTime, bufferedTime, isSeekable,
       className, extraClasses, childClasses, style, childrenStyles,
     } = this.props
     const { currentIntent } = this.state
@@ -115,6 +117,11 @@ class ProgressBar extends Component {
         style={style}
         ref={this.storeRef}
       >
+        <div
+          className={childClasses.buffered || 'ProgressBar-buffered'}
+          style={{ width: `${Math.min(100, 100 * bufferedTime / totalTime)}%`, ...(childrenStyles.buffered || {}) }}
+        />
+
         <div
           className={childClasses.elapsed || 'ProgressBar-elapsed'}
           style={{ width: styleLeft, ...(childrenStyles.elapsed || {}) }}

@@ -64,6 +64,17 @@ describe('<ProgressBar />', () => {
     expect(bar3.find('.ProgressBar-elapsed').props().style.width).to.equal('100%')
   })
 
+  it('sets correct buffered width', () => {
+    const bar1 = mount(<ProgressBar />)
+    expect(bar1.find('.ProgressBar-buffered').props().style.width).to.equal('0%')
+
+    const bar2 = mount(<ProgressBar totalTime={10} bufferedTime={1}/>)
+    expect(bar2.find('.ProgressBar-buffered').props().style.width).to.equal('10%')
+
+    const bar3 = mount(<ProgressBar totalTime={10} bufferedTime={20} />)
+    expect(bar3.find('.ProgressBar-buffered').props().style.width).to.equal('100%')
+  })
+
   it('passes a time from seek click', () => {
     const callback = spy()
     const bar = mount(<ProgressBar totalTime={10} isSeekable={true} onSeek={callback} />)
@@ -91,6 +102,7 @@ describe('<ProgressBar />', () => {
   it('accepts custom child component classes', () => {
     const childClasses = {
       elapsed: 'MyElapsed',
+      buffered: 'MyBuffered',
       intent: 'MyIntent',
       handle: 'MyHandle',
       seek: 'MySeek',
@@ -98,6 +110,7 @@ describe('<ProgressBar />', () => {
 
     const bar = mount(<ProgressBar childClasses={childClasses} isSeekable />)
     expect(bar.find('.MyElapsed')).to.have.length(1)
+    expect(bar.find('.MyBuffered')).to.have.length(1)
     expect(bar.find('.MyIntent')).to.have.length(1)
     expect(bar.find('.MyHandle')).to.have.length(1)
     expect(bar.find('.MySeek')).to.have.length(1)
@@ -112,6 +125,7 @@ describe('<ProgressBar />', () => {
     const style = { fontSize: 100 }
     const childrenStyles = {
       elapsed: { ...style },
+      buffered: { ...style },
       intent: { ...style },
       handle: { ...style },
       RangeControlOverlay: { ...style },
@@ -119,6 +133,7 @@ describe('<ProgressBar />', () => {
 
     const bar = shallow(<ProgressBar isSeekable={true} childrenStyles={childrenStyles} />)
     expect(bar.find('.ProgressBar-elapsed').props().style).to.include(style)
+    expect(bar.find('.ProgressBar-buffered').props().style).to.include(style)
     expect(bar.find('.ProgressBar-intent').props().style).to.include(style)
     expect(bar.find('.ProgressBar-handle').props().style).to.include(style)
     expect(bar.find(RangeControlOverlay).props().style).to.include(style)
