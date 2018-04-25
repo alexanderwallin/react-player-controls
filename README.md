@@ -12,13 +12,21 @@
 [![Dependencies](https://img.shields.io/david/alexanderwallin/react-player-controls.svg?style=flat-square)](https://david-dm.org/alexanderwallin/react-player-controls)
 [![Dev dependency status](https://david-dm.org/alexanderwallin/react-player-controls/dev-status.svg?style=flat-square)](https://david-dm.org/alexanderwallin/react-player-controls#info=devDependencies)
 
-This is a minimal set of modular, tested and hopefully useful React components for composing media player interfaces. It is designed for you to compose media player controls yourself using a small and easy-to-learn API.
+This is a minimal set of modular, tested and hopefully useful React components for composing media player interfaces. It is designed for you to compose media player controls yourself using a [small and easy-to-learn API](#api).
 
-From a library point of view, creating and providing components like `<Player />` or `<ProgressBar />` tends to result in abstractions with tons of props, often preventing arbitrary customisation, whilst providing little real value. These abstractions prove especially hindering when it comes to styling child elements. Therefor, instead of shipping these composite components, there are a collection of recipies that you can more or less copy-paste right into your project. Along with these plain components are a few boilerplate sets of styles in different forms that you can use if you want.
+From a library point of view, creating and providing components like `<Player />` or `<ProgressBar />` tends to result in abstractions with tons of props, often preventing arbitrary customisation, whilst providing little real value. These abstractions prove especially hindering when it comes to styling child elements. Therefor, instead of shipping these composite components, there is [a collection of recipies](#recipies) that you can more or less copy-paste right into your project. Along with these plain components are a few boilerplate sets of styles in different forms that you can use if you want.
 
 You can see the base components in action on the [examples page](https://alexanderwallin.github.io/react-player-controls).
 
 ⚠️  **NOTE:** This library does not deal with actual media in any way, only the UI. ⚠️
+
+### Table of contents
+
+* [Installation](#installation)
+* [Usage](#usage)
+* [API](#api)
+* [Recipies](#recipies)
+* [Contribute](#contribute)
 
 
 ## Installation
