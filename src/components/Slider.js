@@ -34,7 +34,7 @@ class Slider extends PureComponent {
     onChangeEnd: noop,
     children: null,
     className: null,
-    style: {}
+    style: {},
   }
 
   $el = null
