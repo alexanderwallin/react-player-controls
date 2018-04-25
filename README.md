@@ -12,11 +12,14 @@
 [![Dependencies](https://img.shields.io/david/alexanderwallin/react-player-controls.svg?style=flat-square)](https://david-dm.org/alexanderwallin/react-player-controls)
 [![Dev dependency status](https://david-dm.org/alexanderwallin/react-player-controls/dev-status.svg?style=flat-square)](https://david-dm.org/alexanderwallin/react-player-controls#info=devDependencies)
 
-This is a set of modular, tested and hopefully useful React components for composing media players. This library does not deal with actual media in any way, only the UI.
+This is a minimal set of modular, tested and hopefully useful React components for composing media player interfaces. It is designed for you to compose media player controls yourself using a small and easy-to-learn API.
 
-Check out the components in action on the [examples page](https://alexanderwallin.github.io/react-player-controls).
+From a library point of view, creating and providing components like `<Player />` or `<ProgressBar />` tends to result in abstractions with tons of props, often preventing arbitrary customisation, whilst providing little real value. These abstractions prove especially hindering when it comes to styling child elements. Therefor, instead of shipping these composite components, there are a collection of recipies that you can more or less copy-paste right into your project. Along with these plain components are a few boilerplate sets of styles in different forms that you can use if you want.
 
-**A note on styles:** This library does not yet ship with any component styles. However, this is [on the way](https://github.com/alexanderwallin/react-player-controls/milestone/1). Meanwhile, you can check out [the styles from the examples page](https://github.com/alexanderwallin/react-player-controls/blob/master/docs/src/sass/_controls.scss) to get a kick start or just some inspiration in styling your player.
+You can see the base components in action on the [examples page](https://alexanderwallin.github.io/react-player-controls).
+
+⚠️  **NOTE:** This library does not deal with actual media in any way, only the UI. ⚠️
+
 
 ## Installation
 
@@ -27,118 +30,115 @@ npm i react-player-controls
 ## Usage
 
 ```js
-// Import the components you need as ES2015 modules
-import { PlayButton, PauseButton } from 'react-player-controls'
+// ES2015+ import
+import { Slider, Direction } from 'react-player-controls'
+
+// Using CommonJS
+const { Slider, Direction } = require('react-player-controls')
 ```
 
-## Components
+## API
 
-#### Playback and song changes
+* [`<Button />`](#button-)
+* [`Direction`](#direction)
+* [`<FormattedTime />`](#formattedtime-)
+* [`<PlayerIcon />`](#playericon-)
+* [`<Slider />`](#slider-)
 
-```jsx
-// Play and pause
-<PlayButton isEnabled={true} onClick={playHandler} />
-<PauseButton onClick={pauseHandler} />
+### `<Button />`
 
-// Prev and next
-<PrevButton onClick={prevHandler} isEnabled={currentSong > 0} />
-<NextButton onClick={nextHandler} isEnabled={currentSong < numSongs.length - 1} />
+`<Button />` is basically a simple HTML `button`.
 
-// Wrapper for play, pause, prev and next
-<PlaybackControls
-  isPlayable={true}
-  isPlaying={false}
-  onPlaybackChange={setPlayback}
-  showPrevious={true}
-  hasPrevious={currentSong > 0}
-  onPrevious={prevHandler}
-  showNext={true}
-  hasNext={currentSong < numSongs.length - 1}
-  onNext={nextHandler}
-/>
+```js
+<Button onClick={() => alert('clicked')}>
+  Click me
+</Button>
 ```
 
-#### Progress and time
+| Prop name | Default value | Description |
+|-----------|---------------|-------------|
+| `onClick` | - | **Required.** A callback function that is invoked when the button is clicked. |
+| `isEnabled` | `true` | Whether the button is enabled. Setting this to `false` will set the `disabled` attribute on the `button` element to `true`. |
+| `className` | `null` | A string to set as the HTML `class` attribute |
+| `style` | `{}` | Styles to set on the `button` element. |
+| `children` | `null` | Child elements. |
 
-```jsx
-// Simple time formatter
-// Will render "3:24"
-<FormattedTime numSeconds={204} />
+### `Direction`
 
-// Progress bar and seek control
-<ProgressBar
-  totalTime={song.duration}
-  currentTime={audioEl.currentTime}
-  isSeekable={true}
-  onSeek={seekTime => { /* f.i. update the time marker */}}
-  onSeekStart={seekTime => { /* perhaps freeze a video frame? */ }}
-  onSeekEnd={seekTime => { /* perform seek: */ audioEl.currentTime = seekTime }}
-  onIntent={seekTime => { /* f.i. update intended time marker */}}
-/>
+An enum describing a slider's active axis.
 
-// <TimeMarker /> composite component
-//
-// A time marker can be one of four types:
-//
-// - TimeMarkerType.ELAPSED
-// - TimeMarkerType.REMAINING
-// - TimeMarkerType.REMAINING_NEGATIVE
-// - TimeMarkerType.DURATION
+| Key | Value |
+|-----|-------|
+| `HORIZONTAL` | `"HORIZONTAL"` |
+| `VERTICAL` | `"VERTICAL"` |
 
-<TimeMarker
-  totalTime={190}
-  currentTime={65}
-  markerSeparator=" / "
-/>
-// -> "1:05 / 3:10" (without wrapping <span /> elements)
+### `<FormattedTime />`
 
-<TimeMarker
-  totalTime={190}
-  currentTime={65}
-  markerSeparator=" | "
-  firstMarkerType={TimeMarkerType.ELAPSED}
-  secondMarkerType={TimeMarkerType.REMANING_NEGATIVE}
-/>
-// -> "1:05 | -2:05" (without wrapping <span /> elements)
+`<FormattedTime />` translates a number of seconds into the player-friendly format of `m:ss`, or `h:mm:ss` if the total time is one hour or higher.
+
+```js
+// This will render -1:01:02
+<FormattedTime numSeconds={-3662} />
 ```
 
-#### Volume controls
+| Prop name | Default value | Description |
+|-----------|---------------|-------------|
+| `numSeconds` | `0` | A number of seconds, positive or negative |
+| `className` | `null` | A string to set as the HTML `class` attribute |
+| `style` | `{}` | Styles to set on the wrapping `span` element. |
 
-```jsx
-// Buttons for sound on/off states
-<SoundOnButton onClick={mute} />
-<SoundOffButton onClick={unmute} />
+### `<PlayerIcon />`
 
-// A composite mute toggle wrapper
-<MuteToggleButton
-  isMuted={isMuted}
-  onMuteChange={handleMuteChange}
-  isEnabled={somePredicate}
-/>
+`<PlayerIcon />` is not really a component in itself, but a container of a number of icon components.
 
-// Volume slider
-<VolumeSlider
-  direction={ControlDirection.VERTICAL}
-  volume={volumeBetweenZeroAndOne}
-  onVolumeChange={handleVolumeChange}
-  isEnabled={somePredicate}
-/>
+```js
+<PlayerIcon.Play />
+<PlayerIcon.Pause />
+<PlayerIcon.Previous />
+<PlayerIcon.Next />
+<PlayerIcon.SoundOn />
+<PlayerIcon.SoundOff />
 ```
+
+Any props passed to a `<PlayerIcon.* />` component will be passed onto the underlying `svg` element.
+
+### `<Slider />`
+
+The `<Slider />` helps you build things like volume controls and progress bars. Slightly conterintuitively, **it does not take a `value` prop**, but expect you to keep track of this yourself, and then render whatever you want inside it.
+
+*What this component actually does is that it renders an element inside itself, after its children, which listens to mouse events and invokes change and intent callbacks with relative, normalised values based on those events.*
+
+```js
+<Slider
+  direction={Direction.HORIZONTAL}
+  isEnabled
+  onIntent={intent => console.log(`hovered at ${intent}`)}
+  onChange={newValue => console.log(`clicked at ${newValue}`)}
+  onChangeStart={startValue => console.log(`started dragging at ${startValue}`)}
+  onChangeEnd={endValue => console.log(`stopped dragging at ${endValue}`)}
+>
+  {/* Here we render whatever we want */}
+</Slider>
+```
+
+| Prop name | Default value | Description |
+|-----------|---------------|-------------|
+| `direction` | `Direction.HORIZONTAL` | The slider's direction |
+| `isEnabled` | `true` | Whether the slider is interactable |
+| `onIntent` | `() => {}` | A function that is invoked with the relative, normalised value at which the user is hovering. |
+| `onChange` | `() => {}` | A function that is invoked with the latest relative, normalised value that the user has set by either clicking or dragging. |
+| `onChangeStart` | `() => {}` | A function that is invoked with the relative, normalised value at which the user started changing the slider's value. |
+| `onChangeEnd` | `() => {}` | A function that is invoked with the relative, normalised value at which the user stopped changing the slider's value. |
+| `children` | `null` | Child elements. |
+| `className` | `null` | A string to set as the HTML `class` attribute. |
+| `style` | `{}` | Styles to set on the wrapping `div` element. |
+
+
+## Recipies
+
+...
+
 
 ## Contribute
-Contributors are welcome! Please make sure that tests pass locally before opening a PR.
 
-#### Dev
-```sh
-npm run dev
-```
-
-#### Build
-```sh
-npm run build
-```
-
-#### Tests
-```sh
-npm run test
-```
+Contributions are very welcome, no matter your experience! Please submit a PR and we'll take it from there.
