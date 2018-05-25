@@ -126,6 +126,52 @@ import { PlayButton, PauseButton } from 'react-player-controls'
 />
 ```
 
+#### Custom Icons
+Custom SVG icons can be passed as an 'icon' prop to all single element components.  Only one icon can be passed as a prop, so the PlayBackControls and MuteToggleButton components are not yet supported.
+To use icons copy the 'path' in the SVG file to the template provided below, using the appropriate className and viewBox size.
+```jsx
+// Format for custom icons. Copy the SVG 'path' to the template below, and set the 'viewBox' to the size matching your SVG
+
+// Note the classNames for the different components
+// PlayIcon className="Icon PlayIcon"
+// PasueIcon className="Icon PauseIcon"
+// PrevIcon className="Icon PreviousIcon"
+// NextIcon className="Icon NextIcon"
+// VolumeIcon className="Icon SoundOnIcon"
+// MuteIcon className="Icon SoundOffIcon"
+
+export const CustomPlayIcon = () =>
+  <svg className="Icon PlayIcon" viewBox="0 0 16 16">
+    <g className="Icon-shape">
+      <path d="M1,14c0,0.547,0.461,1,1,1c0.336,0,0.672-0.227,1-0.375L14.258,9C14.531,8.867,15,8.594,15,8s-0.469-0.867-0.742-1L3,1.375  C2.672,1.227,2.336,1,2,1C1.461,1,1,1.453,1,2V14z"/>
+    </g>
+  </svg>
+  
+export const CustomNextIcon = () =>
+  <svg className="Icon NextIcon" viewBox="0 0 16 16">
+    <g className="Icon-shape">
+      <path d="M15.375,7L10,2.54C9.695,2.287,9.461,2,9,2C8.375,2,8,2.516,8,3v3H1C0.45,6,0,6.45,0,7v2c0,0.55,0.45,1,1,1h7v3  c0,0.484,0.375,1,1,1c0.461,0,0.695-0.287,1-0.54L15.375,9C15.758,8.688,16,8.445,16,8S15.758,7.313,15.375,7z"/>    
+    </g>
+  </svg>
+
+// Passing the icon to a component (from wherever you keep icons file)
+import { CustomPlayIcon, CustomNextIcon } from './icons'
+
+// Custom PlayButton icon
+<PlayButton 
+  isEnabled={true} 
+  onClick={playHandler}
+  icon={<CustomPlayIcon/>} 
+/>
+
+// Custom NextButton icon
+<NextButton
+  isEnabled={this.state.isEnabled}
+  onClick={() => alert('Go to next')} 
+  icon={<CustomNextIcon/>}
+/>
+```
+
 ## Contribute
 Contributors are welcome! Please make sure that tests pass locally before opening a PR.
 

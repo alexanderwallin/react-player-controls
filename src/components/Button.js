@@ -14,6 +14,7 @@ class Button extends Component {
     extraClasses: PropTypes.string,
     style: PropTypes.object,
     children: PropTypes.node,
+    icon: PropTypes.node
   }
 
   static defaultProps = {
@@ -32,7 +33,13 @@ class Button extends Component {
   }
 
   render () {
-    const { isEnabled, className, extraClasses, style, children } = this.props
+    const { isEnabled, className, extraClasses, style, icon } = this.props
+    let { children } = this.props
+
+    // Check if icon was passed as prop, and if so then use as children
+    if (icon !== undefined) {
+      children = icon
+    }
 
     return (
       <button
