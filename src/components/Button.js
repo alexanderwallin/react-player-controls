@@ -25,9 +25,9 @@ class Button extends Component {
   }
 
   @autobind
-  handleClick () {
+  handleClick (event) {
     if (this.props.isEnabled) {
-      this.props.onClick()
+      this.props.onClick(event)
     }
   }
 
