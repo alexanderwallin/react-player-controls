@@ -37,7 +37,7 @@ import { PlayButton, PauseButton } from 'react-player-controls'
 
 ```jsx
 // Play and pause
-<PlayButton isEnabled={true} onClick={playHandler} />
+<PlayButton isEnabled={true} onClick={evt => console.log(evt)} />
 <PauseButton onClick={pauseHandler} />
 
 // Prev and next
