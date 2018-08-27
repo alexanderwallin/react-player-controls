@@ -145,7 +145,7 @@ The `<Slider />` helps you build things like volume controls and progress bars. 
 ## Recipies
 
 <details>
-<summary>Styled buttons with icons</summary>
+<summary>Buttons with icons</summary>
 
 ```js
 import { Button } from 'react-player-controls'
@@ -168,6 +168,7 @@ const WHITE_SMOKE = '#eee'
 const GRAY = '#878c88'
 const GREEN = '#72d687'
 
+// A colored bar that will represent the current value
 const SliderBar = ({ direction, value, style }) => (
   <div
     style={Object.assign({}, {
@@ -188,6 +189,7 @@ const SliderBar = ({ direction, value, style }) => (
   />
 )
 
+// A handle to indicate the current value
 const SliderHandle = ({ direction, value, style }) => (
   <div
     style={Object.assign({}, {
@@ -215,7 +217,8 @@ const SliderHandle = ({ direction, value, style }) => (
   />
 )
 
-const ProgressBar = ({ isEnabled, direction, value }) => (
+// A composite progress bar component
+const ProgressBar = ({ isEnabled, direction, value, ...props }) => (
   <Slider
     isEnabled={isEnabled}
     direction={direction}
@@ -228,11 +231,62 @@ const ProgressBar = ({ isEnabled, direction, value }) => (
       transition: direction === Direction.HORIZONTAL ? 'width 0.1s' : 'height 0.1s',
       cursor: isEnabled === true ? 'pointer' : 'default',
     }}
+    {...props}
   >
     <SliderBar direction={direction} value={value} style={{ background: isEnabled ? GREEN : GRAY }} />
     <SliderHandle direction={direction} value={value} style={{ background: isEnabled ? GREEN : GRAY }} />
   </Slider>
 )
+
+// Now use <ProgressBar /> somewhere
+<ProgressBar
+  isEnabled
+  direction={Direction.HORIZONTAL}
+  value={currentTime / currentSong.duration}
+  onChange={value => seek(value * currentSong.duration)}
+/>
+```
+</details>
+
+<details>
+<summary>Playback controls</summary>
+
+```js
+import { Button } from 'react-player-controls'
+import Icon from 'some-icon-library'
+
+const PlaybackControls = ({
+  isPlaying,
+  onPlaybackChange,
+  hasPrevious,
+  onPrevious,
+  hasNext,
+  onNext,
+}) => (
+  <div>
+    <Button disabled={hasPrevious === false} onClick={onPrevious}>
+      <Icon.Previous />
+    </Button>
+
+    <Button onClick={() => onPlaybackChange(!isPlaying)}>
+      {isPlaying ? <Icon.Pause /> : <Icon.Play />}
+    </Button>
+
+    <Button disabled={hasNext === false} onClick={onNext}>
+      <Icon.Next />
+    </Button>
+  </div>
+)
+
+// Use PlaybackControls in a player context
+<PlaybackControls
+  isPlaying={player.isPlaying}
+  onPlaybackChange={isPlaying => player.setIsPlaying(isPlaying)}
+  hasPrevious={songs.indexOf(currentSong) > 0}
+  hasNext={songs.indexOf(currentSong) < songs.length - 1}
+  onPrevious={player.setSong(songs[songs.indexOf(currentSong) - 1])}
+  onNext={player.setSong(songs[songs.indexOf(currentSong) + 1])}
+/>
 ```
 </details>
 
