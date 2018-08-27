@@ -112,9 +112,9 @@ Any props passed to a `<PlayerIcon.* />` component will be passed onto the under
 
 ### `<Slider />`
 
-The `<Slider />` helps you build things like volume controls and progress bars. Slightly conterintuitively, **it does not take a `value` prop**, but expect you to keep track of this yourself, and then render whatever you want inside it.
+The `<Slider />` helps you build things like volume controls and progress bars. Slightly counterintuitively, **it does not take a `value` prop**, but expects you to keep track of this yourself and render whatever you want inside it.
 
-*What this component actually does is that it renders an element inside itself, after its children, which listens to mouse events and invokes change and intent callbacks with relative, normalised values based on those events.*
+What this component actually does is that it renders an element inside itself, on top of its children, which listens to mouse events and invokes change and intent callbacks with relative, normalised values based on those events.
 
 ```js
 <Slider
