@@ -313,6 +313,51 @@ const PlaybackControls = ({
 ```
 </details>
 
+<details>
+<summary>Progress bar with buffer</summary>
+
+```js
+import { Direction, Slider } from 'react-player-controls'
+
+const Bar = ({ style, children, ...props }) => (
+  <div
+    style={{
+      height: 6,
+      width: '100%',
+      ...style,
+    }}
+  >
+    {children}
+  </div>
+)
+
+const ProgressBarWithBuffer = ({
+  amountBuffered,
+  ...props,
+}) => (
+  <Slider
+    direction={Direction.HORIZONTAL}
+    {...props}
+  >
+    {/* Background bar */}
+    <Bar style={{ background: 'gray', width: '100%' }} />
+
+    {/* Buffer bar */}
+    <Bar style={{ background: 'silver', width: `${amountBuffered * 100}%` }} />
+
+    {/* Playtime bar */}
+    <Bar style={{ background: 'blue', width: `${100 * currentTime / duration}%` }} />
+  </Slider>
+)
+
+// Use buffer bar somewhere
+<ProgressBarWithBuffer
+  amountBuffered={secondsBuffered / duration}
+  {/* callback props etc */}
+/>
+```
+</details>
+
 
 ## Contribute
 
