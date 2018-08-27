@@ -145,16 +145,39 @@ What this component actually does is that it renders an element inside itself, o
 ## Recipies
 
 <details>
-<summary>Buttons with icons</summary>
+<summary>Styled buttons with icons</summary>
 
 ```js
-import { Button } from 'react-player-controls'
-import Icon from 'some-icon-library'
+import { Button, PlayerIcon } from 'react-player-controls'
 
-const PlayButton = props => <Button {...props}><Icon.Play /></Button>
-const PauseButton = props => <Button {...props}><Icon.Pause /></Button>
-const PreviousButton = props => <Button {...props}><Icon.Previous /></Button>
-const NextButton = props => <Button {...props}><Icon.Next /></Button>
+// A base component that has base styles applied to it
+const PlayerButton = ({ style, children, ...props }) => (
+  <Button
+    style={{
+      appearance: 'none',
+      outline: 'none',
+      border: 'none',
+      borderRadius: 3,
+      background: 'white',
+      color: 'blue',
+      '&:hover': {
+        'color': 'lightblue',
+      },
+      ...style,
+    }}
+    {...props}
+  >
+    {children}
+  </Button>
+)
+
+// Compose buttons with matching icons. Use whatever icon library
+// you want. If you don't have any particular logic for each of the
+// buttons, you might not need this abstraction.
+const PlayButton = props => <Button {...props}><PlayerIcon.Play /></Button>
+const PauseButton = props => <Button {...props}><PlayerIcon.Pause /></Button>
+const PreviousButton = props => <Button {...props}><PlayerIcon.Previous /></Button>
+const NextButton = props => <Button {...props}><PlayerIcon.Next /></Button>
 ```
 </details>
 
