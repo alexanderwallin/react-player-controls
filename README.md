@@ -125,7 +125,7 @@ What this component actually does is that it renders an element inside itself, o
   onChangeStart={startValue => console.log(`started dragging at ${startValue}`)}
   onChangeEnd={endValue => console.log(`stopped dragging at ${endValue}`)}
 >
-  {/* Here we render whatever we want */}
+  {/* Here we render whatever we want. Nothings is rendered by default. */}
 </Slider>
 ```
 
