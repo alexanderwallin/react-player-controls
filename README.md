@@ -464,6 +464,86 @@ class BarWithTimeOnHover extends React.Component {
 ```
 </details>
 
+<details>
+<summary>Base CSS styles (as seen on the docs page)</summary>
+
+```css
+/* Root slider component */
+.slider {
+  position: relative;
+}
+
+.slider.is-horizontal {
+  width: 200px;
+  height: 8px;
+}
+
+.slider.is-vertical {
+  width: 8px;
+  height: 200px;
+}
+
+/* Bars – can be progress. value, buffer or whatever */
+.bar {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.bar.is-background {
+  background: #878c88;
+}
+
+.bar.is-value {
+  background: #72d687;
+}
+
+.bar.is-horizontal {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  /* width: set dynamically in js */;
+  height: 100%;
+}
+
+.bar.is-vertical {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  /* height: set dynamically in js */;
+}
+
+/* Slider handle */
+.handle {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: 'green';
+  border-radius: 50%;
+  transform: scale(1);
+  transition: transform 0.2s;
+}
+
+.handle:hover {
+  transform: scale(1.3);
+}
+
+.handle.is-horizontal {
+  top: 0;
+  /* left: set dynamically in js to x %; */
+  margin-top: -4px;
+  margin-left: -8px;
+}
+
+.handle.is-vertical {
+  left: 0;
+  /* bottom: set dynamically in js to x %; */
+  margin-bottom: -8px;
+  margin-left: -4px;
+}
+```
+</details>
+
 
 ## Contribute
 
