@@ -140,6 +140,7 @@ What this component actually does is that it renders an element inside itself, o
 | `children` | `null` | Child elements. |
 | `className` | `null` | A string to set as the HTML `class` attribute. |
 | `style` | `{}` | Styles to set on the wrapping `div` element. |
+| `overlayZIndex` | 10 | The `z-index` of the invisible overlay that captures mouse events |
 
 
 ## Recipies

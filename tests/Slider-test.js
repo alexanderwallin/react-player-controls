@@ -17,6 +17,11 @@ describe('<Slider />', () => {
     expect(slider.find(RangeControlOverlay).length).to.equal(1)
   })
 
+  it('give <RangeControlOverlay /> a z-index of overlayZIndex', () => {
+    const slider = shallow(<Slider overlayZIndex={666} />)
+    expect(slider.find(RangeControlOverlay).props().style.zIndex).to.equal(666)
+  })
+
   it('is enabled by default', () => {
     const slider = mount(<Slider />)
     expect(slider.props().isEnabled).to.equal(true)

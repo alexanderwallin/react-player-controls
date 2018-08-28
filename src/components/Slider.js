@@ -23,6 +23,7 @@ class Slider extends PureComponent {
     children: PropTypes.node,
     className: PropTypes.string,
     style: PropTypes.object,
+    overlayZIndex: PropTypes.number,
   }
 
   static defaultProps = {
@@ -35,6 +36,7 @@ class Slider extends PureComponent {
     children: null,
     className: null,
     style: {},
+    overlayZIndex: 10,
   }
 
   $el = null
@@ -78,6 +80,7 @@ class Slider extends PureComponent {
       children,
       className,
       style,
+      overlayZIndex,
     } = this.props
 
     return (
@@ -109,7 +112,7 @@ class Slider extends PureComponent {
             right: 0,
             bottom: 0,
             left: 0,
-            zIndex: 10,
+            zIndex: overlayZIndex,
           }}
         />
       </div>
