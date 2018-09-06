@@ -14,7 +14,7 @@
 
 This is a minimal set of modular, tested and hopefully useful React components for composing media player interfaces. It is designed for you to compose media player controls yourself using a [small and easy-to-learn API](#api).
 
-👴 Check the old [README for version 0.5.x](https://github.com/alexanderwallin/react-player-controls/blob/dd30d5f062f5606feb69e6a381a6490cf556e63b/README.md), which contained more pre-baked components, if you are still on that version. 👵
+> 👴 Check the old [README for version 0.5.x](https://github.com/alexanderwallin/react-player-controls/blob/dd30d5f062f5606feb69e6a381a6490cf556e63b/README.md), which contained more pre-baked components, if you are still on that version. 👵
 
 From a library point of view, creating and providing components like `<Player />` or `<ProgressBar />` tends to result in abstractions with tons of props, often preventing arbitrary customisation, whilst providing little real value. These abstractions prove especially hindering when it comes to styling child elements. Therefor, instead of shipping these composite components, there is [a collection of recipies](#recipies) that you can more or less copy-paste right into your project. Along with these plain components are a few boilerplate sets of styles in different forms that you can use if you want.
 
