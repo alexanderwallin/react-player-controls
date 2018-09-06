@@ -1,17 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import autobind from 'autobind-decorator'
-import classNames from 'classnames'
 
-import { withCustomizableClasses } from '../utils/composers.js'
+import { Direction } from '../constants.js'
+import { noop } from '../utils.js'
 
-const { oneOfType, shape, func, number, oneOf, object } = PropTypes
-
-// Range control directions
-export const ControlDirection = {
-  HORIZONTAL: 'HORIZONTAL',
-  VERTICAL: 'VERTICAL',
-}
+const { oneOfType, shape, func, number, oneOf, object, string } = PropTypes
 
 /**
  * An invisible overlay that acts as a range mouse control
@@ -31,19 +25,21 @@ class RangeControlOverlay extends Component {
         top: number.isRequired,
       }),
     ]).isRequired,
-    onValue: func.isRequired,
+    onChange: func.isRequired,
     onChangeStart: func,
     onChangeEnd: func,
     onIntent: func,
-    direction: oneOf([ControlDirection.HORIZONTAL, ControlDirection.VERTICAL]),
+    direction: oneOf([Direction.HORIZONTAL, Direction.VERTICAL]),
+    className: string,
     style: object,
   }
 
   static defaultProps = {
-    onChangeStart: () => {},
-    onChangeEnd: () => {},
-    onIntent: () => {},
-    direction: ControlDirection.HORIZONTAL,
+    onChangeStart: noop,
+    onChangeEnd: noop,
+    onIntent: noop,
+    direction: Direction.HORIZONTAL,
+    className: null,
     style: {},
   }
 
@@ -100,14 +96,14 @@ class RangeControlOverlay extends Component {
   }
 
   getValueFromMouseEvent (mouseEvent) {
-    return this.props.direction === ControlDirection.VERTICAL
+    return this.props.direction === Direction.VERTICAL
       ? this.getVerticalValue(mouseEvent.pageY)
       : this.getHorizontalValue(mouseEvent.pageX)
   }
 
   @autobind
   triggerRangeChange (mouseEvent) {
-    this.props.onValue(this.getValueFromMouseEvent(mouseEvent))
+    this.props.onChange(this.getValueFromMouseEvent(mouseEvent))
   }
 
   @autobind
@@ -120,7 +116,7 @@ class RangeControlOverlay extends Component {
   triggerIntent (mouseEvent) {
     const { direction, onIntent } = this.props
 
-    const value = direction === ControlDirection.VERTICAL
+    const value = direction === Direction.VERTICAL
       ? this.getVerticalValue(mouseEvent.pageY)
       : this.getHorizontalValue(mouseEvent.pageX)
 
@@ -160,12 +156,11 @@ class RangeControlOverlay extends Component {
   }
 
   render () {
-    const { className, extraClasses, style } = this.props
-    const { isDragging } = this.state
+    const { className, style } = this.props
 
     return (
       <div
-        className={classNames(className, extraClasses, { isDragging })}
+        className={className}
         style={style}
         onMouseDown={this.startDrag}
         onMouseMove={this.handleIntentMove}
@@ -174,4 +169,4 @@ class RangeControlOverlay extends Component {
   }
 }
 
-export default withCustomizableClasses('RangeControlOverlay')(RangeControlOverlay)
+export default RangeControlOverlay

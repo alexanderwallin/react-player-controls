@@ -8,8 +8,6 @@ chai.use(chaiEnzyme())
 
 import FormattedTime from '../src/components/FormattedTime.js'
 
-const noop = () => {}
-
 describe('<FormattedTime />', () => {
   it('defaults to 0:00', () => {
     const time = mount(<FormattedTime />)
@@ -55,21 +53,6 @@ describe('<FormattedTime />', () => {
   it('should accept a className', () => {
     let time = shallow(<FormattedTime className="CustomClassName" />)
     expect(time.props().className).to.contain('CustomClassName')
-  })
-
-  it('should have a default className', () => {
-    let time = shallow(<FormattedTime />)
-    expect(time.props().className).to.contain('FormattedTime')
-  })
-
-  it('should accept extra classes', () => {
-    const classes = 'TestClass'
-
-    let time = mount(<FormattedTime extraClasses={classes} onClick={noop} />)
-    expect(time.props().extraClasses).to.equal(classes)
-
-    time = shallow(<FormattedTime extraClasses={classes} onClick={noop} />)
-    expect(time.props().className).to.contain(classes)
   })
 
   it('should accept custom styles', () => {

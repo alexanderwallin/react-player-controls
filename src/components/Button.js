@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import autobind from 'autobind-decorator'
 
 /**
@@ -11,15 +10,13 @@ class Button extends Component {
     onClick: PropTypes.func.isRequired,
     isEnabled: PropTypes.bool,
     className: PropTypes.string,
-    extraClasses: PropTypes.string,
     style: PropTypes.object,
     children: PropTypes.node,
   }
 
   static defaultProps = {
     isEnabled: true,
-    className: 'Button',
-    extraClasses: '',
+    className: null,
     style: {},
     children: null,
   }
@@ -32,15 +29,11 @@ class Button extends Component {
   }
 
   render () {
-    const { isEnabled, className, extraClasses, style, children } = this.props
+    const { isEnabled, className, style, children } = this.props
 
     return (
       <button
-        className={classNames(
-          className,
-          { isEnabled },
-          extraClasses
-        )}
+        className={className}
         style={style}
         disabled={!isEnabled}
         onClick={this.handleClick}

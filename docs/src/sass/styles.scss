@@ -30,6 +30,7 @@ body {
 
 .site-header {
   display: flex;
+  flex-flow: wrap row;
   width: 100%;
   margin-bottom: 20px;
   padding: 20px 0;
@@ -37,11 +38,11 @@ body {
 }
 
 .site-sidebar {
-  flex: 1;
+  width: 25%;
 }
 
 .site-content {
-  flex: 2;
+  width: 75%;
 }
 
 //
@@ -155,12 +156,16 @@ menu {
   border-bottom: 1px solid #eee;
 }
 
+.component-group-title {
+  margin: 16px 0 40px;
+}
+
 .component-content {
   margin-bottom: 40px;
 }
 
 .component-title {
-  font-size: 1.25em;
+  font-size: 1.125em;
 }
 
 .ComponentDemo {
@@ -246,6 +251,3 @@ menu {
   text-align: center;
   color: $gray;
 }
-
-
-@import "controls";

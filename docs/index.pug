@@ -1,4 +1,4 @@
-- var componentLinks = [['PlayButton', 'PauseButton', 'PrevButton', 'NextButton', 'PlaybackControls'], ['FormattedTime', 'TimeMarker', 'ProgressBar'], ['SoundOnButton', 'SoundOffButton', 'MuteToggleButton', 'VolumeSlider']]
+- var baseComponentLinks = [['Button', 'FormattedTime', 'PlayerIcon', 'Slider']]
 
 doctype html
 html(lang="en")
@@ -22,9 +22,9 @@ html(lang="en")
               a(href="https://github.com/reactify/react-player-controls") Fork on GitHub
 
       aside.site-sidebar
-        h5 Components
+        h5 Base components
         nav.site-nav
-          each componentGroup in componentLinks
+          each componentGroup in baseComponentLinks
             ul
               each component in componentGroup
                 li
@@ -35,7 +35,10 @@ html(lang="en")
                       | &nbsp;/&gt;
 
       main.site-content
-        each componentGroup in componentLinks
+
+        each componentGroup in baseComponentLinks
+          h2.component-group-title Base components
+
           .component-group
             each component in componentGroup
               .component-content
@@ -50,8 +53,8 @@ html(lang="en")
       footer.site-footer
         p
           | Made by&nbsp;
-          a(href="https://github.com/reactify") @reactify
+          a(href="https://github.com/alexanderwallin") @alexanderwallin
           | &nbsp;&middot;&nbsp;
-          a(href="http://reactifymusic.com") reactifymusic.com
+          a(href="http://alexanderwallin.com") alexanderwallin.com
 
   script(src="build/bundle.js")
