@@ -51,11 +51,11 @@ describe('<Slider />', () => {
     const slider = mount(<Slider onIntent={onIntent} />)
 
     slider.setProps({ isEnabled: false })
-    slider.node.handleIntent(0.5)
+    slider.instance().handleIntent(0.5)
     expect(onIntent.callCount).to.equal(0)
 
     slider.setProps({ isEnabled: true })
-    slider.node.handleIntent(0.5)
+    slider.instance().handleIntent(0.5)
     expect(onIntent.callCount).to.equal(1)
   })
 
@@ -71,19 +71,19 @@ describe('<Slider />', () => {
       />
     )
     slider.setProps({ isEnabled: false })
-    slider.node.handleChange(0.5)
+    slider.instance().handleChange(0.5)
     expect(onChange.callCount).to.equal(0)
-    slider.node.handleChangeStart(0.5)
+    slider.instance().handleChangeStart(0.5)
     expect(onChangeStart.callCount).to.equal(0)
-    slider.node.handleChangeEnd(0.5)
+    slider.instance().handleChangeEnd(0.5)
     expect(onChangeEnd.callCount).to.equal(0)
 
     slider.setProps({ isEnabled: true })
-    slider.node.handleChange(0.5)
+    slider.instance().handleChange(0.5)
     expect(onChange.callCount).to.equal(1)
-    slider.node.handleChangeStart(0.5)
+    slider.instance().handleChangeStart(0.5)
     expect(onChangeStart.callCount).to.equal(1)
-    slider.node.handleChangeEnd(0.5)
+    slider.instance().handleChangeEnd(0.5)
     expect(onChangeEnd.callCount).to.equal(1)
   })
 
