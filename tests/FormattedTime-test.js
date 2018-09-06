@@ -8,8 +8,6 @@ chai.use(chaiEnzyme())
 
 import FormattedTime from '../src/components/FormattedTime.js'
 
-const noop = () => {}
-
 describe('<FormattedTime />', () => {
   it('defaults to 0:00', () => {
     const time = mount(<FormattedTime />)
