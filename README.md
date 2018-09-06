@@ -138,7 +138,7 @@ What this component actually does is that it renders an element inside itself, o
 | `onIntent` | `() => {}` | A function that is invoked with the relative, normalised value at which the user is hovering. |
 | `onChange` | `() => {}` | A function that is invoked with the latest relative, normalised value that the user has set by either clicking or dragging. |
 | `onChangeStart` | `() => {}` | A function that is invoked with the relative, normalised value at which the user started changing the slider's value. |
-| `onChangeEnd` | `() => {}` | A function that is invoked with the relative, normalised value at which the user stopped changing the slider's value. |
+| `onChangeEnd` | `() => {}` | A function that is invoked with the relative, normalised value at which the user stopped changing the slider's value. When the component unmounts, this function will be invoked with a value of `null`. |
 | `children` | `null` | Child elements. |
 | `className` | `null` | A string to set as the HTML `class` attribute. |
 | `style` | `{}` | Styles to set on the wrapping `div` element. |
