@@ -6,7 +6,7 @@
   &nbsp;
 </h1>
 
-[![npm version](https://badge.fury.io/js/react-player-controls.svg)](https://badge.fury.io/js/react-player-controls)
+[![npm version](https://badge.fury.io/js/react-player-controls.svg)](https://npmjs.com/package/react-player-controls)
 [![Build Status](https://travis-ci.org/alexanderwallin/react-player-controls.svg?branch=master)](https://travis-ci.org/alexanderwallin/react-player-controls)
 ![Status: Beta](https://img.shields.io/badge/status-beta-yellow.svg)
 [![Dependencies](https://img.shields.io/david/alexanderwallin/react-player-controls.svg?style=flat-square)](https://david-dm.org/alexanderwallin/react-player-controls)
