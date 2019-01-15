@@ -5,11 +5,11 @@ import chai, { expect } from 'chai'
 import chaiEnzyme from 'chai-enzyme'
 import { spy } from 'sinon'
 
-chai.use(chaiEnzyme())
-
 import { Direction } from '../src/constants.js'
 import RangeControlOverlay from '../src/components/RangeControlOverlay.js'
 import Slider from '../src/components/Slider.js'
+
+chai.use(chaiEnzyme())
 
 describe('<Slider />', () => {
   it('renders a <RangeControlOverlay />', () => {

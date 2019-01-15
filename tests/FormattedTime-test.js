@@ -4,9 +4,9 @@ import { shallow, mount } from 'enzyme'
 import chai, { expect } from 'chai'
 import chaiEnzyme from 'chai-enzyme'
 
-chai.use(chaiEnzyme())
-
 import FormattedTime from '../src/components/FormattedTime.js'
+
+chai.use(chaiEnzyme())
 
 describe('<FormattedTime />', () => {
   it('defaults to 0:00', () => {

@@ -5,10 +5,10 @@ import chai, { expect } from 'chai'
 import chaiEnzyme from 'chai-enzyme'
 import { spy } from 'sinon'
 
-chai.use(chaiEnzyme())
-
 import { Direction } from '../src/constants.js'
 import RangeControlOverlay from '../src/components/RangeControlOverlay.js'
+
+chai.use(chaiEnzyme())
 
 const noop = () => {}
 

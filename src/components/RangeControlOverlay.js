@@ -12,7 +12,6 @@ const { oneOfType, shape, func, number, oneOf, object, string } = PropTypes
  * within a specified bounds.
  */
 class RangeControlOverlay extends Component {
-
   static propTypes = {
     bounds: oneOfType([
       func,

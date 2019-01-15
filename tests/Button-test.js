@@ -5,9 +5,9 @@ import chai, { expect } from 'chai'
 import chaiEnzyme from 'chai-enzyme'
 import { spy } from 'sinon'
 
-chai.use(chaiEnzyme())
-
 import Button from '../src/components/Button.js'
+
+chai.use(chaiEnzyme())
 
 const noop = () => {}
 

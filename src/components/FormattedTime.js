@@ -10,7 +10,6 @@ const padZero = digit =>
  * Time formatter that turns seconds into h:mm:ss
  */
 class FormattedTime extends Component {
-
   static propTypes = {
     numSeconds: number,
     className: string,
