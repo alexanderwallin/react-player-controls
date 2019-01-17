@@ -100,6 +100,60 @@ describe('<RangeControlOverlay />', () => {
   })
 })
 
+describe('intent', () => {
+  let overlay = null
+  let onIntent = null
+  let onIntentStart = null
+  let onIntentEnd = null
+
+  beforeEach(() => {
+    onIntent = spy()
+    onIntentStart = spy()
+    onIntentEnd = spy()
+
+    overlay = shallow(
+      <RangeControlOverlay
+        bounds={{ left: 100, width: 100 }}
+        direction={Direction.HORIZONTAL}
+        onChange={noop}
+        onIntent={onIntent}
+        onIntentStart={onIntentStart}
+        onIntentEnd={onIntentEnd}
+      />
+    )
+  })
+
+  it('invokes onIntent on mouseover when not dragging', () => {
+    overlay.instance().startDrag({ pageX: 140 })
+    overlay.find('div').simulate('mousemove', { pageX: 120 })
+    expect(onIntent.callCount).to.equal(0)
+
+    overlay.instance().endDrag({ pageX: 150 })
+    overlay.find('div').simulate('mousemove', { pageX: 120 })
+    expect(onIntent.args[0][0]).to.equal(0.2)
+  })
+
+  it('invokes onIntentStart on mouseenter when not dragging', () => {
+    overlay.instance().startDrag({ pageX: 140 })
+    overlay.find('div').simulate('mouseenter', { pageX: 120 })
+    expect(onIntentStart.callCount).to.equal(0)
+
+    overlay.instance().endDrag({ pageX: 150 })
+    overlay.find('div').simulate('mouseenter', { pageX: 120 })
+    expect(onIntentStart.args[0][0]).to.equal(0.2)
+  })
+
+  it('invokes onIntentEnd on mouseleave when not dragging', () => {
+    overlay.instance().startDrag({ pageX: 140 })
+    overlay.find('div').simulate('mouseleave')
+    expect(onIntentEnd.callCount).to.equal(0)
+
+    overlay.instance().endDrag({ pageX: 150 })
+    overlay.find('div').simulate('mouseleave')
+    expect(onIntentEnd.callCount).to.equal(1)
+  })
+})
+
 describe('all controls', () => {
   it('it invokes onChangeStart and onChangeEnd prop functions', () => {
     const onChangeStart = spy()
@@ -123,6 +177,8 @@ describe('all controls', () => {
     expect(onChangeEnd.callCount).to.equal(1)
     expect(onChangeEnd.args[0][0]).to.equal(0.2)
   })
+
+
 
   it('accepts a custom className', () => {
     const overlay = shallow(<RangeControlOverlay className="MyClassName" bounds={noop} onChange={noop} />)

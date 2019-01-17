@@ -28,6 +28,8 @@ class RangeControlOverlay extends Component {
     onChangeStart: func,
     onChangeEnd: func,
     onIntent: func,
+    onIntentStart: func,
+    onIntentEnd: func,
     direction: oneOf([Direction.HORIZONTAL, Direction.VERTICAL]),
     className: string,
     style: object,
@@ -37,6 +39,8 @@ class RangeControlOverlay extends Component {
     onChangeStart: noop,
     onChangeEnd: noop,
     onIntent: noop,
+    onIntentStart: noop,
+    onIntentEnd: noop,
     direction: Direction.HORIZONTAL,
     className: null,
     style: {},
@@ -106,20 +110,38 @@ class RangeControlOverlay extends Component {
   }
 
   @autobind
-  handleIntentMove (evt) {
+  handleIntentStart (evt) {
+    const { direction, onIntentStart } = this.props
+
     if (!this.state.isDragging) {
-      this.triggerIntent(evt)
+      const value = direction === Direction.VERTICAL
+        ? this.getVerticalValue(evt.pageY)
+        : this.getHorizontalValue(evt.pageX)
+
+      onIntentStart(value)
     }
   }
 
-  triggerIntent (mouseEvent) {
+  @autobind
+  handleIntentMove (evt) {
     const { direction, onIntent } = this.props
 
-    const value = direction === Direction.VERTICAL
-      ? this.getVerticalValue(mouseEvent.pageY)
-      : this.getHorizontalValue(mouseEvent.pageX)
+    if (!this.state.isDragging) {
+      const value = direction === Direction.VERTICAL
+        ? this.getVerticalValue(evt.pageY)
+        : this.getHorizontalValue(evt.pageX)
 
-    onIntent(value)
+      onIntent(value)
+    }
+  }
+
+  @autobind
+  handleIntentEnd (evt) {
+    const { onIntentEnd } = this.props
+
+    if (!this.state.isDragging) {
+      onIntentEnd()
+    }
   }
 
   getRectFromBounds () {
@@ -162,7 +184,9 @@ class RangeControlOverlay extends Component {
         className={className}
         style={style}
         onMouseDown={this.startDrag}
+        onMouseEnter={this.handleIntentStart}
         onMouseMove={this.handleIntentMove}
+        onMouseLeave={this.handleIntentEnd}
       />
     )
   }
