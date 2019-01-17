@@ -198,11 +198,13 @@ class SliderDemo extends PureComponent {
       lastValueStart: 0,
       lastValueEnd: 0,
       lastIntent: 0,
+      lastIntentStart: 0,
+      lastIntentEndCount: 0,
     }
   }
 
   render () {
-    const { isEnabled, direction, value, lastValueStart, lastValueEnd, lastIntent } = this.state
+    const { isEnabled, direction, value, lastValueStart, lastValueEnd, lastIntent, lastIntentStart, lastIntentEndCount } = this.state
 
     return (
       <div className="ComponentDemo SliderDemo">
@@ -212,7 +214,7 @@ class SliderDemo extends PureComponent {
               `const SliderBar = ({ direction, value, style }) => <div style={computedStylesHere} />` +
               `\nconst SliderHandle = ({ direction, value, style }) => <div style={computedStylesHere} />` +
               `\n` +
-              `\n<Slider\n  isEnabled={this.state.isEnabled}\n  direction={this.state.direction}\n  onChange={newValue => this.setState(() => ({ value: newValue }))}\n  onChangeStart={startValue => this.setState(() => ({ lastValueStart: startValue }))}\n  onChangeEnd={endValue => this.setState(() => ({ lastValueEnd: endValue }))}\n  onIntent={intent => this.setState(() => ({ lastIntent: intent }))}\n  style={sliderStylesHere}\n>` +
+              `\n<Slider\n  isEnabled={this.state.isEnabled}\n  direction={this.state.direction}\n  onChange={newValue => this.setState(() => ({ value: newValue }))}\n  onChangeStart={startValue => this.setState(() => ({ lastValueStart: startValue }))}\n  onChangeEnd={endValue => this.setState(() => ({ lastValueEnd: endValue }))}\n  onIntent={intent => this.setState(() => ({ lastIntent: intent }))}\n  onIntentStart={intent => this.setState(() => ({ lastIntentStart: intent }))}\n  onIntentEnd={() => this.setState(() => ({ lastIntentEndCount: this.state.lastIntentEndCount + 1 }))}\n  style={sliderStylesHere}\n>` +
               `\n  <SliderBar\n    direction={this.state.direction}\n    value={this.state.value}\n    style={{ background: this.state.isEnabled ? '#72d687' : '#878c88' }}\n  />` +
               `\n  <SliderBar\n    direction={this.state.direction}\n    value={this.state.lastIntent}\n    style={{ background: 'rgba(0, 0, 0, 0.05)' }}\n  />` +
               `\n  <SliderHandle\n    direction={this.state.direction}\n    value={this.state.value}\n    style={{ background: this.state.isEnabled ? '#72d687' : '#878c88' }}\n  />` +
@@ -255,6 +257,16 @@ class SliderDemo extends PureComponent {
             <code>lastIntent</code>
             <input type="number" disabled value={lastIntent} />
           </label>
+
+          <label>
+            <code>lastIntentStart</code>
+            <input type="number" disabled value={lastIntentStart} />
+          </label>
+
+          <label>
+            <code>lastIntentEndCount</code>
+            <input type="number" disabled value={lastIntentEndCount} />
+          </label>
         </div>
 
         <div className="ComponentDemo-results">
@@ -265,6 +277,8 @@ class SliderDemo extends PureComponent {
             onChangeStart={startValue => this.setState(() => ({ lastValueStart: startValue }))}
             onChangeEnd={endValue => this.setState(() => ({ lastValueEnd: endValue }))}
             onIntent={intent => this.setState(() => ({ lastIntent: intent }))}
+            onIntentStart={intent => this.setState(() => ({ lastIntentStart: intent }))}
+            onIntentEnd={() => this.setState(() => ({ lastIntentEndCount: lastIntentEndCount + 1 }))}
             style={{
               width: direction === Direction.HORIZONTAL ? 200 : 8,
               height: direction === Direction.HORIZONTAL ? 8 : 130,
