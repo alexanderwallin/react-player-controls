@@ -123,6 +123,8 @@ What this component actually does is that it renders an element inside itself, o
   direction={Direction.HORIZONTAL}
   isEnabled
   onIntent={intent => console.log(`hovered at ${intent}`)}
+  onIntentStart={intent => console.log(`entered with mouse at ${intent}`)}
+  onIntentEnd={() => console.log('left with mouse')}
   onChange={newValue => console.log(`clicked at ${newValue}`)}
   onChangeStart={startValue => console.log(`started dragging at ${startValue}`)}
   onChangeEnd={endValue => console.log(`stopped dragging at ${endValue}`)}
@@ -135,7 +137,9 @@ What this component actually does is that it renders an element inside itself, o
 |-----------|---------------|-------------|
 | `direction` | `Direction.HORIZONTAL` | The slider's direction |
 | `isEnabled` | `true` | Whether the slider is interactable |
-| `onIntent` | `() => {}` | A function that is invoked with the relative, normalised value at which the user is hovering. |
+| `onIntent` | `() => {}` | A function that is invoked with the relative, normalised value at which the user is hovering (when not dragging). |
+| `onIntentStart` | `() => {}` | A function this is invoked with the relative, normalised value at which the user started hovering the slider (when not dragging). |
+| `onIntentEnd` | `() => {}` | A function this is invoked when the mouse left the slider area (when not dragging). |
 | `onChange` | `() => {}` | A function that is invoked with the latest relative, normalised value that the user has set by either clicking or dragging. |
 | `onChangeStart` | `() => {}` | A function that is invoked with the relative, normalised value at which the user started changing the slider's value. |
 | `onChangeEnd` | `() => {}` | A function that is invoked with the relative, normalised value at which the user stopped changing the slider's value. When the component unmounts, this function will be invoked with a value of `null`. |
