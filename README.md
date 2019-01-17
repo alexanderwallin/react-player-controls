@@ -423,7 +423,7 @@ class BarWithTimeOnHover extends React.Component {
     }
 
     this.handleIntent = this.handleIntent.bind(this)
-    this.handleMouseLeave = this.handleMouseLeave.bind(this)
+    this.handleIntentEnd = this.handleIntentEnd.bind(this)
   }
 
   handleIntent(value) {
@@ -432,7 +432,11 @@ class BarWithTimeOnHover extends React.Component {
     })
   }
 
-  handleMouseLeave() {
+  handleIntentEnd() {
+    // Note that this might not be invoked if the user ends
+    // a control change with the mouse outside of the slider
+    // element, so you might want to do this inside a
+    // onChangeEnd callback too.
     this.setState({
       hoverValue: null,
     })
@@ -449,7 +453,7 @@ class BarWithTimeOnHover extends React.Component {
           position: 'relative',
         }}
         onIntent={this.handleIntent}
-        onMouseLeave={this.handleMouseLeave}
+        onIntentEnd={this.handleIntentEnd}
       >
         <TimeBar />
 
