@@ -46,17 +46,34 @@ describe('<Slider />', () => {
     expect(slider.props().direction).to.equal(Direction.HORIZONTAL)
   })
 
-  it('invokes onIntent callback when enabled', () => {
+  it('invokes intent callbacks when enabled', () => {
     const onIntent = spy()
-    const slider = mount(<Slider onIntent={onIntent} />)
+    const onIntentStart = spy()
+    const onIntentEnd = spy()
+    const slider = mount(
+      <Slider
+        onChange={() => {}}
+        onIntent={onIntent}
+        onIntentStart={onIntentStart}
+        onIntentEnd={onIntentEnd}
+      />
+    )
 
     slider.setProps({ isEnabled: false })
     slider.instance().handleIntent(0.5)
     expect(onIntent.callCount).to.equal(0)
+    slider.instance().handleIntentStart(0.5)
+    expect(onIntentStart.callCount).to.equal(0)
+    slider.instance().handleIntentEnd(0.5)
+    expect(onIntentEnd.callCount).to.equal(0)
 
     slider.setProps({ isEnabled: true })
     slider.instance().handleIntent(0.5)
     expect(onIntent.callCount).to.equal(1)
+    slider.instance().handleIntentStart(0.5)
+    expect(onIntentStart.callCount).to.equal(1)
+    slider.instance().handleIntentEnd(0.5)
+    expect(onIntentEnd.callCount).to.equal(1)
   })
 
   it('invokes change callbacks when enabled', () => {

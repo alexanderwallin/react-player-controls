@@ -17,6 +17,8 @@ class Slider extends PureComponent {
     direction: PropTypes.oneOf([Direction.HORIZONTAL, Direction.VERTICAL]),
     isEnabled: PropTypes.bool,
     onIntent: PropTypes.func,
+    onIntentStart: PropTypes.func,
+    onIntentEnd: PropTypes.func,
     onChange: PropTypes.func,
     onChangeStart: PropTypes.func,
     onChangeEnd: PropTypes.func,
@@ -30,6 +32,8 @@ class Slider extends PureComponent {
     direction: Direction.HORIZONTAL,
     isEnabled: true,
     onIntent: noop,
+    onIntentStart: noop,
+    onIntentEnd: noop,
     onChange: noop,
     onChangeStart: noop,
     onChangeEnd: noop,
@@ -50,6 +54,20 @@ class Slider extends PureComponent {
   handleIntent (intent) {
     if (this.props.isEnabled) {
       this.props.onIntent(intent)
+    }
+  }
+
+  @autobind
+  handleIntentStart (intent) {
+    if (this.props.isEnabled) {
+      this.props.onIntentStart(intent)
+    }
+  }
+
+  @autobind
+  handleIntentEnd () {
+    if (this.props.isEnabled) {
+      this.props.onIntentEnd()
     }
   }
 
@@ -103,6 +121,8 @@ class Slider extends PureComponent {
           direction={direction}
           bounds={() => this.$el.getBoundingClientRect()}
           onIntent={this.handleIntent}
+          onIntentStart={this.handleIntentStart}
+          onIntentEnd={this.handleIntentEnd}
           onChange={this.handleChange}
           onChangeStart={this.handleChangeStart}
           onChangeEnd={this.handleChangeEnd}
