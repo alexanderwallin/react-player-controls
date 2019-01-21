@@ -98,93 +98,105 @@ describe('<RangeControlOverlay />', () => {
       expect(onChange.args[2][0]).to.equal(0)
     })
   })
-})
 
-describe('intent', () => {
-  let overlay = null
-  let onIntent = null
-  let onIntentStart = null
-  let onIntentEnd = null
+  describe('intent', () => {
+    let overlay = null
+    let onIntent = null
+    let onIntentStart = null
+    let onIntentEnd = null
 
-  beforeEach(() => {
-    onIntent = spy()
-    onIntentStart = spy()
-    onIntentEnd = spy()
+    beforeEach(() => {
+      onIntent = spy()
+      onIntentStart = spy()
+      onIntentEnd = spy()
 
-    overlay = shallow(
-      <RangeControlOverlay
-        bounds={{ left: 100, width: 100 }}
-        direction={Direction.HORIZONTAL}
-        onChange={noop}
-        onIntent={onIntent}
-        onIntentStart={onIntentStart}
-        onIntentEnd={onIntentEnd}
-      />
-    )
+      overlay = shallow(
+        <RangeControlOverlay
+          bounds={{ left: 100, width: 100 }}
+          direction={Direction.HORIZONTAL}
+          onChange={noop}
+          onIntent={onIntent}
+          onIntentStart={onIntentStart}
+          onIntentEnd={onIntentEnd}
+        />
+      )
+    })
+
+    it('invokes onIntent on mouseover when not dragging', () => {
+      overlay.instance().startDrag({ pageX: 140 })
+      overlay.find('div').simulate('mousemove', { pageX: 120 })
+      expect(onIntent.callCount).to.equal(0)
+
+      overlay.instance().endDrag({ pageX: 150 })
+      overlay.find('div').simulate('mousemove', { pageX: 120 })
+      expect(onIntent.args[0][0]).to.equal(0.2)
+    })
+
+    it('invokes onIntentStart on mouseenter when not dragging', () => {
+      overlay.instance().startDrag({ pageX: 140 })
+      overlay.find('div').simulate('mouseenter', { pageX: 120 })
+      expect(onIntentStart.callCount).to.equal(0)
+
+      overlay.instance().endDrag({ pageX: 150 })
+      overlay.find('div').simulate('mouseenter', { pageX: 120 })
+      expect(onIntentStart.args[0][0]).to.equal(0.2)
+    })
+
+    it('invokes onIntentEnd on mouseleave when not dragging', () => {
+      overlay.instance().startDrag({ pageX: 140 })
+      overlay.find('div').simulate('mouseleave')
+      expect(onIntentEnd.callCount).to.equal(0)
+
+      overlay.instance().endDrag({ pageX: 150 })
+      overlay.find('div').simulate('mouseleave')
+      expect(onIntentEnd.callCount).to.equal(1)
+    })
   })
 
-  it('invokes onIntent on mouseover when not dragging', () => {
-    overlay.instance().startDrag({ pageX: 140 })
-    overlay.find('div').simulate('mousemove', { pageX: 120 })
-    expect(onIntent.callCount).to.equal(0)
+  describe('all controls', () => {
+    it('it invokes onChangeStart and onChangeEnd prop functions', () => {
+      const onChangeStart = spy()
+      const onChangeEnd = spy()
+      const overlay = shallow(
+        <RangeControlOverlay
+          bounds={{ left: 100, width: 100 }}
+          direction={Direction.HORIZONTAL}
+          onChange={noop}
+          onChangeStart={onChangeStart}
+          onChangeEnd={onChangeEnd}
+        />
+      )
+      const instance = overlay.instance()
 
-    overlay.instance().endDrag({ pageX: 150 })
-    overlay.find('div').simulate('mousemove', { pageX: 120 })
-    expect(onIntent.args[0][0]).to.equal(0.2)
-  })
+      instance.startDrag({ pageX: 110 })
+      expect(onChangeStart.callCount).to.equal(1)
+      expect(onChangeStart.args[0][0]).to.equal(0.1)
 
-  it('invokes onIntentStart on mouseenter when not dragging', () => {
-    overlay.instance().startDrag({ pageX: 140 })
-    overlay.find('div').simulate('mouseenter', { pageX: 120 })
-    expect(onIntentStart.callCount).to.equal(0)
+      instance.endDrag({ pageX: 120 })
+      expect(onChangeEnd.callCount).to.equal(1)
+      expect(onChangeEnd.args[0][0]).to.equal(0.2)
+    })
 
-    overlay.instance().endDrag({ pageX: 150 })
-    overlay.find('div').simulate('mouseenter', { pageX: 120 })
-    expect(onIntentStart.args[0][0]).to.equal(0.2)
-  })
+    it('accepts a custom className', () => {
+      const overlay = shallow(
+        <RangeControlOverlay
+          className="MyClassName"
+          bounds={noop}
+          onChange={noop}
+        />
+      )
+      expect(overlay.props().className).to.include('MyClassName')
+    })
 
-  it('invokes onIntentEnd on mouseleave when not dragging', () => {
-    overlay.instance().startDrag({ pageX: 140 })
-    overlay.find('div').simulate('mouseleave')
-    expect(onIntentEnd.callCount).to.equal(0)
-
-    overlay.instance().endDrag({ pageX: 150 })
-    overlay.find('div').simulate('mouseleave')
-    expect(onIntentEnd.callCount).to.equal(1)
-  })
-})
-
-describe('all controls', () => {
-  it('it invokes onChangeStart and onChangeEnd prop functions', () => {
-    const onChangeStart = spy()
-    const onChangeEnd = spy()
-    const overlay = shallow(
-      <RangeControlOverlay
-        bounds={{ left: 100, width: 100 }}
-        direction={Direction.HORIZONTAL}
-        onChange={noop}
-        onChangeStart={onChangeStart}
-        onChangeEnd={onChangeEnd}
-      />
-    )
-    const instance = overlay.instance()
-
-    instance.startDrag({ pageX: 110 })
-    expect(onChangeStart.callCount).to.equal(1)
-    expect(onChangeStart.args[0][0]).to.equal(0.1)
-
-    instance.endDrag({ pageX: 120 })
-    expect(onChangeEnd.callCount).to.equal(1)
-    expect(onChangeEnd.args[0][0]).to.equal(0.2)
-  })
-
-  it('accepts a custom className', () => {
-    const overlay = shallow(<RangeControlOverlay className="MyClassName" bounds={noop} onChange={noop} />)
-    expect(overlay.props().className).to.include('MyClassName')
-  })
-
-  it('should accept custom styles', () => {
-    const overlay = shallow(<RangeControlOverlay style={{ fontSize: 100 }} bounds={noop} onChange={noop} />)
-    expect(overlay.props().style).to.eql({ fontSize: 100 })
+    it('should accept custom styles', () => {
+      const overlay = shallow(
+        <RangeControlOverlay
+          style={{ fontSize: 100 }}
+          bounds={noop}
+          onChange={noop}
+        />
+      )
+      expect(overlay.props().style).to.eql({ fontSize: 100 })
+    })
   })
 })
