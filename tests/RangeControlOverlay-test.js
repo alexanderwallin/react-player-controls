@@ -178,8 +178,6 @@ describe('all controls', () => {
     expect(onChangeEnd.args[0][0]).to.equal(0.2)
   })
 
-
-
   it('accepts a custom className', () => {
     const overlay = shallow(<RangeControlOverlay className="MyClassName" bounds={noop} onChange={noop} />)
     expect(overlay.props().className).to.include('MyClassName')
