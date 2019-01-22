@@ -83,7 +83,7 @@ class RangeControlOverlay extends Component {
     }
 
     const touch = evt.touches[0]
-    const value = this.getValueFromMouseEvent(touch)
+    const value = this.getValueFromInteractionPoint(touch)
 
     // If this is a potential start of a drag, make sure
     // it's not intended as a scroll
@@ -125,7 +125,7 @@ class RangeControlOverlay extends Component {
     }
 
     const endValue = evt !== undefined
-      ? this.getValueFromMouseEvent(evt.touches[0])
+      ? this.getValueFromInteractionPoint(evt.touches[0])
       : null
     onChangeEnd(endValue)
 
@@ -146,7 +146,7 @@ class RangeControlOverlay extends Component {
     this.toggleSelection('none')
 
     const startValue = evt
-      ? this.getValueFromMouseEvent(evt)
+      ? this.getValueFromInteractionPoint(evt)
       : null
     this.props.onChangeStart(startValue)
   }
@@ -164,7 +164,7 @@ class RangeControlOverlay extends Component {
     this.toggleSelection('')
 
     const endValue = evt
-      ? this.getValueFromMouseEvent(evt)
+      ? this.getValueFromInteractionPoint(evt)
       : null
     this.props.onChangeEnd(endValue)
   }
@@ -177,15 +177,15 @@ class RangeControlOverlay extends Component {
     body.style['-ms-user-select'] = value
   }
 
-  getValueFromMouseEvent (mouseEvent) {
+  getValueFromInteractionPoint (point) {
     return this.props.direction === Direction.VERTICAL
-      ? this.getVerticalValue(mouseEvent.pageY)
-      : this.getHorizontalValue(mouseEvent.pageX)
+      ? this.getVerticalValue(point.pageY)
+      : this.getHorizontalValue(point.pageX)
   }
 
   @autobind
   triggerRangeChange (mouseEvent) {
-    this.props.onChange(this.getValueFromMouseEvent(mouseEvent))
+    this.props.onChange(this.getValueFromInteractionPoint(mouseEvent))
   }
 
   @autobind
@@ -231,24 +231,24 @@ class RangeControlOverlay extends Component {
       : bounds
   }
 
-  getHorizontalValue (mouseX) {
+  getHorizontalValue (pageX) {
     const rect = this.getRectFromBounds()
     const scrollX = (window.pageXOffset !== undefined)
       ? window.pageXOffset
       : (document.documentElement || document.body.parentNode || document.body).scrollLeft
-    let dLeft = mouseX - (rect.left + scrollX)
+    let dLeft = pageX - (rect.left + scrollX)
     dLeft = Math.max(dLeft, 0)
     dLeft = Math.min(dLeft, rect.width)
 
     return dLeft / rect.width
   }
 
-  getVerticalValue (mouseY) {
+  getVerticalValue (pageY) {
     const rect = this.getRectFromBounds()
     const scrollY = (window.pageYOffset !== undefined)
       ? window.pageYOffset
       : (document.documentElement || document.body.parentNode || document.body).scrollTop
-    let dTop = mouseY - (rect.top + scrollY)
+    let dTop = pageY - (rect.top + scrollY)
     dTop = Math.max(dTop, 0)
     dTop = Math.min(dTop, rect.height)
 
