@@ -49,6 +49,8 @@ class RangeControlOverlay extends Component {
   constructor (props) {
     super(props)
 
+    this.touchStartPosition = null
+
     this.state = {
       isDragging: false,
     }
@@ -56,6 +58,83 @@ class RangeControlOverlay extends Component {
 
   componentWillUnmount () {
     this.endDrag()
+    this.handleTouchEnd()
+  }
+
+  @autobind
+  handleTouchStart (evt) {
+    if (evt.touches.length > 1) {
+      return false
+    }
+
+    this.touchStartPosition = evt.touches[0]
+
+    window.addEventListener('touchmove', this.handleTouchMove)
+    window.addEventListener('touchend', this.handleTouchEnd)
+  }
+
+  @autobind
+  handleTouchMove (evt) {
+    const { direction, onChange, onChangeStart } = this.props
+    const { isDragging } = this.state
+
+    if (evt.touches.length > 1) {
+      return false
+    }
+
+    const touch = evt.touches[0]
+    const value = this.getValueFromMouseEvent(touch)
+
+    // If this is a potential start of a drag, make sure
+    // it's not intended as a scroll
+    if (isDragging === false) {
+      const dX = touch.pageX - this.touchStartPosition.pageX
+      const dY = touch.pageY - this.touchStartPosition.pageY
+
+      const isScrolling =
+        (direction === Direction.HORIZONTAL && Math.abs(dX) < Math.abs(dY)) ||
+        (direction === Direction.VERTICAL && Math.abs(dY) < Math.abs(dX))
+
+      if (isScrolling === true) {
+        return false
+      }
+
+      this.setState({ isDragging: true })
+      onChangeStart(value)
+    }
+
+    if (typeof evt.preventDefault === 'function') {
+      evt.preventDefault()
+    }
+    if (typeof evt.stopPropagation === 'function') {
+      evt.stopPropagation()
+    }
+
+    this.toggleSelection('none')
+
+    onChange(value)
+  }
+
+  @autobind
+  handleTouchEnd (evt) {
+    const { onChangeEnd } = this.props
+    const { isDragging } = this.state
+
+    if (evt !== undefined && evt.touches.length > 1) {
+      return false
+    }
+
+    const endValue = evt !== undefined
+      ? this.getValueFromMouseEvent(evt.touches[0])
+      : null
+    onChangeEnd(endValue)
+
+    window.removeEventListener('touchmove', this.handleTouchMove)
+    window.removeEventListener('touchend', this.handleTouchEnd)
+
+    this.toggleSelection('')
+    this.touchStartPosition = null
+    this.setState({ isDragging: false })
   }
 
   @autobind
@@ -183,6 +262,7 @@ class RangeControlOverlay extends Component {
       <div
         className={className}
         style={style}
+        onTouchStart={this.handleTouchStart}
         onMouseDown={this.startDrag}
         onMouseEnter={this.handleIntentStart}
         onMouseMove={this.handleIntentMove}

@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount, shallow } from 'enzyme'
 import chai, { expect } from 'chai'
 import chaiEnzyme from 'chai-enzyme'
 import { spy } from 'sinon'
@@ -197,6 +197,69 @@ describe('<RangeControlOverlay />', () => {
         />
       )
       expect(overlay.props().style).to.eql({ fontSize: 100 })
+    })
+  })
+
+  // We use the internal handlers instead of simulating events to test
+  // touch functionality, since touch events are attached to the window,
+  // and are thus not handled by React's synthetic event system, and
+  // therefor not supported by enzyme.
+  //
+  // @see https://github.com/airbnb/enzyme/issues/426
+  describe('touch controls', () => {
+    let overlay = null
+    let onChange = null
+    let onChangeStart
+    let onChangeEnd
+
+    beforeEach(() => {
+      onChange = spy()
+      onChangeStart = spy()
+      onChangeEnd = spy()
+
+      overlay = mount(
+        <RangeControlOverlay
+          bounds={{ top: 100, left: 100, width: 100, height: 100 }}
+          direction={Direction.HORIZONTAL}
+          onChange={onChange}
+          onChangeStart={onChangeStart}
+          onChangeEnd={onChangeEnd}
+        />
+      )
+    })
+
+    it('triggers a change when dragging in the overlay\'s direction', () => {
+      const instance = overlay.instance()
+
+      // Horizontal
+      instance.handleTouchStart({ touches: [{ pageX: 110, pageY: 110 }] })
+      instance.handleTouchMove({ touches: [{ pageX: 110, pageY: 120 }] })
+      expect(onChange.callCount).to.equal(0)
+
+      instance.handleTouchMove({ touches: [{ pageX: 120, pageY: 110 }] })
+      expect(onChange.callCount).to.equal(1)
+      expect(onChange.args[0][0]).to.equal(0.2)
+      instance.handleTouchEnd({ touches: [{ pageX: 120, pageY: 110 }] })
+
+      // Vertical
+      overlay.setProps({ direction: Direction.VERTICAL })
+      instance.handleTouchStart({ touches: [{ pageX: 110, pageY: 110 }] })
+      instance.handleTouchMove({ touches: [{ pageX: 120, pageY: 110 }] })
+      expect(onChange.callCount).to.equal(1)
+
+      instance.handleTouchMove({ touches: [{ pageX: 110, pageY: 120 }] })
+      expect(onChange.callCount).to.equal(2)
+      expect(onChange.args[1][0]).to.equal(0.8)
+      instance.handleTouchEnd({ touches: [{ pageX: 120, pageY: 110 }] })
+    })
+
+    it('invokes onChangeStart only after moving has been confirmed', () => {
+      const instance = overlay.instance()
+
+      instance.handleTouchStart({ touches: [{ pageX: 110, pageY: 110 }] })
+      expect(onChangeStart.callCount).to.equal(0)
+      instance.handleTouchMove({ touches: [{ pageX: 120, pageY: 110 }] })
+      expect(onChangeStart.callCount).to.equal(1)
     })
   })
 })
