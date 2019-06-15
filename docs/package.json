@@ -3,8 +3,6 @@
   "scripts": {
     "pug": "pug index.pug",
     "pug:watch": "pug -w index.pug",
-    "sass": "node-sass --recursive --output build --source-map true --source-map-contents src/sass",
-    "sass:watch": "npm run sass -- --watch",
     "js": "browserify src/js/demos.js -t babelify -o build/bundle.js",
     "js:watch": "watchify src/js/demos.js -t babelify -o build/bundle.js",
     "serve": "live-server --port=8293",
@@ -26,7 +24,6 @@
     "browserify": "^13.1.0",
     "live-server": "^1.1.0",
     "livereload": "^0.5.0",
-    "node-sass": "^4.5.3",
     "npm-run-all": "^3.0.0",
     "pug-cli": "^1.0.0-alpha6",
     "watchify": "^3.11.0"
