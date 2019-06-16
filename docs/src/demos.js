@@ -10,7 +10,7 @@ import {
   FormattedTime,
   PlayerIcon,
   Slider,
-} from '../../../dist/index.js'
+} from '../../dist/index.js'
 
 const WHITE_SMOKE = '#eee'
 const GRAY = '#878c88'

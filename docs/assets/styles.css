@@ -1,7 +1,6 @@
-@import "../../node_modules/prismjs/themes/prism";
+@import "/assets/prism.css";
 
 @import "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700";
-@import "grid";
 
 :root {
   --black: #3D463F;
@@ -10,9 +9,15 @@
   --white: #fefefe;
   --blue: #0E52CE;
   --green: #72D687;
+
+  --font: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-var(--font): "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
 
 body {
   background-color: #fafafa;
@@ -20,9 +25,9 @@ body {
   font-family: var(--font);
 }
 
-//
-// Layout
-//
+/*
+ * Layout
+ */
 
 .site-container {
   display: flex;
@@ -50,9 +55,9 @@ body {
   width: 75%;
 }
 
-//
-// Typography
-//
+/*
+ * Typography
+ */
 
 .site-title {
   flex: 2;
@@ -121,9 +126,9 @@ code {
   font-family: Monaco, Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
 }
 
-//
-// Sidebar / navigation
-//
+/*
+ * Sidebar / navigation
+ */
 
 nav ul,
 nav li
@@ -151,9 +156,9 @@ menu li {
   display: inline-block;
 }
 
-//
-// Page content
-//
+/*
+ * Page content
+ */
 
 .component-group {
   margin-bottom: 40px;
@@ -219,20 +224,20 @@ menu li {
 .ComponentDemo-settings {
   flex: 1;
   border-right: 1px solid #eee;
+}
 
-  &::before {
-    content: 'State Settings';
-  }
+.ComponentDemo-settings::before {
+  content: 'State Settings';
+}
 
-  label {
-    display: block;
-    margin-bottom: 4px;
-  }
+.ComponentDemo-settings label {
+  display: block;
+  margin-bottom: 4px;
+}
 
-  code + input,
-  code + select {
-    margin-left: 10px;
-  }
+.ComponentDemo-settings code + input,
+.ComponentDemo-settings code + select {
+  margin-left: 10px;
 }
 
 .ComponentDemo-results {
@@ -244,9 +249,9 @@ menu li {
 }
 
 
-//
-// Footer
-//
+/*
+ * Footer
+ */
 
 .site-footer {
   width: 100%;
