@@ -22665,7 +22665,7 @@ var _prismjs = _interopRequireDefault(require("prismjs"));
 
 require("prismjs/components/prism-jsx.js");
 
-var _index = require("../../../dist/index.js");
+var _index = require("../../dist/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23121,7 +23121,7 @@ _reactDom.default.render(_react.default.createElement(PlayerIconDemo, null), doc
 
 _reactDom.default.render(_react.default.createElement(SliderDemo, null), document.querySelector('.component-demo[data-component="Slider"]'));
 
-},{"../../../dist/index.js":7,"prismjs":34,"prismjs/components/prism-jsx.js":33,"react":187,"react-dom":36}],189:[function(require,module,exports){
+},{"../../dist/index.js":7,"prismjs":34,"prismjs/components/prism-jsx.js":33,"react":187,"react-dom":36}],189:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

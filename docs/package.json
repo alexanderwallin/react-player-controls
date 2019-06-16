@@ -3,11 +3,11 @@
   "scripts": {
     "pug": "pug index.pug",
     "pug:watch": "pug -w index.pug",
-    "js": "browserify src/js/demos.js -t babelify -o build/bundle.js",
-    "js:watch": "watchify src/js/demos.js -t babelify -o build/bundle.js",
+    "js": "browserify src/demos.js -t babelify -o assets/app.js",
+    "js:watch": "watchify src/demos.js -t babelify -o assets/app.js",
     "serve": "live-server --port=8293",
     "start": "npm-run-all --parallel '*:watch' 'serve'",
-    "build": "npm-run-all --parallel 'pug' 'sass' 'js'"
+    "build": "npm-run-all --parallel 'pug' 'js'"
   },
   "private": true,
   "dependencies": {

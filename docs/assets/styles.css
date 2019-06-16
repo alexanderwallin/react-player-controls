@@ -1,7 +1,6 @@
-@import "../../node_modules/prismjs/themes/prism";
+@import "/assets/prism.css";
 
 @import "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700";
-@import "grid";
 
 :root {
   --black: #3D463F;
@@ -10,9 +9,20 @@
   --white: #fefefe;
   --blue: #0E52CE;
   --green: #72D687;
+
+  --font: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --monospace: Monaco, Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
 }
 
-var(--font): "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
 
 body {
   background-color: #fafafa;
@@ -20,14 +30,14 @@ body {
   font-family: var(--font);
 }
 
-//
-// Layout
-//
+/*
+ * Layout
+ */
 
 .site-container {
   display: flex;
   flex-wrap: wrap;
-  width: 95%;
+  width: 90%;
   max-width: 960px;
   margin: 0 auto;
   padding-bottom: 40px;
@@ -50,9 +60,9 @@ body {
   width: 75%;
 }
 
-//
-// Typography
-//
+/*
+ * Typography
+ */
 
 .site-title {
   flex: 2;
@@ -118,12 +128,12 @@ a&:hover {
 
 pre,
 code {
-  font-family: Monaco, Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
+  font-family: var(--monospace);
 }
 
-//
-// Sidebar / navigation
-//
+/*
+ * Sidebar / navigation
+ */
 
 nav ul,
 nav li
@@ -151,9 +161,9 @@ menu li {
   display: inline-block;
 }
 
-//
-// Page content
-//
+/*
+ * Page content
+ */
 
 .component-group {
   margin-bottom: 40px;
@@ -181,17 +191,17 @@ menu li {
   border-radius: 2px;
 }
 
-.ComponentDemo-code,
-.ComponentDemo-settings,
-.ComponentDemo-results {
+.ComponentDemo .ComponentDemo-code,
+.ComponentDemo .ComponentDemo-settings,
+.ComponentDemo .ComponentDemo-results {
   position: relative;
   padding: 40px 16px 24px;
   font-size: 12px;
 }
 
-.ComponentDemo-code::before,
-.ComponentDemo-settings::before,
-.ComponentDemo-results::before {
+.ComponentDemo .ComponentDemo-code::before,
+.ComponentDemo .ComponentDemo-settings::before,
+.ComponentDemo .ComponentDemo-results::before {
   position: absolute;
   top: 16px;
   left: 16px;
@@ -203,7 +213,7 @@ menu li {
   text-transform: uppercase;
 }
 
-.ComponentDemo-code {
+.ComponentDemo .ComponentDemo-code {
   width: 100%;
   margin: 0;
   padding-top: 40px;
@@ -212,27 +222,35 @@ menu li {
   line-height: 1.6;
 }
 
-.ComponentDemo-code::before {
+.ComponentDemo .ComponentDemo-code::before {
   content: 'JS';
 }
 
 .ComponentDemo-settings {
   flex: 1;
   border-right: 1px solid #eee;
+}
 
-  &::before {
-    content: 'State Settings';
-  }
+.ComponentDemo-settings::before {
+  content: 'State Settings';
+}
 
-  label {
-    display: block;
-    margin-bottom: 4px;
-  }
+.ComponentDemo-settings label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+  line-height: 24px;
+}
 
-  code + input,
-  code + select {
-    margin-left: 10px;
-  }
+.ComponentDemo-settings code {
+  flex-grow: 1;
+}
+
+.ComponentDemo-settings code + input,
+.ComponentDemo-settings code + select {
+  margin-left: 10px;
+  padding: 4px;
+  font-family: var(--monospace);
 }
 
 .ComponentDemo-results {
@@ -244,9 +262,9 @@ menu li {
 }
 
 
-//
-// Footer
-//
+/*
+ * Footer
+ */
 
 .site-footer {
   width: 100%;
@@ -256,4 +274,47 @@ menu li {
   font-size: 12px;
   text-align: center;
   color: var(--gray);
+}
+
+
+/**
+ * Mobile
+ */
+
+@media (max-width: 767px) {
+  .site-container {
+    display: block;
+  }
+
+  .external-nav {
+    display: none;
+  }
+
+  .site-sidebar {
+    width: auto;
+    margin-bottom: 40px;
+  }
+
+  .site-content {
+    width: auto;
+  }
+
+  .component-group {
+    border: none;
+  }
+
+  .ComponentDemo {
+    display: block;
+  }
+
+  .ComponentDemo-code,
+  .ComponentDemo-settings,
+  .ComponentDemo-results {
+    width: 100%;
+  }
+
+  .ComponentDemo-settings {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
 }
