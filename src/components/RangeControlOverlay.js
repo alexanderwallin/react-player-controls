@@ -50,6 +50,7 @@ class RangeControlOverlay extends Component {
     super(props)
 
     this.touchStartPosition = null
+    this.lastTouch = null
 
     this.state = {
       isDragging: false,
@@ -113,6 +114,8 @@ class RangeControlOverlay extends Component {
     this.toggleSelection('none')
 
     onChange(value)
+
+    this.lastTouch = touch
   }
 
   @autobind
@@ -124,9 +127,7 @@ class RangeControlOverlay extends Component {
       return false
     }
 
-    const endValue = evt !== undefined
-      ? this.getValueFromInteractionPoint(evt.touches[0])
-      : null
+    const endValue = this.getValueFromInteractionPoint(this.lastTouch)
     onChangeEnd(endValue)
 
     window.removeEventListener('touchmove', this.handleTouchMove)
@@ -134,6 +135,7 @@ class RangeControlOverlay extends Component {
 
     this.toggleSelection('')
     this.touchStartPosition = null
+    this.lastTouch = null
     this.setState({ isDragging: false })
   }
 
