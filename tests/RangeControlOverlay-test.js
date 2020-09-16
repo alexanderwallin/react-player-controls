@@ -36,7 +36,7 @@ describe('<RangeControlOverlay />', () => {
       expect(onChange.args[0][0]).to.equal(0.5)
     })
 
-    it('does not get affected by the mouse y position', () => {
+    it('does not get affected by the pointer y position', () => {
       instance.triggerRangeChange({ pageX: 175, pageY: 20 })
       instance.triggerRangeChange({ pageX: 175, pageY: 189 })
 
@@ -79,7 +79,7 @@ describe('<RangeControlOverlay />', () => {
       expect(onChange.args[0][0]).to.equal(0.5)
     })
 
-    it('does not get affected by the mouse x position', () => {
+    it('does not get affected by the pointer x position', () => {
       instance.triggerRangeChange({ pageX: 30, pageY: 175 })
       instance.triggerRangeChange({ pageX: 999, pageY: 175 })
 
@@ -123,33 +123,33 @@ describe('intent', () => {
     )
   })
 
-  it('invokes onIntent on mouseover when not dragging', () => {
+  it('invokes onIntent on pointerover when not dragging', () => {
     overlay.instance().startDrag({ pageX: 140 })
-    overlay.find('div').simulate('mousemove', { pageX: 120 })
+    overlay.find('div').simulate('pointermove', { pageX: 120 })
     expect(onIntent.callCount).to.equal(0)
 
     overlay.instance().endDrag({ pageX: 150 })
-    overlay.find('div').simulate('mousemove', { pageX: 120 })
+    overlay.find('div').simulate('pointermove', { pageX: 120 })
     expect(onIntent.args[0][0]).to.equal(0.2)
   })
 
-  it('invokes onIntentStart on mouseenter when not dragging', () => {
+  it('invokes onIntentStart on pointerenter when not dragging', () => {
     overlay.instance().startDrag({ pageX: 140 })
-    overlay.find('div').simulate('mouseenter', { pageX: 120 })
+    overlay.find('div').simulate('pointerenter', { pageX: 120 })
     expect(onIntentStart.callCount).to.equal(0)
 
     overlay.instance().endDrag({ pageX: 150 })
-    overlay.find('div').simulate('mouseenter', { pageX: 120 })
+    overlay.find('div').simulate('pointerenter', { pageX: 120 })
     expect(onIntentStart.args[0][0]).to.equal(0.2)
   })
 
-  it('invokes onIntentEnd on mouseleave when not dragging', () => {
+  it('invokes onIntentEnd on pointerleave when not dragging', () => {
     overlay.instance().startDrag({ pageX: 140 })
-    overlay.find('div').simulate('mouseleave')
+    overlay.find('div').simulate('pointerleave')
     expect(onIntentEnd.callCount).to.equal(0)
 
     overlay.instance().endDrag({ pageX: 150 })
-    overlay.find('div').simulate('mouseleave')
+    overlay.find('div').simulate('pointerleave')
     expect(onIntentEnd.callCount).to.equal(1)
   })
 })

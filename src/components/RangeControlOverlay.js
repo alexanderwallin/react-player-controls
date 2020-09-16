@@ -8,7 +8,7 @@ import { noop } from '../utils.js'
 const { oneOfType, shape, func, number, oneOf, object, string } = PropTypes
 
 /**
- * An invisible overlay that acts as a range mouse control
+ * An invisible overlay that acts as a range pointer control
  * within a specified bounds.
  */
 class RangeControlOverlay extends Component {
@@ -61,13 +61,13 @@ class RangeControlOverlay extends Component {
   @autobind
   startDrag (evt) {
     this.setState({ isDragging: true })
-    window.addEventListener('mousemove', this.triggerRangeChange)
-    window.addEventListener('mouseup', this.endDrag)
+    window.addEventListener('pointermove', this.triggerRangeChange)
+    window.addEventListener('pointerup', this.endDrag)
 
     this.toggleSelection('none')
 
     const startValue = evt
-      ? this.getValueFromMouseEvent(evt)
+      ? this.getValueFromPointerEvent(evt)
       : null
     this.props.onChangeStart(startValue)
   }
@@ -79,13 +79,13 @@ class RangeControlOverlay extends Component {
     }
 
     this.setState({ isDragging: false })
-    window.removeEventListener('mousemove', this.triggerRangeChange)
-    window.removeEventListener('mouseup', this.endDrag)
+    window.removeEventListener('pointermove', this.triggerRangeChange)
+    window.removeEventListener('pointerup', this.endDrag)
 
     this.toggleSelection('')
 
     const endValue = evt
-      ? this.getValueFromMouseEvent(evt)
+      ? this.getValueFromPointerEvent(evt)
       : null
     this.props.onChangeEnd(endValue)
   }
@@ -98,15 +98,15 @@ class RangeControlOverlay extends Component {
     body.style['-ms-user-select'] = value
   }
 
-  getValueFromMouseEvent (mouseEvent) {
+  getValueFromPointerEvent (pointerEvent) {
     return this.props.direction === Direction.VERTICAL
-      ? this.getVerticalValue(mouseEvent.pageY)
-      : this.getHorizontalValue(mouseEvent.pageX)
+      ? this.getVerticalValue(pointerEvent.pageY)
+      : this.getHorizontalValue(pointerEvent.pageX)
   }
 
   @autobind
-  triggerRangeChange (mouseEvent) {
-    this.props.onChange(this.getValueFromMouseEvent(mouseEvent))
+  triggerRangeChange (pointerEvent) {
+    this.props.onChange(this.getValueFromPointerEvent(pointerEvent))
   }
 
   @autobind
@@ -152,24 +152,24 @@ class RangeControlOverlay extends Component {
       : bounds
   }
 
-  getHorizontalValue (mouseX) {
+  getHorizontalValue (pointerX) {
     const rect = this.getRectFromBounds()
     const scrollX = (window.pageXOffset !== undefined)
       ? window.pageXOffset
       : (document.documentElement || document.body.parentNode || document.body).scrollLeft
-    let dLeft = mouseX - (rect.left + scrollX)
+    let dLeft = pointerX - (rect.left + scrollX)
     dLeft = Math.max(dLeft, 0)
     dLeft = Math.min(dLeft, rect.width)
 
     return dLeft / rect.width
   }
 
-  getVerticalValue (mouseY) {
+  getVerticalValue (pointerY) {
     const rect = this.getRectFromBounds()
     const scrollY = (window.pageYOffset !== undefined)
       ? window.pageYOffset
       : (document.documentElement || document.body.parentNode || document.body).scrollTop
-    let dTop = mouseY - (rect.top + scrollY)
+    let dTop = pointerY - (rect.top + scrollY)
     dTop = Math.max(dTop, 0)
     dTop = Math.min(dTop, rect.height)
 
@@ -183,10 +183,10 @@ class RangeControlOverlay extends Component {
       <div
         className={className}
         style={style}
-        onMouseDown={this.startDrag}
-        onMouseEnter={this.handleIntentStart}
-        onMouseMove={this.handleIntentMove}
-        onMouseLeave={this.handleIntentEnd}
+        onPointerDown={this.startDrag}
+        onPointerEnter={this.handleIntentStart}
+        onPointerMove={this.handleIntentMove}
+        onPointerLeave={this.handleIntentEnd}
       />
     )
   }
