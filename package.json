@@ -1,5 +1,5 @@
 {
-  "name": "@aristotl3/react-player-controls",
+  "name": "@arist0tl3/react-player-controls",
   "version": "1.1.1",
   "description": "UI components for media players",
   "main": "dist/index.js",
@@ -67,5 +67,9 @@
   "dependencies": {
     "autobind-decorator": "^2.4.0",
     "prop-types": "^15.6.2"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
   }
 }
