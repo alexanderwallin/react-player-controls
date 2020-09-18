@@ -76,6 +76,7 @@ class RangeControlOverlay extends Component {
     }
 
     this.touchStartPosition = evt.touches[0]
+    this.lastTouch = evt.touches[0]
 
     window.addEventListener('touchmove', this.handleTouchMove, { passive: false })
     window.addEventListener('touchend', this.handleTouchEnd)
