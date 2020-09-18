@@ -1,11 +1,10 @@
 {
   "name": "react-player-controls-docs",
   "scripts": {
-    "js": "browserify src/demos.js -t babelify -o assets/app.js",
-    "js:watch": "watchify src/demos.js -t babelify -o assets/app.js",
-    "serve": "live-server --port=8293",
-    "start": "npm-run-all --parallel '*:watch' 'serve'",
-    "build": "npm-run-all --parallel 'pug' 'js'"
+    "build": "browserify src/demos.js -t babelify -o assets/app.js",
+    "build:watch": "watchify src/demos.js -t babelify -o assets/app.js",
+    "dev": "npm-run-all --parallel '*:watch' 'start'",
+    "start": "live-server --port=8293"
   },
   "private": true,
   "dependencies": {
