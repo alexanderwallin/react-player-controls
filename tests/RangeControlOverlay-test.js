@@ -261,5 +261,59 @@ describe('<RangeControlOverlay />', () => {
       instance.handleTouchMove({ touches: [{ pageX: 120, pageY: 110 }] })
       expect(onChangeStart.callCount).to.equal(1)
     })
+
+    describe('cancels touchmove events after dragging', () => {
+      let preventDefault
+      let stopPropagation
+
+      beforeEach(() => {
+        preventDefault = spy()
+        stopPropagation = spy()
+      })
+
+      it ('horizontally on a horizontal slider', () => {
+        overlay.setProps({ direction: Direction.HORIZONTAL })
+        const instance = overlay.instance()
+
+        instance.handleTouchStart({ touches: [{ pageX: 100, pageY: 100 }] })
+        instance.handleTouchMove({
+          touches: [{ pageX: 100, pageY: 110 }],
+          preventDefault,
+          stopPropagation,
+        })
+        expect(preventDefault.callCount).to.equal(0)
+        expect(preventDefault.callCount).to.equal(0)
+
+        instance.handleTouchMove({
+          touches: [{ pageX: 110, pageY: 100 }],
+          preventDefault,
+          stopPropagation,
+        })
+        expect(preventDefault.callCount).to.equal(1)
+        expect(preventDefault.callCount).to.equal(1)
+      })
+
+      it('vertically on a vertical slider', () => {
+        overlay.setProps({ direction: Direction.VERTICAL })
+        const instance = overlay.instance()
+
+        instance.handleTouchStart({ touches: [{ pageX: 100, pageY: 100 }] })
+        instance.handleTouchMove({
+          touches: [{ pageX: 110, pageY: 100 }],
+          preventDefault,
+          stopPropagation,
+        })
+        expect(preventDefault.callCount).to.equal(0)
+        expect(preventDefault.callCount).to.equal(0)
+
+        instance.handleTouchMove({
+          touches: [{ pageX: 100, pageY: 110 }],
+          preventDefault,
+          stopPropagation,
+        })
+        expect(preventDefault.callCount).to.equal(1)
+        expect(preventDefault.callCount).to.equal(1)
+      })
+    })
   })
 })

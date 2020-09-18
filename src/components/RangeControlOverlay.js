@@ -49,6 +49,7 @@ class RangeControlOverlay extends Component {
   constructor (props) {
     super(props)
 
+    this.$el = null
     this.touchStartPosition = null
     this.lastTouch = null
 
@@ -63,6 +64,12 @@ class RangeControlOverlay extends Component {
   }
 
   @autobind
+  storeRef ($el) {
+    this.$el = $el
+    this.$el.addEventListener('touchstart', this.handleTouchStart, { passive: false })
+  }
+
+  @autobind
   handleTouchStart (evt) {
     if (evt.touches.length > 1) {
       return false
@@ -70,7 +77,7 @@ class RangeControlOverlay extends Component {
 
     this.touchStartPosition = evt.touches[0]
 
-    window.addEventListener('touchmove', this.handleTouchMove)
+    window.addEventListener('touchmove', this.handleTouchMove, { passive: false })
     window.addEventListener('touchend', this.handleTouchEnd)
   }
 
@@ -104,6 +111,9 @@ class RangeControlOverlay extends Component {
       onChangeStart(value)
     }
 
+    // Prevent scrolling
+    this.$el.addEventListener('wheel', this.disableScroll)
+
     if (typeof evt.preventDefault === 'function') {
       evt.preventDefault()
     }
@@ -121,7 +131,6 @@ class RangeControlOverlay extends Component {
   @autobind
   handleTouchEnd (evt) {
     const { onChangeEnd } = this.props
-    const { isDragging } = this.state
 
     if (evt !== undefined && evt.touches.length > 1) {
       return false
@@ -132,11 +141,18 @@ class RangeControlOverlay extends Component {
 
     window.removeEventListener('touchmove', this.handleTouchMove)
     window.removeEventListener('touchend', this.handleTouchEnd)
+    this.$el.removeEventListener('wheel', this.disableScroll)
 
     this.toggleSelection('')
     this.touchStartPosition = null
     this.lastTouch = null
     this.setState({ isDragging: false })
+  }
+
+  @autobind
+  disableScroll (evt) {
+    console.log('stop scrolling damnit')
+    evt.preventDefault()
   }
 
   @autobind
@@ -264,7 +280,7 @@ class RangeControlOverlay extends Component {
       <div
         className={className}
         style={style}
-        onTouchStart={this.handleTouchStart}
+        ref={this.storeRef}
         onMouseDown={this.startDrag}
         onMouseEnter={this.handleIntentStart}
         onMouseMove={this.handleIntentMove}
