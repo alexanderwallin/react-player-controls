@@ -1,8 +1,6 @@
 {
   "name": "react-player-controls-docs",
   "scripts": {
-    "pug": "pug index.pug",
-    "pug:watch": "pug -w index.pug",
     "js": "browserify src/demos.js -t babelify -o assets/app.js",
     "js:watch": "watchify src/demos.js -t babelify -o assets/app.js",
     "serve": "live-server --port=8293",
@@ -12,7 +10,6 @@
   "private": true,
   "dependencies": {
     "prismjs": "^1.5.1",
-    "pug": "^2.0.0-beta5",
     "react": "^15.3.1",
     "react-dom": "^15.3.1"
   },
@@ -25,7 +22,6 @@
     "live-server": "^1.1.0",
     "livereload": "^0.5.0",
     "npm-run-all": "^3.0.0",
-    "pug-cli": "^1.0.0-alpha6",
     "watchify": "^3.11.0"
   }
 }
