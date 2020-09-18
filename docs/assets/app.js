@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -589,6 +589,9 @@ function (_Component) {
     _classCallCheck(this, RangeControlOverlay);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(RangeControlOverlay).call(this, props));
+    _this.$el = null;
+    _this.touchStartPosition = null;
+    _this.lastTouch = null;
     _this.state = {
       isDragging: false
     };
@@ -599,6 +602,102 @@ function (_Component) {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.endDrag();
+      this.handleTouchEnd();
+    }
+  }, {
+    key: "storeRef",
+    value: function storeRef($el) {
+      this.$el = $el;
+      this.$el.addEventListener('touchstart', this.handleTouchStart, {
+        passive: false
+      });
+    }
+  }, {
+    key: "handleTouchStart",
+    value: function handleTouchStart(evt) {
+      if (evt.touches.length > 1) {
+        return false;
+      }
+
+      this.touchStartPosition = evt.touches[0];
+      window.addEventListener('touchmove', this.handleTouchMove, {
+        passive: false
+      });
+      window.addEventListener('touchend', this.handleTouchEnd);
+    }
+  }, {
+    key: "handleTouchMove",
+    value: function handleTouchMove(evt) {
+      var _this$props = this.props,
+          direction = _this$props.direction,
+          onChange = _this$props.onChange,
+          onChangeStart = _this$props.onChangeStart;
+      var isDragging = this.state.isDragging;
+
+      if (evt.touches.length > 1) {
+        return false;
+      }
+
+      var touch = evt.touches[0];
+      var value = this.getValueFromInteractionPoint(touch); // If this is a potential start of a drag, make sure
+      // it's not intended as a scroll
+
+      if (isDragging === false) {
+        var dX = touch.pageX - this.touchStartPosition.pageX;
+        var dY = touch.pageY - this.touchStartPosition.pageY;
+        var isScrolling = direction === _constants.Direction.HORIZONTAL && Math.abs(dX) < Math.abs(dY) || direction === _constants.Direction.VERTICAL && Math.abs(dY) < Math.abs(dX);
+
+        if (isScrolling === true) {
+          return false;
+        }
+
+        this.setState({
+          isDragging: true
+        });
+        onChangeStart(value);
+      } // Prevent scrolling
+
+
+      this.$el.addEventListener('wheel', this.disableScroll);
+
+      if (typeof evt.preventDefault === 'function') {
+        evt.preventDefault();
+      }
+
+      if (typeof evt.stopPropagation === 'function') {
+        evt.stopPropagation();
+      }
+
+      this.toggleSelection('none');
+      onChange(value);
+      this.lastTouch = touch;
+    }
+  }, {
+    key: "handleTouchEnd",
+    value: function handleTouchEnd(evt) {
+      var onChangeEnd = this.props.onChangeEnd;
+
+      if (evt !== undefined && evt.touches.length > 1) {
+        return false;
+      }
+
+      var endValue = this.getValueFromInteractionPoint(this.lastTouch);
+      onChangeEnd(endValue);
+      window.removeEventListener('touchmove', this.handleTouchMove);
+      window.removeEventListener('touchend', this.handleTouchEnd);
+      this.$el.removeEventListener('wheel', this.disableScroll);
+      this.toggleSelection('');
+      this.touchStartPosition = null;
+      this.lastTouch = null;
+      this.setState({
+        isDragging: false
+      });
+    }
+  }, {
+    key: "disableScroll",
+    value: function disableScroll(evt) {
+      console.log('stop scrolling damnit');
+      evt.preventDefault();
     }
   }, {
     key: "startDrag",
@@ -609,7 +708,7 @@ function (_Component) {
       window.addEventListener('mousemove', this.triggerRangeChange);
       window.addEventListener('mouseup', this.endDrag);
       this.toggleSelection('none');
-      var startValue = evt ? this.getValueFromMouseEvent(evt) : null;
+      var startValue = evt ? this.getValueFromInteractionPoint(evt) : null;
       this.props.onChangeStart(startValue);
     }
   }, {
@@ -625,7 +724,7 @@ function (_Component) {
       window.removeEventListener('mousemove', this.triggerRangeChange);
       window.removeEventListener('mouseup', this.endDrag);
       this.toggleSelection('');
-      var endValue = evt ? this.getValueFromMouseEvent(evt) : null;
+      var endValue = evt ? this.getValueFromInteractionPoint(evt) : null;
       this.props.onChangeEnd(endValue);
     }
   }, {
@@ -638,21 +737,21 @@ function (_Component) {
       body.style['-ms-user-select'] = value;
     }
   }, {
-    key: "getValueFromMouseEvent",
-    value: function getValueFromMouseEvent(mouseEvent) {
-      return this.props.direction === _constants.Direction.VERTICAL ? this.getVerticalValue(mouseEvent.pageY) : this.getHorizontalValue(mouseEvent.pageX);
+    key: "getValueFromInteractionPoint",
+    value: function getValueFromInteractionPoint(point) {
+      return this.props.direction === _constants.Direction.VERTICAL ? this.getVerticalValue(point.pageY) : this.getHorizontalValue(point.pageX);
     }
   }, {
     key: "triggerRangeChange",
     value: function triggerRangeChange(mouseEvent) {
-      this.props.onChange(this.getValueFromMouseEvent(mouseEvent));
+      this.props.onChange(this.getValueFromInteractionPoint(mouseEvent));
     }
   }, {
     key: "handleIntentStart",
     value: function handleIntentStart(evt) {
-      var _this$props = this.props,
-          direction = _this$props.direction,
-          onIntentStart = _this$props.onIntentStart;
+      var _this$props2 = this.props,
+          direction = _this$props2.direction,
+          onIntentStart = _this$props2.onIntentStart;
 
       if (!this.state.isDragging) {
         var value = direction === _constants.Direction.VERTICAL ? this.getVerticalValue(evt.pageY) : this.getHorizontalValue(evt.pageX);
@@ -662,9 +761,9 @@ function (_Component) {
   }, {
     key: "handleIntentMove",
     value: function handleIntentMove(evt) {
-      var _this$props2 = this.props,
-          direction = _this$props2.direction,
-          onIntent = _this$props2.onIntent;
+      var _this$props3 = this.props,
+          direction = _this$props3.direction,
+          onIntent = _this$props3.onIntent;
 
       if (!this.state.isDragging) {
         var value = direction === _constants.Direction.VERTICAL ? this.getVerticalValue(evt.pageY) : this.getHorizontalValue(evt.pageX);
@@ -688,20 +787,20 @@ function (_Component) {
     }
   }, {
     key: "getHorizontalValue",
-    value: function getHorizontalValue(mouseX) {
+    value: function getHorizontalValue(pageX) {
       var rect = this.getRectFromBounds();
       var scrollX = window.pageXOffset !== undefined ? window.pageXOffset : (document.documentElement || document.body.parentNode || document.body).scrollLeft;
-      var dLeft = mouseX - (rect.left + scrollX);
+      var dLeft = pageX - (rect.left + scrollX);
       dLeft = Math.max(dLeft, 0);
       dLeft = Math.min(dLeft, rect.width);
       return dLeft / rect.width;
     }
   }, {
     key: "getVerticalValue",
-    value: function getVerticalValue(mouseY) {
+    value: function getVerticalValue(pageY) {
       var rect = this.getRectFromBounds();
       var scrollY = window.pageYOffset !== undefined ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-      var dTop = mouseY - (rect.top + scrollY);
+      var dTop = pageY - (rect.top + scrollY);
       dTop = Math.max(dTop, 0);
       dTop = Math.min(dTop, rect.height);
       return 1 - dTop / rect.height;
@@ -709,12 +808,13 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this$props3 = this.props,
-          className = _this$props3.className,
-          style = _this$props3.style;
+      var _this$props4 = this.props,
+          className = _this$props4.className,
+          style = _this$props4.style;
       return _react.default.createElement("div", {
         className: className,
         style: style,
+        ref: this.storeRef,
         onMouseDown: this.startDrag,
         onMouseEnter: this.handleIntentStart,
         onMouseMove: this.handleIntentMove,
@@ -724,7 +824,7 @@ function (_Component) {
   }]);
 
   return RangeControlOverlay;
-}(_react.Component), (_applyDecoratedDescriptor(_class.prototype, "startDrag", [_autobindDecorator.default], Object.getOwnPropertyDescriptor(_class.prototype, "startDrag"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "endDrag", [_autobindDecorator.default], Object.getOwnPropertyDescriptor(_class.prototype, "endDrag"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "triggerRangeChange", [_autobindDecorator.default], Object.getOwnPropertyDescriptor(_class.prototype, "triggerRangeChange"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "handleIntentStart", [_autobindDecorator.default], Object.getOwnPropertyDescriptor(_class.prototype, "handleIntentStart"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "handleIntentMove", [_autobindDecorator.default], Object.getOwnPropertyDescriptor(_class.prototype, "handleIntentMove"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "handleIntentEnd", [_autobindDecorator.default], Object.getOwnPropertyDescriptor(_class.prototype, "handleIntentEnd"), _class.prototype)), _class);
+}(_react.Component), (_applyDecoratedDescriptor(_class.prototype, "storeRef", [_autobindDecorator.default], Object.getOwnPropertyDescriptor(_class.prototype, "storeRef"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "handleTouchStart", [_autobindDecorator.default], Object.getOwnPropertyDescriptor(_class.prototype, "handleTouchStart"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "handleTouchMove", [_autobindDecorator.default], Object.getOwnPropertyDescriptor(_class.prototype, "handleTouchMove"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "handleTouchEnd", [_autobindDecorator.default], Object.getOwnPropertyDescriptor(_class.prototype, "handleTouchEnd"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "disableScroll", [_autobindDecorator.default], Object.getOwnPropertyDescriptor(_class.prototype, "disableScroll"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "startDrag", [_autobindDecorator.default], Object.getOwnPropertyDescriptor(_class.prototype, "startDrag"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "endDrag", [_autobindDecorator.default], Object.getOwnPropertyDescriptor(_class.prototype, "endDrag"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "triggerRangeChange", [_autobindDecorator.default], Object.getOwnPropertyDescriptor(_class.prototype, "triggerRangeChange"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "handleIntentStart", [_autobindDecorator.default], Object.getOwnPropertyDescriptor(_class.prototype, "handleIntentStart"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "handleIntentMove", [_autobindDecorator.default], Object.getOwnPropertyDescriptor(_class.prototype, "handleIntentMove"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "handleIntentEnd", [_autobindDecorator.default], Object.getOwnPropertyDescriptor(_class.prototype, "handleIntentEnd"), _class.prototype)), _class);
 RangeControlOverlay.propTypes = {
   bounds: oneOfType([func, shape({
     width: number.isRequired,
@@ -3539,6 +3639,10 @@ process.off = noop;
 process.removeListener = noop;
 process.removeAllListeners = noop;
 process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
