@@ -8,9 +8,7 @@
   },
   "private": true,
   "dependencies": {
-    "prismjs": "^1.5.1",
-    "react": "^15.3.1",
-    "react-dom": "^15.3.1"
+    "prismjs": "^1.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
