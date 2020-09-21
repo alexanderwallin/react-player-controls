@@ -117,4 +117,13 @@ Slider.propTypes = {
   overlayZIndex: PropTypes.number,
 }
 
-export default Slider
+function arePropsEqual (prevProps, nextProps) {
+  for (const prop in nextProps) {
+    if (nextProps[prop] !== prevProps[prop]) {
+      return false
+    }
+  }
+  return true
+}
+
+export default React.memo(Slider, arePropsEqual)
