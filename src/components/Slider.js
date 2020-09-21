@@ -1,6 +1,5 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import autobind from 'autobind-decorator'
 
 import { Direction } from '../constants.js'
 import { noop } from '../utils.js'
@@ -12,132 +11,104 @@ import RangeControlOverlay from './RangeControlOverlay.js'
  * A wrapper around <RangeControlOverlay /> that may be used to
  * compose slider controls such as volume sliders or progress bars.
  */
-class Slider extends PureComponent {
-  static propTypes = {
-    direction: PropTypes.oneOf([Direction.HORIZONTAL, Direction.VERTICAL]),
-    isEnabled: PropTypes.bool,
-    onIntent: PropTypes.func,
-    onIntentStart: PropTypes.func,
-    onIntentEnd: PropTypes.func,
-    onChange: PropTypes.func,
-    onChangeStart: PropTypes.func,
-    onChangeEnd: PropTypes.func,
-    children: PropTypes.node,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    overlayZIndex: PropTypes.number,
+function Slider ({
+  direction = Direction.HORIZONTAL,
+  isEnabled = true,
+  onIntent = noop,
+  onIntentStart = noop,
+  onIntentEnd = noop,
+  onChange = noop,
+  onChangeStart = noop,
+  onChangeEnd = noop,
+  children = null,
+  className = null,
+  style = {},
+  overlayZIndex = 10,
+}) {
+  const $el = React.createRef()
+
+  const handleIntent = (intent) => {
+    if (isEnabled) {
+      onIntent(intent)
+    }
   }
-
-  static defaultProps = {
-    direction: Direction.HORIZONTAL,
-    isEnabled: true,
-    onIntent: noop,
-    onIntentStart: noop,
-    onIntentEnd: noop,
-    onChange: noop,
-    onChangeStart: noop,
-    onChangeEnd: noop,
-    children: null,
-    className: null,
-    style: {},
-    overlayZIndex: 10,
+  const handleIntentStart = (intent) => {
+    if (isEnabled) {
+      onIntentStart(intent)
+    }
   }
-
-  $el = null
-
-  @autobind
-  storeRef ($el) {
-    this.$el = $el
+  const handleIntentEnd = () => {
+    if (isEnabled) {
+      onIntentEnd()
+    }
   }
-
-  @autobind
-  handleIntent (intent) {
-    if (this.props.isEnabled) {
-      this.props.onIntent(intent)
+  const handleChange = (value) => {
+    if (isEnabled) {
+      onChange(value)
+    }
+  }
+  const handleChangeStart = (value) => {
+    if (isEnabled) {
+      onChangeStart(value)
+    }
+  }
+  const handleChangeEnd = (value) => {
+    if (isEnabled) {
+      onChangeEnd(value)
     }
   }
 
-  @autobind
-  handleIntentStart (intent) {
-    if (this.props.isEnabled) {
-      this.props.onIntentStart(intent)
-    }
-  }
+  return (
+    <div
+      ref={$el}
+      className={className}
+      style={{
+        position: 'relative',
+        ...style,
+      }}
+    >
+      {children}
 
-  @autobind
-  handleIntentEnd () {
-    if (this.props.isEnabled) {
-      this.props.onIntentEnd()
-    }
-  }
-
-  @autobind
-  handleChange (value) {
-    if (this.props.isEnabled) {
-      this.props.onChange(value)
-    }
-  }
-
-  @autobind
-  handleChangeStart (value) {
-    if (this.props.isEnabled) {
-      this.props.onChangeStart(value)
-    }
-  }
-
-  @autobind
-  handleChangeEnd (value) {
-    if (this.props.isEnabled) {
-      this.props.onChangeEnd(value)
-    }
-  }
-
-  render () {
-    const {
-      direction,
-      children,
-      className,
-      style,
-      overlayZIndex,
-    } = this.props
-
-    return (
-      <div
-        ref={this.storeRef}
-        className={className}
+      {/*
+        TODO: Make it possible to render or extend this node yourself,
+        so that these styles – the z-index property in particular – is
+        not forced upon the component consumer.
+      */}
+      <RangeControlOverlay
+        direction={direction}
+        bounds={() => $el.current.getBoundingClientRect()}
+        onIntent={handleIntent}
+        onIntentStart={handleIntentStart}
+        onIntentEnd={handleIntentEnd}
+        onChange={handleChange}
+        onChangeStart={handleChangeStart}
+        onChangeEnd={handleChangeEnd}
         style={{
-          position: 'relative',
-          ...style,
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+          zIndex: overlayZIndex,
         }}
-      >
-        {children}
+      />
+    </div>
+  )
+}
 
-        {/*
-          TODO: Make it possible to render or extend this node yourself,
-          so that these styles – the z-index property in particular – is
-          not forced upon the component consumer.
-        */}
-        <RangeControlOverlay
-          direction={direction}
-          bounds={() => this.$el.getBoundingClientRect()}
-          onIntent={this.handleIntent}
-          onIntentStart={this.handleIntentStart}
-          onIntentEnd={this.handleIntentEnd}
-          onChange={this.handleChange}
-          onChangeStart={this.handleChangeStart}
-          onChangeEnd={this.handleChangeEnd}
-          style={{
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-            zIndex: overlayZIndex,
-          }}
-        />
-      </div>
-    )
-  }
+Slider.propTypes = {
+  direction: PropTypes.oneOf([Direction.HORIZONTAL, Direction.VERTICAL]),
+  isEnabled: PropTypes.bool,
+  onIntent: PropTypes.func,
+  onIntentStart: PropTypes.func,
+  onIntentEnd: PropTypes.func,
+  onChange: PropTypes.func,
+  onChangeStart: PropTypes.func,
+  onChangeEnd: PropTypes.func,
+  children: PropTypes.node,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  overlayZIndex: PropTypes.number,
 }
 
 export default Slider

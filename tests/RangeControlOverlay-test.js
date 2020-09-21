@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount, shallow } from 'enzyme'
 import chai, { expect } from 'chai'
 import chaiEnzyme from 'chai-enzyme'
 import { spy } from 'sinon'
@@ -98,93 +98,222 @@ describe('<RangeControlOverlay />', () => {
       expect(onChange.args[2][0]).to.equal(0)
     })
   })
-})
 
-describe('intent', () => {
-  let overlay = null
-  let onIntent = null
-  let onIntentStart = null
-  let onIntentEnd = null
+  describe('intent', () => {
+    let overlay = null
+    let onIntent = null
+    let onIntentStart = null
+    let onIntentEnd = null
 
-  beforeEach(() => {
-    onIntent = spy()
-    onIntentStart = spy()
-    onIntentEnd = spy()
+    beforeEach(() => {
+      onIntent = spy()
+      onIntentStart = spy()
+      onIntentEnd = spy()
 
-    overlay = shallow(
-      <RangeControlOverlay
-        bounds={{ left: 100, width: 100 }}
-        direction={Direction.HORIZONTAL}
-        onChange={noop}
-        onIntent={onIntent}
-        onIntentStart={onIntentStart}
-        onIntentEnd={onIntentEnd}
-      />
-    )
+      overlay = shallow(
+        <RangeControlOverlay
+          bounds={{ left: 100, width: 100 }}
+          direction={Direction.HORIZONTAL}
+          onChange={noop}
+          onIntent={onIntent}
+          onIntentStart={onIntentStart}
+          onIntentEnd={onIntentEnd}
+        />
+      )
+    })
+
+    it('invokes onIntent on mouseover when not dragging', () => {
+      overlay.instance().startDrag({ pageX: 140 })
+      overlay.find('div').simulate('mousemove', { pageX: 120 })
+      expect(onIntent.callCount).to.equal(0)
+
+      overlay.instance().endDrag({ pageX: 150 })
+      overlay.find('div').simulate('mousemove', { pageX: 120 })
+      expect(onIntent.args[0][0]).to.equal(0.2)
+    })
+
+    it('invokes onIntentStart on mouseenter when not dragging', () => {
+      overlay.instance().startDrag({ pageX: 140 })
+      overlay.find('div').simulate('mouseenter', { pageX: 120 })
+      expect(onIntentStart.callCount).to.equal(0)
+
+      overlay.instance().endDrag({ pageX: 150 })
+      overlay.find('div').simulate('mouseenter', { pageX: 120 })
+      expect(onIntentStart.args[0][0]).to.equal(0.2)
+    })
+
+    it('invokes onIntentEnd on mouseleave when not dragging', () => {
+      overlay.instance().startDrag({ pageX: 140 })
+      overlay.find('div').simulate('mouseleave')
+      expect(onIntentEnd.callCount).to.equal(0)
+
+      overlay.instance().endDrag({ pageX: 150 })
+      overlay.find('div').simulate('mouseleave')
+      expect(onIntentEnd.callCount).to.equal(1)
+    })
   })
 
-  it('invokes onIntent on mouseover when not dragging', () => {
-    overlay.instance().startDrag({ pageX: 140 })
-    overlay.find('div').simulate('mousemove', { pageX: 120 })
-    expect(onIntent.callCount).to.equal(0)
+  describe('all controls', () => {
+    it('it invokes onChangeStart and onChangeEnd prop functions', () => {
+      const onChangeStart = spy()
+      const onChangeEnd = spy()
+      const overlay = shallow(
+        <RangeControlOverlay
+          bounds={{ left: 100, width: 100 }}
+          direction={Direction.HORIZONTAL}
+          onChange={noop}
+          onChangeStart={onChangeStart}
+          onChangeEnd={onChangeEnd}
+        />
+      )
+      const instance = overlay.instance()
 
-    overlay.instance().endDrag({ pageX: 150 })
-    overlay.find('div').simulate('mousemove', { pageX: 120 })
-    expect(onIntent.args[0][0]).to.equal(0.2)
+      instance.startDrag({ pageX: 110 })
+      expect(onChangeStart.callCount).to.equal(1)
+      expect(onChangeStart.args[0][0]).to.equal(0.1)
+
+      instance.endDrag({ pageX: 120 })
+      expect(onChangeEnd.callCount).to.equal(1)
+      expect(onChangeEnd.args[0][0]).to.equal(0.2)
+    })
+
+    it('accepts a custom className', () => {
+      const overlay = shallow(
+        <RangeControlOverlay
+          className="MyClassName"
+          bounds={noop}
+          onChange={noop}
+        />
+      )
+      expect(overlay.props().className).to.include('MyClassName')
+    })
+
+    it('should accept custom styles', () => {
+      const overlay = shallow(
+        <RangeControlOverlay
+          style={{ fontSize: 100 }}
+          bounds={noop}
+          onChange={noop}
+        />
+      )
+      expect(overlay.props().style).to.eql({ fontSize: 100 })
+    })
   })
 
-  it('invokes onIntentStart on mouseenter when not dragging', () => {
-    overlay.instance().startDrag({ pageX: 140 })
-    overlay.find('div').simulate('mouseenter', { pageX: 120 })
-    expect(onIntentStart.callCount).to.equal(0)
+  // We use the internal handlers instead of simulating events to test
+  // touch functionality, since touch events are attached to the window,
+  // and are thus not handled by React's synthetic event system, and
+  // therefor not supported by enzyme.
+  //
+  // @see https://github.com/airbnb/enzyme/issues/426
+  describe('touch controls', () => {
+    let overlay = null
+    let onChange = null
+    let onChangeStart
+    let onChangeEnd
 
-    overlay.instance().endDrag({ pageX: 150 })
-    overlay.find('div').simulate('mouseenter', { pageX: 120 })
-    expect(onIntentStart.args[0][0]).to.equal(0.2)
-  })
+    beforeEach(() => {
+      onChange = spy()
+      onChangeStart = spy()
+      onChangeEnd = spy()
 
-  it('invokes onIntentEnd on mouseleave when not dragging', () => {
-    overlay.instance().startDrag({ pageX: 140 })
-    overlay.find('div').simulate('mouseleave')
-    expect(onIntentEnd.callCount).to.equal(0)
+      overlay = mount(
+        <RangeControlOverlay
+          bounds={{ top: 100, left: 100, width: 100, height: 100 }}
+          direction={Direction.HORIZONTAL}
+          onChange={onChange}
+          onChangeStart={onChangeStart}
+          onChangeEnd={onChangeEnd}
+        />
+      )
+    })
 
-    overlay.instance().endDrag({ pageX: 150 })
-    overlay.find('div').simulate('mouseleave')
-    expect(onIntentEnd.callCount).to.equal(1)
-  })
-})
+    it('triggers a change when dragging in the overlay\'s direction', () => {
+      const instance = overlay.instance()
 
-describe('all controls', () => {
-  it('it invokes onChangeStart and onChangeEnd prop functions', () => {
-    const onChangeStart = spy()
-    const onChangeEnd = spy()
-    const overlay = shallow(
-      <RangeControlOverlay
-        bounds={{ left: 100, width: 100 }}
-        direction={Direction.HORIZONTAL}
-        onChange={noop}
-        onChangeStart={onChangeStart}
-        onChangeEnd={onChangeEnd}
-      />
-    )
-    const instance = overlay.instance()
+      // Horizontal
+      instance.handleTouchStart({ touches: [{ pageX: 110, pageY: 110 }] })
+      instance.handleTouchMove({ touches: [{ pageX: 110, pageY: 120 }] })
+      expect(onChange.callCount).to.equal(0)
 
-    instance.startDrag({ pageX: 110 })
-    expect(onChangeStart.callCount).to.equal(1)
-    expect(onChangeStart.args[0][0]).to.equal(0.1)
+      instance.handleTouchMove({ touches: [{ pageX: 120, pageY: 110 }] })
+      expect(onChange.callCount).to.equal(1)
+      expect(onChange.args[0][0]).to.equal(0.2)
+      instance.handleTouchEnd({ touches: [{ pageX: 120, pageY: 110 }] })
 
-    instance.endDrag({ pageX: 120 })
-    expect(onChangeEnd.callCount).to.equal(1)
-    expect(onChangeEnd.args[0][0]).to.equal(0.2)
-  })
+      // Vertical
+      overlay.setProps({ direction: Direction.VERTICAL })
+      instance.handleTouchStart({ touches: [{ pageX: 110, pageY: 110 }] })
+      instance.handleTouchMove({ touches: [{ pageX: 120, pageY: 110 }] })
+      expect(onChange.callCount).to.equal(1)
 
-  it('accepts a custom className', () => {
-    const overlay = shallow(<RangeControlOverlay className="MyClassName" bounds={noop} onChange={noop} />)
-    expect(overlay.props().className).to.include('MyClassName')
-  })
+      instance.handleTouchMove({ touches: [{ pageX: 110, pageY: 120 }] })
+      expect(onChange.callCount).to.equal(2)
+      expect(onChange.args[1][0]).to.equal(0.8)
+      instance.handleTouchEnd({ touches: [{ pageX: 120, pageY: 110 }] })
+    })
 
-  it('should accept custom styles', () => {
-    const overlay = shallow(<RangeControlOverlay style={{ fontSize: 100 }} bounds={noop} onChange={noop} />)
-    expect(overlay.props().style).to.eql({ fontSize: 100 })
+    it('invokes onChangeStart only after moving has been confirmed', () => {
+      const instance = overlay.instance()
+
+      instance.handleTouchStart({ touches: [{ pageX: 110, pageY: 110 }] })
+      expect(onChangeStart.callCount).to.equal(0)
+      instance.handleTouchMove({ touches: [{ pageX: 120, pageY: 110 }] })
+      expect(onChangeStart.callCount).to.equal(1)
+    })
+
+    describe('cancels touchmove events after dragging', () => {
+      let preventDefault
+      let stopPropagation
+
+      beforeEach(() => {
+        preventDefault = spy()
+        stopPropagation = spy()
+      })
+
+      it ('horizontally on a horizontal slider', () => {
+        overlay.setProps({ direction: Direction.HORIZONTAL })
+        const instance = overlay.instance()
+
+        instance.handleTouchStart({ touches: [{ pageX: 100, pageY: 100 }] })
+        instance.handleTouchMove({
+          touches: [{ pageX: 100, pageY: 110 }],
+          preventDefault,
+          stopPropagation,
+        })
+        expect(preventDefault.callCount).to.equal(0)
+        expect(preventDefault.callCount).to.equal(0)
+
+        instance.handleTouchMove({
+          touches: [{ pageX: 110, pageY: 100 }],
+          preventDefault,
+          stopPropagation,
+        })
+        expect(preventDefault.callCount).to.equal(1)
+        expect(preventDefault.callCount).to.equal(1)
+      })
+
+      it('vertically on a vertical slider', () => {
+        overlay.setProps({ direction: Direction.VERTICAL })
+        const instance = overlay.instance()
+
+        instance.handleTouchStart({ touches: [{ pageX: 100, pageY: 100 }] })
+        instance.handleTouchMove({
+          touches: [{ pageX: 110, pageY: 100 }],
+          preventDefault,
+          stopPropagation,
+        })
+        expect(preventDefault.callCount).to.equal(0)
+        expect(preventDefault.callCount).to.equal(0)
+
+        instance.handleTouchMove({
+          touches: [{ pageX: 100, pageY: 110 }],
+          preventDefault,
+          stopPropagation,
+        })
+        expect(preventDefault.callCount).to.equal(1)
+        expect(preventDefault.callCount).to.equal(1)
+      })
+    })
   })
 })
