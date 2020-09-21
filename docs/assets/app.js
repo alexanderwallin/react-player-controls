@@ -214,7 +214,7 @@ Button.defaultProps = {
 var _default = Button;
 exports.default = _default;
 
-},{"autobind-decorator":13,"prop-types":18,"react":34}],2:[function(require,module,exports){
+},{"autobind-decorator":12,"prop-types":17,"react":33}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -403,7 +403,7 @@ FormattedTime.defaultProps = {
 var _default = FormattedTime;
 exports.default = _default;
 
-},{"prop-types":18,"react":34}],3:[function(require,module,exports){
+},{"prop-types":17,"react":33}],3:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -413,9 +413,9 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _reactUseGesture = require("react-use-gesture");
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _reactUseGesture = require("react-use-gesture");
 
 var _constants = require("../constants.js");
 
@@ -479,14 +479,6 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
-var oneOfType = _propTypes.default.oneOfType,
-    shape = _propTypes.default.shape,
-    func = _propTypes.default.func,
-    number = _propTypes.default.number,
-    oneOf = _propTypes.default.oneOf,
-    object = _propTypes.default.object,
-    string = _propTypes.default.string;
-
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
@@ -512,144 +504,6 @@ function getVerticalValue(rect, y) {
 function getSliderValue(bounds, direction, xy) {
   var rect = getRectFromBounds(bounds);
   return direction === _constants.Direction.HORIZONTAL ? getHorizontalValue(rect, xy[0]) : getVerticalValue(rect, xy[1]);
-}
-
-function RangeControlOverlay(_ref) {
-  var bounds = _ref.bounds,
-      _ref$onChange = _ref.onChange,
-      onChange = _ref$onChange === void 0 ? _utils.noop : _ref$onChange,
-      _ref$onChangeStart = _ref.onChangeStart,
-      onChangeStart = _ref$onChangeStart === void 0 ? _utils.noop : _ref$onChangeStart,
-      _ref$onChangeEnd = _ref.onChangeEnd,
-      onChangeEnd = _ref$onChangeEnd === void 0 ? _utils.noop : _ref$onChangeEnd,
-      _ref$onIntent = _ref.onIntent,
-      onIntent = _ref$onIntent === void 0 ? _utils.noop : _ref$onIntent,
-      _ref$onIntentStart = _ref.onIntentStart,
-      onIntentStart = _ref$onIntentStart === void 0 ? _utils.noop : _ref$onIntentStart,
-      _ref$onIntentEnd = _ref.onIntentEnd,
-      onIntentEnd = _ref$onIntentEnd === void 0 ? _utils.noop : _ref$onIntentEnd,
-      _ref$direction = _ref.direction,
-      direction = _ref$direction === void 0 ? _constants.Direction.HORIZONTAL : _ref$direction,
-      _ref$className = _ref.className,
-      className = _ref$className === void 0 ? null : _ref$className,
-      _ref$style = _ref.style,
-      style = _ref$style === void 0 ? null : _ref$style;
-  var bind = (0, _reactUseGesture.useGesture)({
-    onMoveStart: function onMoveStart(_ref2) {
-      var dragging = _ref2.dragging,
-          xy = _ref2.xy;
-      return !dragging && onIntentStart(getSliderValue(bounds, direction, xy));
-    },
-    onMove: function onMove(_ref3) {
-      var dragging = _ref3.dragging,
-          xy = _ref3.xy;
-      return !dragging && onIntent(getSliderValue(bounds, direction, xy));
-    },
-    onMoveEnd: function onMoveEnd(_ref4) {
-      var dragging = _ref4.dragging;
-      return !dragging && onIntentEnd();
-    },
-    onDragStart: function onDragStart(_ref5) {
-      var xy = _ref5.xy;
-      return onChangeStart(getSliderValue(bounds, direction, xy));
-    },
-    onDrag: function onDrag(_ref6) {
-      var xy = _ref6.xy;
-      return onChange(getSliderValue(bounds, direction, xy));
-    },
-    onDragEnd: function onDragEnd(_ref7) {
-      var xy = _ref7.xy;
-      return onChangeStart(getSliderValue(bounds, direction, xy));
-    }
-  }, {
-    axis: direction === _constants.Direction.HORIZONTAL ? 'x' : 'y',
-    filterTaps: true
-  });
-  return _react.default.createElement("div", _extends({
-    className: className,
-    style: _objectSpread({
-      touchAction: direction === _constants.Direction.HORIZONTAL ? 'pan-y' : 'pan-x'
-    }, style)
-  }, bind()));
-}
-
-RangeControlOverlay.propTypes = {
-  bounds: oneOfType([func, shape({
-    width: number.isRequired,
-    left: number.isRequired
-  }), shape({
-    height: number.isRequired,
-    top: number.isRequired
-  })]).isRequired,
-  onChange: func.isRequired,
-  onChangeStart: func,
-  onChangeEnd: func,
-  onIntent: func,
-  onIntentStart: func,
-  onIntentEnd: func,
-  direction: oneOf([_constants.Direction.HORIZONTAL, _constants.Direction.VERTICAL]),
-  className: string,
-  style: object
-};
-var _default = RangeControlOverlay;
-exports.default = _default;
-
-},{"../constants.js":6,"../utils.js":8,"prop-types":18,"react":34,"react-use-gesture":29}],4:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
-var _constants = require("../constants.js");
-
-var _utils = require("../utils.js");
-
-var _RangeControlOverlay = _interopRequireDefault(require("./RangeControlOverlay.js"));
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    default: obj
-  };
-}
-
-function _objectSpread(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-    var ownKeys = Object.keys(source);
-
-    if (typeof Object.getOwnPropertySymbols === 'function') {
-      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-      }));
-    }
-
-    ownKeys.forEach(function (key) {
-      _defineProperty(target, key, source[key]);
-    });
-  }
-
-  return target;
-}
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
 }
 /**
  * Slider
@@ -687,59 +541,48 @@ function Slider(_ref) {
 
   var $el = _react.default.createRef();
 
-  var handleIntent = function handleIntent(intent) {
-    if (isEnabled) {
-      onIntent(intent);
-    }
+  var bounds = function bounds() {
+    return $el.current.getBoundingClientRect();
   };
 
-  var handleIntentStart = function handleIntentStart(intent) {
-    if (isEnabled) {
-      onIntentStart(intent);
+  var bind = (0, _reactUseGesture.useGesture)({
+    onMoveStart: function onMoveStart(_ref2) {
+      var dragging = _ref2.dragging,
+          xy = _ref2.xy;
+      return isEnabled && !dragging && onIntentStart(getSliderValue(bounds, direction, xy));
+    },
+    onMove: function onMove(_ref3) {
+      var dragging = _ref3.dragging,
+          xy = _ref3.xy;
+      return isEnabled && !dragging && onIntent(getSliderValue(bounds, direction, xy));
+    },
+    onMoveEnd: function onMoveEnd(_ref4) {
+      var dragging = _ref4.dragging;
+      return isEnabled && !dragging && onIntentEnd();
+    },
+    onDragStart: function onDragStart(_ref5) {
+      var xy = _ref5.xy;
+      return isEnabled && onChangeStart(getSliderValue(bounds, direction, xy));
+    },
+    onDrag: function onDrag(_ref6) {
+      var xy = _ref6.xy;
+      return isEnabled && onChange(getSliderValue(bounds, direction, xy));
+    },
+    onDragEnd: function onDragEnd(_ref7) {
+      var xy = _ref7.xy;
+      return isEnabled && onChangeStart(getSliderValue(bounds, direction, xy));
     }
-  };
-
-  var handleIntentEnd = function handleIntentEnd() {
-    if (isEnabled) {
-      onIntentEnd();
-    }
-  };
-
-  var handleChange = function handleChange(value) {
-    if (isEnabled) {
-      onChange(value);
-    }
-  };
-
-  var handleChangeStart = function handleChangeStart(value) {
-    if (isEnabled) {
-      onChangeStart(value);
-    }
-  };
-
-  var handleChangeEnd = function handleChangeEnd(value) {
-    if (isEnabled) {
-      onChangeEnd(value);
-    }
-  };
-
+  }, {
+    axis: direction === _constants.Direction.HORIZONTAL ? 'x' : 'y',
+    filterTaps: true
+  });
   return _react.default.createElement("div", {
     ref: $el,
     className: className,
     style: _objectSpread({
       position: 'relative'
     }, style)
-  }, children, _react.default.createElement(_RangeControlOverlay.default, {
-    direction: direction,
-    bounds: function bounds() {
-      return $el.current.getBoundingClientRect();
-    },
-    onIntent: handleIntent,
-    onIntentStart: handleIntentStart,
-    onIntentEnd: handleIntentEnd,
-    onChange: handleChange,
-    onChangeStart: handleChangeStart,
-    onChangeEnd: handleChangeEnd,
+  }, children, _react.default.createElement("div", _extends({}, bind(), {
     style: {
       position: 'absolute',
       top: 0,
@@ -748,7 +591,7 @@ function Slider(_ref) {
       left: 0,
       zIndex: overlayZIndex
     }
-  }));
+  })));
 }
 
 Slider.propTypes = {
@@ -768,7 +611,7 @@ Slider.propTypes = {
 var _default = Slider;
 exports.default = _default;
 
-},{"../constants.js":6,"../utils.js":8,"./RangeControlOverlay.js":3,"prop-types":18,"react":34}],5:[function(require,module,exports){
+},{"../constants.js":5,"../utils.js":7,"prop-types":17,"react":33,"react-use-gesture":28}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -902,7 +745,7 @@ var SoundOff = function SoundOff(props) {
 
 exports.SoundOff = SoundOff;
 
-},{"react":34}],6:[function(require,module,exports){
+},{"react":33}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -915,7 +758,7 @@ var Direction = {
 };
 exports.Direction = Direction;
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -990,7 +833,7 @@ function _interopRequireDefault(obj) {
   };
 }
 
-},{"./components/Button.js":1,"./components/FormattedTime.js":2,"./components/Slider.js":4,"./components/icons.js":5,"./constants.js":6}],8:[function(require,module,exports){
+},{"./components/Button.js":1,"./components/FormattedTime.js":2,"./components/Slider.js":3,"./components/icons.js":4,"./constants.js":5}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1005,7 +848,7 @@ var noop = function noop() {};
 
 exports.noop = noop;
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 (function(Prism) {
 
 var javascript = Prism.util.clone(Prism.languages.javascript);
@@ -1034,7 +877,7 @@ Prism.languages.insertBefore('inside', 'attr-value',{
 
 }(Prism));
 
-},{}],10:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function (global){
 
 /* **********************************************
@@ -1833,7 +1676,7 @@ Prism.languages.js = Prism.languages.javascript;
 })();
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -2019,7 +1862,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],12:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 "use strict";
 
 var _react = _interopRequireWildcard(require("react"));
@@ -2474,7 +2317,7 @@ _reactDom.default.render(_react.default.createElement(PlayerIconDemo, null), doc
 
 _reactDom.default.render(_react.default.createElement(SliderDemo, null), document.querySelector('.component-demo[data-component="Slider"]'));
 
-},{"../../dist/index.js":7,"prismjs":10,"prismjs/components/prism-jsx.js":9,"react":34,"react-dom":22}],13:[function(require,module,exports){
+},{"../../dist/index.js":6,"prismjs":9,"prismjs/components/prism-jsx.js":8,"react":33,"react-dom":21}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2571,7 +2414,7 @@ function autobind() {
 
   return boundMethod.apply(void 0, arguments);
 }
-},{}],14:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -2663,7 +2506,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],15:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -2758,7 +2601,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 module.exports = checkPropTypes;
 
 }).call(this,require('_process'))
-},{"./lib/ReactPropTypesSecret":19,"_process":11}],16:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":18,"_process":10}],15:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2819,7 +2662,7 @@ module.exports = function() {
   return ReactPropTypes;
 };
 
-},{"./lib/ReactPropTypesSecret":19}],17:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":18}],16:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -3378,7 +3221,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 };
 
 }).call(this,require('_process'))
-},{"./checkPropTypes":15,"./lib/ReactPropTypesSecret":19,"_process":11,"object-assign":14}],18:[function(require,module,exports){
+},{"./checkPropTypes":14,"./lib/ReactPropTypesSecret":18,"_process":10,"object-assign":13}],17:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -3410,7 +3253,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./factoryWithThrowingShims":16,"./factoryWithTypeCheckers":17,"_process":11}],19:[function(require,module,exports){
+},{"./factoryWithThrowingShims":15,"./factoryWithTypeCheckers":16,"_process":10}],18:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -3424,7 +3267,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}],20:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 (function (process){
 /** @license React v16.13.1
  * react-dom.development.js
@@ -28440,7 +28283,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this,require('_process'))
-},{"_process":11,"object-assign":14,"prop-types/checkPropTypes":15,"react":34,"scheduler":27,"scheduler/tracing":28}],21:[function(require,module,exports){
+},{"_process":10,"object-assign":13,"prop-types/checkPropTypes":14,"react":33,"scheduler":26,"scheduler/tracing":27}],20:[function(require,module,exports){
 /** @license React v16.13.1
  * react-dom.production.min.js
  *
@@ -28734,7 +28577,7 @@ exports.flushSync=function(a,b){if((W&(fj|gj))!==V)throw Error(u(187));var c=W;W
 exports.unmountComponentAtNode=function(a){if(!gk(a))throw Error(u(40));return a._reactRootContainer?(Nj(function(){ik(null,null,a,!1,function(){a._reactRootContainer=null;a[Od]=null})}),!0):!1};exports.unstable_batchedUpdates=Mj;exports.unstable_createPortal=function(a,b){return kk(a,b,2<arguments.length&&void 0!==arguments[2]?arguments[2]:null)};
 exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!gk(c))throw Error(u(200));if(null==a||void 0===a._reactInternalFiber)throw Error(u(38));return ik(a,b,c,!1,d)};exports.version="16.13.1";
 
-},{"object-assign":14,"react":34,"scheduler":27}],22:[function(require,module,exports){
+},{"object-assign":13,"react":33,"scheduler":26}],21:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -28776,7 +28619,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/react-dom.development.js":20,"./cjs/react-dom.production.min.js":21,"_process":11}],23:[function(require,module,exports){
+},{"./cjs/react-dom.development.js":19,"./cjs/react-dom.production.min.js":20,"_process":10}],22:[function(require,module,exports){
 (function (process){
 /** @license React v0.19.1
  * scheduler-tracing.development.js
@@ -29129,7 +28972,7 @@ exports.unstable_wrap = unstable_wrap;
 }
 
 }).call(this,require('_process'))
-},{"_process":11}],24:[function(require,module,exports){
+},{"_process":10}],23:[function(require,module,exports){
 /** @license React v0.19.1
  * scheduler-tracing.production.min.js
  *
@@ -29141,7 +28984,7 @@ exports.unstable_wrap = unstable_wrap;
 
 'use strict';var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unstable_clear=function(a){return a()};exports.unstable_getCurrent=function(){return null};exports.unstable_getThreadID=function(){return++b};exports.unstable_subscribe=function(){};exports.unstable_trace=function(a,d,c){return c()};exports.unstable_unsubscribe=function(){};exports.unstable_wrap=function(a){return a};
 
-},{}],25:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 (function (process){
 /** @license React v0.19.1
  * scheduler.development.js
@@ -30003,7 +29846,7 @@ exports.unstable_wrapCallback = unstable_wrapCallback;
 }
 
 }).call(this,require('_process'))
-},{"_process":11}],26:[function(require,module,exports){
+},{"_process":10}],25:[function(require,module,exports){
 /** @license React v0.19.1
  * scheduler.production.min.js
  *
@@ -30026,7 +29869,7 @@ exports.unstable_getCurrentPriorityLevel=function(){return R};exports.unstable_g
 exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();if("object"===typeof c&&null!==c){var e=c.delay;e="number"===typeof e&&0<e?d+e:d;c="number"===typeof c.timeout?c.timeout:Y(a)}else c=Y(a),e=d;c=e+c;a={id:P++,callback:b,priorityLevel:a,startTime:e,expirationTime:c,sortIndex:-1};e>d?(a.sortIndex=e,J(O,a),null===L(N)&&a===L(O)&&(U?h():U=!0,g(W,e-d))):(a.sortIndex=c,J(N,a),T||S||(T=!0,f(X)));return a};
 exports.unstable_shouldYield=function(){var a=exports.unstable_now();V(a);var b=L(N);return b!==Q&&null!==Q&&null!==b&&null!==b.callback&&b.startTime<=a&&b.expirationTime<Q.expirationTime||k()};exports.unstable_wrapCallback=function(a){var b=R;return function(){var c=R;R=b;try{return a.apply(this,arguments)}finally{R=c}}};
 
-},{}],27:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -30037,7 +29880,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/scheduler.development.js":25,"./cjs/scheduler.production.min.js":26,"_process":11}],28:[function(require,module,exports){
+},{"./cjs/scheduler.development.js":24,"./cjs/scheduler.production.min.js":25,"_process":10}],27:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -30048,7 +29891,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/scheduler-tracing.development.js":23,"./cjs/scheduler-tracing.production.min.js":24,"_process":11}],29:[function(require,module,exports){
+},{"./cjs/scheduler-tracing.development.js":22,"./cjs/scheduler-tracing.production.min.js":23,"_process":10}],28:[function(require,module,exports){
 (function (process){
 
 'use strict'
@@ -30060,7 +29903,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./react-use-gesture.cjs.development.js":30,"./react-use-gesture.cjs.production.min.js":31,"_process":11}],30:[function(require,module,exports){
+},{"./react-use-gesture.cjs.development.js":29,"./react-use-gesture.cjs.production.min.js":30,"_process":10}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -32601,11 +32444,11 @@ exports.useScroll = useScroll;
 exports.useWheel = useWheel;
 
 
-},{"react":34}],31:[function(require,module,exports){
+},{"react":33}],30:[function(require,module,exports){
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0});var e,t=(e=require("react"))&&"object"==typeof e&&"default"in e?e.default:e;function n(e,t){return e.map((function(e,n){return e+t[n]}))}function r(e,t){return e.map((function(e,n){return e-t[n]}))}function i(e,t,n){return n=n||Math.hypot.apply(Math,e),t?n/t:0}function o(e,t){return t?e.map((function(e){return e/t})):Array(e.length).fill(0)}function a(e){return Math.hypot.apply(Math,e)}function s(e,t){return t=t||Math.hypot.apply(Math,e)||1,e.map((function(e){return e/t}))}function u(e,t,n){var r=Math.hypot.apply(Math,t);return{velocities:o(t,n),velocity:i(t,n,r),distance:a(e),direction:s(t,r)}}function c(e){return Math.sign?Math.sign(e):Number(e>0)-Number(e<0)||+e}function l(e,t){return Math.abs(e)>=t&&c(e)*t}function d(e,t,n){return 0===t||Infinity===Math.abs(t)?function(e,t){return Math.pow(e,5*t)}(e,n):e*t*n/(t+n*e)}function v(e,t,n,r){return void 0===r&&(r=.15),0===r?function(e,t,n){return Math.max(t,Math.min(e,n))}(e,t,n):e<t?-d(t-e,n-t,r)+t:e>n?d(e-n,n-t,r)+n:e}function h(){return(h=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}function f(e,t){e.prototype=Object.create(t.prototype),e.prototype.constructor=e,e.__proto__=t}function g(e,t){if(null==e)return{};var n,r,i={},o=Object.keys(e);for(r=0;r<o.length;r++)t.indexOf(n=o[r])>=0||(i[n]=e[n]);return i}function p(e,t){(null==t||t>e.length)&&(t=e.length);for(var n=0,r=new Array(t);n<t;n++)r[n]=e[n];return r}function m(e){var t=0;if("undefined"==typeof Symbol||null==e[Symbol.iterator]){if(Array.isArray(e)||(e=function(e,t){if(e){if("string"==typeof e)return p(e,void 0);var n=Object.prototype.toString.call(e).slice(8,-1);return"Object"===n&&e.constructor&&(n=e.constructor.name),"Map"===n||"Set"===n?Array.from(e):"Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)?p(e,void 0):void 0}}(e)))return function(){return t>=e.length?{done:!0}:{done:!1,value:e[t++]}};throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}return(t=e[Symbol.iterator]()).next.bind(t)}function y(){}var S=function(){for(var e=arguments.length,t=new Array(e),n=0;n<e;n++)t[n]=arguments[n];return function(){for(var e=arguments.length,n=new Array(e),r=0;r<e;r++)n[r]=arguments[r];return t.forEach((function(e){return e.apply(void 0,n)}))}},b=function(e){return Array.isArray(e)?e:[e,e]},w=function(e,t){return void 0!==e?e:t};function T(e,t){var n={};return Object.entries(e).forEach((function(e){var r=e[0],i=e[1];return(void 0!==i||r in t)&&(n[r]=i)})),n}function G(e){return"function"==typeof e?e():e}function M(){var e={_active:!1,_blocked:!1,_intentional:[!1,!1],_movement:[0,0],_initial:[0,0],_lastEventType:void 0,event:void 0,values:[0,0],velocities:[0,0],delta:[0,0],movement:[0,0],offset:[0,0],lastOffset:[0,0],direction:[0,0],initial:[0,0],previous:[0,0],first:!1,last:!1,active:!1,timeStamp:0,startTime:0,elapsedTime:0,cancel:y,canceled:!1,memo:void 0,args:void 0},t={axis:void 0,xy:[0,0],vxvy:[0,0],velocity:0,distance:0};return{shared:{hovering:!1,scrolling:!1,wheeling:!1,dragging:!1,moving:!1,pinching:!1,touches:0,buttons:0,down:!1,shiftKey:!1,altKey:!1,metaKey:!1,ctrlKey:!1},drag:h(h(h({},e),t),{},{_isTap:!0,_delayedEvent:!1,tap:!1,swipe:[0,0]}),pinch:h(h({},e),{da:[0,0],vdva:[0,0],origin:void 0,turns:0}),wheel:h(h({},e),t),move:h(h({},e),t),scroll:h(h({},e),t)}}var _=function(e){return function(t,n,r){var i=e?"addEventListener":"removeEventListener";n.forEach((function(e){return t[i](e[0],e[1],r)}))}},E=_(!0),P=_(!1);function O(e){if("touches"in e){var t=e.touches;return t.length>0?t:e.changedTouches}return null}function D(e){var t="buttons"in e?e.buttons:0,n=O(e),r=n&&n.length||0;return h({touches:r,down:r>0||t>0,buttons:t},function(e){return{shiftKey:e.shiftKey,altKey:e.altKey,metaKey:e.metaKey,ctrlKey:e.ctrlKey}}(e))}function B(e){var t=e.currentTarget;return{values:[t.scrollX||t.scrollLeft||0,t.scrollY||t.scrollTop||0]}}function K(e){return{values:[e.deltaX,e.deltaY]}}function x(e){var t=O(e),n=t?t[0]:e;return{values:[n.clientX,n.clientY]}}function W(e){return{values:[260*e.scale,e.rotation]}}function C(e){var t=e.touches,n=t[1].clientX-t[0].clientX,r=t[1].clientY-t[0].clientY;return{values:[Math.hypot(n,r),-180*Math.atan2(n,r)/Math.PI],origin:[(t[1].clientX+t[0].clientX)/2,(t[1].clientY+t[0].clientY)/2]}}var L=function(){var e=this;this.state=M(),this.timeouts={},this.domListeners=[],this.windowListeners={},this.bindings={},this.clean=function(){e.resetBindings(),Object.values(e.timeouts).forEach(clearTimeout),Object.keys(e.windowListeners).forEach((function(t){return e.removeWindowListeners(t)}))},this.resetBindings=function(){e.bindings={};var t=e.getDomTarget();t&&(P(t,e.domListeners,e.config.eventOptions),e.domListeners=[])},this.getDomTarget=function(){var t=e.config.domTarget;return t&&"current"in t?t.current:t},this.addWindowListeners=function(t,n){e.config.window&&(e.windowListeners[t]=n,E(e.config.window,n,e.config.eventOptions))},this.removeWindowListeners=function(t){if(e.config.window){var n=e.windowListeners[t];n&&(P(e.config.window,n,e.config.eventOptions),delete e.windowListeners[t])}},this.addDomTargetListeners=function(t){Object.entries(e.bindings).forEach((function(t){var n=t[1];e.domListeners.push([t[0].substr(2).toLowerCase(),S.apply(void 0,n)])})),E(t,e.domListeners,e.config.eventOptions)},this.addBindings=function(t,n){(Array.isArray(t)?t:[t]).forEach((function(t){e.bindings[t]?e.bindings[t].push(n):e.bindings[t]=[n]}))},this.getBindings=function(){var t={},n=e.config.captureString;return Object.entries(e.bindings).forEach((function(e){var r=e[0],i=e[1],o=Array.isArray(i)?i:[i];t[r+n]=S.apply(void 0,o)})),t},this.getBind=function(){if(e.config.domTarget){var t=e.getDomTarget();return t&&e.addDomTargetListeners(t),e.clean}return e.getBindings()}};function H(e,n,r,i){var o=t.useMemo((function(){var e=new L;return{nativeRefs:i,current:e,bind:function(){e.resetBindings();for(var t=arguments.length,r=new Array(t),i=0;i<t;i++)r[i]=arguments[i];for(var a,s=m(n);!(a=s()).done;){var u=a.value;new u(e,r).addBindings()}if(o.nativeRefs)for(var c in o.nativeRefs)e.addBindings(c,o.nativeRefs[c]);return e.getBind()}}}),[]);return o.current.config=r,o.current.handlers=e,o.nativeRefs=i,t.useEffect((function(){return o.current.clean}),[]),o.bind}var k=function(){function e(e,t,n){var r=this;void 0===n&&(n=[]),this.stateKey=e,this.controller=t,this.args=n,this.debounced=!0,this.setTimeout=function(e,t){var n;void 0===t&&(t=140);for(var i=arguments.length,o=new Array(i>2?i-2:0),a=2;a<i;a++)o[a-2]=arguments[a];r.controller.timeouts[r.stateKey]=(n=window).setTimeout.apply(n,[e,t].concat(o))},this.clearTimeout=function(){clearTimeout(r.controller.timeouts[r.stateKey])},this.addWindowListeners=function(e){r.controller.addWindowListeners(r.stateKey,e)},this.removeWindowListeners=function(){r.controller.removeWindowListeners(r.stateKey)},this.getStartGestureState=function(e,t){return h(h({},M()[r.stateKey]),{},{_active:!0,values:e,initial:e,offset:r.state.offset,lastOffset:r.state.offset,startTime:t.timeStamp})},this.rubberband=function(e,t){var n=r.config.bounds;return e.map((function(e,r){return v(e,n[r][0],n[r][1],t[r])}))},this.fireGestureHandler=function(e){if(r.state._blocked)return r.debounced||(r.state._active=!1,r.clean()),null;var t=r.state._intentional;if(!e&&!1===t[0]&&!1===t[1])return null;var n=r.state,i=n._active,o=n.active;r.state.active=i,r.state.first=i&&!o,r.state.last=o&&!i,r.controller.state.shared[r.ingKey]=i;var a=h(h(h({},r.controller.state.shared),r.state),r.mapStateValues(r.state)),s=r.handler(a);return r.state.memo=void 0!==s?s:r.state.memo,i||r.clean(),a}}var t,i=e.prototype;return i.updateSharedState=function(e){Object.assign(this.controller.state.shared,e)},i.updateGestureState=function(e){Object.assign(this.state,e)},i.getGenericPayload=function(e,t){var n=e.timeStamp,r=this.state;return{_lastEventType:e.type,event:e,timeStamp:n,elapsedTime:t?0:n-r.startTime,args:this.args,previous:r.values}},i.checkIntentionality=function(e,t,n){return{_intentional:e,_blocked:!1}},i.getMovement=function(e,t){void 0===t&&(t=this.state);var i=this.config,o=i.initial,a=i.threshold,s=i.rubberband,u=a[0],c=a[1],d=t._initial,v=t._active,f=t._intentional,g=t.lastOffset,p=t.movement,m=f[0],y=f[1],S=this.getInternalMovement(e,t),b=S[0],w=S[1];!1===m&&(m=l(b,u)),!1===y&&(y=l(w,c));var T=this.checkIntentionality([m,y],[b,w],t),M=T._intentional,_=T._blocked,E=M[0],P=M[1],O=[b,w];if(!1!==E&&!1===f[0]&&(d[0]=G(o)[0]),!1!==P&&!1===f[1]&&(d[1]=G(o)[1]),_)return h(h({},T),{},{_movement:O,delta:[0,0]});var D=[!1!==E?b-E:G(o)[0],!1!==P?w-P:G(o)[1]],B=n(D,g),K=v?s:[0,0];return D=this.rubberband(n(D,d),K),h(h({},T),{},{_initial:d,_movement:O,movement:D,offset:this.rubberband(B,K),delta:r(D,p)})},i.clean=function(){this.clearTimeout(),this.removeWindowListeners()},(t=[{key:"config",get:function(){return this.controller.config[this.stateKey]}},{key:"enabled",get:function(){return this.controller.config.enabled&&this.config.enabled}},{key:"state",get:function(){return this.controller.state[this.stateKey]}},{key:"handler",get:function(){return this.controller.handlers[this.stateKey]}}])&&function(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}(e.prototype,t),e}(),I=function(e){function t(){return e.apply(this,arguments)||this}f(t,e);var n=t.prototype;return n.getInternalMovement=function(e,t){return r(e,t.initial)},n.checkIntentionality=function(e,t,n){var r=n.axis,i=!1;if(!1!==e[0]||!1!==e[1]){var o=t.map(Math.abs),a=o[0],s=o[1],u=this.config,c=u.axis;r=r||(a>s?"x":a<s?"y":void 0),(c||u.lockDirection)&&(r?c&&r!==c?i=!0:e["x"===r?1:0]=!1:e=[!1,!1])}return{_intentional:e,_blocked:i,axis:r}},n.getKinematics=function(e,t){var n=this.state.timeStamp,r=this.getMovement(e,this.state),i=r.delta;if(r._blocked)return r;var o=u(r.movement,i,t.timeStamp-n);return h(h({values:e,delta:i},r),o)},n.mapStateValues=function(e){return{xy:e.values,vxvy:e.velocities}},t}(k),A=function(e){function t(t,n){var r;return(r=e.call(this,"drag",t,n)||this).ingKey="dragging",r.wasTouch=!1,r.isEventTypeTouch=function(e){return!!e&&0===e.indexOf("touch")},r.dragShouldStart=function(e){var t=D(e).touches;return!(!r.controller.config.pointer&&r.isEventTypeTouch(r.state._lastEventType)&&!r.isEventTypeTouch(e.type)&&Math.abs(e.timeStamp-r.state.startTime)<200)&&r.enabled&&t<2},r.setPointers=function(e){var t=e.currentTarget,n=e.pointerId;t&&t.setPointerCapture(n),r.updateGestureState({currentTarget:t,pointerId:n})},r.removePointers=function(){var e=r.state,t=e.currentTarget,n=e.pointerId;t&&n&&t.releasePointerCapture(n)},r.setListeners=function(e){r.removeWindowListeners(),r.addWindowListeners(e?[["touchmove",r.onDragChange],["touchend",r.onDragEnd],["touchcancel",r.onDragEnd]]:[["mousemove",r.onDragChange],["mouseup",r.onDragEnd]])},r.onDragStart=function(e){r.dragShouldStart(e)&&(r.controller.config.pointer?r.setPointers(e):r.setListeners(r.isEventTypeTouch(e.type)),r.config.delay>0?(r.state._delayedEvent=!0,"function"==typeof e.persist&&e.persist(),r.setTimeout((function(){return r.startDrag(e)}),r.config.delay)):r.startDrag(e))},r.onDragChange=function(e){if(!r.state.canceled)if(r.state._active){var t=D(e);if(t.down){r.updateSharedState(t);var n=x(e),i=r.getKinematics(n.values,e),o=r.state._isTap;o&&a(i._movement)>=3&&(o=!1),r.updateGestureState(h(h(h({},r.getGenericPayload(e)),i),{},{_isTap:o,cancel:function(){return r.onCancel()}})),r.fireGestureHandler()}else r.onDragEnd(e)}else r.state._delayedEvent&&(r.clearTimeout(),r.startDrag(e))},r.onDragEnd=function(e){r.state._active=!1,r.updateSharedState({down:!1,buttons:0,touches:0});var t=r.state,n=t._isTap,i=t.values,o=t.velocities,a=o[0],s=o[1],u=t.movement,l=u[0],d=u[1],v=t._intentional,f=v[0],g=v[1],p=h(h({},r.getGenericPayload(e)),r.getMovement(i)),m=r.config,y=m.swipeVelocity,S=y[0],b=y[1],w=m.swipeDistance,T=w[0],G=w[1],M=[0,0];p.elapsedTime<220&&(!1!==f&&Math.abs(a)>S&&Math.abs(l)>T&&(M[0]=c(a)),!1!==g&&Math.abs(s)>b&&Math.abs(d)>G&&(M[1]=c(s))),r.updateGestureState(h(h({event:e},p),{},{tap:n,swipe:M})),r.fireGestureHandler(r.config.filterTaps&&r.state._isTap)},r.clean=function(){e.prototype.clean.call(function(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}(r)),r.state._delayedEvent=!1,r.controller.config.pointer&&r.removePointers()},r.onCancel=function(){r.updateGestureState({canceled:!0,cancel:y}),r.state._active=!1,r.updateSharedState({down:!1,buttons:0,touches:0}),requestAnimationFrame((function(){return r.fireGestureHandler()}))},r}f(t,e);var n=t.prototype;return n.startDrag=function(e){var t=this,n=x(e).values;this.updateSharedState(D(e));var r=h(h({},this.getStartGestureState(n,e)),this.getGenericPayload(e,!0));this.updateGestureState(h(h(h({},r),this.getMovement(n,r)),{},{cancel:function(){return t.onCancel()}})),this.fireGestureHandler()},n.addBindings=function(){this.controller.config.pointer?(this.controller.addBindings("onPointerDown",this.onDragStart),this.controller.addBindings("onPointerMove",this.onDragChange),this.controller.addBindings(["onPointerUp","onPointerCancel"],this.onDragEnd)):this.controller.addBindings(["onTouchStart","onMouseDown"],this.onDragStart)},t}(I),j="undefined"!=typeof window?window:void 0,V={lockDirection:!1,axis:void 0,bounds:void 0};function R(e){void 0===e&&(e={});var t=e.eventOptions,n=(t=void 0===t?{}:t).passive,r=void 0===n||n,i=t.capture,o=void 0!==i&&i,a=t.pointer,s=void 0!==a&&a,u=e.window,c=void 0===u?j:u,l=e.domTarget,d=void 0===l?void 0:l,v=e.enabled,f=void 0===v||v;return h(h({},g(e,["eventOptions","window","domTarget","enabled"])),{},{enabled:f,domTarget:d,window:c,eventOptions:{passive:!d||!!r,capture:!!o},captureString:o?"Capture":"",pointer:!!s})}function F(e){var t=e.threshold,n=void 0===t?void 0:t,r=e.rubberband,i=void 0===r?0:r,o=e.enabled,a=e.initial;return"boolean"==typeof i&&(i=i?.15:0),void 0===n&&(n=0),{enabled:void 0===o||o,initial:void 0===a?[0,0]:a,threshold:b(n),rubberband:b(i)}}function X(e){void 0===e&&(e={});var t=e.axis,n=e.lockDirection,r=e.bounds,i=void 0===r?{}:r,o=g(e,["axis","lockDirection","bounds"]),a=[[w(i.left,-Infinity),w(i.right,Infinity)],[w(i.top,-Infinity),w(i.bottom,Infinity)]];return h(h(h(h({},F(o)),V),T({axis:t,lockDirection:n},e)),{},{bounds:a})}function Y(e){void 0===e&&(e={});var t=e.distanceBounds,n=void 0===t?{}:t,r=e.angleBounds,i=void 0===r?{}:r,o=g(e,["distanceBounds","angleBounds"]),a=[[w(n.min,-Infinity),w(n.max,Infinity)],[w(i.min,-Infinity),w(i.max,Infinity)]];return h(h({},F(o)),{},{bounds:a})}function q(e){void 0===e&&(e={});var t=e.enabled,n=e.threshold,r=e.bounds,i=e.rubberband,o=e.initial,a=g(e,["enabled","threshold","bounds","rubberband","initial"]),s=a.swipeVelocity,u=void 0===s?.5:s,c=a.swipeDistance,l=void 0===c?60:c,d=a.delay,v=void 0!==d&&d,f=a.filterTaps,p=void 0!==f&&f,m=a.axis,y=a.lockDirection;void 0===n?n=Math.max(0,p?3:0,y||m?1:0):p=!0;var S=X(T({enabled:t,threshold:n,bounds:r,rubberband:i,axis:m,lockDirection:y,initial:o},e));return h(h({},S),{},{filterTaps:p||S.threshold[0]+S.threshold[1]>0,swipeVelocity:b(u),swipeDistance:b(l),delay:"number"==typeof v?v:v?180:0})}var N=function(e){function t(t,n){var r;return(r=e.call(this,"pinch",t,n)||this).ingKey="pinching",r.pinchShouldStart=function(e){var t=D(e);return r.enabled&&2===t.touches},r.onPinchStart=function(e){if(r.pinchShouldStart(e)){var t=C(e),n=t.values,i=t.origin;r.updateSharedState(D(e));var o=h(h({},r.getStartGestureState(n,e)),r.getGenericPayload(e,!0));r.updateGestureState(h(h(h({},o),r.getMovement(n,o)),{},{origin:i,cancel:function(){return r.onCancel()}})),r.fireGestureHandler()}},r.onPinchChange=function(e){var t=r.state,n=t.timeStamp;if(!t.canceled&&t._active){var i=D(e);if(2===i.touches&&e.timeStamp!==n){r.updateSharedState(i);var o=C(e),a=o.origin,s=r.getKinematics(o.values,e);r.updateGestureState(h(h(h({},r.getGenericPayload(e)),s),{},{origin:a,cancel:function(){return r.onCancel()}})),r.fireGestureHandler()}}},r.onPinchEnd=function(e){r.state.active&&(r.state._active=!1,r.updateSharedState({down:!1,touches:0}),r.updateGestureState(h(h({event:e},r.getGenericPayload(e)),r.getMovement(r.state.values))),r.fireGestureHandler())},r.onCancel=function(){r.state._active=!1,r.updateGestureState({canceled:!0,cancel:y}),r.updateSharedState({down:!1,touches:0}),requestAnimationFrame((function(){return r.fireGestureHandler()}))},r.onGestureStart=function(e){if(r.enabled){e.preventDefault();var t=W(e).values;r.updateSharedState(D(e));var n=h(h({},r.getStartGestureState(t,e)),r.getGenericPayload(e,!0));r.updateGestureState(h(h(h({},n),r.getMovement(t,n)),{},{cancel:function(){return r.onCancel()}})),r.fireGestureHandler()}},r.onGestureChange=function(e){var t=r.state;if(!t.canceled&&t._active){e.preventDefault();var n=D(e);r.updateSharedState(n);var i=W(e),o=r.getKinematics(i.values,e);r.updateGestureState(h(h(h({},r.getGenericPayload(e)),o),{},{cancel:function(){return r.onCancel()}})),r.fireGestureHandler()}},r.onGestureEnd=function(e){e.preventDefault(),r.state.active&&(r.state._active=!1,r.updateSharedState({down:!1,touches:0}),r.updateGestureState(h(h({event:e},r.getGenericPayload(e)),r.getMovement(r.state.values))),r.fireGestureHandler())},r.updateTouchData=function(e){if(r.enabled&&2===e.touches.length&&r.state._active){var t=C(e);r.state.origin=t.origin}},r.wheelShouldRun=function(e){return r.enabled&&e.ctrlKey},r.getWheelValuesFromEvent=function(e){var t=K(e).values[1],n=r.state.values,i=n[1];return{values:[n[0]-t,void 0!==i?i:0],origin:[e.clientX,e.clientY],delta:[0,t]}},r.onWheel=function(e){r.wheelShouldRun(e)&&(r.clearTimeout(),r.setTimeout(r.onWheelEnd),r.state._active?r.onWheelChange(e):r.onWheelStart(e))},r.onWheelStart=function(e){var t=r.getWheelValuesFromEvent(e),n=t.values,i=t.delta,o=t.origin;r.controller.config.eventOptions.passive||e.preventDefault(),r.updateSharedState(D(e));var a=h(h(h({},r.getStartGestureState(n,e)),r.getGenericPayload(e,!0)),{},{initial:r.state.values});r.updateGestureState(h(h(h({},a),r.getMovement(n,a)),{},{offset:n,delta:i,origin:o})),r.fireGestureHandler()},r.onWheelChange=function(e){var t=D(e);r.updateSharedState(t);var n=r.getWheelValuesFromEvent(e),i=n.origin,o=n.delta,a=r.getKinematics(n.values,e);r.updateGestureState(h(h(h({},r.getGenericPayload(e)),a),{},{origin:i,delta:o})),r.fireGestureHandler()},r.onWheelEnd=function(){r.state._active=!1,r.updateGestureState(r.getMovement(r.state.values)),r.fireGestureHandler()},r}return f(t,e),t.prototype.addBindings=function(){this.controller.config.domTarget&&function(){try{return"constructor"in GestureEvent}catch(e){return!1}}()?(this.controller.addBindings("onGestureStart",this.onGestureStart),this.controller.addBindings("onGestureChange",this.onGestureChange),this.controller.addBindings(["onGestureEnd","onTouchCancel"],this.onGestureEnd),this.controller.addBindings(["onTouchStart","onTouchMove"],this.updateTouchData)):(this.controller.addBindings("onTouchStart",this.onPinchStart),this.controller.addBindings("onTouchMove",this.onPinchChange),this.controller.addBindings(["onTouchEnd","onTouchCancel"],this.onPinchEnd),this.controller.addBindings("onWheel",this.onWheel))},t}(function(e){function t(){return e.apply(this,arguments)||this}f(t,e);var n=t.prototype;return n.getInternalMovement=function(e,t){var n=e[0],r=e[1],i=t.values,o=t.turns,a=t.initial,s=(r=void 0!==r?r:i[1])-i[1],u=Math.abs(s)>270?o+c(s):o;return[n-a[0],r-360*u-a[1]]},n.getKinematics=function(e,t){var n=this.state,r=n.timeStamp,i=n.initial,o=this.getMovement(e,this.state),a=o.delta,s=o.movement,c=(e[1]-s[1]-i[1])/360,l=u(s,a,t.timeStamp-r);return h(h({values:e,delta:a,turns:c},o),l)},n.mapStateValues=function(e){return{da:e.values,vdva:e.velocities}},t}(k)),U=function(e){function t(t,r){var i;return(i=e.call(this,"wheel",t,r)||this).ingKey="wheeling",i.debounced=!0,i.wheelShouldRun=function(e){return(!e.ctrlKey||!("pinch"in i.controller.handlers))&&i.enabled},i.getValuesFromEvent=function(e){var t=i.state.values;return{values:n(K(e).values,t)}},i.onWheel=function(e){i.wheelShouldRun(e)&&(i.clearTimeout(),i.setTimeout(i.onWheelEnd),i.state._active?i.onWheelChange(e):i.onWheelStart(e))},i.onWheelStart=function(e){var t=i.getValuesFromEvent(e).values;i.updateSharedState(D(e));var n=h(h(h({},i.getStartGestureState(t,e)),i.getGenericPayload(e,!0)),{},{initial:i.state.values}),r=i.getMovement(t,n),o=r.delta;i.updateGestureState(h(h(h({},n),r),{},{distance:a(o),direction:s(o)})),i.fireGestureHandler()},i.onWheelChange=function(e){var t=D(e);i.updateSharedState(t);var n=i.getValuesFromEvent(e),r=i.getKinematics(n.values,e);i.updateGestureState(h(h({},i.getGenericPayload(e)),r)),i.fireGestureHandler()},i.onWheelEnd=function(){i.state._active=!1,i.updateGestureState(h(h({},i.getMovement(i.state.values)),{},{velocities:[0,0],velocity:0})),i.fireGestureHandler()},i}return f(t,e),t.prototype.addBindings=function(){this.controller.addBindings("onWheel",this.onWheel)},t}(I),$=function(e){function t(t,n){var r;return(r=e.call(this,"move",t,n)||this).ingKey="moving",r.debounced=!0,r.moveShouldRun=function(){return r.enabled},r.onMove=function(e){r.moveShouldRun()&&(r.clearTimeout(),r.setTimeout(r.onMoveEnd),r.state._active?r.onMoveChange(e):r.onMoveStart(e))},r.onMoveStart=function(e){var t=x(e).values;r.updateSharedState(D(e));var n=h(h({},r.getStartGestureState(t,e)),r.getGenericPayload(e,!0));r.updateGestureState(h(h({},n),r.getMovement(t,n))),r.fireGestureHandler()},r.onMoveChange=function(e){var t=D(e);r.updateSharedState(t);var n=x(e),i=r.getKinematics(n.values,e);r.updateGestureState(h(h({},r.getGenericPayload(e)),i)),r.fireGestureHandler()},r.onMoveEnd=function(){r.state._active=!1,r.updateGestureState(h(h({},r.getMovement(r.state.values)),{},{velocities:[0,0],velocity:0})),r.fireGestureHandler()},r.onPointerEnter=function(e){if(r.controller.state.shared.hovering=!0,r.controller.config.enabled){if(r.controller.config.hover.enabled){var t=x(e).values,n=h(h(h(h({},r.controller.state.shared),r.state),r.getGenericPayload(e,!0)),{},{values:t,active:!0,hovering:!0});r.controller.handlers.hover(h(h({},n),r.mapStateValues(n)))}"move"in r.controller.handlers&&r.onMoveStart(e)}},r.onPointerLeave=function(e){if(r.controller.state.shared.hovering=!1,"move"in r.controller.handlers&&r.onMoveEnd(),r.controller.config.hover.enabled){var t=x(e).values,n=h(h(h(h({},r.controller.state.shared),r.state),r.getGenericPayload(e)),{},{values:t,active:!1});r.controller.handlers.hover(h(h({},n),r.mapStateValues(n)))}},r}return f(t,e),t.prototype.addBindings=function(){this.controller.config.pointer?("move"in this.controller.handlers&&this.controller.addBindings("onPointerMove",this.onMove),"hover"in this.controller.handlers&&(this.controller.addBindings("onPointerEnter",this.onPointerEnter),this.controller.addBindings("onPointerLeave",this.onPointerLeave))):("move"in this.controller.handlers&&this.controller.addBindings("onMouseMove",this.onMove),"hover"in this.controller.handlers&&(this.controller.addBindings("onMouseEnter",this.onPointerEnter),this.controller.addBindings("onMouseLeave",this.onPointerLeave)))},t}(I),z=function(e){function t(t,n){var r;return(r=e.call(this,"scroll",t,n)||this).ingKey="scrolling",r.debounced=!0,r.scrollShouldRun=function(){return r.enabled},r.onScroll=function(e){r.scrollShouldRun()&&(r.clearTimeout(),r.setTimeout(r.onScrollEnd),r.state._active?r.onScrollChange(e):r.onScrollStart(e))},r.onScrollStart=function(e){var t=B(e).values;r.updateSharedState(D(e));var n=h(h(h({},r.getStartGestureState(t,e)),r.getGenericPayload(e,!0)),{},{initial:r.state.values}),i=r.getMovement(t,n),o=i.delta;r.updateGestureState(h(h(h({},n),i),{},{distance:a(o),direction:s(o)})),r.fireGestureHandler()},r.onScrollChange=function(e){var t=D(e);r.updateSharedState(t);var n=B(e),i=r.getKinematics(n.values,e);r.updateGestureState(h(h({},r.getGenericPayload(e)),i)),r.fireGestureHandler()},r.onScrollEnd=function(){r.state._active=!1,r.updateGestureState(h(h({},r.getMovement(r.state.values)),{},{velocities:[0,0],velocity:0})),r.fireGestureHandler()},r}return f(t,e),t.prototype.addBindings=function(){this.controller.addBindings("onScroll",this.onScroll)},t}(I);function J(e,t,n){var r=t+"Start",i=t+"End";return delete n[t],delete n[r],delete n[i],function(n){var o=void 0;return n.first&&r in e&&e[r](n),t in e&&(o=e[t](n)),n.last&&i in e&&e[i](n),o}}exports.addV=n,exports.rubberbandIfOutOfBounds=v,exports.subV=r,exports.useDrag=function(e,t){void 0===t&&(t={});var n=t.domTarget,r=t.eventOptions,i=t.window,o=g(t,["domTarget","eventOptions","window"]),a=h(h({},R({domTarget:n,eventOptions:r,window:i})),{},{drag:q(o)});return H({drag:e},[A],a)},exports.useGesture=function(e,n){void 0===n&&(n={});var r=t.useState((function(){return new Set(Object.keys(e).map((function(e){return e.replace(/End|Start/,"")})))}))[0],i=n.drag,o=n.wheel,a=n.move,s=n.scroll,u=n.pinch,c=n.hover,l=R(g(n,["drag","wheel","move","scroll","pinch","hover"])),d=[],v={},f=h({},e);return r.has("onDrag")&&(d.push(A),v.drag=J(e,"onDrag",f),l.drag=q(i)),r.has("onWheel")&&(d.push(U),v.wheel=J(e,"onWheel",f),l.wheel=X(o)),r.has("onScroll")&&(d.push(z),v.scroll=J(e,"onScroll",f),l.scroll=X(s)),r.has("onMove")&&(d.push($),v.move=J(e,"onMove",f),l.move=X(a)),r.has("onPinch")&&(d.push(N),v.pinch=J(e,"onPinch",f),l.pinch=Y(u)),r.has("onHover")&&(r.has("onMove")||d.push($),v.hover=e.onHover,l.hover=h({enabled:!0},c),delete f.onHover),H(v,d,l,f)},exports.useHover=function(e,t){void 0===t&&(t={});var n=t.domTarget,r=t.eventOptions,i=t.window,o=g(t,["domTarget","eventOptions","window"]),a=h(h({},R({domTarget:n,eventOptions:r,window:i})),{},{hover:h({enabled:!0},o)});return H({hover:e},[$],a)},exports.useMove=function(e,t){void 0===t&&(t={});var n=t.domTarget,r=t.eventOptions,i=t.window,o=g(t,["domTarget","eventOptions","window"]),a=h(h({},R({domTarget:n,eventOptions:r,window:i})),{},{move:X(o)});return H({move:e},[$],a)},exports.usePinch=function(e,t){void 0===t&&(t={});var n=t.domTarget,r=t.eventOptions,i=t.window,o=g(t,["domTarget","eventOptions","window"]),a=h(h({},R({domTarget:n,eventOptions:r,window:i})),{},{pinch:Y(o)});return H({pinch:e},[N],a)},exports.useScroll=function(e,t){void 0===t&&(t={});var n=t.domTarget,r=t.eventOptions,i=t.window,o=g(t,["domTarget","eventOptions","window"]),a=h(h({},R({domTarget:n,eventOptions:r,window:i})),{},{scroll:X(o)});return H({scroll:e},[z],a)},exports.useWheel=function(e,t){void 0===t&&(t={});var n=t.domTarget,r=t.eventOptions,i=t.window,o=g(t,["domTarget","eventOptions","window"]),a=h(h({},R({domTarget:n,eventOptions:r,window:i})),{},{wheel:X(o)});return H({wheel:e},[U],a)};
 
 
-},{"react":34}],32:[function(require,module,exports){
+},{"react":33}],31:[function(require,module,exports){
 (function (process){
 /** @license React v16.13.1
  * react.development.js
@@ -34521,7 +34364,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this,require('_process'))
-},{"_process":11,"object-assign":14,"prop-types/checkPropTypes":15}],33:[function(require,module,exports){
+},{"_process":10,"object-assign":13,"prop-types/checkPropTypes":14}],32:[function(require,module,exports){
 /** @license React v16.13.1
  * react.production.min.js
  *
@@ -34548,7 +34391,7 @@ key:d,ref:g,props:e,_owner:k}};exports.createContext=function(a,b){void 0===b&&(
 exports.lazy=function(a){return{$$typeof:A,_ctor:a,_status:-1,_result:null}};exports.memo=function(a,b){return{$$typeof:z,type:a,compare:void 0===b?null:b}};exports.useCallback=function(a,b){return Z().useCallback(a,b)};exports.useContext=function(a,b){return Z().useContext(a,b)};exports.useDebugValue=function(){};exports.useEffect=function(a,b){return Z().useEffect(a,b)};exports.useImperativeHandle=function(a,b,c){return Z().useImperativeHandle(a,b,c)};
 exports.useLayoutEffect=function(a,b){return Z().useLayoutEffect(a,b)};exports.useMemo=function(a,b){return Z().useMemo(a,b)};exports.useReducer=function(a,b,c){return Z().useReducer(a,b,c)};exports.useRef=function(a){return Z().useRef(a)};exports.useState=function(a){return Z().useState(a)};exports.version="16.13.1";
 
-},{"object-assign":14}],34:[function(require,module,exports){
+},{"object-assign":13}],33:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -34559,4 +34402,4 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/react.development.js":32,"./cjs/react.production.min.js":33,"_process":11}]},{},[12]);
+},{"./cjs/react.development.js":31,"./cjs/react.production.min.js":32,"_process":10}]},{},[11]);
