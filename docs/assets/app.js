@@ -1907,89 +1907,30 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 var WHITE_SMOKE = '#eee';
 var GRAY = '#878c88';
 var GREEN = '#72d687'; //
-// Button demo
-//
-
-var ButtonDemo =
-/*#__PURE__*/
-function (_PureComponent) {
-  _inherits(ButtonDemo, _PureComponent);
-
-  function ButtonDemo(props) {
-    var _this;
-
-    _classCallCheck(this, ButtonDemo);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ButtonDemo).call(this, props));
-    _this.state = {
-      isEnabled: true
-    };
-    return _this;
-  }
-
-  _createClass(ButtonDemo, [{
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      var isEnabled = this.state.isEnabled;
-      return _react.default.createElement("div", {
-        className: "ComponentDemo ButtonDemo"
-      }, _react.default.createElement("pre", {
-        className: "ComponentDemo-code"
-      }, _react.default.createElement("code", {
-        className: "language-jsx",
-        dangerouslySetInnerHTML: {
-          __html: _prismjs.default.highlight("<Button\n  isEnabled={this.state.isEnabled}\n  onClick={() => alert('Clicked!')} \n>\n  This is a button\n</Button>", _prismjs.default.languages.jsx)
-        }
-      })), _react.default.createElement("div", {
-        className: "ComponentDemo-settings"
-      }, _react.default.createElement("label", null, _react.default.createElement("input", {
-        type: "checkbox",
-        checked: isEnabled,
-        onChange: function onChange(evt) {
-          return _this2.setState({
-            isEnabled: !isEnabled
-          });
-        }
-      }), _react.default.createElement("code", null, "isEnabled"))), _react.default.createElement("div", {
-        className: "ComponentDemo-results"
-      }, _react.default.createElement(_index.Button, {
-        isEnabled: isEnabled,
-        onClick: function onClick() {
-          return alert('Clicked!');
-        }
-      }, "This is a button")));
-    }
-  }]);
-
-  return ButtonDemo;
-}(_react.PureComponent); //
 // FormattedTime demo
 //
 
-
 var FormattedTimeDemo =
 /*#__PURE__*/
-function (_PureComponent2) {
-  _inherits(FormattedTimeDemo, _PureComponent2);
+function (_PureComponent) {
+  _inherits(FormattedTimeDemo, _PureComponent);
 
   function FormattedTimeDemo(props) {
-    var _this3;
+    var _this;
 
     _classCallCheck(this, FormattedTimeDemo);
 
-    _this3 = _possibleConstructorReturn(this, _getPrototypeOf(FormattedTimeDemo).call(this, props));
-    _this3.state = {
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(FormattedTimeDemo).call(this, props));
+    _this.state = {
       numSeconds: 100
     };
-    return _this3;
+    return _this;
   }
 
   _createClass(FormattedTimeDemo, [{
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this2 = this;
 
       var numSeconds = this.state.numSeconds;
       return _react.default.createElement("div", {
@@ -2007,7 +1948,7 @@ function (_PureComponent2) {
         type: "number",
         value: numSeconds,
         onChange: function onChange(evt) {
-          return _this4.setState({
+          return _this2.setState({
             numSeconds: evt.target.value
           });
         }
@@ -2027,8 +1968,8 @@ function (_PureComponent2) {
 
 var PlayerIconDemo =
 /*#__PURE__*/
-function (_PureComponent3) {
-  _inherits(PlayerIconDemo, _PureComponent3);
+function (_PureComponent2) {
+  _inherits(PlayerIconDemo, _PureComponent2);
 
   function PlayerIconDemo() {
     _classCallCheck(this, PlayerIconDemo);
@@ -2293,8 +2234,6 @@ function SliderDemo() {
     }
   }))));
 }
-
-_reactDom.default.render(_react.default.createElement(ButtonDemo, null), document.querySelector('.component-demo[data-component="Button"]'));
 
 _reactDom.default.render(_react.default.createElement(FormattedTimeDemo, null), document.querySelector('.component-demo[data-component="FormattedTime"]'));
 

@@ -5,7 +5,6 @@ import Prism from 'prismjs'
 import 'prismjs/components/prism-jsx.js'
 
 import {
-  Button,
   Direction,
   FormattedTime,
   PlayerIcon,
@@ -15,52 +14,6 @@ import {
 const WHITE_SMOKE = '#eee'
 const GRAY = '#878c88'
 const GREEN = '#72d687'
-
-//
-// Button demo
-//
-class ButtonDemo extends PureComponent {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      isEnabled: true,
-    }
-  }
-
-  render () {
-    const { isEnabled } = this.state
-
-    return (
-      <div className="ComponentDemo ButtonDemo">
-        <pre className="ComponentDemo-code">
-          <code className="language-jsx" dangerouslySetInnerHTML={{
-            __html: Prism.highlight(
-              `<Button\n  isEnabled={this.state.isEnabled}\n  onClick={() => alert('Clicked!')} \n>\n  This is a button\n</Button>`,
-              Prism.languages.jsx
-            )
-          }} />
-        </pre>
-
-        <div className="ComponentDemo-settings">
-          <label>
-            <input type="checkbox" checked={isEnabled} onChange={(evt) => this.setState({ isEnabled: !isEnabled })} />
-            <code>isEnabled</code>
-          </label>
-        </div>
-
-        <div className="ComponentDemo-results">
-          <Button
-            isEnabled={isEnabled}
-            onClick={() => alert('Clicked!')}
-          >
-            This is a button
-          </Button>
-        </div>
-      </div>
-    )
-  }
-}
 
 //
 // FormattedTime demo
@@ -293,7 +246,6 @@ function SliderDemo () {
   )
 }
 
-ReactDOM.render(<ButtonDemo />, document.querySelector('.component-demo[data-component="Button"]'))
 ReactDOM.render(<FormattedTimeDemo />, document.querySelector('.component-demo[data-component="FormattedTime"]'))
 ReactDOM.render(<PlayerIconDemo />, document.querySelector('.component-demo[data-component="PlayerIcon"]'))
 ReactDOM.render(<SliderDemo />, document.querySelector('.component-demo[data-component="Slider"]'))
