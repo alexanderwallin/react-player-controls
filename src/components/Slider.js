@@ -47,7 +47,6 @@ function getSliderValue (bounds, direction, xy) {
  */
 function Slider ({
   direction = Direction.HORIZONTAL,
-  isEnabled = true,
   onIntent = noop,
   onIntentStart = noop,
   onIntentEnd = noop,
@@ -64,12 +63,12 @@ function Slider ({
 
   const bind = useGesture(
     {
-      onMoveStart: ({ dragging, xy }) => isEnabled && !dragging && onIntentStart(getSliderValue(bounds, direction, xy)),
-      onMove: ({ dragging, xy }) => isEnabled && !dragging && onIntent(getSliderValue(bounds, direction, xy)),
-      onMoveEnd: ({ dragging }) => isEnabled && !dragging && onIntentEnd(),
-      onDragStart: ({ xy }) => isEnabled && onChangeStart(getSliderValue(bounds, direction, xy)),
-      onDrag: ({ xy }) => isEnabled && onChange(getSliderValue(bounds, direction, xy)),
-      onDragEnd: ({ xy }) => isEnabled && onChangeStart(getSliderValue(bounds, direction, xy)),
+      onMoveStart: ({ dragging, xy }) => !dragging && onIntentStart(getSliderValue(bounds, direction, xy)),
+      onMove: ({ dragging, xy }) => !dragging && onIntent(getSliderValue(bounds, direction, xy)),
+      onMoveEnd: ({ dragging }) => !dragging && onIntentEnd(),
+      onDragStart: ({ xy }) => onChangeStart(getSliderValue(bounds, direction, xy)),
+      onDrag: ({ xy }) => onChange(getSliderValue(bounds, direction, xy)),
+      onDragEnd: ({ xy }) => onChangeStart(getSliderValue(bounds, direction, xy)),
     },
     {
       axis: direction === Direction.HORIZONTAL ? 'x' : 'y',
