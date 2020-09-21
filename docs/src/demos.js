@@ -34,7 +34,7 @@ class ButtonDemo extends PureComponent {
     return (
       <div className="ComponentDemo ButtonDemo">
         <pre className="ComponentDemo-code">
-          <code className="language-jsx" dangerouslySetInnerHTMLL={{
+          <code className="language-jsx" dangerouslySetInnerHTML={{
             __html: Prism.highlight(
               `<Button\n  isEnabled={this.state.isEnabled}\n  onClick={() => alert('Clicked!')} \n>\n  This is a button\n</Button>`,
               Prism.languages.jsx
@@ -268,11 +268,11 @@ function SliderDemo () {
         <Slider
           isEnabled={isEnabled}
           direction={direction}
-          onChange={newValue => setValue(newValue)}
-          onChangeStart={startValue => setLastValueStart(startValue)}
-          onChangeEnd={endValue => setLastValueEnd(endValue)}
-          onIntent={intent => setLastIntent(intent)}
-          onIntentStart={intent => setLastIntentStart(intent)}
+          onChange={setValue}
+          onChangeStart={setLastValueStart}
+          onChangeEnd={setLastValueEnd}
+          onIntent={setLastIntent}
+          onIntentStart={setLastIntentStart}
           onIntentEnd={() => setLastIntentEndCount(lastIntentEndCount + 1)}
           style={{
             width: direction === Direction.HORIZONTAL ? 200 : 24,
