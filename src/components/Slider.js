@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { useGesture } from 'react-use-gesture'
 
 import { Direction } from '../constants.js'
-import { noop } from '../utils.js'
+
+function noop () {}
 
 function clamp (value, min, max) {
   return Math.min(Math.max(value, min), max)
