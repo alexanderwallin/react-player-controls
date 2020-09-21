@@ -11,17 +11,13 @@
 [![Dependencies](https://img.shields.io/david/alexanderwallin/react-player-controls.svg?style=flat-square)](https://david-dm.org/alexanderwallin/react-player-controls)
 [![Dev dependency status](https://david-dm.org/alexanderwallin/react-player-controls/dev-status.svg?style=flat-square)](https://david-dm.org/alexanderwallin/react-player-controls#info=devDependencies)
 
-This is a minimal set of modular, tested and hopefully useful React components for composing media player interfaces. It is designed for you to compose media player controls yourself using a [small and easy-to-learn API](#api).
+This is a minimal set of modular and hopefully useful React components for composing media player interfaces. It is designed for you to compose media player controls yourself using a [small and easy-to-learn API](#api).
 
-> 👴 Check the old [README for version 0.5.x](https://github.com/alexanderwallin/react-player-controls/blob/dd30d5f062f5606feb69e6a381a6490cf556e63b/README.md), which contained more pre-baked components, if you are still on that version. 👵
-
-From a library point of view, creating and providing components like `<Player />` or `<ProgressBar />` tends to result in abstractions with tons of props, often preventing arbitrary customisation, whilst providing little real value. These abstractions prove especially hindering when it comes to styling child elements. Therefor, instead of shipping these composite components, there is [a collection of recipies](#recipies) that you can more or less copy-paste right into your project. Along with these plain components are a few boilerplate sets of styles in different forms that you can use if you want.
-
-You can see the base components in action on the [examples page](https://alexanderwallin.github.io/react-player-controls).
+Instead of shipping default but customisable styles, there are [implementation recipies](#recipes) to help you get going quickly. Also check out [the demo site](http://alexanderwallin.github.io/react-player-controls/) to try the components out.
 
 ⚠️  **NOTE:** This library does not deal with actual media in any way, only the UI. ⚠️
 
-### Table of contents
+## Table of contents
 
 * [Installation](#installation)
 * [Usage](#usage)
@@ -48,29 +44,10 @@ const { Slider, Direction } = require('react-player-controls')
 
 ## API
 
-* [`<Button />`](#button-)
 * [`Direction`](#direction)
 * [`<FormattedTime />`](#formattedtime-)
 * [`<PlayerIcon />`](#playericon-)
 * [`<Slider />`](#slider-)
-
-### `<Button />`
-
-`<Button />` is basically a simple HTML `button`.
-
-```js
-<Button onClick={() => alert('clicked')}>
-  Click me
-</Button>
-```
-
-| Prop name | Default value | Description |
-|-----------|---------------|-------------|
-| `onClick` | - | **Required.** A callback function that is invoked when the button is clicked. |
-| `isEnabled` | `true` | Whether the button is enabled. Setting this to `false` will set the `disabled` attribute on the `button` element to `true`. |
-| `className` | `null` | A string to set as the HTML `class` attribute |
-| `style` | `{}` | Styles to set on the `button` element. |
-| `children` | `null` | Child elements. |
 
 ### `Direction`
 
@@ -113,14 +90,13 @@ Any props passed to a `<PlayerIcon.* />` component will be passed onto the under
 
 ### `<Slider />`
 
-The `<Slider />` helps you build things like volume controls and progress bars. Slightly counterintuitively, **it does not take a `value` prop**, but expects you to keep track of this yourself and render whatever you want inside it.
+The `<Slider />` helps you build things like volume controls and progress bars. **It does not take a `value` prop**, but expects you to keep track of this yourself and render whatever you want inside it.
 
 What this component actually does is that it renders an element inside itself, on top of its children, which listens to mouse events and invokes change and intent callbacks with relative, normalised values based on those events.
 
 ```js
 <Slider
   direction={Direction.HORIZONTAL}
-  isEnabled
   onIntent={intent => console.log(`hovered at ${intent}`)}
   onIntentStart={intent => console.log(`entered with mouse at ${intent}`)}
   onIntentEnd={() => console.log('left with mouse')}
@@ -135,13 +111,12 @@ What this component actually does is that it renders an element inside itself, o
 | Prop name | Default value | Description |
 |-----------|---------------|-------------|
 | `direction` | `Direction.HORIZONTAL` | The slider's direction |
-| `isEnabled` | `true` | Whether the slider is interactable |
-| `onIntent` | `() => {}` | A function that is invoked with the relative, normalised value at which the user is hovering (when not dragging). |
-| `onIntentStart` | `() => {}` | A function this is invoked with the relative, normalised value at which the user started hovering the slider (when not dragging). |
+| `onIntent` | `(intent) => {}` | A function that is invoked with the relative, normalised value at which the user is hovering (when not dragging). |
+| `onIntentStart` | `(intent) => {}` | A function this is invoked with the relative, normalised value at which the user started hovering the slider (when not dragging). |
 | `onIntentEnd` | `() => {}` | A function this is invoked when the mouse left the slider area (when not dragging). |
-| `onChange` | `() => {}` | A function that is invoked with the latest relative, normalised value that the user has set by either clicking or dragging. |
-| `onChangeStart` | `() => {}` | A function that is invoked with the relative, normalised value at which the user started changing the slider's value. |
-| `onChangeEnd` | `() => {}` | A function that is invoked with the relative, normalised value at which the user stopped changing the slider's value. When the component unmounts, this function will be invoked with a value of `null`. |
+| `onChange` | `(value) => {}` | A function that is invoked with the latest relative, normalised value that the user has set by either clicking or dragging. |
+| `onChangeStart` | `(value) => {}` | A function that is invoked with the relative, normalised value at which the user started changing the slider's value. |
+| `onChangeEnd` | `(value) => {}` | A function that is invoked with the relative, normalised value at which the user stopped changing the slider's value. When the component unmounts, this function will be invoked with a value of `null`. |
 | `children` | `null` | Child elements. |
 | `className` | `null` | A string to set as the HTML `class` attribute. |
 | `style` | `{}` | Styles to set on the wrapping `div` element. |
@@ -154,11 +129,11 @@ What this component actually does is that it renders an element inside itself, o
 <summary>Styled buttons with icons</summary>
 
 ```js
-import { Button, PlayerIcon } from 'react-player-controls'
+import { PlayerIcon } from 'react-player-controls'
 
 // A base component that has base styles applied to it
 const PlayerButton = ({ style, children, ...props }) => (
-  <Button
+  <button
     style={{
       appearance: 'none',
       outline: 'none',
@@ -174,16 +149,16 @@ const PlayerButton = ({ style, children, ...props }) => (
     {...props}
   >
     {children}
-  </Button>
+  </button>
 )
 
 // Compose buttons with matching icons. Use whatever icon library
 // you want. If you don't have any particular logic for each of the
 // buttons, you might not need this abstraction.
-const PlayButton = props => <Button {...props}><PlayerIcon.Play /></Button>
-const PauseButton = props => <Button {...props}><PlayerIcon.Pause /></Button>
-const PreviousButton = props => <Button {...props}><PlayerIcon.Previous /></Button>
-const NextButton = props => <Button {...props}><PlayerIcon.Next /></Button>
+const PlayButton = props => <button {...props}><PlayerIcon.Play /></button>
+const PauseButton = props => <button {...props}><PlayerIcon.Pause /></button>
+const PreviousButton = props => <button {...props}><PlayerIcon.Previous /></button>
+const NextButton = props => <button {...props}><PlayerIcon.Next /></button>
 ```
 </details>
 
@@ -249,7 +224,6 @@ const SliderHandle = ({ direction, value, style }) => (
 // A composite progress bar component
 const ProgressBar = ({ isEnabled, direction, value, ...props }) => (
   <Slider
-    isEnabled={isEnabled}
     direction={direction}
     onChange={/* store value somehow */}
     style={{
@@ -281,7 +255,6 @@ const ProgressBar = ({ isEnabled, direction, value, ...props }) => (
 <summary>Playback controls</summary>
 
 ```js
-import { Button } from 'react-player-controls'
 import Icon from 'some-icon-library'
 
 const PlaybackControls = ({
@@ -293,17 +266,17 @@ const PlaybackControls = ({
   onNext,
 }) => (
   <div>
-    <Button disabled={hasPrevious === false} onClick={onPrevious}>
+    <button disabled={!hasPrevious} onClick={onPrevious}>
       <Icon.Previous />
-    </Button>
+    </button>
 
-    <Button onClick={() => onPlaybackChange(!isPlaying)}>
+    <button onClick={() => onPlaybackChange(!isPlaying)}>
       {isPlaying ? <Icon.Pause /> : <Icon.Play />}
-    </Button>
+    </button>
 
-    <Button disabled={hasNext === false} onClick={onNext}>
+    <button disabled={!hasNext} onClick={onNext}>
       <Icon.Next />
-    </Button>
+    </button>
   </div>
 )
 
