@@ -8,7 +8,7 @@
   },
   "private": true,
   "dependencies": {
-    "prismjs": "^1.5.1"
+    "prismjs": "^1.21.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
