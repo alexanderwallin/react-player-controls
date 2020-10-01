@@ -68,7 +68,7 @@ function Slider ({
       onMoveEnd: ({ dragging }) => !dragging && onIntentEnd(),
       onDragStart: ({ xy }) => onChangeStart(getSliderValue(bounds, direction, xy)),
       onDrag: ({ xy }) => onChange(getSliderValue(bounds, direction, xy)),
-      onDragEnd: ({ xy }) => onChangeStart(getSliderValue(bounds, direction, xy)),
+      onDragEnd: ({ xy }) => onChangeEnd(getSliderValue(bounds, direction, xy)),
     },
     {
       axis: direction === Direction.HORIZONTAL ? 'x' : 'y',
