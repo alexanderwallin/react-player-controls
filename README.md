@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://cdn.rawgit.com/alexanderwallin/react-player-controls/master/docs/img/logo-icon.svg" width="100" height="100" />
+  <img src="https://alexanderwallin.github.io/react-player-controls/assets/logo-icon.svg" width="100" height="100" />
   <br />
   react-player-controls
   <br />
