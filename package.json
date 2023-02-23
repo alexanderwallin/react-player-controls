@@ -12,9 +12,7 @@
     "prebuild": "rimraf dist",
     "build": "babel --out-dir dist src",
     "dev": "npm run build -- --watch",
-    "lint": "eslint src tests",
-    "test": "mocha --require @babel/register --require jsdom-global/register --require tests/helpers/configure-enzyme.js tests/*.js",
-    "test:w": "npm test -- -w"
+    "lint": "eslint src tests"
   },
   "repository": {
     "type": "git",
@@ -39,10 +37,6 @@
     "babel-eslint": "^10.0.1",
     "babel-plugin-transform-class-properties": "^6.11.5",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "chai": "^4.2.0",
-    "chai-enzyme": "^1.0.0-beta.1",
-    "enzyme": "^3.8.0",
-    "enzyme-adapter-react-16": "^1.7.1",
     "eslint": "^7.10.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.22.1",
@@ -54,13 +48,10 @@
     "jsdom-global": "^3.0.2",
     "mocha": "^5.2.0",
     "mocha-jsdom": "^2.0.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "rimraf": "^2.6.3",
     "sinon": "^7.2.2"
-  },
-  "peerDependencies": {
-    "react": "^16.8.0"
   },
   "dependencies": {
     "autobind-decorator": "^2.4.0",
