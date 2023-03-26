@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 
-import { withCustomizableClasses } from '../utils/composers.js'
-
-const { number, object } = PropTypes
+const { number, object, string } = PropTypes
 
 const padZero = digit =>
   `${digit < 10 ? '0' : ''}${digit}`
@@ -13,14 +10,15 @@ const padZero = digit =>
  * Time formatter that turns seconds into h:mm:ss
  */
 class FormattedTime extends Component {
-
   static propTypes = {
     numSeconds: number,
+    className: string,
     style: object,
   }
 
   static defaultProps = {
     numSeconds: 0,
+    className: null,
     style: {},
   }
 
@@ -40,14 +38,14 @@ class FormattedTime extends Component {
   }
 
   render () {
-    const { style, className, extraClasses } = this.props
+    const { style, className } = this.props
 
     return (
-      <span className={classNames(className, extraClasses)} style={style}>
+      <span className={className} style={style}>
         {this.getFormattedTime()}
       </span>
     )
   }
 }
 
-export default withCustomizableClasses('FormattedTime', FormattedTime)
+export default FormattedTime

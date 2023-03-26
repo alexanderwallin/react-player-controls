@@ -6,5 +6,10 @@
     "brace-style": [2, "stroustrup"],
     "comma-dangle": [2, "only-multiline"],
     "react/prop-types": [2, { "ignore": ["className", "extraClasses", "childClasses", "childrenStyles"] }],
-  }
+  },
+  "settings": {
+    "react": {
+      "version": "detect",
+    },
+  },
 }
